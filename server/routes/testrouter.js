@@ -171,12 +171,12 @@ router.post('/process/download_csv', function(req, res, next) {
                     console.log('success : ', row);
                 } else if (err) {
                     console.log('down load csv file error : ', err.stack);
-                    res.render('./error/500', {
+                    res.render('../error/500', {
                         devices: devices
                     });
                 } else {
                     console.log('null');
-                    res.render('./error/404', {
+                    res.render('../error/404', {
                         devices: devices
                     });
                 }
@@ -208,7 +208,7 @@ router.get('/', function(req, res, next) {
                         var get_filepath = fs.existsSync(process.cwd() + '/camera_images/' + rows.si_serial + '/' + rows.si_path + '/' + rows.si_filename);
                     } catch (err) {
                         console.log('error : ', err.stack);
-                        res.render('./pages/test_index', {
+                        res.render('first_index', {
                             serial_Num: serial,
                             img_path: path,
                             devices: devices,
@@ -221,7 +221,7 @@ router.get('/', function(req, res, next) {
                     }
 
 
-                    res.render('./pages/test_index', {
+                    res.render('first_index', {
                         serial_Num: serial,
                         img_path: path,
                         devices: devices,
@@ -232,7 +232,7 @@ router.get('/', function(req, res, next) {
                     res.redirect('/');
                 } else {
                     console.log('null');
-                    res.render('./pages/test_index', {
+                    res.render('first_index', {
                         serial_Num: serial,
                         img_path: path,
                         devices: devices,

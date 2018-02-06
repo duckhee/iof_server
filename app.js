@@ -11,6 +11,60 @@ var flash = require('connect-flash');
 var index = require('./server/routes/index');
 
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+//카메라 사진 저장
+var io = require('socket.io').listen(5001), // 이미지 저장관련 소켓
+    dl = require('delivery'), //이미지 전달 모듈
+    fs = require('fs'); // 파일 저장
+var moment = require('moment'); //시간 모듈
+
+io.sockets.on('connection', function(socket) {
+
+    var delivery = dl.listen(socket);
+
+    delivery.on('receive.success', function(file) {
+        //채널별 폴더유무 체크
+        var params = file.params;
+        var date_folder = moment().format('YYYYMMDD');
+
+        //일별 폴더 유무 체크
+        fs.exists('./camera_images/' + params.channel + "/" + date_folder, function(exists) {
+            console.log(exists);
+            if (!exists) {
+                //채널 폴더 유무 체크
+                fs.exists('./camera_images/' + params.channel, function(exists) {
+                    if (!exists) {
+                        fs.mkdir('./camera_images/' + params.channel, '0777', function(err) {
+                            if (err) throw err;
+                            console.log('dir channel writed');
+                        });
+                    }
+                });
+
+                //일별 폴더 유무 체크
+                fs.mkdir('./camera_images/' + params.channel + "/" + date_folder, '0777', function(err) {
+                    if (err) throw err;
+                    console.log('dir date writed');
+                });
+            }
+
+            //이미지일 경우만 저장
+            fs.writeFile("./camera_images/" + params.channel + "/" + date_folder + "/" + params.img_name, file.buffer, function(err) {
+                if (err) {
+                    console.log('File could not be saved: ' + err);
+                } else {
+                    console.log('File ' + params.img_name + " saved");
+                };
+            });
+        });
+
+
+
+    });
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 var app = express();
 
 // view engine setup
