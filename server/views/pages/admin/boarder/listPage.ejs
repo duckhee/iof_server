@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>welcome Test IOF</title>
+    <% include ../../../partials/stylesheet.ejs %>
+    <% include ../../../partials/header_javascript.ejs %>
+    <% include ../../../partials/weather_config.ejs %>
+</head>
+
+
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="/" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>I</b>OF</span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>C &amp; H </b>IOF</span>
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button"> <span class="sr-only">Toggle navigation</span>
+                </a>
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <!-- Tasks: style can be found in dropdown.less -->
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- Sidebar user panel -->
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src="/static/images/logo_iot.png" class="img-circle" alt="User Image">
+                    </div>
+                    <div class="pull-left info">
+                        
+                        <!-- <a href="#"><i class="fa fa-circle text-success"></i> Online</a> -->
+                    </div>
+                </div>
+                <!-- nav item -->
+                <% include ../../../partials/nav_item %>
+                <!-- end nav item -->
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+                <section class="content-header">
+                        <h1>
+                            board <small>list</small>
+                        </h1>
+                        <ol class="breadcrumb">
+                            <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+                            <li><i class="ffa fa-dshboard"></i>board</li>
+                            <li class="active">list</li>
+                        </ol>
+                    </section>
+                <!-- Content Header (Page header) -->
+               <section class="content">
+	<div class="row">
+		<!-- left column -->
+		<div class="col-md-12">
+			<!-- general form elements -->
+			<div class='box'>
+				<div class="box-header with-border">
+					<h3 class="box-title">Board List</h3>
+				</div>
+				<div class='box-body'>
+					<!-- 추가  -->
+					<select name="searchType" id="searchType">
+						<option value="title">제목</option>
+						<option value="writer">작성자</option>
+					</select> 
+					<input type="text" name='searchKeyword' id="searchKeyword">
+					<button id='searchBtn'><i class="fa fa-fw fa-search"></i>Search</button>
+					<!-- 기존 -->
+					<button id='newBtn'>New Board</button>
+				</div>
+				
+				
+				
+			</div>
+			<div class="box">
+				<div class="box-header with-border">
+					<h3 class="box-title">LIST PAGING</h3>
+				</div>
+				<div class="box-body">
+					<table class="table table-bordered">
+						<tr>
+							<th style="width: 10px">BNO</th>
+							<th>TITLE</th>
+							<th>WRITER</th>
+							<th>REGDATE</th>
+							<th style="width: 40px">VIEWCNT</th>
+						</tr>
+						
+						<tbody id="tbody">
+                        <% 
+                        //if(locals.post){
+                            for(post of posts){ 
+                        %>
+							<tr>
+								<td><%= posts.id%></td>
+								<td><%=posts.title%></td>
+								<td><%=posts.writer%></td>
+								<td><%=posts.createdAt%></td>
+								<td><span class="badge bg-red"><%=posts.viewcnt%></span></td>
+							</tr>
+                        <% 
+                            } 
+                            /*
+                        }else{
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><span class="badge bg-red"></span></td>
+                            </tr>
+                        }
+                        */
+                        %>
+						
+						</tbody>
+					</table>
+				</div>
+				<!-- /.box-body -->
+
+
+				<div class="box-footer">
+
+					<div class="text-center">
+						<ul class="pagination">
+						</ul>
+					</section>
+               <!-- Conten end -->
+            </div>
+        <% include ../../../partials/footer.ejs %>
+            <div class="control-sidebar-bg"></div>
+        </div>
+        <!-- /.content-wrapper -->
+      
+            <!-- /.control-sidebar -->
+            <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+    </div>
+    
+    <% include ../../../partials/footer_javascript_index.ejs %>
+  </body>
+</html>
