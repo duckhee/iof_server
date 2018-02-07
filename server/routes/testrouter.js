@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
 //controller set 
-var imagecontroller = require('../controllers/camera_controller');
-var datacontroller = require('../controllers/data_controller');
-var settingcontroller = require('../controllers/setting_controller');
+var setting_controller = require('../controllers/device_setting_controller');
+var data_controller = require('../controllers/data_controller');
+var camera_controller = require('../controllers/image_controller');
+var network_controller = require('../controllers/network_controller');
 //util set
 var downloader = require('../util/file');
 //get file module
