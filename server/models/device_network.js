@@ -1,21 +1,18 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  var camera_image = sequelize.define('camera_image', {
-    si_serial: DataTypes.STRING,
-    si_apikey:DataTypes.STRING,
-    si_path: DataTypes.STRING,
-    si_filename: DataTypes.STRING,
-    si_filesize: DataTypes.STRING
-    
+  var device_network = sequelize.define('device_network', {
+    sn_serial: DataTypes.STRING,
+    sn_apikey:DataTypes.STRING,
+    sn_address: DataTypes.STRING,
+    sn_type: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
-
       }
     }
   });
-  return camera_image;
+  return device_network;
 };
 
 /*

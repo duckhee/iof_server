@@ -11,6 +11,9 @@ module.exports = {
       si_serial: {
         type: Sequelize.STRING
       },
+      si_apikey: {
+        type: Sequelize.STRING
+      },
       si_path: {
         type: Sequelize.STRING
       },

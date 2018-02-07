@@ -1,23 +1,23 @@
 'use strict';
 module.exports = {
   up: function(queryInterface, Sequelize) {
-    return queryInterface.createTable('device_values', {
+    return queryInterface.createTable('device_networks', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      sd_serial: {
+      sn_serial: {
         type: Sequelize.STRING
       },
-      sd_apikey: {
+      sn_apikey: {
         type: Sequelize.STRING
       },
-      sd_address: {
+      sn_address: {
         type: Sequelize.STRING
       },
-      sd_data: {
+      sn_type: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -31,6 +31,6 @@ module.exports = {
     });
   },
   down: function(queryInterface, Sequelize) {
-    return queryInterface.dropTable('device_values');
+    return queryInterface.dropTable('device_networks');
   }
 };

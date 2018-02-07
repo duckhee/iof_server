@@ -2,6 +2,7 @@
 module.exports = function(sequelize, DataTypes) {
   var device_value = sequelize.define('device_value', {
     sd_serial: DataTypes.STRING,
+    sd_apikey:DataTypes.STRING,
     sd_address: DataTypes.STRING,
     sd_data: DataTypes.STRING
   }, {
@@ -13,3 +14,10 @@ module.exports = function(sequelize, DataTypes) {
   });
   return device_value;
 };
+
+/*
+  value는 데이터 값
+  시리얼 번호 이거는 디바이스 이름
+  apikey 보안을 위해서 사용
+  address는 위치 
+*/
