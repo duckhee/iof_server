@@ -1,13 +1,27 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var device_setting = sequelize.define('device_setting', {
-    st_serial: DataTypes.STRING,
-    st_address: DataTypes.STRING,
-    st_apikey:DataTypes.STRING,
-    st_title: DataTypes.STRING,
-    st_gps: DataTypes.STRING,
-    st_ping: DataTypes.INTEGER,
-    st_group: DataTypes.INTEGER
+    st_serial: {
+      type:DataTypes.STRING,
+    },
+    st_address:  {
+      type:DataTypes.STRING,
+    },
+    st_apikey: {
+      type:DataTypes.STRING,
+    },
+    st_title: {
+      type:DataTypes.STRING,
+    },
+    st_gps:  {
+      type:DataTypes.STRING,
+    },
+    st_ping: {
+      type:DataTypes.INTEGER,
+    },
+    st_group: {
+      type:DataTypes.INTEGER,
+    },
   }, {
     classMethods: {
       associate: function(models) {

@@ -60,9 +60,6 @@ io.sockets.on('connection', function(socket) {
                 };
             });
         });
-
-
-
     });
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -89,6 +86,7 @@ app.use(session({
         maxAge: 1000 * 60 * 60 // 쿠키 유효기간 1시간
     }
 }));
+
 //get public folder url (css, javascript, bootstrap)
 app.use('/static', express.static(path.join(__dirname, 'public')));
 //get camera image url
