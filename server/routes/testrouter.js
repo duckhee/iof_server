@@ -198,7 +198,7 @@ router.get('/', function(req, res, next) {
         'si_serial': serial
     };
     var devices;
-    var path = '/images/failed/failed/failed.jpg'
+    var path = '/camera_images/failed/failed/failed.jpg'
     settingcontroller.group_device(function(group_row, err) {
         if (group_row) {
             devices = JSON.stringify(group_row);
@@ -217,7 +217,7 @@ router.get('/', function(req, res, next) {
                         //res.redirect('/');
                     }
                     if (get_filepath) {
-                        path = '/images' + rows.si_serial + '/' + rows.si_path + '/' + rows.si_filename;
+                        path = '/camera_images' + rows.si_serial + '/' + rows.si_path + '/' + rows.si_filename;
                     }
 
 
