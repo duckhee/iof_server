@@ -1,11 +1,21 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var camera_image = sequelize.define('camera_image', {
-    si_serial: DataTypes.STRING,
-    si_apikey:DataTypes.STRING,
-    si_path: DataTypes.STRING,
-    si_filename: DataTypes.STRING,
-    si_filesize: DataTypes.STRING
+    si_serial:  {
+      type:DataTypes.STRING,
+    },
+    si_apikey: {
+      type:DataTypes.STRING,
+    },
+    si_path: {
+      type:DataTypes.STRING,
+    },
+    si_filename:  {
+      type:DataTypes.STRING,
+    },
+    si_filesize: {
+      type:DataTypes.STRING,
+    },
     
   }, {
     classMethods: {
