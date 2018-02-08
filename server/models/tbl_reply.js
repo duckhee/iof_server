@@ -22,6 +22,11 @@ module.exports = function(sequelize, DataTypes) {
         classMethods: {
             associate: function(models) {
                 // associations can be defined here
+                tbl_reply.belongTo(models.tbl_board, {
+                    foreignKeyConstraint: true,
+                    foreignKey: 'title',
+                    allowNull: false
+                });
             }
         }
     });

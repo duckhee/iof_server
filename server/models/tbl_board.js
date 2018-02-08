@@ -26,6 +26,8 @@ module.exports = function(sequelize, DataTypes) {
         classMethods: {
             associate: function(models) {
                 // associations can be defined here
+                tbl_board.belongTo(models.user);
+                tbl_board.hasMany(models.tbl_reply);
             }
         }
     });
