@@ -18,6 +18,7 @@ module.exports = {
                     key: 'apikey'
                 },
                 onDelete: 'CASCADE',
+                allowNull: false,
             },
             sn_address: {
                 type: Sequelize.STRING
