@@ -8,6 +8,7 @@ module.exports = function(sequelize, DataTypes) {
         si_apikey: {
             type: DataTypes.STRING,
             unique: true,
+            allowNull: false,
         },
         si_path: {
             type: DataTypes.STRING,

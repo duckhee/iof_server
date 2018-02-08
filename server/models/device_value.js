@@ -7,6 +7,7 @@ module.exports = function(sequelize, DataTypes) {
         sd_apikey: {
             type: DataTypes.STRING,
             unique: true,
+            allowNull: false,
         },
         sd_address: {
             type: DataTypes.STRING,

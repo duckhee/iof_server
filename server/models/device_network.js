@@ -10,7 +10,9 @@ module.exports = function(sequelize, DataTypes) {
             references: {
                 model: 'user',
                 key: 'apikey'
-            }
+            },
+            allowNull: false,
+            onDelete: 'CASCADE',
         },
         sn_address: {
             type: DataTypes.STRING,

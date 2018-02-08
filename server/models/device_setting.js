@@ -10,6 +10,7 @@ module.exports = function(sequelize, DataTypes) {
         st_apikey: {
             type: DataTypes.STRING,
             unique: true,
+            allowNull: false,
         },
         st_title: {
             type: DataTypes.STRING,
