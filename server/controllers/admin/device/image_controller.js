@@ -1,18 +1,15 @@
-var models = require('../models/index');
-var camera_image = require('../models/camera_image');
+var models = require('../../../models/index');
+var camera_image = require('../../../models/camera_image');
 
 
 
 
-exports.insert = function(camera_info, callback)
-{
+exports.insert = function(camera_info, callback) {
     models.camera_image.create({
-        
-    }).then(function(row)
-    {
+
+    }).then(function(row) {
         callback(null, row);
-    }).catch(function(err)
-    {
+    }).catch(function(err) {
         console.log('error : ', err.stack);
         callback(err, null);
     });
@@ -28,20 +25,17 @@ exports.insert_array_data = function(camera_info, callback) {
     });
 };
 
-exports.findinsert = function(camera_info, callback)
-{
+exports.findinsert = function(camera_info, callback) {
     models.camera_image.findOrCreate({
-        where:{
+        where: {
 
         },
-        defaults:
-        {
+        defaults: {
 
         }
-    }).spread(function(){
+    }).spread(function() {
 
-    }).catch(function(err)
-    {
+    }).catch(function(err) {
         callback(err, null);
     });
 };

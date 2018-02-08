@@ -1,5 +1,5 @@
-var models = require('../models/index');
-var user = require('../models/user');
+var models = require('../../models/index');
+var user = require('../../models/user');
 
 
 exports.create = function(user_info, callback) {
