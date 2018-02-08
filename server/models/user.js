@@ -7,13 +7,27 @@ module.exports = function(sequelize, DataTypes) {
                 type: DataTypes.STRING,
                 unique: true,
             },
-            user_password: DataTypes.STRING,
-            user_name: DataTypes.STRING,
-            user_phone1: DataTypes.INTEGER,
-            user_phone2: DataTypes.INTEGER,
-            user_phone3: DataTypes.INTEGER,
-            user_address1: DataTypes.STRING,
-            user_address2: DataTypes.STRING,
+            user_password: {
+                type: DataTypes.STRING,
+            },
+            user_name: {
+                type: DataTypes.STRING,
+            },
+            user_phone1: {
+                type: DataTypes.INTEGER,
+            },
+            user_phone2: {
+                type: DataTypes.INTEGER,
+            },
+            user_phone3: {
+                type: DataTypes.INTEGER,
+            },
+            user_address1: {
+                type: DataTypes.STRING,
+            },
+            user_address2: {
+                type: DataTypes.STRING,
+            },
             apikey: {
                 type: DataTypes.STRING,
                 unique: true,
