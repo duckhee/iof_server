@@ -32,6 +32,7 @@ module.exports = function(sequelize, DataTypes) {
             apikey: {
                 type: DataTypes.STRING,
                 unique: true,
+                allowNull: false
             }
         }, {
             classMethods: {

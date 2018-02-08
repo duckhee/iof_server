@@ -36,15 +36,18 @@ module.exports = {
             },
             apikey: {
                 type: DataTypes.STRING,
-                unique: true
+                unique: true,
+                allowNull: false
             },
             createdAt: {
                 allowNull: false,
-                type: Sequelize.DATE
+                type: 'TIMESTAMP',
+                defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
             },
             updatedAt: {
                 allowNull: false,
-                type: Sequelize.DATE
+                type: 'TIMESTAMP',
+                defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
             }
         });
     },
