@@ -10,6 +10,9 @@ var bcrypt = require('bcrypt-nodejs');
 var flash = require('connect-flash');
 var index = require('./server/routes/index');
 
+//test router 테스트용 라우터 모든 테스트 여기
+var test = require('./server/routes/testrouter');
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //카메라 사진 저장
@@ -57,9 +60,6 @@ io.sockets.on('connection', function(socket) {
                 };
             });
         });
-
-
-
     });
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -86,6 +86,7 @@ app.use(session({
         maxAge: 1000 * 60 * 60 // 쿠키 유효기간 1시간
     }
 }));
+
 //get public folder url (css, javascript, bootstrap)
 app.use('/static', express.static(path.join(__dirname, 'public')));
 //get camera image url
