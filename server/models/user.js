@@ -1,4 +1,6 @@
 'use strict';
+
+var bcrypt = require('bcrypt-nodejs');
 module.exports = function(sequelize, DataTypes) {
     var user = sequelize.define('user', {
             user_id: {
@@ -20,10 +22,19 @@ module.exports = function(sequelize, DataTypes) {
             classMethods: {
                 associate: function(models) {
                     // associations can be defined here
+                    user.hasMany(models.device, {
+                        foreignKey: 'apikey',
+                        onDelete: 'CASCADE'
+                    });
                 }
             }
         },
 
     );
+    //insert before 
+    user.hook("beforeCreate", function(user) {
+        user.user_password = bcrypt.hashSync(user.user_password, bcrypt.genSaltSync(10), null);
+        console.log('before Create hook >>>>>>>>', user.user_password);
+    });
     return user;
 };
