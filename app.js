@@ -97,6 +97,10 @@ app.use(session({
     }
 }));
 
+//passport add
+//app.use(passport.initialize()); // passport 구동
+//app.use(passport.session()); // 세션 연결
+
 //get public folder url (css, javascript, bootstrap)
 app.use('/static', express.static(path.join(__dirname, 'public')));
 //get camera image url
