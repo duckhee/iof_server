@@ -105,8 +105,8 @@ app.use('/images', express.static(path.join(__dirname, 'camera_images')));
 app.use('/upload', express.static(path.join(__dirname, 'upload')));
 //zip file download
 app.use('/download', express.static(path.join(__dirname, 'download')));
-//index router
 
+//index router
 app.use('/', index);
 
 
