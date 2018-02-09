@@ -18,7 +18,7 @@ var folder_zip = require('zip-folder');
 var moment = require('moment');
 var excel = require('excel4node');
 //controller value 
-var valueControllers = require('../controllers/data_controller');
+var valueControllers = require('../controllers/device/data_controller');
 
 //file zip file_info{name} callback
 exports.file_zip = function(file_info, callback) {

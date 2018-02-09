@@ -13,6 +13,16 @@ var index = require('./server/routes/index');
 //test router 테스트용 라우터 모든 테스트 여기
 var test = require('./server/routes/testrouter');
 
+let db = require('./server/models');
+
+//data base connectin check
+db.sequelize.sync().then(function() {
+    console.log("db connection success");
+}).catch(function(err) {
+    console.log('db connection error');
+    console.log(err);
+});
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //카메라 사진 저장
