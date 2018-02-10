@@ -12,7 +12,7 @@ var index = require('./server/routes/index');
 
 //test router 테스트용 라우터 모든 테스트 여기
 var test = require('./server/routes/testrouter');
-
+//
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //카메라 사진 저장
