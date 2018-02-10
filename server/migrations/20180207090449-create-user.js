@@ -1,26 +1,43 @@
 'use strict';
 module.exports = {
     up: function(queryInterface, Sequelize) {
-        return queryInterface.createTable('device_values', {
+        return queryInterface.createTable('users', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-            sd_serial: {
-                type: Sequelize.STRING
+            user_id: {
+                type: Sequelize.STRING,
+                unique: true
             },
-            sd_apikey: {
+            user_password: {
                 type: Sequelize.STRING,
                 allowNull: false,
-
             },
-            sd_address: {
+            user_name: {
                 type: Sequelize.STRING
             },
-            sd_data: {
+            user_phone1: {
+                type: Sequelize.INTEGER
+            },
+            user_phone2: {
+                type: Sequelize.INTEGER
+            },
+            user_phone3: {
+                type: Sequelize.INTEGER
+            },
+            user_address1: {
                 type: Sequelize.STRING
+            },
+            user_address2: {
+                type: Sequelize.STRING
+            },
+            apikey: {
+                type: DataTypes.STRING,
+                unique: true,
+                allowNull: false
             },
             createdAt: {
                 allowNull: false,
@@ -35,6 +52,6 @@ module.exports = {
         });
     },
     down: function(queryInterface, Sequelize) {
-        return queryInterface.dropTable('device_values');
+        return queryInterface.dropTable('users');
     }
 };
