@@ -1,33 +1,34 @@
 'use strict';
 module.exports = {
     up: function(queryInterface, Sequelize) {
-        return queryInterface.createTable('tbl_boards', {
+        return queryInterface.createTable('devices', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-            title: {
-                type: Sequelize.STRING,
-                allowNull: false
+            device_name: {
+                type: Sequelize.STRING
             },
-            content: {
-                type: Sequelize.TEXT
-            },
-            writer: {
+            device_apikey: {
                 type: Sequelize.STRING,
-                allowNull: false,
                 references: {
-                    model: 'user',
-                    key: 'user_id'
+                    model: 'users',
+                    key: 'apikey'
                 },
                 onDelete: 'CASCADE',
-
+                allowNull: false,
             },
-            viewcnt: {
+            device_num: {
                 type: Sequelize.INTEGER,
                 default: 0
+            },
+            device_serial: {
+                type: Sequelize.STRING
+            },
+            device_address: {
+                type: Sequelize.STRING
             },
             createdAt: {
                 allowNull: false,
@@ -42,6 +43,6 @@ module.exports = {
         });
     },
     down: function(queryInterface, Sequelize) {
-        return queryInterface.dropTable('tbl_boards');
+        return queryInterface.dropTable('devices');
     }
 };

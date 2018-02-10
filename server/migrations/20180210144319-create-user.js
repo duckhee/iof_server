@@ -35,9 +35,13 @@ module.exports = {
                 type: Sequelize.STRING
             },
             apikey: {
-                type: DataTypes.STRING,
+                type: Sequelize.STRING,
                 unique: true,
                 allowNull: false
+            },
+            user_status: {
+                type: Sequelize.ENUM('active', 'inactive'),
+                defaultValue: 'active'
             },
             createdAt: {
                 allowNull: false,

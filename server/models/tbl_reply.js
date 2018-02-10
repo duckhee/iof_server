@@ -5,7 +5,7 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.INTEGER,
             references: {
                 model: 'tbl_board',
-                key: 'title'
+                key: 'id'
             },
             onDelete: 'CASCADE',
         },
@@ -24,7 +24,7 @@ module.exports = function(sequelize, DataTypes) {
                 // associations can be defined here
                 tbl_reply.belongTo(models.tbl_board, {
                     foreignKeyConstraint: true,
-                    foreignKey: 'title',
+                    foreignKey: 'id',
                     allowNull: false
                 });
             }

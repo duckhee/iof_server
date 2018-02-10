@@ -38,20 +38,25 @@ module.exports = function(sequelize, DataTypes) {
             classMethods: {
                 associate: function(models) {
                     // associations can be defined here
-                    user.hasMany(models.device_network, {
-                        foreignKey: 'apikey',
-                        onDelete: 'CASCADE'
-                    });
+                    /*
+                      user.hasMany(models.device_network, {
+                          foreignKey: 'apikey',
+                          onDelete: 'CASCADE'
+                      });
 
-                    user.hasMany(models.tbl_board, {
-                        foreignKey: 'user_id',
-                        onDelete: 'CASCADE'
-                    });
+                      user.hasMany(models.tbl_board, {
+                          foreignKey: 'user_id',
+                          onDelete: 'CASCADE'
+                      });
 
-                    user.hasMany(models.tbl_reply, {
-                        foreignKey: 'user_id',
-                        onDelete: 'CASCADE'
-                    });
+                      user.hasMany(models.tbl_reply, {
+                          foreignKey: 'user_id',
+                          onDelete: 'CASCADE'
+                      });
+                      */
+                    user.hasMany(models.device_network);
+                    user.hasMany(models.tbl_board);
+                    user.hasMany(models.tbl_reply);
                 },
             }
         },

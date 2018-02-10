@@ -1,35 +1,30 @@
 'use strict';
 module.exports = {
     up: function(queryInterface, Sequelize) {
-        return queryInterface.createTable('device_settings', {
+        return queryInterface.createTable('device_networks', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-            st_serial: {
+            sn_serial: {
                 type: Sequelize.STRING
             },
-            st_apikey: {
+            sn_apikey: {
                 type: Sequelize.STRING,
+                references: {
+                    model: 'users',
+                    key: 'apikey'
+                },
+                onDelete: 'CASCADE',
                 allowNull: false,
-
             },
-            st_address: {
+            sn_address: {
                 type: Sequelize.STRING
             },
-            st_title: {
+            sn_type: {
                 type: Sequelize.STRING
-            },
-            st_gps: {
-                type: Sequelize.STRING
-            },
-            st_ping: {
-                type: Sequelize.INTEGER
-            },
-            st_group: {
-                type: Sequelize.INTEGER
             },
             createdAt: {
                 allowNull: false,
@@ -44,6 +39,6 @@ module.exports = {
         });
     },
     down: function(queryInterface, Sequelize) {
-        return queryInterface.dropTable('device_settings');
+        return queryInterface.dropTable('device_networks');
     }
 };

@@ -1,25 +1,27 @@
 'use strict';
 module.exports = {
     up: function(queryInterface, Sequelize) {
-        return queryInterface.createTable('device_values', {
+        return queryInterface.createTable('camera_images', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-            sd_serial: {
+            si_serial: {
                 type: Sequelize.STRING
             },
-            sd_apikey: {
+            si_apikey: {
                 type: Sequelize.STRING,
                 allowNull: false,
-
             },
-            sd_address: {
+            si_path: {
                 type: Sequelize.STRING
             },
-            sd_data: {
+            si_filename: {
+                type: Sequelize.STRING
+            },
+            si_filesize: {
                 type: Sequelize.STRING
             },
             createdAt: {
@@ -35,6 +37,6 @@ module.exports = {
         });
     },
     down: function(queryInterface, Sequelize) {
-        return queryInterface.dropTable('device_values');
+        return queryInterface.dropTable('camera_images');
     }
 };
