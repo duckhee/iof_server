@@ -31,5 +31,8 @@ module.exports = function(sequelize, DataTypes) {
             }
         }
     });
+    tbl_board.hook('beforeCreate', function(tbl_board) {
+        console.log('test hook', tbl_board);
+    })
     return tbl_board;
 };
