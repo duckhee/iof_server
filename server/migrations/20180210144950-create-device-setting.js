@@ -1,29 +1,34 @@
 'use strict';
 module.exports = {
     up: function(queryInterface, Sequelize) {
-        return queryInterface.createTable('camera_images', {
+        return queryInterface.createTable('device_settings', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-            si_serial: {
+            st_serial: {
                 type: Sequelize.STRING
             },
-            si_apikey: {
+            st_apikey: {
                 type: Sequelize.STRING,
                 allowNull: false,
-
             },
-            si_path: {
+            st_address: {
                 type: Sequelize.STRING
             },
-            si_filename: {
+            st_title: {
                 type: Sequelize.STRING
             },
-            si_filesize: {
+            st_gps: {
                 type: Sequelize.STRING
+            },
+            st_ping: {
+                type: Sequelize.INTEGER
+            },
+            st_group: {
+                type: Sequelize.INTEGER
             },
             createdAt: {
                 allowNull: false,
@@ -38,6 +43,6 @@ module.exports = {
         });
     },
     down: function(queryInterface, Sequelize) {
-        return queryInterface.dropTable('camera_images');
+        return queryInterface.dropTable('device_settings');
     }
 };

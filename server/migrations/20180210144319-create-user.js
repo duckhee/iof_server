@@ -1,35 +1,47 @@
 'use strict';
 module.exports = {
     up: function(queryInterface, Sequelize) {
-        return queryInterface.createTable('device_settings', {
+        return queryInterface.createTable('users', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-            st_serial: {
-                type: Sequelize.STRING
+            user_id: {
+                type: Sequelize.STRING,
+                unique: true
             },
-            st_apikey: {
+            user_password: {
                 type: Sequelize.STRING,
                 allowNull: false,
-
             },
-            st_address: {
+            user_name: {
                 type: Sequelize.STRING
             },
-            st_title: {
-                type: Sequelize.STRING
-            },
-            st_gps: {
-                type: Sequelize.STRING
-            },
-            st_ping: {
+            user_phone1: {
                 type: Sequelize.INTEGER
             },
-            st_group: {
+            user_phone2: {
                 type: Sequelize.INTEGER
+            },
+            user_phone3: {
+                type: Sequelize.INTEGER
+            },
+            user_address1: {
+                type: Sequelize.STRING
+            },
+            user_address2: {
+                type: Sequelize.STRING
+            },
+            apikey: {
+                type: Sequelize.STRING,
+                unique: true,
+                allowNull: false
+            },
+            user_status: {
+                type: Sequelize.ENUM('active', 'inactive'),
+                defaultValue: 'active'
             },
             createdAt: {
                 allowNull: false,
@@ -44,6 +56,6 @@ module.exports = {
         });
     },
     down: function(queryInterface, Sequelize) {
-        return queryInterface.dropTable('device_settings');
+        return queryInterface.dropTable('users');
     }
 };
