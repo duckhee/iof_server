@@ -1,26 +1,31 @@
 'use strict';
 module.exports = {
     up: function(queryInterface, Sequelize) {
-        return queryInterface.createTable('device_values', {
+        return queryInterface.createTable('tbl_replies', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-            sd_serial: {
-                type: Sequelize.STRING
+            bno: {
+                type: Sequelize.INTEGER,
+                references: {
+                    model: 'tbl_boards',
+                    key: 'title'
+                },
+                onDelete: 'CASCADE',
             },
-            sd_apikey: {
+            rwriter: {
                 type: Sequelize.STRING,
-                allowNull: false,
-
+                references: {
+                    model: 'users',
+                    key: 'user_id'
+                },
+                onDelete: 'CASCADE',
             },
-            sd_address: {
-                type: Sequelize.STRING
-            },
-            sd_data: {
-                type: Sequelize.STRING
+            rcontent: {
+                type: Sequelize.TEXT
             },
             createdAt: {
                 allowNull: false,
@@ -35,6 +40,6 @@ module.exports = {
         });
     },
     down: function(queryInterface, Sequelize) {
-        return queryInterface.dropTable('device_values');
+        return queryInterface.dropTable('tbl_replies');
     }
 };

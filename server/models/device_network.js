@@ -1,18 +1,38 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  var device_network = sequelize.define('device_network', {
-    sn_serial: DataTypes.STRING,
-    sn_apikey:DataTypes.STRING,
-    sn_address: DataTypes.STRING,
-    sn_type: DataTypes.STRING
-  }, {
-    classMethods: {
-      associate: function(models) {
-        // associations can be defined here
-      }
-    }
-  });
-  return device_network;
+    var device_network = sequelize.define('device_network', {
+        sn_serial: {
+            type: DataTypes.STRING,
+        },
+        sn_apikey: {
+            type: DataTypes.STRING,
+            unique: true,
+            references: {
+                model: 'user',
+                key: 'apikey'
+            },
+            allowNull: false,
+            onDelete: 'CASCADE',
+        },
+        sn_address: {
+            type: DataTypes.STRING,
+        },
+        sn_type: {
+            type: DataTypes.STRING,
+        },
+    }, {
+        classMethods: {
+            associate: function(models) {
+                // associations can be defined here
+                device_network.belongTo(models.user, {
+                    foreignKeyConstraint: true,
+                    foreignKey: 'apikey',
+                    allowNull: false
+                });
+            }
+        }
+    });
+    return device_network;
 };
 
 /*
