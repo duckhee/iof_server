@@ -38,7 +38,8 @@ module.exports = {
                 type:Sequelize.STRING
             },
             user_email:{
-                type:Sequelize.STRING
+                type:Sequelize.STRING,
+                unique:true
             },
             apikey: {
                 type: Sequelize.STRING,

@@ -33,7 +33,8 @@ module.exports = function(sequelize, DataTypes) {
                 type:DataTypes.STRING
             },
             user_email:{
-                type:DataTypes.STRING
+                type:DataTypes.STRING,
+                unique:true
             },
             user_status:{
                 type:DataTypes.ENUM,
