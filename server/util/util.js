@@ -1,5 +1,5 @@
 //craete apikey
-function createApikey() {
+exports.createApikey = function() {
     var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
     var string_length = 15;
     var randomstring = '';
@@ -12,7 +12,7 @@ function createApikey() {
 }
 
 //null checking
- function isEmpty(value) {
+exports.isEmpty = function(value) {
     if (value == "" || value == null || value == undefined || (value != null && typeof value == "object" && !Object.keys(value).length)) {
         return true;
     } else {
@@ -21,7 +21,7 @@ function createApikey() {
 };
 
 //phone checking
-function phone_number(phone_info) {
+exports.phone_number = function(phone_info) {
     var phone = new Array;
     if (phone_info.indexOf('-') != -1) {
         phone = phone_info.split('-');
@@ -33,3 +33,4 @@ function phone_number(phone_info) {
 
     return phone;
 }
+

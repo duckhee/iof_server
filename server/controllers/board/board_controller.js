@@ -59,8 +59,10 @@ exports.start_list = function(callback){
             ['createdAt', 'DESC']
         ]
     }).then(function(rows){
+        console.log('rows : ', rows);
         callback(null, rows);
     }).catch(function(err){
+        console.log('error : ', err);
         callback(err, null);
     })
 }

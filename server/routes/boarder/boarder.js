@@ -24,11 +24,14 @@ router.get('/list', function(req, res, next){
              res.json(err);
         }else {
             console.log('boarder data : ',row);
-            //var checking = util_make.inEmpty(row);
-            //console.log('checking data : ', checking);
-            res.render('boarder/listPage',{
-                post:row
-            });
+            var checking = util_make.isEmpty(row);
+            if(checking){
+                res.render('boarder/emptylistPage');
+            }else{
+                res.render('boarder/listPage',{
+                    post:row
+                });
+            }
         }
     });
     
