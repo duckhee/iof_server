@@ -2,7 +2,7 @@ var models = require('../../models/index');
 var user = require('../../models/user');
 
 //make user
-exports.create = function(user_info, callback) {
+exports.create_user = function(user_info, callback) {
     models.user.findOrCreate({
         where: {
             user_id: user_info.id,
@@ -51,7 +51,8 @@ exports.update_user = function(user_info, callback) {
 exports.find_userid = function(user_info, callback) {
     models.user.find({
         where: {
-
+            user_name:user_info.user_name,
+            user_email:user_info.user_email
         }
     }).then(function(row) {
         callback(null, row);
@@ -65,6 +66,7 @@ exports.find_userpw = function(user_info, callback) {
     models.user.findOne({
         where: {
             user_id: user_info.user_id,
+            user_email:user_info.user_email
         }
     }).then(function(row) {
         callback(null, row);
@@ -91,7 +93,10 @@ exports.list_user = function(user_info, callback) {
     models.user.findAll({
         where: {
 
-        }
+        },
+        order:[
+            ['createdAt', 'DESC']
+        ]
     }).then(function(rows) {
         callback(null, rows);
     }).catch(function(err) {
@@ -103,7 +108,8 @@ exports.list_user = function(user_info, callback) {
 exports.delete_user = function(user_info, callback) {
     models.user.destroy({
         where: {
-            user_id: user_info.user_id
+            user_id: user_info.user_id,
+            user_password:user_info.user_password
         }
     }).then(function(row) {
         callback(null, row);
