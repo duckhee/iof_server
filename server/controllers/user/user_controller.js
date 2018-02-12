@@ -50,7 +50,8 @@ exports.check_id = function(user_info, callback) {
 exports.update_user = function(user_info, callback) {
     models.user.update({}, {
         where: {
-
+            user_id:user_info.user_id,
+            user_password:user_info.user_pw
         }
     }).then(function(row) {
         callback(null, row);
