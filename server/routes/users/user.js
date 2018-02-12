@@ -20,7 +20,7 @@ router.post('/process/registe', function(req, res, next) {
     var username = req.body.name || req.query.name || req.param.name || req.params.name;
     var userphone = req.body.phone || req.query.phone || req.param.phone || req.params.phone;
     
-    var phone_number = custom_util.phone_number(userphone);
+    //var phone_number = custom_util.phone_number(userphone);
     
     var useraddress1 = req.body.address1 || req.query.address1 || req.param.address1 || req.params.address1;
     var useraddress2 = req.body.address2 || req.query.address2 || req.param.address2 || req.params.address2;
@@ -32,9 +32,9 @@ router.post('/process/registe', function(req, res, next) {
         user_pw:userpw, 
         user_name:username,
         user_email:useremail,
-        user_phone1:phone_number[0],
-        user_phone2:phone_number[1],
-        user_phone3:phone_number[2],
+        //user_phone1:phone_number[0],
+        //user_phone2:phone_number[1],
+       // user_phone3:phone_number[2],
         user_address1:useraddress1,
         user_address2:useraddress2,
         user_zipcode:userzipcode,

@@ -87,11 +87,28 @@ exports.list = function(data_info, callback){
 exports.upcount = function(data_info, callback) {
     models.tbl_board.update({}, {
         where: {
-
+q
         }
-    }).then(function(row) {
-        callback(null, row);
-    }).catch(function(err) {
+    }).then((row) => {
+       callback(null, row);
+    }).catch((err) => {
+        callback(err, null);
+    });
+};
+
+//testing update count
+exports.upcounting = function(data_info, callback){
+    models.tbl_board.findOne({
+        where:{
+            
+        }
+    }).then((row) => {
+        models.tbl_board.increment('viewcnt',{by:1}).then(rows =>{
+            callback(null, rows);
+        }).catch(err => {
+            callback(err,null);
+        });
+    }).catch(err => {
         callback(err, null);
     });
 };

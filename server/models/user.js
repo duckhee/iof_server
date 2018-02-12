@@ -1,6 +1,7 @@
 'use strict';
 
 var bcrypt = require('bcrypt-nodejs');
+
 module.exports = function(sequelize, DataTypes) {
     var user = sequelize.define('user', {
             user_id: {
@@ -72,23 +73,22 @@ module.exports = function(sequelize, DataTypes) {
                   //  user.hasMany(models.tbl_board);
                   //  user.hasMany(models.tbl_reply);
                 },
-            }
-        }
-        /*
-        {
+            },
             instanceMethods:{
                 generatehash : function(user_password, done){
                     bcrypt.genSalt(10, function(err, salt){
-                       return bcrypt.hashSync(user_password, salt, null, done);
+                        bcrypt.hashSync(user_password, salt, null, done);
                     });
                 },
                 validPassword : function(user_password, next){
-                    return bcrypt.compare(user_password, this.user_password, next);
+                     bcrypt.compare(user_password, this.user_password, next);
 
                 }
-            }
+            },
+            
+            
         }
-        */
+        
     );
     /*
     user.beforeCreate(function(model, done){
