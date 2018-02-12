@@ -29,6 +29,14 @@ module.exports = function(sequelize, DataTypes) {
             user_address2: {
                 type: DataTypes.STRING,
             },
+            user_zipcode:{
+                type:DataTypes.STRING
+            },
+            user_status:{
+                type:DataTypes.ENUM,
+                values: ['active', 'inactive'],
+                defaultValue: 'active'
+            },
             apikey: {
                 type: DataTypes.STRING,
                 unique: true,

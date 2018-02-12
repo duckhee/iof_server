@@ -37,8 +37,22 @@ router.post('/process/registe', function(req, res, next) {
 });
 
 //router ajax user id check page
-router.get('/check/id', function(req, res, next) {
-
+router.get('/check_id', function(req, res, next) {
+    //get query id 
+    var id = req.query.id || req.body.id || req.param.id || req.params.id;
+    var user_info = {
+        user_id:id
+    };
+    user_controller.check_id(user_info, function(err, row){
+        if(err){
+            console.log('error : ', err);
+             res.json(err);
+        }else if(row)
+        {
+            console.log('check id : ',row);
+             res.json(row);
+        }
+    });
 });
 
 //router login page
@@ -49,6 +63,25 @@ router.get('/login', function(req, res, next) {
 //router login post process
 router.post('/process/login', function(req, res, next) {
     console.log('login post router');
+    var userid = req.query.id || req.body.id || req.params.id || req.param.id;
+    var userpw = req.query.pw || req.body.pw || req.params.pw || req.param.pw;
+
+    var user_info = {
+        user_id :userid,
+        user_pw:userpw
+    };
+
+    user_controller.login(user_info, function(err, row){
+        if(err){
+             res.redirect('/user/login');
+        }else if(row)
+        {
+             res.redirect('/');
+        }else
+        {
+             res.redirect('/use/login');
+        }
+    });
     
 });
 

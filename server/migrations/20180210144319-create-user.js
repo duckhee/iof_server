@@ -34,6 +34,9 @@ module.exports = {
             user_address2: {
                 type: Sequelize.STRING
             },
+            user_zipcode:{
+                type:Sequelize.STRING
+            },
             apikey: {
                 type: Sequelize.STRING,
                 unique: true,

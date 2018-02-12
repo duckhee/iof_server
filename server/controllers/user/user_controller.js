@@ -7,7 +7,7 @@ exports.create = function(user_info, callback) {
         where: {
             user_id: user_info.id,
         },
-        default: {
+        defaults: {
 
         }
     }).spread(function(user, created) {
