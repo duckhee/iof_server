@@ -38,7 +38,7 @@ module.exports = function(sequelize, DataTypes) {
             classMethods: {
                 associate: function(models) {
                     // associations can be defined here
-                    /*
+                    
                       user.hasMany(models.device_network, {
                           foreignKey: 'apikey',
                           onDelete: 'CASCADE'
@@ -53,19 +53,44 @@ module.exports = function(sequelize, DataTypes) {
                           foreignKey: 'user_id',
                           onDelete: 'CASCADE'
                       });
-                      */
-                    user.hasMany(models.device_network);
-                    user.hasMany(models.tbl_board);
-                    user.hasMany(models.tbl_reply);
+                      
+                  //  user.hasMany(models.device_network);
+                  //  user.hasMany(models.tbl_board);
+                  //  user.hasMany(models.tbl_reply);
                 },
             }
-        },
+        },{
+            instanceMethods:{
+                generatehash : function(password, done){
+                    bcrypt.genSalt(10, function(err, salt){
+                        bcrypt.hashSync(password, salt, null, done);
+                    });
+                },
+                validPassword : function(password, next){
+                    bcrypt.compare(password, this.password, next)
+                }
+            }
+        }
 
     );
-    //insert before 
+    user.beforeCreate(function(model, done){
+        models.generatehash(model.password, function(err, encrypted){
+            if(err)
+            {
+                return done(err);
+            }
+            model.password = encrypted;
+            done();
+        });
+    });
+    return user;
+
+    //insert before
+    /* 
     user.hook("beforeCreate", function(user) {
         user.user_password = bcrypt.hashSync(user.user_password, bcrypt.genSaltSync(10), null);
         console.log('before Create hook >>>>>>>>', user.user_password);
     });
     return user;
+    */
 };
