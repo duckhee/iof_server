@@ -44,4 +44,6 @@ router.get('/modfiy', function(req, res, next){
 //modfiy page post router
 router.get('/process/modfiy', function(req, res, next){
     next();
-})
+});
+
+module.exports = router;

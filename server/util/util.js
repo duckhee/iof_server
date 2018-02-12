@@ -12,7 +12,7 @@ function createApikey() {
 }
 
 //null checking
-var isEmpty = function(value) {
+ function isEmpty(value) {
     if (value == "" || value == null || value == undefined || (value != null && typeof value == "object" && !Object.keys(value).length)) {
         return true;
     } else {
@@ -21,7 +21,7 @@ var isEmpty = function(value) {
 };
 
 //phone checking
-var phone_number = function(phone_info) {
+function phone_number(phone_info) {
     var phone = new Array;
     if (phone_info.indexOf('-') != -1) {
         phone = phone_info.split('-');

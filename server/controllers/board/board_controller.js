@@ -1,5 +1,5 @@
-var models = require('../../../models/index');
-var tbl_board = require('../../../models/tbl_board');
+var models = require('../../models/index');
+var tbl_board = require('../../models/tbl_board');
 
 
 //board insert create
@@ -51,6 +51,19 @@ exports.read = function(data_info, callback) {
         callback(err, null);
     });
 };
+
+//board start list
+exports.start_list = function(callback){
+    models.tbl_board.findAll({
+        order:[
+            ['createdAt', 'DESC']
+        ]
+    }).then(function(rows){
+        callback(null, rows);
+    }).catch(function(err){
+        callback(err, null);
+    })
+}
 
 //board list 
 exports.list = function(data_info, callback){
