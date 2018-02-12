@@ -10,19 +10,14 @@ var bcrypt = require('bcrypt-nodejs');
 var flash = require('connect-flash');
 var index = require('./server/routes/index');
 var user = require('./server/routes/users/user');
+var device = require('./server/routes/device/device');
+var boarder = require('./server/routes/boarder');
 
 //test router 테스트용 라우터 모든 테스트 여기
 var test = require('./server/routes/testrouter');
 
 let db = require('./server/models');
 
-//data base connectin check
-db.sequelize.sync().then(function() {
-    console.log("db connection success");
-}).catch(function(err) {
-    console.log('db connection error');
-    console.log(err);
-});
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -115,6 +110,10 @@ app.use('/download', express.static(path.join(__dirname, 'download')));
 app.use('/', index);
 //user router
 app.use('/user', user);
+//device router
+//app.use('device', device);
+//boarder router
+//app.use('/board', boarder);
 
 
 // catch 404 and forward to error handler
@@ -134,5 +133,14 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('../error/500');
 });
+
+//data base connectin check
+db.sequelize.sync().then(function() {
+    console.log("db connection success");
+}).catch(function(err) {
+    console.log('db connection error');
+    console.log(err);
+});
+
 
 module.exports = app;
