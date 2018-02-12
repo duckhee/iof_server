@@ -46,6 +46,19 @@ exports.check_id = function(user_info, callback) {
     });
 };
 
+//check email
+exports.check_email = function(user_info, callback){
+    module.user.find({
+        where:{
+            user_email:user_info.user_eamil
+        }
+    }).then((row) => {
+        callback(null, row);
+    }).catch(err => {
+        callback(err, null);
+    })
+}
+
 //update user
 exports.update_user = function(user_info, callback) {
     models.user.update({}, {

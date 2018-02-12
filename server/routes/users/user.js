@@ -77,6 +77,24 @@ router.get('/check_id', function(req, res, next) {
     });
 });
 
+//check email ajax router
+router.get('/check_email', function(req, res, next){
+    var email = req.query.emial || req.body.email || req.param.email || req.params.email;
+    var user_info = {
+        user_email:email
+    };
+    user_controller.check_email(user_info, function(err, row){
+        if(err){
+            console.log('check email error : ', err);
+        }else if(row){
+            console.log('check email : ', row);
+             res.json(row);
+        }else{
+             res.json(true);
+        }
+    });
+});
+
 //router login page
 router.get('/login', function(req, res, next) {
     res.render('user/login_page');
