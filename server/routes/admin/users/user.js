@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var bcrypt = require('bcrypt-nodejs');
-
+var custom_util = require('../../util/util'); //create apikey
 var user_controller = require('../../../controllers/user/user_controller');
 
 //registe user page
@@ -12,6 +12,7 @@ router.get('/registe', function(req, res, next) {
 //registe user page post process
 router.post('/process/registe', function(req, res, next) {
     console.log('reigste page post router');
+
     var useid = req.body.id || req.query.id || req.param.id || req.params.id;
     var userpw = req.body.pw || req.query.pw || req.param.pw || req.params.pw;
     var useremail = req.body.email || req.query.email || req.param.email || req.params.email;
@@ -41,8 +42,25 @@ router.post('/process/registe', function(req, res, next) {
 });
 
 //router ajax user id check page
-router.get('/check/id', function(req, res, next) {
-
+router.get('/check_id', function(req, res, next) {
+    console.log('checkid router ');
+    var userid = req.query.id || req.body.id || req.param.id || req.params.id;
+    console.log('testing get parameter id : ', userid);
+    user_info = {
+        user_id : userid
+    };
+    user_controller.check_id(user_info, function(err, row){
+        if(err){
+            console.log(err);
+             res.redirect('/user/check_id?id='+userid);
+        }else if(row){
+            console.log('check id : ',row);
+             res.json(row);
+        }else{
+            console.log('NULL');
+            res.json(true);
+        }
+    });
 });
 
 //router login page
@@ -52,7 +70,27 @@ router.get('/login', function(req, res, next) {
 
 //router login post process
 router.post('/process/login', function(req, res, next) {
-    next();
+    console.log('login post router');
+    var userid = req.query.id || req.body.id || req.params.id || req.param.id;
+    var userpw = req.query.pw || req.body.pw || req.params.pw || req.param.pw;
+
+    var user_info = {
+        user_id :userid,
+        user_pw:userpw
+    };
+
+    user_controller.login(user_info, function(err, row){
+        if(err){
+             res.redirect('/user/login');
+        }else if(row)
+        {
+             res.redirect('/');
+        }else
+        {
+             res.redirect('/use/login');
+        }
+    });
+    
 });
 
 //router profile page
