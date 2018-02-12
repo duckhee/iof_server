@@ -85,7 +85,7 @@ module.exports = function(sequelize, DataTypes) {
 
     );
     user.beforeCreate(function(model, done){
-        models.generatehash(model.password, function(err, encrypted){
+        model.generatehash(model.password, function(err, encrypted){
             if(err)
             {
                 return done(err);

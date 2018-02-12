@@ -116,4 +116,4 @@ exports.delete_user = function(user_info, callback) {
     }).catch(function(err) {
         callback(err, null);
     });
-}
+};
