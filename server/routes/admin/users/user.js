@@ -14,6 +14,7 @@ router.post('/process/registe', function(req, res, next) {
     console.log('reigste page post router');
     var useid = req.body.id || req.query.id || req.param.id || req.params.id;
     var userpw = req.body.pw || req.query.pw || req.param.pw || req.params.pw;
+    var useremail = req.body.email || req.query.email || req.param.email || req.params.email;
     var username = req.body.name || req.query.name || req.param.name || req.params.name;
     var userphone1 = req.body.phone1 || req.query.phone1 || req.param.phone1 || req.params.phone1;
     var userphone2 = req.body.phone2 || req.query.phone2 || req.param.phone2 || req.params.phone2;
@@ -26,6 +27,7 @@ router.post('/process/registe', function(req, res, next) {
     var user_info = {
         user_id:userid,
         user_password:userpw,
+        user_email:useremail,
         user_name:username,
         user_phone1:userphone1,
         user_phone2:userphone2,
