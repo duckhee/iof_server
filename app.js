@@ -135,9 +135,9 @@ app.use(function(err, req, res, next) {
 });
 
 //data base connectin check
-db.sequelize.sync().then(function() {
+db.sequelize.sync().then(() => {
     console.log("db connection success");
-}).catch(function(err) {
+}).catch((err) => {
     console.log('db connection error');
     console.log(err);
 });
