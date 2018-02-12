@@ -5,18 +5,30 @@ var user = require('../../models/user');
 exports.create_user = function(user_info, callback) {
     models.user.findOrCreate({
         where: {
-            user_id: user_info.id,
+            user_id: user_info.user_id,
         },
         defaults: {
-
+            user_id: user_info.user_id,
+            user_password:user_info.user_pw,
+            user_name:user_info.user_name,
+            user_email:user_info.user_email,
+            user_phone1:user_info.user_phone1,
+            user_phone2:user_info.user_phone2,
+            user_phone3:user_info.user_phone3,
+            user_address1:user_info.user_address1,
+            user_address2:user_info.user_address2,
+            user_zipcode:user_info.user_zipcode,
+            apikey:user_info.user_apikey,
         }
-    }).spread(function(user, created) {
+    }).spread((user, created) => {
         if (created) {
+            console.log('test created : ',created);
             callback(null, null, created);
         } else {
+            console.log(user);
             callback(null, user.dataValues, null);
         }
-    }).catch(function(err) {
+    }).catch((err) => {
         callback(err, null, null);
     });
 };

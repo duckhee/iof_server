@@ -47,7 +47,8 @@ module.exports = function(sequelize, DataTypes) {
                 unique: true,
                 allowNull: false
             }
-        }, {
+        }, 
+        {
             classMethods: {
                 associate: function(models) {
                     // associations can be defined here
@@ -72,22 +73,26 @@ module.exports = function(sequelize, DataTypes) {
                   //  user.hasMany(models.tbl_reply);
                 },
             }
-        },{
+        }
+        /*
+        {
             instanceMethods:{
-                generatehash : function(password, done){
+                generatehash : function(user_password, done){
                     bcrypt.genSalt(10, function(err, salt){
-                        bcrypt.hashSync(password, salt, null, done);
+                       return bcrypt.hashSync(user_password, salt, null, done);
                     });
                 },
-                validPassword : function(password, next){
-                    bcrypt.compare(password, this.password, next)
+                validPassword : function(user_password, next){
+                    return bcrypt.compare(user_password, this.user_password, next);
+
                 }
             }
         }
-
+        */
     );
+    /*
     user.beforeCreate(function(model, done){
-        model.generatehash(model.password, function(err, encrypted){
+        model.generatehash(model.user_password, function(err, encrypted){
             if(err)
             {
                 return done(err);
@@ -95,15 +100,15 @@ module.exports = function(sequelize, DataTypes) {
             model.password = encrypted;
             done();
         });
-    });
+    }); 
     return user;
-
+    */
     //insert before
-    /* 
+    
     user.hook("beforeCreate", function(user) {
         user.user_password = bcrypt.hashSync(user.user_password, bcrypt.genSaltSync(10), null);
         console.log('before Create hook >>>>>>>>', user.user_password);
     });
     return user;
-    */
+    
 };

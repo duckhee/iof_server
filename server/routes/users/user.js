@@ -11,32 +11,50 @@ router.get('/registe', function(req, res, next) {
 });
 //registe user page post process
 router.post('/process/registe', function(req, res, next) {
-    consoel.log('registe post router');
+    console.log('registe post router');
     
     var userid = req.body.id || req.query.id || req.param.id || req.params.id;
-    var userpw = req.body.pw || req.query.pw || req.param.pw || req.params.pw;
+    var userpw = req.body.password || req.query.password || req.param.password || req.params.password;
     var useremail = req.body.email || req.query.email || req.param.email || req.params.email;
     var username = req.body.name || req.query.name || req.param.name || req.params.name;
     var userphone = req.body.phone || req.query.phone || req.param.phone || req.params.phone;
-    var phone_number = custom_util.phone_number(userphone);
+    //var phone_number = custom_util.phone_number(userphone);
     var useraddress1 = req.body.address1 || req.query.address1 || req.param.address1 || req.params.address1;
     var useraddress2 = req.body.address2 || req.query.address2 || req.param.address2 || req.params.address2;
     var userzipcode = req.body.zipcode || req.query.zipcode || req.param.zipcode || req.params.zipcode;
-
+    var apikey = custom_util.createApikey(userid);
+    console.log(userid);
+    console.log(userpw);
+    console.log(useremail);
+    console.log(username);
+    console.log(userphone);
+    console.log(apikey);
     var user_info = {
         user_id:userid,
         user_pw:userpw, 
         user_name:username,
         user_email:useremail,
-        user_phone1:phone_number[0],
-        user_phone2:phone_number[1],
-        user_phone3:phone_number[2],
+        //user_phone1:phone_number[0],
+        //user_phone2:phone_number[1],
+       // user_phone3:phone_number[2],
         user_address1:useraddress1,
         user_address2:useraddress2,
         user_zipcode:userzipcode,
+        user_apikey:apikey
     };
-
-    next();
+    user_controller.create_user(user_info, function(err, newuser, olduser){
+        if(err){
+            console.log('create user error : ', err);
+        
+        }else if(olduser === true){
+             res.redirect('/');
+        }else if(newuser){
+            res.redirect('/user/registe');
+        }else{
+             res.redirect('/user/registe');
+        }
+    });
+    
 });
 
 //router ajax user id check page
