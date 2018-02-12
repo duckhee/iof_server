@@ -37,7 +37,7 @@ router.post('/process/registe', function(req, res, next) {
         user_zipcode:userzipcode,
     };
 
-
+    next();
 });
 
 //router ajax user id check page

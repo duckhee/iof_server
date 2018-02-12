@@ -50,7 +50,8 @@ exports.list10_value = function(data_info, callback){
         },
         order:[
             ['createdAt', 'DESC']
-        ]
+        ],
+        limit:10,
     }).then(function(rows){
         callback(null, rows);
     }).catch(function(err){
@@ -63,7 +64,10 @@ exports.list_value = function(data_info, callback){
     models.device_value.findAll({
         where:{
 
-        }
+        },
+        order:[
+            ['createdAt', 'DESC']
+        ],
     }).then(function(rows){
         callback(null, rows);
     }).catch(function(err){
