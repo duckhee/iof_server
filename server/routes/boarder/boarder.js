@@ -67,11 +67,27 @@ router.get('/modify', function(req, res, next){
 router.post('/modify', function(req, res, next){
     console.log('boarder modify post router');
     next();
-})
+});
 
 //boarder reply router
-//router.get('/')
+router.get('/create/reply', function(req, res, next){
 
+});
+
+//boarder reply list router
+router.get('/list/reply', function(req, res, next){
+
+});
+
+//boarder modify reply router
+router.get('/modify/reply', function(req, res, next){
+
+});
+
+//boader delete reply router
+router.get('/delete/reply', function(req, res, next){
+
+});
 
 
 module.exports = router;

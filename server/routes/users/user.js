@@ -17,9 +17,8 @@ router.post('/process/registe', function(req, res, next) {
     var userpw = req.body.pw || req.query.pw || req.param.pw || req.params.pw;
     var useremail = req.body.email || req.query.email || req.param.email || req.params.email;
     var username = req.body.name || req.query.name || req.param.name || req.params.name;
-    var userphone1 = req.body.phone1 || req.query.phone1 || req.param.phone1 || req.params.phone1;
-    var userphone2 = req.body.phone2 || req.query.phone2 || req.param.phone2 || req.params.phone2;
-    var userphone3 = req.body.phone3 || req.query.phone3 || req.param.phone3 || req.params.phone3;
+    var userphone = req.body.phone || req.query.phone || req.param.phone || req.params.phone;
+    var phone_number = custom_util.phone_number(userphone);
     var useraddress1 = req.body.address1 || req.query.address1 || req.param.address1 || req.params.address1;
     var useraddress2 = req.body.address2 || req.query.address2 || req.param.address2 || req.params.address2;
     var userzipcode = req.body.zipcode || req.query.zipcode || req.param.zipcode || req.params.zipcode;
@@ -29,9 +28,9 @@ router.post('/process/registe', function(req, res, next) {
         user_pw:userpw, 
         user_name:username,
         user_email:useremail,
-        user_phone1:userphone1,
-        user_phone2:userphone2,
-        user_phone3:userphone3,
+        user_phone1:phone_number[0],
+        user_phone2:phone_number[1],
+        user_phone3:phone_number[2],
         user_address1:useraddress1,
         user_address2:useraddress2,
         user_zipcode:userzipcode,
