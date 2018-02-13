@@ -8,6 +8,7 @@ module.exports = function(sequelize, DataTypes) {
                 key: 'id'
             },
             onDelete: 'CASCADE',
+            allowNull: false
         },
         rwriter: {
             type: DataTypes.STRING,
@@ -16,13 +17,19 @@ module.exports = function(sequelize, DataTypes) {
                 key: 'user_id'
             },
             onDelete: 'CASCADE',
+            allowNull: false
         },
         rcontent: DataTypes.TEXT
     }, {
         classMethods: {
             associate: function(models) {
                 // associations can be defined here
-                tbl_reply.belongTo(models.tbl_board, {
+                tbl_reply.belongMany(models.user, {
+                    foreignKeyConstraint: true,
+                    foreignKey: 'user_id',
+                    allowNull: false
+                });
+                tbl_reply.belongMany(models.tbl_board, {
                     foreignKeyConstraint: true,
                     foreignKey: 'id',
                     allowNull: false

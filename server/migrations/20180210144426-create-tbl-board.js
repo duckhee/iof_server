@@ -27,7 +27,8 @@ module.exports = {
             },
             viewcnt: {
                 type: Sequelize.INTEGER,
-                default: 0
+                allowNull: false,
+                defaults: 0
             },
             createdAt: {
                 allowNull: false,
