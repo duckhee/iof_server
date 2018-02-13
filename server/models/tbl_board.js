@@ -27,7 +27,7 @@ module.exports = function(sequelize, DataTypes) {
         viewcnt: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            defaults: 0
+            defaultValue: 0
         }
     }, {
         classMethods: {
