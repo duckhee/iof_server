@@ -77,11 +77,12 @@ module.exports = function(sequelize, DataTypes) {
                 generatehash: function(user_password, done) {
                     bcrypt.genSalt(10, function(err, salt) {
                         bcrypt.hashSync(user_password, salt, null, done);
+                        //return bcrypt.hashSync(user_password, salt, null, done);
                     });
                 },
                 validPassword: function(user_password, next) {
-                    bcrypt.compare(user_password, this.user_password, next);
-
+                    //return bcrypt.compare(user_password, this.user_password, next);
+                    return bcrypt.compareSync(user_password, this.user_password);
                 }
             },
 
