@@ -13,6 +13,9 @@ var user = require('./server/routes/users/user');
 var device = require('./server/routes/device/device');
 var boarder = require('./server/routes/boarder/boarder');
 
+//passport testing
+//var custom_passport = require('./server/config/passport');
+
 //test router 테스트용 라우터 모든 테스트 여기
 var test = require('./server/routes/testrouter');
 
