@@ -3,6 +3,9 @@ var LocalStrategy = require('passport-local').Strategy;
 var models = require('../models/index');
 var user = require('../models/user');
 
+//user controller add
+var user_controller = require('../controllers/user/user_controller');
+
 module.exports = function(passport) {
     passport.serializeUser(function(user, done) {
         //세션에 사용자 정보 등록
@@ -11,7 +14,7 @@ module.exports = function(passport) {
     //user to deserialize the user
     passport.deserializeUser(function(id, dnoe) {
         //세션에 기록된 사용자 정보를 얻어온다.
-        User.findById(id).then(function(user) {
+        user.findById(id).then(function(user) {
             if (user) {
                 console.log(user);
                 done(null, user.get());
