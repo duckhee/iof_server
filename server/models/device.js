@@ -15,7 +15,7 @@ module.exports = function(sequelize, DataTypes) {
         },
         device_num: {
             type: DataTypes.INTEGER,
-            defaults: 0
+            defaultValue: 0
         },
         device_serial: {
             type: DataTypes.STRING

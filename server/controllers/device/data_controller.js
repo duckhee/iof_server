@@ -46,7 +46,7 @@ exports.bulk_create = function(data_info, callback){
 exports.list10_value = function(data_info, callback){
     models.device_value.findAll({
         where:{
-
+            
         },
         order:[
             ['createdAt', 'DESC']
