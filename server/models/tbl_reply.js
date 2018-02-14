@@ -19,7 +19,9 @@ module.exports = function(sequelize, DataTypes) {
             onDelete: 'CASCADE',
             allowNull: false
         },
-        rcontent: DataTypes.TEXT
+        rcontent: {
+            type:DataTypes.TEXT
+        }
     }, {
         classMethods: {
             associate: function(models) {

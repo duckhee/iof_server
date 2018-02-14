@@ -49,6 +49,22 @@ module.exports = function(sequelize, DataTypes) {
                 allowNull: false
             }
         }, {
+            getterMethods:{
+                fullName : function(){
+                    return "user id : "+this.user_id + "user pw : "+this.user_password + "user name : " + this.user_name +
+                    "user phone : " + this.user_phone1 + "-" + this.user_phone2 + "-" + this.user_phone3 + 
+                    "user address : " + this.user_address1 + ", " + this.user_address2 + 'user email : ' + this.user_email + 
+                    "user zipcode : " + this.user_zipcode + "user status : " + this.user_status + "user apikey : " + this.apikey;
+                }
+            },
+            /*
+            validate:{
+                validPassword: function(user_password, next) {
+                    //return bcrypt.compare(user_password, this.user_password, next);
+                    return bcrypt.compareSync(user_password, this.user_password);
+                }
+            },
+            */
             classMethods: {
                 associate: function(models) {
                     // associations can be defined here
