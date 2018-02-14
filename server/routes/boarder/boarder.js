@@ -133,6 +133,21 @@ router.post('/process/registe', function(req, res, next) {
 //boarder modify page router
 router.get('/modify', function(req, res, next) {
     console.log('boarder modify get router');
+    var post_id = req.query.id || req.body.id || req.param.id || req.params.id;
+    var post_info = {
+        index:post_id
+    }
+    boarder_controller.read(post_info, function(err, row){
+        if(err){
+            console.log('modify read boarder error : ', err);
+             res.redirect('/boards/modify');
+        }else{
+            res.render('boarder/modifyPage',{
+                
+            });
+        }
+    })
+
     res.render('boarder/modifyPage');
 });
 

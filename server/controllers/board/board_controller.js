@@ -128,3 +128,20 @@ exports.upcounting = function(data_info, callback){
         callback(err, null);
     });
 };
+
+//boarder modify
+exports.modify = function(boarder_info, callback){
+    models.tbl_board.update({
+
+    },{
+        where:{
+
+        }
+    }).then(row =>{
+        console.log('modify boarder : ', row);
+        callback(null, row);
+    }).catch(err => {
+        console.log('modify boarder error : ', err);
+        callback(err, null);
+    })
+}
