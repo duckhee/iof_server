@@ -104,8 +104,8 @@
 						
 						<tbody id="tbody">
                         <% 
-                        if(locals.post){
-                            for(post of posts){ 
+                        if(post){
+                            for(posts of post){ 
                         %>
 							<tr>
 								<td><%= posts.id%></td>
@@ -117,7 +117,7 @@
                         <% 
                             } 
                             
-                        }else{
+                        }else{ %>
                             <tr>
                                 <td></td>
                                 <td></td>
@@ -125,6 +125,7 @@
                                 <td></td>
                                 <td><span class="badge bg-red"></span></td>
                             </tr>
+                            <%
                         }
                         
                         %>

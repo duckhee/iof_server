@@ -21,20 +21,40 @@ router.get('/list', function(req, res, next) {
     boarder_controller.start_list(function(err, row) {
         if (err) {
             console.log('boarder list error : ', err);
-            res.json(err);
-        } else {
-            console.log('boarder data : ', row);
+            //res.json(err);
+            next(err);
+        }
+        else{
+            res.render('boarder/listPage', {
+                post:row
+            });    
+        }
+        /*
+        else{
             var checking = util_make.isEmpty(row);
             if (checking) {
-                res.render('boarder/emptylistPage');
+                res.render('boarder/listPage', {
+                    post: row
+                });
             } else {
                 res.render('boarder/listPage', {
                     post: row
                 });
             }
         }
+        */
     });
-
+        /*
+        else {
+            console.log('boarder data : ', row);
+            var posts = JSON.stringify(row);
+            console.log('posts : ', post);
+            res.render('boarder/listPage', {
+                post:posts
+            });
+        }
+    });
+    */
 });
 
 //boarder list page router
