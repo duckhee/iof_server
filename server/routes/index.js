@@ -3,6 +3,8 @@ var router = express.Router();
 
 router.all('/', function(req, res, next){
   console.log('root path all router');
+  console.log('request ip : ', req.ip);
+  console.log('request url : ', req.originalUrl);
   next();
 })
 

@@ -45,6 +45,36 @@ router.post('/process/list', function(req, res, next) {
     next();
 });
 
+//boarder read page router
+router.get('/read', function(req, res, next){
+    console.log('boarder read get router');
+    var boarder_id = req.body.id || req.query.id || req.param.id || req.params.id;
+
+    var boarder_info = {
+        index:boarder_id
+    };
+
+    boarder_controller.read(boarder_info, function(err, row){
+        if(err){
+            console.log('boarder read error : ', err);
+             res.redirect('/boards/read');
+        }else if(row){
+            console.log('boarder read page get : ', row);
+            res.render('boarder/readPage',{
+                post:row
+            });
+        }else{
+             res.redirect('/boards/read');
+        }
+    });
+});
+
+//boarder read page router
+router.post('/read', function(req, res, next){
+    console.log('boarder read post router');
+    next();
+});
+
 //boarder registe page router
 router.get('/registe', function(req, res, next) {
     console.log('boarder registe get router');
@@ -54,6 +84,10 @@ router.get('/registe', function(req, res, next) {
 //boarder registe page router
 router.post('/process/registe', function(req, res, next) {
     console.log('boarder registe post router');
+
+    var title = req.body.title || req.query.title || req.param.title || req.params.title;
+    var editor = req.body.editor1 || req.query.editor1 || req.param.editor1 || req.params.editor1;
+
 
 
     next();

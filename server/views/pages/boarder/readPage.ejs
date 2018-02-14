@@ -22,7 +22,8 @@
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top">
                 <!-- Sidebar toggle button-->
-                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button"> <span class="sr-only">Toggle navigation</span>
+                 <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                        <span class="sr-only">Toggle navigation</span>
                 </a>
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
@@ -54,121 +55,87 @@
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
-                <section class="content-header">
+                 <section class="content-header">
                     <h1>
-                        Show <small>Serial</small>
+                        Boarder <small>registe</small>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-                        <li><i class="ffa fa-dshboard"></i>address</li>
-                        <li class="active"><a href="/">serial</a></li>
+                        <li><i class="ffa fa-dshboard"></i>boarder</li>
+                        <li class="active"><a href="#">registe</a></li>
                     </ol>
-                </section>
-                <div class="content">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="box box-primary">
-                                <div class="box-header with-dorder">
-                                    <i class="fa fa-fw fa-download"></i>
-                                    <h3 class="box-title">Sensor or Picture Down Load</h3>
-                                </div>
-                                <div class="box-body">
-                                <p> click button download.</p>
-                                <form action="/process/download_csv?serial_Num=<%=serial_Num%>" method="post">
-                                    <button type="submit" class="btn btn-block btn-success" name="sensor_download" id="sensor_download"><i class="fa fa-fw fa-download"></i>Sensor Data Download</button>
-                                </form>
-                                <form action="/process/download_zip?serial_Num=<%=serial_Num%>" method="post">
-                                    <button type="submit" class="btn btn-block btn-danger" name="image_download" id="image_download"><i class="fa fa-fw fa-download"></i>Picture Data Download</button>
-                                </form>
-                                </div>
-                            </div>
-                        </div>
+                </section> 
+                  <!-- Main content -->
+    <section class="content">
+            <div class="row">
+              <div class="col-md-12">
+                    <form action="/boards/process/registe" method="post">
+                <div class="box box-info">
+                  <div class="box-header">
+                        
+                    <h3 class="box-title">                      
+                            <!-- set title input box-->
+                            <div class="form-horizontal">
+                                  <label class="col-sm-2 control-label">title</label>
+                                  <div class="col-sm-10">
+                                      <input id="title" name="title" type="text" placeholder="write title here.">
+                                  </div>
+                          </div>
+                          <!-- end set title input box-->
+                    </h3>
+                    
+                    <!-- tools box -->
+                    <div class="pull-right box-tools">
+                      
                     </div>
-                        <!-- download button group -->
-                    <div class="row">
-                        <!-- <div class="col-xs-12"> -->
-                        <div class = "col-md-6">
-                            <!-- Line chart -->
-                            <div class="box box-primary">
-                                <div class="box-header with-border">
-                                    <i class="fa fa-bar-chart-o"></i>
-                                    <h3 class="box-title">EC Value (dS/m ECe) 
-                                            </h3><div class="box-tools pull-right"><%= str %></div>     
-                                    <!--<button class="pull-right" id="value_download" name="value_download"><i class="fa fa-fw fa-download"></i>download</button>-->
-                                </div>
-                                <div class="box-body">                                    
-                                    <div id="ec-chartLegend" ></div>
-                                    <div id="ec-chart" style="height: 300px;"></div>    
-                                </div>
-                                <!-- /.box-body-->
-                            </div>
-                            <!-- /.box -->
-                        </div>
-                        <!-- chart end -->
-                        <div class = "col-md-6">
-                            <!-- Line chart -->
-                            <div class="box box-primary">
-                                <div class="box-header with-border">
-                                    <i class="fa fa-bar-chart-o"></i>
-                                    <h3 class="box-title">Temperature Value (degC) 
-                                           </h3><div class="box-tools pull-right"><%= str %></div>                                    
-                                    <!-- <button class="pull-right" id="value_download" name="value_download"><i class="fa fa-fw fa-download"></i>download</button> -->
-                                </div>
-
-                                <div class="box-body">
-                                    <div id="temp-chartLegend" ></div>
-                                    <div id="temp-chart" style="height: 300px;"></div>
-                                </div>
-                                <!-- /.box-body-->
-                            </div>
-                            <!-- /.box -->
-                        </div>
-                        <!-- chart end -->
-                        <div class = "col-md-6">
-
-                            <!-- Line chart -->
-                            <div class="box box-primary">
-                                <div class="box-header with-border">
-                                    <i class="fa fa-bar-chart-o"></i>
-                                    <h3 class="box-title">Moisture Value (%VWC)
-                                            </h3><div class="box-tools pull-right"><%= str %></div>     
-                                    <!--<button class="pull-right" id="value_download" name="value_download"><i class="fa fa-fw fa-download"></i>download</button> -->
-                                </div>
-                                <div class="box-body">
-                                    <div id="moist-chartLegend" ></div>
-                                    <div id="moist-chart" style="height: 300px;"></div>
-
-                                </div>
-                                <!-- /.box-body-->
-                            </div>
-                            <!-- /.box -->
-                        </div>
-                        <!-- chart end -->
-                    <!--</div>
-
-                    <div class="row"> -->
-                        <div class="col-md-6">
-                            <div class="box box-primary">
-                                <div class="box-header with-border">
-                                    <h3 class="box-title">최근 촬영 사진</h3>
-                                    <div class="box-tools pull-right" id="camera-date"  style="height:300px">
-                                        
-                                    </div>
-                                </div>
-                                <!-- /.box-header -->
-                                <div class="box-body">
-                                    <div id="camera-info">
-                                        <img style="height:300px"></img>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.col -->
-                    </div>
-                    <!-- / camera infomation -->
-                    <!-- infomation -->
-                    <!-- /.weather, camera widget -->
+                    <!-- /. tools -->
+                  </div>
+                  <!-- /.box-header -->
+                  <div class="box-body pad">
+                          <textarea id="editor1" name="editor1" rows="10" cols="80">
+                                                  
+                          </textarea>
+                  </div>
+                  <!-- submit button box footer -->
+                  <div class="box-footer">
+                      <button type="submit" class="btn btn-primary">submit</button>
+                      <button type="button" id="cancelBtn" name="cancelBtn" class="btn btn-danger">cancel</button>
+                  </div>
                 </div>
+            </form>
+                <!-- /.box -->
+      
+                <!-- bootstraup wysihtml5 -->
+                <!-- <div class="box">
+                  <div class="box-header">
+                    <h3 class="box-title">Bootstrap WYSIHTML5
+                      <small>Simple and fast</small>
+                    </h3> -->
+                    <!-- tools box -->
+                    <!-- <div class="pull-right box-tools">
+                      <button type="button" class="btn btn-default btn-sm" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fa fa-minus"></i></button>
+                      <button type="button" class="btn btn-default btn-sm" data-widget="remove" data-toggle="tooltip" title="Remove">
+                        <i class="fa fa-times"></i></button>
+                    </div> -->
+                    <!-- /. tools -->
+                  <!-- </div> -->
+                  <!-- /.box-header -->
+                  <!-- <div class="box-body pad">
+                    <form>
+                      <textarea class="textarea" placeholder="Place some text here" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                    </form>
+                  </div>
+                </div> -->
+
+                <!-- bootstraup wysihtml5 -->
+
+              </div>
+              <!-- /.col-->
+            </div>
+            <!-- ./row -->
+          </section>
+          <!-- /.content -->
             </div>
         <% include ../../partials/footer.ejs %>
             <div class="control-sidebar-bg"></div>
@@ -181,5 +148,22 @@
     </div>
     
     <% include ../../partials/footer_javascript_index.ejs %>
+    <script>
+            
+            $(document).ready(function(){
+                $(function () {
+                    // Replace the <textarea id="editor1"> with a CKEditor
+                    // instance, using default configuration.
+                    CKEDITOR.replace('editor1');
+                    //bootstrap WYSIHTML5 - text editor
+                    $(".textarea").wysihtml5();
+                });
+
+                $("#cancelBtn").click(function(){
+                    console.log('cancel');
+                    location.replace('/boards/registe');
+                })
+            });
+    </script>
   </body>
 </html>
