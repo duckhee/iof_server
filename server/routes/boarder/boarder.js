@@ -56,7 +56,7 @@ router.post('/process/list', function(req, res, next) {
             next();//next(router)
         }
     });
-    //res.send('/read?id=' + postid);//read page로 이동 ? 
+    //es.send('/read?id=' + postid);//read page로 이동 ? 
 });
 
 //boarder read page router
@@ -122,22 +122,22 @@ router.post('/modify', function(req, res, next) {
     next();
 });
 
-//boarder reply router
+//boarder reply router ajax ? 
 router.get('/create/reply', function(req, res, next) {
-
+    next();
 });
 
-//boarder reply list router
+//boarder reply list router ajax?
 router.get('/list/reply', function(req, res, next) {
 
 });
 
-//boarder modify reply router
+//boarder modify reply router ajax?
 router.get('/modify/reply', function(req, res, next) {
 
 });
 
-//boader delete reply router
+//boader delete reply router ajax?
 router.get('/delete/reply', function(req, res, next) {
 
 });
