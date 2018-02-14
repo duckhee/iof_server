@@ -98,8 +98,8 @@ exports.find_userpw = function(user_info, callback) {
         callback(null, row);
     }).catch(function(err) {
         callback(err, null);
-    })
-}
+    });
+};
 
 //find user
 exports.find_user = function(user_info, callback) {
@@ -112,8 +112,28 @@ exports.find_user = function(user_info, callback) {
         callback(null, row);
     }).catch(function(err) {
         callback(err, null);
+    });
+};
+
+//detail user
+exports.detail_user = function(user_info, callback){
+    models.user.findOne({
+        where:{
+            user_id:user_info.user_id,
+            user_password:user_info.user_password
+        },
+        include:[{
+            model:models.device,
+            attributes:'device_num, device_name'
+        }]
+    }).then((row) =>{
+        console.log(row);
+        callback(null, row);
+    }).catch(err =>{
+        console.log('detail user error : ', err);
+        callback(err, null);
     })
-}
+};
 
 //list user
 exports.list_user = function(user_info, callback) {

@@ -41,8 +41,22 @@ router.get('/list', function(req, res, next) {
 router.post('/process/list', function(req, res, next) {
     console.log('boarder list post router');
     var postid = req.body.id || req.query.id || req.param.id || req.params.id;
-
-    next();
+    var post_info = {
+        index:postid
+    };
+    boarder_controller.read(post_info, function(err, row){
+        if(err){
+            console.log('process list boarder error : ', err);
+            next();
+        }else if(row){
+            console.log('success list get', row);
+            next();
+        }else{
+            console.log('proccess list boarder null');
+            next();//next(router)
+        }
+    });
+    //res.send('/read?id=' + postid);//read page로 이동 ? 
 });
 
 //boarder read page router
