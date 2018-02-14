@@ -72,7 +72,7 @@ router.get('/check_id', function(req, res, next) {
             res.json(row);
         } else {
             console.log('null');
-            res.json(true);
+            res.json(false);
         }
     });
 });
@@ -90,7 +90,7 @@ router.get('/check_email', function(req, res, next) {
             console.log('check email : ', row);
             res.json(row);
         } else {
-            res.json(true);
+            res.json(false);
         }
     });
 });
