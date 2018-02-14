@@ -10,13 +10,13 @@ exports.create = function(user_info, callback) {
         default: {
 
         }
-    }).spread(function(user, created) {
+    }).spread((user, created) => {
         if (created) {
             callback(null, null, created);
         } else {
             callback(null, user.dataValues, null);
         }
-    }).catch(function(err) {
+    }).catch((err) => {
         callback(err, null, null);
     });
 };
