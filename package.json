@@ -29,11 +29,7 @@
         "nodemailer": "^4.4.2",
         "passport": "^0.4.0",
         "passport-local": "^1.0.0",
-<<<<<<< HEAD
-        "sequelize": "^4.33.2",
-=======
         "sequelize": "^4.33.4",
->>>>>>> cd6374c99f3c4b188b699719d8c492ce3be4ea98
         "sequelize-cli": "^3.2.0",
         "serve-favicon": "~2.4.2",
         "socket.io-client": "2.0.3",
