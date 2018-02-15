@@ -14,8 +14,4 @@ router.get('/', function(req, res, next) {
     res.render('index');
 });
 
-router.get('/readtest', function(req, res, next) {
-    res.render('boarder/readPage');
-})
-
 module.exports = router;

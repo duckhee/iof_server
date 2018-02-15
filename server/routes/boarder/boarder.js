@@ -34,6 +34,7 @@ router.get('/list', function(req, res, next) {
 //boarder list page router
 router.post('/process/list', function(req, res, next) {
     console.log('boarder list post router');
+    /*
     var postid = req.body.id || req.query.id || req.param.id || req.params.id;
     var post_info = {
         index: postid
@@ -50,13 +51,15 @@ router.post('/process/list', function(req, res, next) {
             next(); //next(router)
         }
     });
-    //es.send('/read?id=' + postid);//read page로 이동 ? 
+    //res.send('/read?id=' + postid);//read page로 이동 ? 
+    */
+    next();
 });
 
 //boarder read page router
 router.get('/read', function(req, res, next) {
     console.log('boarder read get router');
-    var boarder_id = req.body.id || req.query.id || req.param.id || req.params.id;
+    var boarder_id = req.body.bno || req.query.bno || req.param.bno || req.params.bno;
 
     var boarder_info = {
         index: boarder_id
@@ -83,7 +86,7 @@ router.get('/read', function(req, res, next) {
 //boarder read page router
 router.post('/read', function(req, res, next) {
     console.log('boarder read post router');
-    next();
+    res.redirect('/boards/read');
 });
 
 //boarder registe page router
@@ -99,9 +102,19 @@ router.post('/process/registe', function(req, res, next) {
     var title = req.body.title || req.query.title || req.param.title || req.params.title;
     var editor = req.body.editor1 || req.query.editor1 || req.param.editor1 || req.params.editor1;
 
+    var board_info = {};
 
+    boarder_controller.create(board_info, function(err, row) {
+        if (err) {
+            console.log('boarder registe error : ', err);
+        } else if (row) {
+            console.log('boarder registe success ');
+        } else {
+            console.log('boarder create null');
+        }
+    });
 
-    next();
+    res.redirect('/boards/list');
 })
 
 //boarder modify page router
@@ -111,14 +124,12 @@ router.get('/modify', function(req, res, next) {
     var post_info = {
         index: post_id
     }
-    boarder_controller.read(post_info, function(err, row) {
+    boarder_controller.modify(post_info, function(err, row) {
         if (err) {
             console.log('modify read boarder error : ', err);
             res.redirect('/boards/modify');
         } else {
-            res.render('boarder/modifyPage', {
-
-            });
+            res.render('boarder/list');
         }
     })
 

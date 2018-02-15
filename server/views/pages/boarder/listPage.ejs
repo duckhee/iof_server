@@ -109,7 +109,7 @@
                         %>
 							<tr>
 								<td><%= posts.id%></td>
-								<td><%=posts.title%></td>
+								<td><a href="/boards/read?bno=<%-posts.id%>"><%=posts.title%></a></td>
 								<td><%=posts.writer%></td>
 								<td><%=posts.createdAt%></td>
 								<td><span class="badge bg-red"><%=posts.viewcnt%></span></td>
