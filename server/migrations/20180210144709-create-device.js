@@ -22,7 +22,7 @@ module.exports = {
             },
             device_num: {
                 type: Sequelize.INTEGER,
-                default: 0
+                defaultValue: 0
             },
             device_serial: {
                 type: Sequelize.STRING

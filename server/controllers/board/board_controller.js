@@ -5,7 +5,7 @@ var tbl_board = require('../../models/tbl_board');
 //board insert create
 exports.create = function(data_info, callback){
     models.tbl_board.create({
-
+        
     }).then(function(row){
         callback(null, row);
     }).catch(function(err){
@@ -19,16 +19,24 @@ exports.insert = function(data_info, callback) {
         where: {
 
         },
+        /*
+        include :[{
+            model:models.user, 
+            attributes:'user_id',
+            where:{
+                user_id:data_info.user_id
+        }}],
+        */
         default: {
 
         }
-    }).spread(function(user, created) {
+    }).spread((user, created) =>{
         if (created) {
             callback(null, null, created);
         } else {
             callback(null, user.dataValues, null);
         }
-    }).catch(function(err) {
+    }).catch((err) => {
         callback(err, null, null);
     });
 };
@@ -87,8 +95,16 @@ exports.list = function(data_info, callback){
 exports.upcount = function(data_info, callback) {
     models.tbl_board.update({}, {
         where: {
-q
-        }
+
+        },
+        /*
+        include :[{
+            model:models.user, 
+            attributes:'user_id',
+            where:{
+                user_id:data_info.user_id
+        }}],
+        */
     }).then((row) => {
        callback(null, row);
     }).catch((err) => {
@@ -101,7 +117,7 @@ exports.upcounting = function(data_info, callback){
     models.tbl_board.findOne({
         where:{
             
-        }
+        },
     }).then((row) => {
         models.tbl_board.increment('viewcnt',{by:1}).then(rows =>{
             callback(null, rows);
@@ -112,3 +128,20 @@ exports.upcounting = function(data_info, callback){
         callback(err, null);
     });
 };
+
+//boarder modify
+exports.modify = function(boarder_info, callback){
+    models.tbl_board.update({
+
+    },{
+        where:{
+
+        }
+    }).then(row =>{
+        console.log('modify boarder : ', row);
+        callback(null, row);
+    }).catch(err => {
+        console.log('modify boarder error : ', err);
+        callback(err, null);
+    })
+}

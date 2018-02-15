@@ -111,7 +111,7 @@ router.post('/insert_data', function(req, res, next) {
     var rowdata_info = '';
     //get json data
     req.on('data', function(data) {
-        var data_info = JSON.parse(data);;
+        var data_info = JSON.parse(data);
         datacontroller.insert_value(data_info, function(row, err) {
             if (row) {
                 res.json(row);

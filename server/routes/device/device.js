@@ -26,6 +26,18 @@ router.post('/process/registe', function(req, res, next){
     next();
 });
 
+//device list page get router
+router.get('/list', function(req, res, next){
+    console.log('device list get router'); 
+    res.render('device/listPage');
+});
+
+//device list page post router
+router.post('/proccess/list', function(req,res, next){
+    console.log('device list post router');
+    next();
+});
+
 //detail page get router
 router.get('/detail', function(req, res, next){
     res.render('device/detailPage');

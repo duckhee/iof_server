@@ -2,25 +2,26 @@
 module.exports = function(sequelize, DataTypes) {
     var device = sequelize.define('device', {
         device_name: {
-            type:DataTypes.STRING
+            type: DataTypes.STRING
         },
         device_apikey: {
-            type:DataTypes.STRING,
-            refernces:{
-                model:'user',
-                key:'apikey'
+            type: DataTypes.STRING,
+            refernces: {
+                model: 'user',
+                key: 'apikey'
             },
             allowNull: false,
             onDelete: 'CASCADE',
         },
         device_num: {
-            type:DataTypes.INTEGER
+            type: DataTypes.INTEGER,
+            defaultValue: 0
         },
         device_serial: {
-            type:DataTypes.STRING
+            type: DataTypes.STRING
         },
         device_address: {
-            type:DataTypes.STRING
+            type: DataTypes.STRING
         }
     }, {
         classMethods: {

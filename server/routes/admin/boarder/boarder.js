@@ -21,62 +21,28 @@ router.get('/list', function(req, res, next) {
     boarder_controller.start_list(function(err, row) {
         if (err) {
             console.log('boarder list error : ', err);
-            //res.json(err);
-            next(err);
-        }
-        else{
-            res.render('boarder/listPage', {
-                post:row
-            });    
-        }
-        /*
-        else{
+            res.json(err);
+        } else {
+            console.log('boarder data : ', row);
             var checking = util_make.isEmpty(row);
             if (checking) {
-                res.render('boarder/listPage', {
-                    post: row
-                });
+                res.render('boarder/emptylistPage');
             } else {
                 res.render('boarder/listPage', {
                     post: row
                 });
             }
         }
-        */
     });
-        /*
-        else {
-            console.log('boarder data : ', row);
-            var posts = JSON.stringify(row);
-            console.log('posts : ', post);
-            res.render('boarder/listPage', {
-                post:posts
-            });
-        }
-    });
-    */
+
 });
 
 //boarder list page router
 router.post('/process/list', function(req, res, next) {
     console.log('boarder list post router');
     var postid = req.body.id || req.query.id || req.param.id || req.params.id;
-    var post_info = {
-        index:postid
-    };
-    boarder_controller.read(post_info, function(err, row){
-        if(err){
-            console.log('process list boarder error : ', err);
-            next();
-        }else if(row){
-            console.log('success list get', row);
-            next();
-        }else{
-            console.log('proccess list boarder null');
-            next();//next(router)
-        }
-    });
-    //es.send('/read?id=' + postid);//read page로 이동 ? 
+
+    next();
 });
 
 //boarder read page router
@@ -133,21 +99,6 @@ router.post('/process/registe', function(req, res, next) {
 //boarder modify page router
 router.get('/modify', function(req, res, next) {
     console.log('boarder modify get router');
-    var post_id = req.query.id || req.body.id || req.param.id || req.params.id;
-    var post_info = {
-        index:post_id
-    }
-    boarder_controller.read(post_info, function(err, row){
-        if(err){
-            console.log('modify read boarder error : ', err);
-             res.redirect('/boards/modify');
-        }else{
-            res.render('boarder/modifyPage',{
-                
-            });
-        }
-    })
-
     res.render('boarder/modifyPage');
 });
 
@@ -157,22 +108,22 @@ router.post('/modify', function(req, res, next) {
     next();
 });
 
-//boarder reply router ajax ? 
+//boarder reply router
 router.get('/create/reply', function(req, res, next) {
-    next();
+
 });
 
-//boarder reply list router ajax?
+//boarder reply list router
 router.get('/list/reply', function(req, res, next) {
 
 });
 
-//boarder modify reply router ajax?
+//boarder modify reply router
 router.get('/modify/reply', function(req, res, next) {
 
 });
 
-//boader delete reply router ajax?
+//boader delete reply router
 router.get('/delete/reply', function(req, res, next) {
 
 });

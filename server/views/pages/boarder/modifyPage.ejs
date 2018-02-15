@@ -69,7 +69,7 @@
     <section class="content">
             <div class="row">
               <div class="col-md-12">
-                    <form action="/boards/process/registe" method="post">
+                    <form action="/boards/process/modify" method="post"></form>
                 <div class="box box-info">
                   <div class="box-header">
                         
@@ -78,7 +78,7 @@
                             <div class="form-horizontal">
                                   <label class="col-sm-2 control-label">title</label>
                                   <div class="col-sm-10">
-                                      <input id="title" name="title" type="text" placeholder="write title here.">
+                                      <input id="title" name="title" type="text" placeholder="write title here." value = "<%=post_read.title%>">
                                   </div>
                           </div>
                           <!-- end set title input box-->
@@ -93,7 +93,7 @@
                   <!-- /.box-header -->
                   <div class="box-body pad">
                           <textarea id="editor1" name="editor1" rows="10" cols="80">
-                                                  
+                            <%=post_read.text%>
                           </textarea>
                   </div>
                   <!-- submit button box footer -->
@@ -148,22 +148,6 @@
     </div>
     
     <% include ../../partials/footer_javascript_index.ejs %>
-    <script>
-            
-            $(document).ready(function(){
-                $(function () {
-                    // Replace the <textarea id="editor1"> with a CKEditor
-                    // instance, using default configuration.
-                    CKEDITOR.replace('editor1');
-                    //bootstrap WYSIHTML5 - text editor
-                    $(".textarea").wysihtml5();
-                });
 
-                $("#cancelBtn").click(function(){
-                    console.log('cancel');
-                    location.replace('/boards/registe');
-                })
-            });
-    </script>
   </body>
 </html>
