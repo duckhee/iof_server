@@ -28,3 +28,6 @@ node_modules
 
 # Debug log from npm
 npm-debug.log
+npm-debug.log.2104413883
+
+./server/config/config.json

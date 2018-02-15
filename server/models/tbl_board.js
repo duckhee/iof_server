@@ -1,6 +1,12 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
     var tbl_board = sequelize.define('tbl_board', {
+        id: {
+            allowNull: false,
+            autoIncrement: true,
+            primaryKey: true,
+            type: DataTypes.INTEGER
+        },
         title: {
             type: DataTypes.STRING,
             allowNull: false
@@ -20,13 +26,19 @@ module.exports = function(sequelize, DataTypes) {
         },
         viewcnt: {
             type: DataTypes.INTEGER,
-            default: 0
+            allowNull: false,
+            defaultValue: 0
         }
     }, {
         classMethods: {
             associate: function(models) {
                 // associations can be defined here
-                tbl_board.belongTo(models.user);
+                //tbl_board.belong(models.user); //check associate
+                tbl_board.belongToMany(models.user, {
+                    foreginKeyConstraint: true,
+                    foreignKey: 'user_id',
+                    allowNull: false
+                });
                 tbl_board.hasMany(models.tbl_reply);
             }
         }

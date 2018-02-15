@@ -10,19 +10,17 @@ var bcrypt = require('bcrypt-nodejs');
 var flash = require('connect-flash');
 var index = require('./server/routes/index');
 var user = require('./server/routes/users/user');
+var device = require('./server/routes/device/device');
+var boarder = require('./server/routes/boarder/boarder');
+
+//passport testing
+//var custom_passport = require('./server/config/passport');
 
 //test router 테스트용 라우터 모든 테스트 여기
 var test = require('./server/routes/testrouter');
 
 let db = require('./server/models');
 
-//data base connectin check
-db.sequelize.sync().then(function() {
-    console.log("db connection success");
-}).catch(function(err) {
-    console.log('db connection error');
-    console.log(err);
-});
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -115,6 +113,10 @@ app.use('/download', express.static(path.join(__dirname, 'download')));
 app.use('/', index);
 //user router
 app.use('/user', user);
+//device router
+app.use('device', device);
+//boarder router
+app.use('/boards', boarder);
 
 
 // catch 404 and forward to error handler
@@ -129,10 +131,21 @@ app.use(function(err, req, res, next) {
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
-
+    console.log('server error : ', err);
     // render the error page
     res.status(err.status || 500);
     res.render('../error/500');
 });
+
+//data base connectin check
+db.sequelize.sync().then(() => {
+    console.log("db connection success");
+}).catch((err) => {
+    console.log('db connection error');
+    console.log(err);
+});
+
+
+
 
 module.exports = app;

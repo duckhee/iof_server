@@ -87,7 +87,7 @@ router.get('/ajax_get_data', function(req, res, next) {
     var serial_info = req.query.serial_Num || req.params.serial_Num;
     data_info = { "sd_serial": serial_info };
     if (serial_info) {
-        var data = datacontroller.list_limit(data_info, function(rows, err) {
+        var data = datacontroller.list10_value(data_info, function(rows, err) {
             if (rows) {
                 res.json(rows);
             } else if (err) {
@@ -111,8 +111,8 @@ router.post('/insert_data', function(req, res, next) {
     var rowdata_info = '';
     //get json data
     req.on('data', function(data) {
-        var data_info = JSON.parse(data);;
-        datacontroller.insert_data(data_info, function(row, err) {
+        var data_info = JSON.parse(data);
+        datacontroller.insert_value(data_info, function(row, err) {
             if (row) {
                 res.json(row);
             } else if (err) {

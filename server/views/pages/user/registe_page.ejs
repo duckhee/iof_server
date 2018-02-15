@@ -13,7 +13,8 @@
             </div>
             <div class="register-box-body">
                 <p class="login-box-msg">Register a new membership</p>
-                <form name = "regist_form" action="" method="">
+                <form name = "regist_form" action="/user/process/registe" method="POST"> 
+                    <!--<form name = "regist_form" action="" method="">-->
                     <div class="form-group has-feedback">
                         <input type="text" class="form-control" placeholder="input id" name="id">
                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -496,11 +497,11 @@
 				return false;
 			}
 		}
-
+/*
 		$(document).ready(function() {
 
 			$("#regist_cancel").click(function() {
-				location.href="admin/user/list"
+				location.href="/"
 			});
 
 			$("#regist_in").click(function() {
@@ -509,7 +510,7 @@
 					
 				} else {
 					alert("회원 가입을 하였습니다.");
-					document.regist_form.action = "/users/registe";
+					document.regist_form.action = "/user/process/registe";
 					document.regist_form.method = "POST";
 					document.regist_form.submit();
 				}
@@ -523,7 +524,8 @@
 				$("#idChk_email").val('N');
 			});
 
-		});
+        });
+  */      
 /*
 		$(document).ready(function() {
 			$('#overlap').on('click', function(evt) {

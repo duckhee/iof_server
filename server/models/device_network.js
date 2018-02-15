@@ -24,7 +24,7 @@ module.exports = function(sequelize, DataTypes) {
         classMethods: {
             associate: function(models) {
                 // associations can be defined here
-                device_network.belongTo(models.user, {
+                device_network.belongToMany(models.user, {
                     foreignKeyConstraint: true,
                     foreignKey: 'apikey',
                     allowNull: false
