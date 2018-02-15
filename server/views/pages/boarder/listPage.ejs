@@ -127,9 +127,7 @@
                             </tr>
                             <%
                         }
-                        
                         %>
-						
 						</tbody>
 					</table>
 				</div>
@@ -159,10 +157,12 @@
   <script>
   $(document).ready(function(){
     $("#newBtn").click(function(){
-        local.href = '/boards/registe';
+        location.href = '/boards/registe';
     });
     $("#searchBtn").click(function(){
-        alter($("#searchKeyword").val());
+        alert($("#searchType").val()+ " " + $("#searchKeyword").val());
+        //location.href = '/search/board?type=$("#searchType").val()&keyword=$("#searchKeyword").val()
+        
     });
   });
   
