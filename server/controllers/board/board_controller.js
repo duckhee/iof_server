@@ -131,11 +131,19 @@ exports.upcounting = function(data_info, callback) {
 //boarder modify
 exports.modify = function(boarder_info, callback) {
     models.tbl_board.update({
-
+        title: boarder_info.title,
+        content: boarder_info.content,
     }, {
         where: {
-
-        }
+            id: boarder_info.post_id
+        },
+        include: [{
+            model: models.user,
+            attributes: 'user_id',
+            where: {
+                user_id: boarder_info.user_id
+            }
+        }]
     }).then(row => {
         console.log('modify boarder : ', row);
         callback(null, row);
