@@ -1,7 +1,7 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
     var tbl_reply = sequelize.define('tbl_reply', {
-        bno: {
+        tblBoardId: {
             type: DataTypes.INTEGER,
             references: {
                 model: 'tbl_board',
@@ -20,24 +20,39 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false
         },
         rcontent: {
-            type:DataTypes.TEXT
+            type: DataTypes.TEXT
         }
     }, {
         classMethods: {
             associate: function(models) {
                 // associations can be defined here
-                tbl_reply.belongMany(models.user, {
+                models.tbl_reply.belongsTo(models.user, {
                     foreignKeyConstraint: true,
-                    foreignKey: 'user_id',
+                    foreignKey: 'rwriter',
                     allowNull: false
                 });
-                tbl_reply.belongMany(models.tbl_board, {
+                models.tbl_reply.belongsTo(models.tbl_board, {
                     foreignKeyConstraint: true,
                     foreignKey: 'id',
                     allowNull: false
                 });
+
             }
         }
     });
+
+    tbl_reply.associate = function(models) {
+        tbl_reply.belongsTo(models.tbl_board, {
+            foreignKey: 'id',
+            foreignKeyConstraint: true,
+            allowNull: false
+        });
+        tbl_reply.belongsTo(models.user, {
+            foreignKeyConstraint: true,
+            foreignKey: 'rwriter',
+            allowNull: false
+        });
+    }
+
     return tbl_reply;
 };

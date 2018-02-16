@@ -77,21 +77,24 @@
                     <!-- header box end-->
                     <div class="box-body">
                     <!-- form group start -->
+                    
                     <!-- 여기서부터 수정 필요 -->
+                    <% for(let post of posts){ %>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Title</label>
                             <input type="text" name='title' class="form-control" 
-                                value="board_title" readonly="readonly">
+                                value="<%=post.title %>" readonly="readonly">
                         </div>
+                        
                         <div class="form-group">
                             <label for="exampleInputPassword1">Content</label>
                             <textarea class="form-control"  name="content" rows="3" 
-                                readonly="readonly">board_content</textarea>
+                                readonly="readonly"><%= post.content%></textarea>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1" >Writer</label>
                             <input type="text" name="writer" class="form-control" 
-                                value="board_writer" readonly="readonly">
+                                value="<%=post.writer %>" readonly="readonly">
                         </div>
                         <!-- form group end -->
                     </div>
@@ -133,11 +136,13 @@
 		                </ul>
 		                <!--  -->
 		                <ul id="rlist">
-				            <!--<c:forEach items="${board.rlist}" var="reply">-->
-					            <li class="time-label">${reply.rcontent}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				            <% if(post.tbl_replies) { 
+                                for(let reply of post.tbl_replies){ %>
+					            <li class="time-label"><%=reply.dataValues.rcontent%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						            <!-- <a href="javascript:removeReply(${reply.rseq},${reply.bno})">X</a> -->
 					            </li>
-				            <!--</c:forEach>-->
+                            <%}%>
+                            <%}%>
 		                </ul>
 		            <!--  -->   
 			            <div class='text-center'>
@@ -145,7 +150,7 @@
 				            </ul>
             			</div>
 
-
+<%}%>
 
               </div>
               <!-- /.col-->
