@@ -46,34 +46,34 @@ router.post('/process/list', function(req, res, next) {
 });
 
 //boarder read page router
-router.get('/read', function(req, res, next){
+router.get('/read', function(req, res, next) {
     console.log('boarder read get router');
-    var boarder_id = req.body.id || req.query.id || req.param.id || req.params.id;
+    var boarder_id = req.body.bno || req.query.bno || req.param.bno || req.params.bno;
 
     var boarder_info = {
-        index:boarder_id
+        index: boarder_id
     };
-    if(boarder_info.index){
-    boarder_controller.read(boarder_info, function(err, row){
-        if(err){
+    if (boarder_info.index) {
+        boarder_controller.read(boarder_info, function(err, row) {
+            if (err) {
                 console.log('boarder read error : ', err);
                 res.redirect('/boards/read');
-            }else if(row){
+            } else if (row) {
                 console.log('boarder read page get : ', row);
-                res.render('boarder/readPage',{
-                    post:row
+                res.render('boarder/readPage', {
+                    post: row
                 });
-            }else{
-                 res.redirect('/boards/read');
+            } else {
+                res.redirect('/boards/read');
             }
         });
-    }else{
-        res.render('boarder/readPage');
+    } else {
+        res.render('boarder/listPage');
     }
 });
 
 //boarder read page router
-router.post('/read', function(req, res, next){
+router.post('/read', function(req, res, next) {
     console.log('boarder read post router');
     next();
 });

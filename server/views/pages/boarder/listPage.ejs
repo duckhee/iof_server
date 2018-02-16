@@ -109,7 +109,7 @@
                         %>
 							<tr>
 								<td><%= posts.id%></td>
-								<td><%=posts.title%></td>
+								<td><a href="/boards/read?bno=<%-posts.id%>"><%=posts.title%></a></td>
 								<td><%=posts.writer%></td>
 								<td><%=posts.createdAt%></td>
 								<td><span class="badge bg-red"><%=posts.viewcnt%></span></td>
@@ -127,9 +127,7 @@
                             </tr>
                             <%
                         }
-                        
                         %>
-						
 						</tbody>
 					</table>
 				</div>
@@ -159,10 +157,12 @@
   <script>
   $(document).ready(function(){
     $("#newBtn").click(function(){
-        local.href = '/boards/registe';
+        location.href = '/boards/registe';
     });
     $("#searchBtn").click(function(){
-        alter($("#searchKeyword").val());
+        alert($("#searchType").val()+ " " + $("#searchKeyword").val());
+        //location.href = '/search/board?type=$("#searchType").val()&keyword=$("#searchKeyword").val()
+        
     });
   });
   
