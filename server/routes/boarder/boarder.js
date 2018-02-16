@@ -99,8 +99,8 @@ router.get('/registe', function(req, res, next) {
 router.post('/process/registe', function(req, res, next) {
     console.log('boarder registe post router');
 
-    var title = req.body.title || req.query.title || req.param.title || req.params.title;
-    var editor = req.body.editor1 || req.query.editor1 || req.param.editor1 || req.params.editor1;
+    var board_title = req.body.title || req.query.title || req.param.title || req.params.title;
+    var board_content = req.body.editor1 || req.query.editor1 || req.param.editor1 || req.params.editor1;
 
     var board_info = {};
 
