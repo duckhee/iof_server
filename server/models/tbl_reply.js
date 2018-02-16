@@ -43,7 +43,7 @@ module.exports = function(sequelize, DataTypes) {
 
     tbl_reply.associate = function(models) {
         tbl_reply.belongsTo(models.tbl_board, {
-            foreignKey: 'id',
+            foreignKey: 'tblBoardId',
             foreignKeyConstraint: true,
             allowNull: false
         });

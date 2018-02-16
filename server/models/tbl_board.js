@@ -52,7 +52,7 @@ module.exports = function(sequelize, DataTypes) {
 
     tbl_board.associate = function(models) {
         tbl_board.hasMany(models.tbl_reply, {
-            foreginKey: 'tblBoardId',
+            foreginKey: 'tblBoardId', //has사용시는 상대방 ?? 자기자신도 가능 ?
             onDelete: 'CASCADE',
             allowNull: false,
             foreginKeyConstraint: true
@@ -60,7 +60,7 @@ module.exports = function(sequelize, DataTypes) {
 
         tbl_board.belongsTo(models.user, {
             foreginKeyConstraint: true,
-            foreignKey: 'writer',
+            foreignKey: 'writer', //belongs 사용시는 자기 자신
             allowNull: false
         });
 
