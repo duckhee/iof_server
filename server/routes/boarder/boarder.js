@@ -128,9 +128,17 @@ router.post('/process/registe', function(req, res, next) {
             res.status(500);
         }
     });
+});
 
+//boarder remove page router
+router.get('/remove', function(req, res, next) {
 
-})
+});
+
+//boarder remove page router
+router.post('/process/remove', function(req, res, next) {
+
+});
 
 //boarder modify page router
 router.get('/modify', function(req, res, next) {
