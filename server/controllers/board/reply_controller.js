@@ -85,3 +85,23 @@ exports.list_reply = function(reply_info, callback) {
         callback(err, null);
     });
 };
+
+//reply delete
+exports.delete_reply = function(reply_info, callback) {
+    models.tbl_reply.destroy({
+        where: {
+            tblBoardId: reply_info.bno,
+            id: reply_info.id,
+            rwriter: 'fain9301'
+        }
+    }).then((row) => {
+        callback(null, row);
+    }).catch((err) => {
+        callback(err, null);
+    });
+};
+
+//reply only delete matching user
+exports.delete_userreply = function(reply_info, callback) {
+
+};

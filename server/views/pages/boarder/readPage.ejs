@@ -173,10 +173,8 @@
    
 <script>
 	function removeReply(seq,bno) {
-		alert(seq);
-		
 		$.ajax({
-			url  : "replyRemove" , 
+			url  : "process/delete/reply" , 
 			type : "post" , 
 			data : { rseq : seq , bno : bno} ,
 			dataType : "json" , 
@@ -185,13 +183,12 @@
 				var txt = "";
 				$.each(ary , function(idx, obj) {
 					txt += "<li class='time-label'>"+obj.rcontent;
-					txt += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-					txt += "<a href='javascript:removeReply("+obj.rseq+","+obj.bno+")'>X</a></li>";
+					txt += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+obj.rwriter;
+					txt += "<a href='javascript:removeReply("+obj.rseq+","+obj.tblBoardId+")'>X</a></li>";
 				});
 				$("#rlist").append(txt);
 			}
 		});
-		 
 	}
 
 	$(document).ready(function() {
@@ -199,10 +196,10 @@
 			location.href="list" ; 
 		});
 		$("#remove").click(function() {
-			//location.href="removePage?bno="+${board.bno} ; 
+			location.href="remove?bno="+<%= posts[0].dataValues.id %> ; 
 		});
 		$("#modify").click(function() {
-			//location.href="modifyPage?bno="+${board.bno} ; 
+			location.href="modify?bno="+<%= posts[0].dataValues.id %> ; 
 		});
 		
 		$("#replyAddBtn").click(function() {
@@ -223,8 +220,8 @@
 					$.each(ary , function(idx, obj) {
                         var test = JSON.stringify(obj);
 						txt += "<li class='time-label'>"+obj.rcontent;
-						txt += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-						txt += "<a href='javascript:removeReply("+obj.rseq+","+obj.bno+")'>X</a></li>";
+						txt += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+obj.rwriter;
+						txt += "<a href='javascript:removeReply("+obj.id+","+obj.tblBoardId+")'>X</a></li>";
 					});
 					$("#rlist").append(txt);
 				}

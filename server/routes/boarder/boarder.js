@@ -198,9 +198,7 @@ router.get('/create/reply', function(req, res, next) {
 
 //boarder reply router ajax ? post
 router.post('/process/create/reply', function(req, res, next) {
-    console.log('writer : ', req.body.rwriter);
-    console.log('content : ', req.body.rcontent);
-    console.log('bno : ', req.body.bno);
+    console.log('create reply post router');
     var reply_info = {
         bno: req.body.bno,
         rwriter: req.body.rwriter,
@@ -244,7 +242,37 @@ router.get('/delete/reply', function(req, res, next) {
 
 //boarder delete reply router ajax ? 
 router.post('/process/delete/reply', function(req, res, next) {
-
+    console.log('rseq : ', req.body.rseq);
+    console.log('bno : ', req.body.bno);
+    var reply_info = {
+        bno: req.body.bno,
+        id: req.body.rseq
+    };
+    reply_controller.delete_reply(reply_info, function(err, row) {
+        if (err) {
+            console.log(err);
+            next();
+        } else {
+            reply_controller.create_reply(reply_info, function(err, new_value) {
+                if (err) {
+                    next();
+                } else if (new_value) {
+                    var reply_info = { bno: new_value.tblBoardId };
+                    reply_controller.list_reply(reply_info, function(err, rows) {
+                        if (err) {
+                            next();
+                        } else if (rows) {
+                            res.json(rows);
+                        } else {
+                            next();
+                        }
+                    });
+                } else {
+                    next();
+                }
+            });
+        }
+    });
 });
 
 module.exports = router;
