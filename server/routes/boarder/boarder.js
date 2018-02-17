@@ -79,6 +79,7 @@ router.get('/read', function(req, res, next) {
                 console.log('boarder read error : ', err);
                 res.redirect('/');
             } else if (result) {
+                console.log(result);
                 res.render('boarder/readPage', {
                     posts: result
                 });
@@ -138,6 +139,7 @@ router.get('/remove', function(req, res, next) {
 //boarder remove page router
 router.post('/process/remove', function(req, res, next) {
 
+
 });
 
 //boarder modify page router
@@ -186,25 +188,63 @@ router.post('/modify', function(req, res, next) {
 
 });
 
+//json data는 body로 날라온다 ????? form에 담겨있어서 ? 
+
 //boarder reply router ajax ? 
 router.get('/create/reply', function(req, res, next) {
+    console.log('create reply get router');
     next();
 });
 
+//boarder reply router ajax ? post
+router.post('/process/create/reply', function(req, res, next) {
+    console.log('writer : ', req.body.rwriter);
+    console.log('content : ', req.body.rcontent);
+    console.log('bno : ', req.body.bno);
+    var reply_info = {
+        bno: req.body.bno,
+        rwriter: req.body.rwriter,
+        rcontent: req.body.rcontent
+    };
+    reply_controller.create_reply(reply_info, function(err, new_value) {
+        if (err) {
+            next();
+        } else if (new_value) {
+            var reply_info = { bno: new_value.tblBoardId };
+            reply_controller.list_reply(reply_info, function(err, rows) {
+                if (err) {
+                    next();
+                } else if (rows) {
+                    res.json(rows);
+                } else {
+                    next();
+                }
+            });
+        } else {
+            next();
+        }
+    });
+
+})
+
 //boarder reply list router ajax?
 router.get('/list/reply', function(req, res, next) {
-
+    next();
 });
 
 //boarder modify reply router ajax?
 router.get('/modify/reply', function(req, res, next) {
-
+    next();
 });
 
 //boader delete reply router ajax?
 router.get('/delete/reply', function(req, res, next) {
-
+    next();
 });
 
+//boarder delete reply router ajax ? 
+router.post('/process/delete/reply', function(req, res, next) {
+
+});
 
 module.exports = router;

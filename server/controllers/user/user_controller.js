@@ -122,10 +122,12 @@ exports.detail_user = function(user_info, callback) {
             user_id: user_info.user_id,
             user_password: user_info.user_password
         },
+        /*
         include: [{
             model: models.device,
             attributes: 'device_num, device_name'
         }]
+        */
     }).then((row) => {
         console.log(row);
         callback(null, row);

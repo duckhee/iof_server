@@ -206,18 +206,22 @@
 		});
 		
 		$("#replyAddBtn").click(function() {
+            
 			$.ajax({
-				url  : "replyInsert" , 
+				url  : "process/create/reply" , 
 				type : "post" , 
-				data : {rwriter : $("#newReplyWriter").val() ,
+				data : {
+                        rwriter : $("#newReplyWriter").val() ,
 					    rcontent : $("#newReplyText").val()  , 
-					    //bno : ${board.bno}
+					    bno: <%=posts[0].dataValues.id%>
 					   } ,
 				dataType : "json" , 
 				success : function(ary) {
+                    console.log(ary);
 					$("#rlist").empty(); // remove() 
 					var txt = "";
 					$.each(ary , function(idx, obj) {
+                        var test = JSON.stringify(obj);
 						txt += "<li class='time-label'>"+obj.rcontent;
 						txt += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
 						txt += "<a href='javascript:removeReply("+obj.rseq+","+obj.bno+")'>X</a></li>";
