@@ -59,27 +59,26 @@ router.post('/process/list', function(req, res, next) {
 //boarder read page router
 router.get('/read', function(req, res, next) {
     console.log('boarder read get router');
-    var boarder_id = req.body.bno || req.query.bno || req.param.bno || req.params.bno;
-
+    var bno = req.body.bno || req.query.bno || req.param.bno || req.params.bno;
+    console.log(bno);
     var boarder_info = {
-        index: boarder_id
+        bno: bno
     };
-    if (boarder_info.index) {
-        boarder_controller.read(boarder_info, function(err, row) {
+    if (boarder_info.bno) {
+        boarder_controller.read_post(boarder_info, function(err, result) {
             if (err) {
                 console.log('boarder read error : ', err);
-                res.redirect('/boards/read');
-            } else if (row) {
-                console.log('boarder read page get : ', row);
+                res.redirect('/');
+            } else if (result) {
                 res.render('boarder/readPage', {
-                    post: row
+                    posts: result
                 });
             } else {
-                res.redirect('/boards/read');
+                res.redirect('/boards/read?bno=' + bno);
             }
         });
     } else {
-        res.render('boarder/readPage');
+        res.render('boarder/listPage');
     }
 });
 
@@ -101,45 +100,73 @@ router.post('/process/registe', function(req, res, next) {
 
     var board_title = req.body.title || req.query.title || req.param.title || req.params.title;
     var board_content = req.body.editor1 || req.query.editor1 || req.param.editor1 || req.params.editor1;
-
-    var board_info = {};
+    var board_writer = 'fain9301'; //testing join
+    var board_info = {
+        title: board_title,
+        content: board_content,
+        writer: board_writer
+    };
 
     boarder_controller.create(board_info, function(err, row) {
         if (err) {
             console.log('boarder registe error : ', err);
+            res.status(404);
         } else if (row) {
             console.log('boarder registe success ');
+            res.redirect('/boards/list');
         } else {
             console.log('boarder create null');
+            res.status(500);
         }
     });
 
-    res.redirect('/boards/list');
+
 })
 
 //boarder modify page router
 router.get('/modify', function(req, res, next) {
     console.log('boarder modify get router');
-    var post_id = req.query.id || req.body.id || req.param.id || req.params.id;
+    var post_id = req.query.bno || req.body.bno || req.param.bno || req.params.bno;
     var post_info = {
         index: post_id
     }
-    boarder_controller.modify(post_info, function(err, row) {
+    boarder_controller.read(post_info, function(err, row) {
         if (err) {
             console.log('modify read boarder error : ', err);
             res.redirect('/boards/modify');
         } else {
-            res.render('boarder/list');
+            res.redirect('/boards/read?bno=' + post_id);
         }
     })
 
-    res.render('boarder/modifyPage');
+
 });
 
 //boarder modify page router
 router.post('/modify', function(req, res, next) {
     console.log('boarder modify post router');
-    next();
+    var post_id = req.query.id || req.body.id || req.param.id || req.params.id;
+    var title = req.query.title || req.body.title || req.param.title || req.params.title;
+    var content = req.query.content || req.body.content || req.param.content || req.params.content;
+    var user_id = 'fain9301'; //testing join
+
+    var boarder_info = {
+        post_id: post_id,
+        title: title,
+        content: content,
+        user_id: user_id
+    };
+    boarder_controller.modify(boarder_info, function(err, row) {
+        if (err) {
+            console.log('modify boarder error : ', err);
+            res.redirect('/boards/modify');
+        } else if (row) {
+            console.log('succes modify boarder ');
+            res.render(path);
+        }
+    })
+
+
 });
 
 //boarder reply router ajax ? 

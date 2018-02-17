@@ -107,7 +107,7 @@ router.post('/process/login', function(req, res, next) {
     var userpw = req.query.pw || req.body.pw || req.params.pw || req.param.pw;
 
     var user_info = {
-        user_id: userid,
+        user_email: userid,
         user_pw: userpw
     };
 
@@ -117,7 +117,7 @@ router.post('/process/login', function(req, res, next) {
         } else if (row) {
             res.redirect('/');
         } else {
-            res.redirect('/use/login');
+            res.redirect('/user/login');
         }
     });
 

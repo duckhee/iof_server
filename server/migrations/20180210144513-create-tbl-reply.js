@@ -8,7 +8,7 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-            bno: {
+            tblBoardId: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
                 references: {

@@ -5,7 +5,8 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false,
             autoIncrement: true,
             primaryKey: true,
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
+
         },
         title: {
             type: DataTypes.STRING,
@@ -33,15 +34,38 @@ module.exports = function(sequelize, DataTypes) {
             associate: function(models) {
                 // associations can be defined here
                 //tbl_board.belong(models.user); //check associate
-                tbl_board.belongToMany(models.user, {
+                models.tbl_board.belongsToMany(models.user, {
                     foreginKeyConstraint: true,
                     foreignKey: 'user_id',
                     allowNull: false
                 });
-                tbl_board.hasMany(models.tbl_reply);
+                models.tbl_board.hasMany(models.tbl_reply, {
+                    foreginKeyConstraint: true,
+                    foreginKey: 'tblBoardId',
+                    onDelete: 'CASCADE',
+                    allowNull: false
+                });
             }
         }
     });
+
+
+    tbl_board.associate = function(models) {
+        tbl_board.hasMany(models.tbl_reply, {
+            foreginKey: 'tblBoardId', //has사용시는 상대방 ?? 자기자신도 가능 ?
+            onDelete: 'CASCADE',
+            allowNull: false,
+            foreginKeyConstraint: true
+        });
+
+        tbl_board.belongsTo(models.user, {
+            foreginKeyConstraint: true,
+            foreignKey: 'writer', //belongs 사용시는 자기 자신
+            allowNull: false
+        });
+
+    }
+
     tbl_board.hook('beforeCreate', function(tbl_board) {
         console.log('test hook', tbl_board);
     })

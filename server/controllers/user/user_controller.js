@@ -116,20 +116,20 @@ exports.find_user = function(user_info, callback) {
 };
 
 //detail user
-exports.detail_user = function(user_info, callback){
+exports.detail_user = function(user_info, callback) {
     models.user.findOne({
-        where:{
-            user_id:user_info.user_id,
-            user_password:user_info.user_password
+        where: {
+            user_id: user_info.user_id,
+            user_password: user_info.user_password
         },
-        include:[{
-            model:models.device,
-            attributes:'device_num, device_name'
+        include: [{
+            model: models.device,
+            attributes: 'device_num, device_name'
         }]
-    }).then((row) =>{
+    }).then((row) => {
         console.log(row);
         callback(null, row);
-    }).catch(err =>{
+    }).catch(err => {
         console.log('detail user error : ', err);
         callback(err, null);
     })
@@ -161,6 +161,22 @@ exports.delete_user = function(user_info, callback) {
     }).then(function(row) {
         callback(null, row);
     }).catch(function(err) {
+        callback(err, null);
+    });
+};
+
+//user login controller
+exports.login = function(user_info, callback) {
+    models.user.findOne({
+        where: {
+            user_email: user_info.user_email,
+            user_password: user_info.user_pw
+        }
+    }).then(row => {
+        console.log('login row testing : ', row);
+        callback(null, row);
+    }).catch(err => {
+        console.log('login error : ', err);
         callback(err, null);
     });
 };
