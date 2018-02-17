@@ -8,7 +8,7 @@ var tbl_reply = require('../../models//tbl_reply');
     select reply
     select list reply
 */
-
+/*
 exports.insert_reply = function(reply_info, callback) {
     models.tbl_reply.findOrCreate({
         where: {},
@@ -31,6 +31,7 @@ exports.insert_reply = function(reply_info, callback) {
         callback(err, null, null);
     })
 }
+*/
 
 //create reply
 exports.create_reply = function(reply_info, callback) {
