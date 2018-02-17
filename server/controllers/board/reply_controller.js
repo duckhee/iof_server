@@ -78,7 +78,10 @@ exports.list_reply = function(reply_info, callback) {
     models.tbl_reply.findAll({
         where: {
             tblBoardId: reply_info.bno
-        }
+        },
+        order: [
+            ['createdAt', 'DESC']
+        ]
     }).then(function(rows) {
         callback(null, rows);
     }).catch(function(err) {

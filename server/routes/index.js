@@ -1,7 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
-router.all('/', function(req, res, next) {
+
+//router all through here middle ware
+router.all('/*', function(req, res, next) {
     console.log('root path all router');
     console.log('request ip : ', req.ip);
     console.log('request url : ', req.originalUrl);
