@@ -150,9 +150,11 @@ exports.list = function(data_info, callback) {
 
 //update count
 exports.upcount = function(data_info, callback) {
-    models.tbl_board.update({}, {
+    models.tbl_board.update({
+        viewcnt: models.sequelize.literal('viewcnt + 1')
+    }, {
         where: {
-
+            id: data_info.bno
         },
         /*
         include :[{
@@ -163,25 +165,10 @@ exports.upcount = function(data_info, callback) {
         }}],
         */
     }).then((row) => {
+        console.log(' board update count : ', row);
         callback(null, row);
     }).catch((err) => {
-        callback(err, null);
-    });
-};
-
-//testing update count
-exports.upcounting = function(data_info, callback) {
-    models.tbl_board.findOne({
-        where: {
-            id: data_info.index
-        },
-    }).then((row) => {
-        models.tbl_board.increment('viewcnt', { by: 1 }).then(rows => {
-            callback(null, rows);
-        }).catch(err => {
-            callback(err, null);
-        });
-    }).catch(err => {
+        console.log('board update error : ', err);
         callback(err, null);
     });
 };

@@ -60,11 +60,20 @@ router.post('/process/list', function(req, res, next) {
 router.get('/read', function(req, res, next) {
     console.log('boarder read get router');
     var bno = req.body.bno || req.query.bno || req.param.bno || req.params.bno;
-    console.log(bno);
+
     var boarder_info = {
         bno: bno
     };
     if (boarder_info.bno) {
+        boarder_controller.upcount(boarder_info, function(err, result) {
+            if (err) {
+                console.log('boarder count error : ', err);
+            } else if (result) {
+                console.log('boarder result upcount : ', result);
+            } else {
+                console.log('null');
+            }
+        });
         boarder_controller.read_post(boarder_info, function(err, result) {
             if (err) {
                 console.log('boarder read error : ', err);
