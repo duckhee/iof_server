@@ -59,7 +59,6 @@ io.sockets.on('connection', function(socket) {
                     console.log('dir date writed');
                 });
             }
-
             //이미지일 경우만 저장
             fs.writeFile("./camera_images/" + params.channel + "/" + date_folder + "/" + params.img_name, file.buffer, function(err) {
                 if (err) {
@@ -72,10 +71,7 @@ io.sockets.on('connection', function(socket) {
     });
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 var app = express();
-
 // view engine setup
 app.set('views', path.join(__dirname, '/server/views/pages'));
 app.set('view engine', 'ejs');
@@ -86,7 +82,6 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-
 app.use(session({
     secret: 'secretkeywon',
     saveUninitialized: false,
@@ -99,7 +94,6 @@ app.use(session({
 //passport add
 //app.use(passport.initialize()); // passport 구동
 //app.use(passport.session()); // 세션 연결
-
 //get public folder url (css, javascript, bootstrap)
 app.use('/static', express.static(path.join(__dirname, 'public')));
 //get camera image url
@@ -114,7 +108,7 @@ app.use('/', index);
 //user router
 app.use('/user', user);
 //device router
-app.use('device', device);
+app.use('/device', device);
 //boarder router
 app.use('/boards', boarder);
 

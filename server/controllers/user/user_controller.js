@@ -56,8 +56,8 @@ exports.check_email = function(user_info, callback) {
         callback(null, row);
     }).catch(err => {
         callback(err, null);
-    })
-}
+    });
+};
 
 //update user
 exports.update_user = function(user_info, callback) {
@@ -121,7 +121,7 @@ exports.detail_user = function(user_info, callback) {
         where: {
             user_id: user_info.user_id,
             user_password: user_info.user_password
-        },
+        },       
         /*
         include: [{
             model: models.device,
@@ -134,7 +134,7 @@ exports.detail_user = function(user_info, callback) {
     }).catch(err => {
         console.log('detail user error : ', err);
         callback(err, null);
-    })
+    });
 };
 
 //list user
@@ -151,7 +151,7 @@ exports.list_user = function(user_info, callback) {
     }).catch(function(err) {
         callback(err, null);
     });
-}
+};
 
 //destory user
 exports.delete_user = function(user_info, callback) {

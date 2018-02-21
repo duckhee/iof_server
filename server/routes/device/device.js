@@ -9,11 +9,12 @@ var setting_controller = require('../../controllers/device/device_setting_contro
 var data_controller = require('../../controllers/device/data_controller');
 var camera_controller = require('../../controllers/device/image_controller');
 var network_controller = require('../../controllers/device/network_controller');
-
+var device_controller = require('../../controllers/device/device_controller');
 
 //show device index page
 router.get('/', function(req, res, next){
-    res.render('device/listPage');
+    console.log('device root router');
+    res.redirect('/device/list');
 });
 
 //registe page get router
@@ -29,7 +30,27 @@ router.post('/process/registe', function(req, res, next){
 //device list page get router
 router.get('/list', function(req, res, next){
     console.log('device list get router'); 
-    res.render('device/listPage');
+    var apikey_info = {};
+    device_controller.list_device(apikey_info, function(err, row){
+        if(err){
+            console.log('device list error : ', err);
+            next(err);
+        }else if(row){
+            console.log('success');
+            console.log(row);
+            
+            res.render('device/listPage',{
+                devices:row
+            });
+            
+           //res.render('device/listPagebackup');
+        }else{
+            console.log('null');
+            res.redirect('/device/list');
+        }
+            
+    })
+    
 });
 
 //device list page post router
