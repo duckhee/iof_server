@@ -106,6 +106,6 @@ exports.delete_reply = function(reply_info, callback) {
 };
 
 //reply only delete matching user
-exports.delete_userreply = function(reply_info, callback) {
+exports.delete_user_reply = function(reply_info, callback) {
 
 };
