@@ -20,6 +20,11 @@ module.exports = function(sequelize, DataTypes) {
         sn_type: {
             type: DataTypes.STRING,
         },
+        sn_status: {
+            type: DataTypes.ENUM,
+            values: ['active', 'inactive'],
+            defaultValue: 'inactive'
+        }
     }, {
         classMethods: {
             associate: function(models) {
