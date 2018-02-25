@@ -6,7 +6,7 @@ module.exports = function(sequelize, DataTypes) {
         },
         device_apikey: {
             type: DataTypes.STRING,
-            refernces: {
+            references: {
                 model: 'user',
                 key: 'apikey'
             },

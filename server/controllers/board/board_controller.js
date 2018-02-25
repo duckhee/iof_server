@@ -50,6 +50,7 @@ exports.read_post = function(data_info, callback) {
             id: data_info.bno
         }
     }).then((result) => {
+        //console.log('testing result  : ', result);
         var loopIndex = 0;
         for (let tbl_board of result) {
             models.tbl_board.find({
@@ -60,6 +61,7 @@ exports.read_post = function(data_info, callback) {
                     }
                 }
             }).then((result2) => {
+                console.log('testing result2 :::::', result2);
                 if (result2) {
                     console.log('testing result2 : ', result2.tbl_replies);
                     tbl_board.tbl_replies = result2.tbl_replies;
