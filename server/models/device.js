@@ -18,7 +18,9 @@ module.exports = function(sequelize, DataTypes) {
             defaultValue: 0
         },
         device_serial: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            allowNull: false,
+
         },
         device_address: {
             type: DataTypes.STRING
@@ -27,13 +29,39 @@ module.exports = function(sequelize, DataTypes) {
         classMethods: {
             associate: function(models) {
                 // associations can be defined here
-                device.hasMany(models.user, {
+                device.belongsTo(models.user, {
                     foreignKeyConstraint: true,
-                    foreignKey: 'apikey',
-                    allowNull: false
+                    foreignKey: 'device_apikey',
+                    allowNull: false,
+                    onDelete: 'CASCADE',
+                });
+
+                device.hasMany(models.device_network, {
+                    foreignKey: 'sn_serial', //has사용시는 상대방 ?? 자기자신도 가능 ?
+                    onDelete: 'CASCADE',
+                    allowNull: false,
+                    foreignKeyConstraint: true
                 });
             }
         }
     });
+
+    device.associate = function(models) {
+        device.belongsTo(models.user, {
+            foreignKeyConstraint: true,
+            foreignKey: 'device_apikey',
+            allowNull: false,
+            onDelete: 'CASCADE',
+        });
+
+        device.hasMany(models.device_network, {
+            foreignKey: 'sn_serial', //has사용시는 상대방 ?? 자기자신도 가능 ?
+            onDelete: 'CASCADE',
+            allowNull: false,
+            foreignKeyConstraint: true
+        });
+    }
+
+
     return device;
 };

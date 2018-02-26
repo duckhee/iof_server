@@ -83,7 +83,10 @@ module.exports = function(sequelize, DataTypes) {
                         foreignKey: 'user_id',
                         onDelete: 'CASCADE'
                     });
-
+                    user.hasMany(models.device, {
+                        foreignKey: 'apikey',
+                        onDelete: 'CASCADE'
+                    });
                     //  user.hasMany(models.device_network);
                     //  user.hasMany(models.tbl_board);
                     //  user.hasMany(models.tbl_reply);

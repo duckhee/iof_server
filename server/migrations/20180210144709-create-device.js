@@ -25,7 +25,9 @@ module.exports = {
                 defaultValue: 0
             },
             device_serial: {
-                type: Sequelize.STRING
+                type: Sequelize.STRING,
+                allowNull: false,
+                unique: true
             },
             device_address: {
                 type: Sequelize.STRING

@@ -3,6 +3,12 @@ module.exports = function(sequelize, DataTypes) {
     var device_value = sequelize.define('device_value', {
         sd_serial: {
             type: DataTypes.STRING,
+            references: {
+                model: '',
+                key: ''
+            },
+            allowNull: false,
+            onDelete: 'CASCADE',
         },
         sd_apikey: {
             type: DataTypes.STRING,
@@ -19,6 +25,7 @@ module.exports = function(sequelize, DataTypes) {
         classMethods: {
             associate: function(models) {
                 // associations can be defined here
+
             }
         }
     });

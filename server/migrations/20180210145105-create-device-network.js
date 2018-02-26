@@ -8,9 +8,6 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-            sn_serial: {
-                type: Sequelize.STRING
-            },
             sn_apikey: {
                 type: Sequelize.STRING,
                 references: {
@@ -19,6 +16,15 @@ module.exports = {
                 },
                 onDelete: 'CASCADE',
                 allowNull: false,
+            },
+            sn_serial: {
+                type: Sequelize.STRING,
+                onDelete: 'CASCADE',
+                allowNull: false,
+                references: {
+                    model: 'devices',
+                    key: 'device_serial'
+                },
             },
             sn_address: {
                 type: Sequelize.STRING

@@ -29,12 +29,14 @@ module.exports = function(sequelize, DataTypes) {
                 models.tbl_reply.belongsTo(models.user, {
                     foreignKeyConstraint: true,
                     foreignKey: 'rwriter',
-                    allowNull: false
+                    allowNull: false,
+                    onDelete: 'CASCADE',
                 });
                 models.tbl_reply.belongsTo(models.tbl_board, {
                     foreignKeyConstraint: true,
                     foreignKey: 'id',
-                    allowNull: false
+                    allowNull: false,
+                    onDelete: 'CASCADE',
                 });
 
             }

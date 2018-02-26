@@ -142,13 +142,13 @@
                                   </thead>
                                   <tbody>
                                 <% if(devices){ 
-                                  for(device in devices){%>
+                                    for(device of devices){%>
                                   <tr>
-                                    <td><%=device.device_name%></td>
-                                    <td><%=device.device_serial%></td>
-                                    <td><%=device.device_address%></td>
-                                    <td><%=device.device_apikey%></td>
-                                    <th>device status</th>
+                                    <td><%= device.device_name%></td>
+                                    <td><%= device.device_serial%></td>
+                                    <td><%= device.device_address%></td>
+                                    <td><%= device.device_apikey%></td>
+                                    <th><%=device.createdAt%></th>
                                   </tr>
                                   <%}%>
                                 <%}else{%>

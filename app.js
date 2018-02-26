@@ -137,6 +137,7 @@ db.sequelize.sync().then(() => {
 }).catch((err) => {
     console.log('db connection error');
     console.log(err);
+    console.log(err.stack);
 });
 
 

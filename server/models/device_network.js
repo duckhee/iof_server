@@ -1,9 +1,7 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
     var device_network = sequelize.define('device_network', {
-        sn_serial: {
-            type: DataTypes.STRING,
-        },
+
         sn_apikey: {
             type: DataTypes.STRING,
             unique: true,
@@ -11,6 +9,16 @@ module.exports = function(sequelize, DataTypes) {
                 model: 'user',
                 key: 'apikey'
             },
+            allowNull: false,
+            onDelete: 'CASCADE',
+        },
+        sn_serial: {
+            type: DataTypes.STRING,
+            references: {
+                model: 'device',
+                key: 'device_serial'
+            },
+
             allowNull: false,
             onDelete: 'CASCADE',
         },
@@ -29,14 +37,38 @@ module.exports = function(sequelize, DataTypes) {
         classMethods: {
             associate: function(models) {
                 // associations can be defined here
-                device_network.belongToMany(models.user, {
+                device_network.belongTo(models.user, {
                     foreignKeyConstraint: true,
-                    foreignKey: 'apikey',
-                    allowNull: false
+                    foreignKey: 'sn_apikey',
+                    allowNull: false,
+                    onDelete: 'CASCADE',
+                });
+                device_network.belongTo(models.device, {
+                    foreignKeyConstraint: true,
+                    foreignKey: 'device_serial',
+                    allowNull: false,
+                    onDelete: 'CASCADE',
                 });
             }
         }
     });
+
+    device_network.associate = function(models) {
+        device_network.belongsTo(models.user, {
+            foreignKeyConstraint: true,
+            foreignKey: 'apikey',
+            allowNull: false,
+            onDelete: 'CASCADE',
+        });
+        device_network.belongsTo(models.device, {
+            foreignKeyConstraint: true,
+            foreignKey: 'sn_serial',
+            allowNull: false,
+            onDelete: 'CASCADE',
+        });
+    }
+
+
     return device_network;
 };
 

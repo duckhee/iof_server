@@ -33,5 +33,16 @@ exports.check_network = function(callback) {
         }
     }).catch((err) => {
         callback(err, null);
+    });
+};
+
+
+exports.test = function(callback) {
+    models.device_network.findAll({
+        include: { model: models.device, }
+    }).then((row) => {
+        callback(null, row);
+    }).catch(err => {
+        callback(err, null);
     })
 }

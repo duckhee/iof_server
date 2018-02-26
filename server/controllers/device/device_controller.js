@@ -8,6 +8,9 @@ exports.group_device = function(callback) {
     models.device.findAll({
         attributes: ['device_name'],
         group: ['device_name'],
+        where: {
+
+        }
     }).then(function(rows) {
         callback(null, rows);
     }).catch(function(err) {
@@ -70,7 +73,7 @@ exports.list_device = function(device_info, callback) {
         },
         order: [
             ['createdAt', 'DESC']
-        ],
+        ]
     }).then(function(rows) {
         callback(null, rows);
     }).catch(function(err) {

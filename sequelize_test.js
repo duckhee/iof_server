@@ -9,3 +9,13 @@ network_test.check_network(function(err, rows) {
         console.log('null');
     }
 });
+
+network_test.test(function(err, row) {
+    if (err) {
+        console.log('error :', err);
+    } else if (rows) {
+        console.log('rows', rows);
+    } else {
+        console.log('null');
+    }
+});
