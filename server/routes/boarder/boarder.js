@@ -133,12 +133,25 @@ router.post('/process/registe', function(req, res, next) {
 
 //boarder remove page router
 router.get('/remove', function(req, res, next) {
-
+    console.log('remove get router');
+    var bno = req.query.bno || req.param.bno || req.body.bno || req.params.bno;
+    console.log('bno ::::: ', bno);
+    var boarder_info = { bno: bno };
+    boarder_controller.delete_boarder(boarder_info, function(err, row) {
+        if (err) {
+            console.log('remove boarder error :', err);
+            res.redirect('/boards/process/remove?bno=' + bno);
+        } else {
+            console.log('boarder delete success ');
+            res.redirect('/boards/list');
+        }
+    });
 });
 
 //boarder remove page router
 router.post('/process/remove', function(req, res, next) {
-
+    console.log('remove post router');
+    res.redirect('/boards/remove?bno=' + req.params.bno);
 
 });
 
@@ -146,15 +159,18 @@ router.post('/process/remove', function(req, res, next) {
 router.get('/modify', function(req, res, next) {
     console.log('boarder modify get router');
     var post_id = req.query.bno || req.body.bno || req.param.bno || req.params.bno;
+    console.log('modify bno :::::', post_id);
     var post_info = {
-        index: post_id
+        bno: post_id
     }
-    boarder_controller.read(post_info, function(err, row) {
+    boarder_controller.modify_start(post_info, function(err, row) {
         if (err) {
             console.log('modify read boarder error : ', err);
             res.redirect('/boards/modify');
         } else {
-            res.redirect('/boards/read?bno=' + post_id);
+            res.render('boarder/modifyPage', {
+                posts: row
+            });
         }
     })
 
@@ -162,31 +178,16 @@ router.get('/modify', function(req, res, next) {
 });
 
 //boarder modify page router
-router.post('/modify', function(req, res, next) {
+router.post('/process/modify', function(req, res, next) {
     console.log('boarder modify post router');
-    var post_id = req.query.id || req.body.id || req.param.id || req.params.id;
-    var title = req.query.title || req.body.title || req.param.title || req.params.title;
-    var content = req.query.content || req.body.content || req.param.content || req.params.content;
-    var user_id = 'fain9301'; //testing join
+    var title = req.body.title;
+    var content = req.body.modify_content;
+    var writer = req.body.writer;
 
-    var boarder_info = {
-        post_id: post_id,
-        title: title,
-        content: content,
-        user_id: user_id
-    };
-    boarder_controller.modify(boarder_info, function(err, row) {
-        if (err) {
-            console.log('modify boarder error : ', err);
-            res.redirect('/boards/modify');
-        } else if (row) {
-            console.log('succes modify boarder ');
-            res.render(path);
-        }
-    })
-
-
+    var modify_info = { title: title, content: content, writer: writer };
+    next();
 });
+
 
 //json data는 body로 날라온다 ????? form에 담겨있어서 ? 
 

@@ -177,6 +177,19 @@ exports.upcount = function(data_info, callback) {
     });
 };
 
+//set modify find read
+exports.modify_start = function(boarder_info, callback) {
+    models.tbl_board.find({
+        where: {
+            id: boarder_info.bno
+        }
+    }).then((row) => {
+        callback(null, row);
+    }).catch((err) => {
+        callback(err, null);
+    });
+};
+
 //boarder modify
 exports.modify = function(boarder_info, callback) {
     models.tbl_board.update({
@@ -199,5 +212,19 @@ exports.modify = function(boarder_info, callback) {
     }).catch(err => {
         console.log('modify boarder error : ', err);
         callback(err, null);
-    })
-}
+    });
+};
+
+//delete boarder 
+exports.delete_boarder = function(boarder_info, callback) {
+    models.tbl_board.destroy({
+        where: {
+            id: boarder_info.bno,
+            writer: 'fain9301' //test user
+        }
+    }).then((row) => {
+        callback(null, row);
+    }).catch((err) => {
+        callback(err, null);
+    });
+};
