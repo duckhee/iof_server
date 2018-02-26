@@ -148,7 +148,7 @@
                                     <td><%= device.device_serial%></td>
                                     <td><%= device.device_address%></td>
                                     <td><%= device.device_apikey%></td>
-                                    <th><%=device.createdAt%></th>
+                                    <th><span class="badge bg-red">device status</span></th>
                                   </tr>
                                   <%}%>
                                 <%}else{%>
@@ -157,7 +157,7 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td></td>
+                                    <th><span class="badge bg-green">device status</span></th>
                                   </tr>
                                 <%}%>
                                   </tbody>
