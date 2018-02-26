@@ -1,5 +1,6 @@
 var models = require('../../models/index');
 var tbl_board = require('../../models/tbl_board');
+var moment = require('moment');
 
 
 //board insert create
@@ -126,6 +127,7 @@ exports.start_list = function(callback) {
             ['createdAt', 'DESC']
         ]
     }).then(function(rows) {
+
         console.log('rows : ', rows);
         callback(null, rows);
     }).catch(function(err) {

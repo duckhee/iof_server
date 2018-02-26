@@ -21,7 +21,21 @@
         </a>
         <ul class="treeview-menu">
             <li><a href="/device/registe"><i class="fa fa-circle-o"></i>devices registe</a></li>
+
+            <%if(lcoal.devices){%>
+              <li><a href="/device"><i class="fa fa-circle-o"></i>devices list
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
+                </ul>       
+            </li>
+            <%}else{%>
             <li><a href="/device"><i class="fa fa-circle-o"></i>devices list</a></li>
+            <%}%>
             <li><a href="/data"><i class="fa fa-circle-o"></i>show detail</a></li>
             <li><a href="/data/chart"><i class="fa fa-circle-o"></i>show chart</a></li>
             <li><a href="/data/data"><i class="fa fa-circle-o"></i>show data</a></li>

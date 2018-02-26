@@ -252,25 +252,18 @@ router.post('/process/delete/reply', function(req, res, next) {
         if (err) {
             console.log(err);
             next();
-        } else {
-            reply_controller.create_reply(reply_info, function(err, new_value) {
+        } else if (row) {
+            reply_controller.list_reply(reply_info, function(err, rows) {
                 if (err) {
                     next();
-                } else if (new_value) {
-                    var reply_info = { bno: new_value.tblBoardId };
-                    reply_controller.list_reply(reply_info, function(err, rows) {
-                        if (err) {
-                            next();
-                        } else if (rows) {
-                            res.json(rows);
-                        } else {
-                            next();
-                        }
-                    });
+                } else if (rows) {
+                    res.json(rows);
                 } else {
                     next();
                 }
             });
+        } else {
+            next();
         }
     });
 });

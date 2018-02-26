@@ -140,7 +140,8 @@
 				            <% if(post.tbl_replies) { 
                                 for(let reply of post.tbl_replies){ %>
 					            <li class="time-label"><%=reply.dataValues.rcontent%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						           <%=reply.dataValues.rwriter%> <a href="javascript:removeReply(<%=reply.dataValues.id%>,<%=reply.dataValues.tblBoardId%>)">X</a> 
+						           <%=reply.dataValues.rwriter%> 
+                                   <a href="javascript:removeReply(<%=reply.dataValues.id%>,<%=reply.dataValues.tblBoardId%>)">X</a> 
 					            </li>
                             <%}%>
                             <%}%>
@@ -180,12 +181,13 @@
 			data : { rseq : seq , bno : bno} ,
 			dataType : "json" , 
 			success : function(ary) {
+                console.log(ary)
 				$("#rlist").empty(); // remove() 
 				var txt = "";
 				$.each(ary , function(idx, obj) {
 					txt += "<li class='time-label'>"+obj.rcontent;
 					txt += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+obj.rwriter;
-					txt += "<a href='javascript:removeReply("+obj.rseq+","+obj.tblBoardId+")'>X</a></li>";
+					txt += "<a href='javascript:removeReply("+obj.id+","+obj.tblBoardId+")'>X</a></li>";
 				});
 				$("#rlist").append(txt);
 			}

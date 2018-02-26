@@ -112,7 +112,11 @@
 								<td><%= posts.id%></td>
 								<td><a href="/boards/read?bno=<%-posts.id%>"><%=posts.title%></a></td>
 								<td><%=posts.writer%></td>
-								<td><%=posts.createdAt%></td>
+								<td><%
+                                var d = new Date();
+                                var str = "";
+                                str = d.getFullYear() + "-" + (d.getMonth() + 1 ) + "-" + d.getDate() ;
+                                %><%=str%></td>
 								<td><span class="badge bg-red"><%=posts.viewcnt%></span></td>
 							</tr>
                         <% 
@@ -157,6 +161,7 @@
   </body>
   <script>
   $(document).ready(function(){
+      var setdate = new Date
     $("#newBtn").click(function(){
         location.href = '/boards/registe';
     });
