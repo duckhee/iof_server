@@ -135,7 +135,6 @@ router.post('/process/registe', function(req, res, next) {
 router.get('/remove', function(req, res, next) {
     console.log('remove get router');
     var bno = req.query.bno || req.param.bno || req.body.bno || req.params.bno;
-    console.log('bno ::::: ', bno);
     var boarder_info = { bno: bno };
     boarder_controller.delete_boarder(boarder_info, function(err, row) {
         if (err) {
@@ -159,7 +158,6 @@ router.post('/process/remove', function(req, res, next) {
 router.get('/modify', function(req, res, next) {
     console.log('boarder modify get router');
     var post_id = req.query.bno || req.body.bno || req.param.bno || req.params.bno;
-    console.log('modify bno :::::', post_id);
     var post_info = {
         bno: post_id
     }
