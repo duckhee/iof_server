@@ -110,7 +110,7 @@ exports.update_device = function(device_info, callback) {
 //network check device
 
 exports.check_network = function(network_info ,callback) {
-    console.log('nework info :::', network_info);
+
     models.device.findAll({
         where: {
             
@@ -125,21 +125,23 @@ exports.check_network = function(network_info ,callback) {
             models.device.find({
                 include: {
                     model: models.device_network,
-                    //attributes: ['sn_status'],
+                    attributes: ['sn_status'],
                     where:{
                         deviceId:device.id
                     },
                     
                 }
             }).then((result2) => {
-                
-                if (result2 === result2.device_networks) {
-                    console.log('testing result2 : ', result2.device_networks);
-                    device.device_networks = result2.device_networks;
+                    console.log(result2.device_network);
+                if (result2) {
+                    console.log('testing result2 : ', result2.device_network);
+                    device.device_networks = result2.device_network;
                     console.log("///////////////////////////////////////////");
                 }
                 loopIndex++;
                 if (loopIndex === result.length) {
+                    console.log('result :::::::::::::::::::: ', result);
+                    console.log('result network status :::::::::::: ', result.device_network);
                     callback(null, result);
                 }
             }).catch((err) => {
