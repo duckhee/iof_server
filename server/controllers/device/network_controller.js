@@ -15,9 +15,15 @@ exports.check_network = function(network_info, callback) {
                 include: {
                     model: models.device_network,
                     attributes: ['sn_status'],
+                    where: {
+                        deviceId: device.id
+                    }
                 }
             }).then((result2) => {
                 if (result2) {
+
+                    console.log('result 2 network', result2);
+
                     device.device_network = result2.device_network;
                 }
                 loopIndex++;

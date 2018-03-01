@@ -6,6 +6,7 @@ network_controller.check_network(network_info, function(err, row) {
         console.log('error ::::::: ', err);
         process.exit();
     } else {
+        console.log('row typedof :::::', typeof(row));
         console.log('row :::::::  ', row);
         process.exit();
     }
