@@ -6,6 +6,9 @@ var device = require('../../models/device');
 //group device callback(row, err) models attribute(하나의 속성 값만 가져오는 것), group(속성 값으로 묵어주는 것)로 해결이 가능하다. 더 알아보기 
 exports.group_device = function(callback) {
     models.device.findAll({
+        where:{
+
+        },
         attributes: ['device_name'],
         group: ['device_name'],
     }).then(function(rows) {
@@ -14,7 +17,7 @@ exports.group_device = function(callback) {
         console.log('group error : ', err.stack);
         callback(err, null);
     });
-}
+};
 
 //insert device 
 exports.insert_device = function(device_info, callback){

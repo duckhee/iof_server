@@ -106,3 +106,49 @@ exports.update_device = function(device_info, callback) {
         callback(err, null);
     });
 };
+
+//network check device
+
+exports.check_network = function(network_info ,callback) {
+
+    models.device.findAll({
+        where: {
+            
+        },
+        order:[
+            ['createdAt', 'DESC']
+        ]
+    }).then((result) => {
+        
+        var loopIndex = 0;
+        for (let device of result) {
+            models.device.find({
+                include: {
+                    model: models.device_network,
+                    attributes: ['sn_status'],
+                    where:{
+                        deviceId:device.id
+                    },
+                    
+                }
+            }).then((result2) => {
+                    console.log(result2.device_network);
+                if (result2) {
+                    console.log('testing result2 : ', result2.device_network);
+                    device.device_networks = result2.device_network;
+                    console.log("///////////////////////////////////////////");
+                }
+                loopIndex++;
+                if (loopIndex === result.length) {
+                    console.log('result :::::::::::::::::::: ', result);
+                    console.log('result network status :::::::::::: ', result.device_network);
+                    callback(null, result);
+                }
+            }).catch((err) => {
+                callback(err, null);
+            });
+        }
+    }).catch((err) => {
+        callback(err, null);
+    });
+};

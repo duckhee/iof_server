@@ -98,7 +98,7 @@
                   </div>
                   <!-- submit button box footer -->
                   <div class="box-footer">
-                      <button type="submit" class="btn btn-primary">submit</button>
+                      <button type="submit" id="sendBtn" name="sendBtn" class="btn btn-primary">submit</button>
                       <button type="button" id="cancelBtn" name="cancelBtn" class="btn btn-danger">cancel</button>
                   </div>
                 </div>
@@ -154,10 +154,17 @@
                 $(function () {
                     // Replace the <textarea id="editor1"> with a CKEditor
                     // instance, using default configuration.
+
                     CKEDITOR.replace('editor1');
+
                     //bootstrap WYSIHTML5 - text editor
                     //$(".textarea").wysihtml5();
                 });
+                /*
+                $("#sendBtn").click(function(){
+                    alert(CKEDITOR.instances.editor1.getData());
+                });
+                */
                 $("#cancelBtn").click(function(){
                     console.log('cancel');
                     location.replace('/boards/registe');

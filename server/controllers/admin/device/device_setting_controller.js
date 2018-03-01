@@ -15,4 +15,4 @@ exports.group_device = function(callback) {
         console.log('group error : ', err.stack);
         callback(err, null);
     });
-}
+};
