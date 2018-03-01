@@ -1,30 +1,28 @@
 var models = require('../../models/index');
 var device_network = require('../../models/device_network');
+var device = require('../../models/device');
 
-
-exports.check_network = function(callback) {
-    models.device_network.findAll({
+//check network
+exports.check_network = function(network_info, callback) {
+    models.device.findAll({
         where: {
 
-        },
-        attributes: ['sn_status']
+        }
     }).then((result) => {
         var loopIndex = 0;
-        for (device in result) {
-            models.device_network.find({
+        for (let device of result) {
+            models.device.find({
                 include: {
-                    model: models.device,
-                    key: device_network.sn_serial
-                },
-                order: [
-                    ['createdAt', 'DESC']
-                ]
+                    model: models.device_network,
+                    attributes: ['sn_status'],
+                }
             }).then((result2) => {
-                if (result2 === result2.devices) {
-                    device_network.devices = result2.devices;
+                if (result2) {
+                    device.device_network = result2.device_network;
                 }
                 loopIndex++;
                 if (loopIndex === result.length) {
+                    console.log('get network status and device ::::::::: ', result);
                     callback(null, result);
                 }
             }).catch((err) => {
@@ -35,14 +33,3 @@ exports.check_network = function(callback) {
         callback(err, null);
     });
 };
-
-
-exports.test = function(callback) {
-    models.device_network.findAll({
-        include: { model: models.device, }
-    }).then((row) => {
-        callback(null, row);
-    }).catch(err => {
-        callback(err, null);
-    })
-}
