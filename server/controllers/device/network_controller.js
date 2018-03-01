@@ -16,7 +16,8 @@ exports.check_network = function(network_info, callback) {
                     model: models.device_network,
                     attributes: ['sn_status'],
                     where: {
-                        deviceId: device.id
+                        deviceId: device.id,
+                        sn_apikey: device.device_apikey
                     }
                 }
             }).then((result2) => {
