@@ -2,19 +2,23 @@ var models = require('../../models/index');
 var device_network = require('../../models/device_network');
 
 
-exports.check_network = function(callback) {
+exports.check_network = function(network_info ,callback) {
+    console.log('nework info :::', network_info);
     models.device_network.findAll({
         where: {
 
         },
         attributes: ['sn_status']
     }).then((result) => {
+        console.log('result ::: ',result)
         var loopIndex = 0;
-        for (device in result) {
-            models.device_network.find({
+        for (let device of result) {
+            models.device.find({
                 include: {
                     model: models.device,
-                    key: device_network.sn_serial
+                    where:{
+                        
+                    }
                 },
                 order: [
                     ['createdAt', 'DESC']
@@ -37,9 +41,11 @@ exports.check_network = function(callback) {
 };
 
 
-exports.test = function(callback) {
+exports.test = function(network_info, callback) {
     models.device_network.findAll({
-        include: { model: models.device, }
+        where:{
+
+        }
     }).then((row) => {
         callback(null, row);
     }).catch(err => {

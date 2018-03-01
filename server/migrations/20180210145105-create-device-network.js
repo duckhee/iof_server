@@ -10,12 +10,13 @@ module.exports = {
             },
             sn_apikey: {
                 type: Sequelize.STRING,
+                allowNull: false,
                 references: {
                     model: 'users',
                     key: 'apikey'
                 },
                 onDelete: 'CASCADE',
-                allowNull: false,
+
             },
             sn_serial: {
                 type: Sequelize.STRING,
@@ -25,6 +26,15 @@ module.exports = {
                     model: 'devices',
                     key: 'device_serial'
                 },
+            },
+            deviceId :{
+                type:Sequelize.INTEGER,
+                references:{
+                    model:'devices',
+                    key:'id'
+                },
+                allowNull:false,
+                onDelete:'CASCADE'
             },
             sn_address: {
                 type: Sequelize.STRING

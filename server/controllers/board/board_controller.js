@@ -83,43 +83,6 @@ exports.read_post = function(data_info, callback) {
     })
 }
 
-//create read tbl board detail
-/*
-exports.read = function(data_info, callback) {
-    models.tbl_board.findAll({
-        where: {
-            id: data_info.index
-        },
-        include: [{
-            all: true,
-            model: models.tbl_reply
-        }]
-    }).then((row) => {
-        var result = {};
-        console.log('testing get row : ', row);
-        models.tbl_board.find({
-            include: [{
-                model: models.tbl_reply,
-                where: {
-                    bno: data_info.index
-                }
-            }]
-        }).then((join_row) => {
-            console.log('testing join : ', join_row);
-            result = { board: row, reply: join_row };
-            callback(null, result);
-        }).catch(err => {
-            console.log('get reply error : ', err);
-            callback(err, null);
-        });
-        result = { board: row };
-        console.log(row);
-        callback(null, result);
-    }).catch((err) => {
-        callback(err, null);
-    });
-};
-*/
 //board start list
 exports.start_list = function(callback) {
     models.tbl_board.findAll({

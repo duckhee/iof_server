@@ -4,13 +4,21 @@ module.exports = function(sequelize, DataTypes) {
 
         sn_apikey: {
             type: DataTypes.STRING,
-            unique: true,
             references: {
                 model: 'user',
                 key: 'apikey'
             },
             allowNull: false,
             onDelete: 'CASCADE',
+        },
+        deviceId :{
+            type:DataTypes.INTEGER,
+            references:{
+                model:'device',
+                key:'id'
+            },
+            allowNull:false,
+            onDelete:'CASCADE'
         },
         sn_serial: {
             type: DataTypes.STRING,
@@ -37,15 +45,15 @@ module.exports = function(sequelize, DataTypes) {
         classMethods: {
             associate: function(models) {
                 // associations can be defined here
-                device_network.belongTo(models.user, {
+                device_network.hasMany(models.user, {
                     foreignKeyConstraint: true,
-                    foreignKey: 'sn_apikey',
+                    foreignKey: 'apikey',
                     allowNull: false,
                     onDelete: 'CASCADE',
                 });
                 device_network.belongTo(models.device, {
                     foreignKeyConstraint: true,
-                    foreignKey: 'device_serial',
+                    foreignKey: 'id',
                     allowNull: false,
                     onDelete: 'CASCADE',
                 });
@@ -56,13 +64,14 @@ module.exports = function(sequelize, DataTypes) {
     device_network.associate = function(models) {
         device_network.belongsTo(models.user, {
             foreignKeyConstraint: true,
-            foreignKey: 'apikey',
+            foreignKey: 'sn_apikey',
             allowNull: false,
             onDelete: 'CASCADE',
         });
-        device_network.belongsTo(models.device, {
+
+        device_network.belongsTo(models.device,{
             foreignKeyConstraint: true,
-            foreignKey: 'sn_serial',
+            foreignKey: 'id',
             allowNull: false,
             onDelete: 'CASCADE',
         });
