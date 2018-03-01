@@ -1,0 +1,1 @@
+var network_controller = require('./controllers/device/network_controller');
