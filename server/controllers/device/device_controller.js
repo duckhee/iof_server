@@ -109,30 +109,30 @@ exports.update_device = function(device_info, callback) {
 
 //network check device
 
-exports.check_network = function(network_info ,callback) {
+exports.check_network = function(network_info, callback) {
 
     models.device.findAll({
         where: {
-            
+
         },
-        order:[
+        order: [
             ['createdAt', 'DESC']
         ]
     }).then((result) => {
-        
+
         var loopIndex = 0;
         for (let device of result) {
             models.device.find({
                 include: {
                     model: models.device_network,
                     attributes: ['sn_status'],
-                    where:{
-                        deviceId:device.id
+                    where: {
+                        deviceId: device.id
                     },
-                    
+
                 }
             }).then((result2) => {
-                    console.log(result2.device_network);
+                console.log(result2.device_network);
                 if (result2) {
                     console.log('testing result2 : ', result2.device_network);
                     device.device_networks = result2.device_network;
@@ -148,6 +148,21 @@ exports.check_network = function(network_info ,callback) {
                 callback(err, null);
             });
         }
+    }).catch((err) => {
+        callback(err, null);
+    });
+};
+
+
+//export data insert check device
+exports.check_device = function(device_info, callback) {
+    models.device.find({
+        where: {
+            device_apikey: device_info.apikey
+        },
+        attributes: ['id']
+    }).then((row) => {
+        callback(null, row);
     }).catch((err) => {
         callback(err, null);
     });
