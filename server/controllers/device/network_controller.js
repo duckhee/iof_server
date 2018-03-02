@@ -6,7 +6,7 @@ var device = require('../../models/device');
 exports.check_network = function(network_info, callback) {
     models.device.findAll({
         where: {
-
+            device_apikey: network_info.apikey
         }
     }).then((result) => {
         var loopIndex = 0;
@@ -14,6 +14,7 @@ exports.check_network = function(network_info, callback) {
             models.device.find({
                 include: {
                     model: models.device_network,
+
                     attributes: ['sn_status'],
                     where: {
                         deviceId: device.id,
@@ -23,13 +24,14 @@ exports.check_network = function(network_info, callback) {
             }).then((result2) => {
                 if (result2) {
 
-                    console.log('result 2 network', result2);
+                    // console.log('result 2 network', result2);
 
                     device.device_network = result2.device_network;
+
                 }
                 loopIndex++;
                 if (loopIndex === result.length) {
-                    console.log('get network status and device ::::::::: ', result);
+                    //console.log('get network status and device ::::::::: ', result);
                     callback(null, result);
                 }
             }).catch((err) => {

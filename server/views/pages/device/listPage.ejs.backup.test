@@ -148,21 +148,31 @@
                                     <td><%= device.device_serial%></td>
                                     <td><%= device.device_address%></td>
                                     <td><%= device.device_apikey%></td>
-                                    <% 
-                                    if(device.device_network.dataValues.sn_status === 'active'){%>
+                                    <% if(device.device_network){
+                                        var test = JSON.parse(device.device_network);
+                                            for(var i = 0;i < test.length; i++){
+                                                status = test[i].dataValues.sn_status;
+                                            }%>
+                                            <script>console.log('<%=status%>');</script>
+                                            <% var test_status = JSON.stringify(status);
+                                             if(test_status === 'active'){%>
                                         <th><span class="badge bg-green">active</span></th>
                                     <%}else{%>
                                         <th><span class="badge bg-red">inactive</span></th>
-                                    <%}%>
+                                    <%
+                                    }
+                                        }
+                                    %>
                                   </tr>
-                                  <%}%>
+                                  <%}
+                                  %>
                                 <%}else{%>
                                   <tr>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <th><span class="badge bg-green">device status</span></th>
+                                    <th><span class="badge bg-green"></span></th>
                                   </tr>
                                 <%}%>
                                   </tbody>

@@ -31,27 +31,19 @@ router.post('/process/registe', function(req, res, next) {
 router.get('/list', function(req, res, next) {
     console.log('device list get router');
     var apikey_info = {};
-    device_controller.list_device(apikey_info, function(err, rows) {
+    network_controller.check_network(apikey_info, function(err, rows) {
         if (err) {
-            console.log('device list error : ', err);
+            console.log('device list router error  : ', err);
             next(err);
-
-            /*}else if(row){
-                console.log('success');
-                console.log(row);
-                
-                res.render('device/listPage',{
-                    devices:row
-                });
-                
-               //res.render('device/listPagebackup');
-            }else{
-                console.log('null');
-                res.redirect('/device/list');
-            }
-            */
         } else {
-            console.log('testing ', rows);
+
+            for (var i = 0; i < rows.length; i++) {
+                if (rows[i].device_network) {
+
+                    console.log('serial :::::: ' + rows[i].dataValues.device_serial + 'i ::::::' + i + '  testing status :::::::::::::::' + rows[i].device_network.dataValues.sn_status);
+                }
+            }
+
             res.render('device/listPage', {
                 devices: rows
             });

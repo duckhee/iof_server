@@ -11,17 +11,19 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false,
             onDelete: 'CASCADE',
         },
-        deviceId :{
-            type:DataTypes.INTEGER,
-            references:{
-                model:'device',
-                key:'id'
+        deviceId: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'device',
+                key: 'id'
             },
-            allowNull:false,
-            onDelete:'CASCADE'
+            allowNull: false,
+            onDelete: 'CASCADE'
         },
         sn_serial: {
             type: DataTypes.STRING,
+            //references: 'device',
+            //referencesKey: 'device_serial',
             references: {
                 model: 'device',
                 key: 'device_serial'
@@ -45,7 +47,7 @@ module.exports = function(sequelize, DataTypes) {
         classMethods: {
             associate: function(models) {
                 // associations can be defined here
-                device_network.hasMany(models.user, {
+                device_network.belongsTo(models.user, {
                     foreignKeyConstraint: true,
                     foreignKey: 'apikey',
                     allowNull: false,
@@ -69,7 +71,7 @@ module.exports = function(sequelize, DataTypes) {
             onDelete: 'CASCADE',
         });
 
-        device_network.belongsTo(models.device,{
+        device_network.belongsTo(models.device, {
             foreignKeyConstraint: true,
             foreignKey: 'id',
             allowNull: false,

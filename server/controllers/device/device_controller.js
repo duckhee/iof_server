@@ -119,7 +119,6 @@ exports.check_network = function(network_info, callback) {
             ['createdAt', 'DESC']
         ]
     }).then((result) => {
-
         var loopIndex = 0;
         for (let device of result) {
             models.device.find({
@@ -127,7 +126,8 @@ exports.check_network = function(network_info, callback) {
                     model: models.device_network,
                     attributes: ['sn_status'],
                     where: {
-                        deviceId: device.id
+                        deviceId: device.id,
+                        sn_apikey: device.device_apikey
                     },
 
                 }
