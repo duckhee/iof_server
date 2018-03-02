@@ -42,3 +42,49 @@ exports.check_network = function(network_info, callback) {
         callback(err, null);
     });
 };
+
+//export update status
+exports.update_inactstatus = function(network_info, callback) {
+    models.device.find({
+        device_apikey: network_info.apikey,
+        device_serial: network_info.serial
+    }).then((result) => {
+        models.device_network.update({
+            sn_status: 'inactive'
+        }, {
+            where: {
+                sn_apikey: network_info.apikey,
+                sn_serial: network_info.serial
+            }
+        }).then((result2) => {
+            callback(null, result2);
+        }).catch((err) => {
+            callback(err, null);
+        });
+    }).catch((err) => {
+        callback(err, null);
+    });
+};
+
+//export update status
+exports.update_actstatus = function(network_info, callback) {
+    models.device.find({
+        device_apikey: network_info.apikey,
+        device_serial: network_info.serial
+    }).then((result) => {
+        models.device_network.update({
+            sn_status: 'active'
+        }, {
+            where: {
+                sn_apikey: network_info.apikey,
+                sn_serial: network_info.serial
+            }
+        }).then((result2) => {
+            callback(null, result2);
+        }).catch((err) => {
+            callback(err, null);
+        });
+    }).catch((err) => {
+        callback(err, null);
+    });
+};
