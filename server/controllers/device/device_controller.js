@@ -134,14 +134,14 @@ exports.check_network = function(network_info, callback) {
             }).then((result2) => {
                 console.log(result2.device_network);
                 if (result2) {
-                    console.log('testing result2 : ', result2.device_network);
+                    // console.log('testing result2 : ', result2.device_network);
                     device.device_networks = result2.device_network;
-                    console.log("///////////////////////////////////////////");
+                    //console.log("///////////////////////////////////////////");
                 }
                 loopIndex++;
                 if (loopIndex === result.length) {
-                    console.log('result :::::::::::::::::::: ', result);
-                    console.log('result network status :::::::::::: ', result.device_network);
+                    //console.log('result :::::::::::::::::::: ', result);
+                    //console.log('result network status :::::::::::: ', result.device_network);
                     callback(null, result);
                 }
             }).catch((err) => {

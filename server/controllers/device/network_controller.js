@@ -14,7 +14,6 @@ exports.check_network = function(network_info, callback) {
             models.device.find({
                 include: {
                     model: models.device_network,
-
                     attributes: ['sn_status'],
                     where: {
                         deviceId: device.id,
