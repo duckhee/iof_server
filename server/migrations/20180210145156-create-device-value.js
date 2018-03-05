@@ -8,6 +8,9 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
+            sd_text: {
+                type: Sequelize.TEXT
+            },
             sd_serial: {
                 type: Sequelize.STRING
             },
