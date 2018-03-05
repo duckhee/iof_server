@@ -18,6 +18,9 @@ module.exports = function(sequelize, DataTypes) {
         sd_address: {
             type: DataTypes.STRING,
         },
+        sd_text: {
+            type: DataTypes.TEXT
+        },
         sd_data: {
             type: DataTypes.STRING,
         },
