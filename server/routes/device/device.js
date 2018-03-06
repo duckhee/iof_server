@@ -24,6 +24,9 @@ router.get('/registe', function(req, res, next) {
 
 //registe page post router
 router.post('/process/registe', function(req, res, next) {
+    var device_name = req.body.device_name || req.query.device_name || req.params.device_name || req.param.device_name;
+    var device_apikey = req.bodt.device_apikey || req.query.device_apikey || req.params.device_apikey || req.param.device_apikey;
+
     next();
 });
 

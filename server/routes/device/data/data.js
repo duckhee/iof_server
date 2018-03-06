@@ -7,30 +7,26 @@ var data_controller = require('../../../controllers/device/data_controller');
 
 //router root data
 router.get('/', function(req, res, next) {
-    next();
+    /// next();
+    res.redirect('/');
 });
 
 
 //router insert data
 router.get('/insert', function(req, res, next) {
     var query_apikey = req.query.apikey || req.params.apikey || req.body.apikey || req.param.apikey;
-    var data_value = req.body.value || req.params.value || req.query.value || req.param.value;
     var apikey_info = { apikey: query_apikey };
-    var insert_data = {};
+
     device_controller.check_device(apikey_info, function(err, result) {
         if (err) {
             console.log('check device error :::::', err);
             next(err);
         } else {
             console.log('device search id ::::', result);
-            insert_data = {
-                deviceId: result,
-                apikey: query_apikey,
-                value: data_value
-            };
-            data_controller.insert_value(insert_data, function(err, row) {
 
-            });
+
+
+
         }
     });
 
@@ -70,5 +66,33 @@ router.post('/insert', function(req, res, next) {
 
 });
 
+//router get data json
+router.get('/get', function(req, res, next) {
+    var query_apikey = req.query.apikey || req.params.apikey || req.body.apikey || req.param.apikey;
+    var data_value = req.body.value || req.params.value || req.query.value || req.param.value;
+    var apikey_info = { apikey: query_apikey };
+    var insert_data = {};
+    device_controller.check_device(apikey_info, function(err, result) {
+        if (err) {
+            console.log('check device error :::::', err);
+            next(err);
+        } else {
+            console.log('device search id ::::', result);
+
+            //data insert info
+            insert_data = {
+                deviceId: result,
+                apikey: query_apikey,
+                value: data_value
+            };
+
+        }
+    });
+});
+
+//router post data json
+router.post('/get', function(req, res, next) {
+
+});
 
 module.exports = router;
