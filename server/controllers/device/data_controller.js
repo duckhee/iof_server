@@ -1,90 +1,110 @@
 var models = require('../../models/index');
 var device_value = require('../../models/device_value');
+var device = require('../../models/device');
+
+
+//checking device and insert
+exports.checking_insert = function(data_info, callback) {
+    models.device.findOne({
+        where: {
+
+        }
+    }).then((row) => {
+        models.device_value.create({
+
+        }).then((row) => {
+
+        }).catch((err) => {
+
+        });
+    }).catch((err) => {
+
+    });
+};
 
 //insert value
-exports.insert_value = function(data_info, callback){
+exports.insert_value = function(data_info, callback) {
     models.device_value.create({
 
-    }).then(function(row){
+    }).then(function(row) {
         callback(null, row);
-    }).catch(function(err){
+    }).catch(function(err) {
         callback(err, null);
     })
 }
 
 //check create vaue
-exports.create_value = function(data_info, callback){
+exports.create_value = function(data_info, callback) {
     models.device_value.findOrCreate({
-        where:{
+        where: {
 
         },
-        defaults:
-        {
+        defaults: {
 
         }
-    }).spread(function(value, created){
-        if(created){
+    }).spread(function(value, created) {
+        if (created) {
             callback(null, null, created);
-        }else{
+        } else {
             callback(null, value.dataValues, null);
         }
-    }).catch(function(err){
+    }).catch(function(err) {
         callback(err, null, null);
     });
 };
 
 //array insert vlaue
-exports.bulk_create = function(data_info, callback){
-    models.device_value.bulkCreate(data_info).then(function(result){
+exports.bulk_create = function(data_info, callback) {
+    models.device_value.bulkCreate(data_info).then(function(result) {
         callback(null, result);
-    }).catch(function(err){
+    }).catch(function(err) {
         callback(err, null);
     });
 };
 
 //find value list limit 10
-exports.list10_value = function(data_info, callback){
+exports.list10_value = function(data_info, callback) {
     models.device_value.findAll({
-        where:{
-            
+        where: {
+
         },
-        order:[
+        order: [
             ['createdAt', 'DESC']
         ],
-        limit:10,
-    }).then(function(rows){
+        limit: 10,
+    }).then(function(rows) {
         callback(null, rows);
-    }).catch(function(err){
+    }).catch(function(err) {
         callback(err, null);
     });
 };
 
 //find value list not limit
-exports.list_value = function(data_info, callback){
+exports.list_value = function(data_info, callback) {
     models.device_value.findAll({
-        where:{
+        where: {
 
         },
-        order:[
+        order: [
             ['createdAt', 'DESC']
         ],
-    }).then(function(rows){
+    }).then(function(rows) {
         callback(null, rows);
-    }).catch(function(err){
+    }).catch(function(err) {
         callback(err, null);
     });
 };
 
 
 //delete value 
-exports.delete_value = function(data_info, callback){
+exports.delete_value = function(data_info, callback) {
     models.device_value.destroy({
-        where:{
+        where: {
 
         }
-    }).then(function(row){
+    }).then(function(row) {
         callback(null, row);
-    }).catch(function(err){
+    }).catch(function(err) {
         callback(err, null);
     });
 };

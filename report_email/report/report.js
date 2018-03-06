@@ -5,7 +5,7 @@ var server_error = 'server error report : ';
 var connection_info = 'device connection report : ';
 
 var mail_option = {
-    from: 'IOT Server report <' + config.mail.auth.user + '>',
+    from: 'IOF Server report <' + config.mail.auth.user + '>',
     to: 'fain9301@yahoo.com',
     subject: 'server error report'
 };

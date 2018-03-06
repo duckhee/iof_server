@@ -30,30 +30,52 @@ router.post('/process/registe', function(req, res, next) {
     next();
 });
 
+//router device list set middleware
+router.get('/list', function(req, res, next) {
+    console.log('testing !! middleware');
+
+
+    req.query.apikey = 'DQ91h8BGCTLizop'; // set and send apikey next router 
+
+    next();
+
+
+})
+
+
 //device list page get router
 router.get('/list', function(req, res, next) {
     console.log('device list get router');
-    var apikey_info = {};
-    network_controller.check_network(apikey_info, function(err, rows) {
-        if (err) {
-            console.log('device list router error  : ', err);
-            next(err);
-        } else {
+    var apikey = req.query.apikey || req.body.apikey || req.params.apikey || req.param.apikey;
+    var apikey_info = {
+        apikey: apikey
+    };
+    if (apikey) {
+        network_controller.check_network(apikey_info, function(err, rows) {
+            if (err) {
+                console.log('device list router error  : ', err);
+                next(err);
+            } else {
 
-            for (var i = 0; i < rows.length; i++) {
-                if (rows[i].device_network) {
+                for (var i = 0; i < rows.length; i++) {
+                    if (rows[i].device_network) {
 
-                    console.log('serial :::::: ' + rows[i].dataValues.device_serial + 'i ::::::' + i + '  testing status :::::::::::::::' + rows[i].device_network.dataValues.sn_status);
+                        console.log('serial :::::: ' + rows[i].dataValues.device_serial + 'i ::::::' + i + '  testing status :::::::::::::::' + rows[i].device_network.dataValues.sn_status);
+                    }
                 }
+
+                res.render('device/listPage', {
+                    devices: rows
+                });
             }
 
-            res.render('device/listPage', {
-                devices: rows
-            });
-        }
-
-    });
-
+        });
+    } else {
+        var rows = null;
+        res.render('device/listPage', {
+            devices: rows
+        })
+    }
 });
 
 //device list page post router

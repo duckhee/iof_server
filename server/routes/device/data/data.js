@@ -66,12 +66,11 @@ router.post('/insert', function(req, res, next) {
 
 });
 
-//router get data json
-router.get('/get', function(req, res, next) {
+//router ajax get data json
+router.get('/ajaxget', function(req, res, next) {
     var query_apikey = req.query.apikey || req.params.apikey || req.body.apikey || req.param.apikey;
-    var data_value = req.body.value || req.params.value || req.query.value || req.param.value;
     var apikey_info = { apikey: query_apikey };
-    var insert_data = {};
+
     device_controller.check_device(apikey_info, function(err, result) {
         if (err) {
             console.log('check device error :::::', err);
@@ -80,19 +79,45 @@ router.get('/get', function(req, res, next) {
             console.log('device search id ::::', result);
 
             //data insert info
-            insert_data = {
-                deviceId: result,
-                apikey: query_apikey,
-                value: data_value
-            };
+            data_controller.list10_value(apikey_info, function(err, rows) {
+                if (err) {
+                    console.log('get data error :::::: ', err);
+                    next(err);
+                } else {
+                    console.log('list limit 10 :::::: ', rows);
+                    res.json(rows);
+                }
+            });
 
         }
     });
 });
 
-//router post data json
-router.post('/get', function(req, res, next) {
+//router ajax post data json
+router.post('/ajaxget', function(req, res, next) {
+    var query_apikey = req.query.apikey || req.params.apikey || req.body.apikey || req.param.apikey;
+    var apikey_info = { apikey: query_apikey };
 
+    device_controller.check_device(apikey_info, function(err, result) {
+        if (err) {
+            console.log('check device error :::::', err);
+            next(err);
+        } else {
+            console.log('device search id ::::', result);
+
+            //data insert info
+            data_controller.list10_value(apikey_info, function(err, rows) {
+                if (err) {
+                    console.log('get data error :::::: ', err);
+                    next(err);
+                } else {
+                    console.log('list limit 10 :::::: ', rows);
+                    res.json(rows);
+                }
+            });
+
+        }
+    });
 });
 
 module.exports = router;
