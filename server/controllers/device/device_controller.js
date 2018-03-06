@@ -145,9 +145,9 @@ exports.check_network = function(network_info, callback) {
             }).then((result2) => {
                 console.log(result2.device_network);
                 if (result2) {
-                    // console.log('testing result2 : ', result2.device_network);
+
                     device.device_networks = result2.device_network;
-                    //console.log("///////////////////////////////////////////");
+
                 }
                 loopIndex++;
                 if (loopIndex === result.length) {
