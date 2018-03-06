@@ -7,7 +7,10 @@ exports.check_network = function(network_info, callback) {
     models.device.findAll({
         where: {
             device_apikey: network_info.apikey
-        }
+        },
+        order: [
+            ['createdAt', 'DESC']
+        ]
     }).then((result) => {
         var loopIndex = 0;
         for (let device of result) {
@@ -18,7 +21,8 @@ exports.check_network = function(network_info, callback) {
                     where: {
                         deviceId: device.id,
                         sn_apikey: device.device_apikey
-                    }
+                    },
+
                 }
             }).then((result2) => {
                 if (result2) {

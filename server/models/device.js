@@ -47,20 +47,36 @@ module.exports = function(sequelize, DataTypes) {
     });
 
     device.associate = function(models) {
-        device.belongsTo(models.user, {
-            foreignKeyConstraint: true,
-            foreignKey: 'device_apikey',
-            allowNull: false,
-            onDelete: 'CASCADE',
+            device.belongsTo(models.user, {
+                foreignKeyConstraint: true,
+                foreignKey: 'device_apikey',
+                allowNull: false,
+                onDelete: 'CASCADE',
+            });
+
+            device.hasOne(models.device_network, { //hosOne??
+                foreignKey: 'deviceId', //has사용시는 상대방 ?? 자기자신도 가능 ?
+                onDelete: 'CASCADE',
+                allowNull: false,
+                foreignKeyConstraint: true
+            });
+        }
+        //before hook
+    device.hook("beforeCreate", function(models, device) {
+        models.device_network.create({
+
+            sn_type: '',
+            sn_address: '',
+            sn_serial: device.device_serial,
+            deviceId: device.id,
+            sn_apikey: device.device_apikey
+        }).then((result) => {
+            console.log('created model device network !!');
+        }).catch((err) => {
+            console.log('before create device failed error :::: ', err);
         });
 
-        device.hasOne(models.device_network, { //hosOne??
-            foreignKey: 'deviceId', //has사용시는 상대방 ?? 자기자신도 가능 ?
-            onDelete: 'CASCADE',
-            allowNull: false,
-            foreignKeyConstraint: true
-        });
-    }
+    });
 
 
     return device;

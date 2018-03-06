@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
 
 //registe page get router
 router.get('/registe', function(req, res, next) {
-    res.render('device/reigstePage');
+    res.render('device/registePage');
 });
 
 //registe page post router
