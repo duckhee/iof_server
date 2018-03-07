@@ -188,7 +188,8 @@ exports.find_info = function(user_info, callback) {
     models.user.findOne({
         where: {
             user_id: user_info.id
-        }
+        },
+        attributes: ['user_id', 'apikey']
     }).then((row) => {
 
         callback(null, row);

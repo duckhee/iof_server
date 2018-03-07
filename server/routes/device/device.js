@@ -56,12 +56,12 @@ router.post('/process/registe', function(req, res, next) {
     var apikey = req.body.device_apikey || req.query.device_apikey || req.params.device_apikey || req.param.device_apikey;
     var serial = req.body.device_serial || req.query.device_serial || req.params.device_serial || req.param.device_serial;
     var address = req.body.device_address || req.query.device_address || req.params.device_address || req.param.device_address;
-    if (req.body) {
-        console.log('device name ::::', name);
-        console.log('device apikey :::: ', apikey);
-        console.log('device serial :::: ', serial);
-        console.log('device address :::: ', address);
-    }
+
+    console.log('device name :::: ', name);
+    console.log('device apikey :::: ', apikey);
+    console.log('device serial :::: ', serial);
+    console.log('device address :::: ', address);
+
     res.redirect('/device/list?apikey=' + apikey);
 });
 
