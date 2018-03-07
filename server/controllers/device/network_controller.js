@@ -133,7 +133,7 @@ exports.update_actstatus = function(network_info, callback) {
 exports.insert_network = function(network_info, callback) {
     models.device_network.create({
         sn_type: '',
-        sn_address: '',
+        sn_address: network_info.device_address,
         sn_serial: network_info.device_serial,
         deviceId: network_info.id,
         sn_apikey: network_info.device_apikey
