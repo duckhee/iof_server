@@ -155,6 +155,7 @@ router.post('/proccess/list', function(req, res, next) {
 
 //detail page get router
 router.get('/detail', function(req, res, next) {
+
     res.render('device/detailPage');
 });
 

@@ -80,7 +80,7 @@ exports.read_post = function(data_info, callback) {
     }).catch((err) => {
         console.log('result error : ', err);
         callback(err, null);
-    })
+    });
 }
 
 //board start list
@@ -190,4 +190,4 @@ exports.delete_boarder = function(boarder_info, callback) {
     }).catch((err) => {
         callback(err, null);
     });
-}; 
+};

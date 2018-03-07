@@ -56,6 +56,14 @@ module.exports = function(sequelize, DataTypes) {
                 onDelete: 'CASCADE',
             });
 
+            device.hasMany(models.device_value, {
+                foreignKey: 'deviceId', //has사용시는 상대방 ?? 자기자신도 가능 ?
+                onDelete: 'CASCADE',
+                allowNull: false,
+                foreignKeyConstraint: true
+            });
+
+
             device.hasOne(models.device_network, { //hosOne??
                 foreignKey: 'deviceId', //has사용시는 상대방 ?? 자기자신도 가능 ?
                 onDelete: 'CASCADE',
