@@ -20,6 +20,7 @@ module.exports = function(sequelize, DataTypes) {
         device_serial: {
             type: DataTypes.STRING,
             allowNull: false,
+            unique: true,
 
         },
         device_address: {

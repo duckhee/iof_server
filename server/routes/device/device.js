@@ -10,6 +10,7 @@ var data_controller = require('../../controllers/device/data_controller');
 var camera_controller = require('../../controllers/device/image_controller');
 var network_controller = require('../../controllers/device/network_controller');
 var device_controller = require('../../controllers/device/device_controller');
+var user_controller = require('../../controllers/user/user_controller');
 
 //show device index page
 router.get('/', function(req, res, next) {
@@ -17,17 +18,51 @@ router.get('/', function(req, res, next) {
     res.redirect('/device/list');
 });
 
+//registe page get router 
+router.get('/registe', function(req, res, next) {
+    console.log('middel ware test !! need limit device num');
+    next();
+})
+
 //registe page get router
 router.get('/registe', function(req, res, next) {
-    res.render('device/registePage');
+    console.log('need get apikey and serial');
+    var user_info = { id: 'fain9301' };
+    if (user_info) {
+        user_controller.find_info(user_info, function(err, row) {
+            if (err) {
+                console.log('error ::: ', err);
+                next(err);
+            } else {
+                console.log('user info ::::::', row);
+                console.log('get apikey ::::: ', row.apikey);
+                var serial = row.apikey + util_make.createserial();
+                console.log('serial make :::: ', serial);
+                res.render('device/registePage', {
+                    apikey: row.apikey,
+                    serial: serial
+                });
+            }
+        });
+    } else {
+        res.json('not user info');
+    }
+
 });
 
 //registe page post router
 router.post('/process/registe', function(req, res, next) {
-    var device_name = req.body.device_name || req.query.device_name || req.params.device_name || req.param.device_name;
-    var device_apikey = req.bodt.device_apikey || req.query.device_apikey || req.params.device_apikey || req.param.device_apikey;
-
-    next();
+    var name = req.body.device_name || req.query.device_name || req.params.device_name || req.param.device_name;
+    var apikey = req.body.device_apikey || req.query.device_apikey || req.params.device_apikey || req.param.device_apikey;
+    var serial = req.body.device_serial || req.query.device_serial || req.params.device_serial || req.param.device_serial;
+    var address = req.body.device_address || req.query.device_address || req.params.device_address || req.param.device_address;
+    if (req.body) {
+        console.log('device name ::::', name);
+        console.log('device apikey :::: ', apikey);
+        console.log('device serial :::: ', serial);
+        console.log('device address :::: ', address);
+    }
+    res.redirect('/device/list?apikey=' + apikey);
 });
 
 //router device list set middleware
@@ -51,6 +86,7 @@ router.get('/list', function(req, res, next) {
         apikey: apikey
     };
     if (apikey) {
+        console.log('apikey :::: ', apikey);
         network_controller.check_network(apikey_info, function(err, rows) {
             if (err) {
                 console.log('device list router error  : ', err);
