@@ -108,3 +108,42 @@ exports.delete_value = function(data_info, callback) {
         callback(err, null);
     });
 };
+
+//read data value 
+exports.read_post = function(data_info, callback) {
+    models.device.findAll({
+        where: {
+            id: data_info.bno
+        }
+    }).then((result) => {
+        //console.log('testing result  : ', result);
+        var loopIndex = 0;
+        for (let device of result) {
+            models.device.find({
+                include: {
+                    model: models.device_value,
+                    where: {
+                        deviceId: device.id
+                    }
+                }
+            }).then((result2) => {
+                console.log('testing result2 :::::', result2);
+                if (result2) {
+                    console.log('testing result2 : ', result2.device_values);
+                    tbl_board.device_values = result2.device_values;
+                }
+                loopIndex++;
+                if (loopIndex === result.length) {
+                    console.log('testing result : ', result);
+                    callback(null, result);
+                }
+            }).catch((err) => {
+                console.log('result2 error : ', err);
+                callback(err, null);
+            });
+        }
+    }).catch((err) => {
+        console.log('result error : ', err);
+        callback(err, null);
+    });
+}

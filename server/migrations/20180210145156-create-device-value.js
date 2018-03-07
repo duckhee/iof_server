@@ -8,6 +8,15 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
+            deviceId: {
+                type: Sequelize.INTEGER,
+                allowNull: false,
+                references: {
+                    model: 'devices',
+                    key: 'id'
+                },
+                onDelete: 'CASCADE',
+            },
             sd_text: {
                 type: Sequelize.TEXT
             },
