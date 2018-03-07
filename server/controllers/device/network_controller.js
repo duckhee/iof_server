@@ -2,6 +2,43 @@ var models = require('../../models/index');
 var device_network = require('../../models/device_network');
 var device = require('../../models/device');
 
+
+//report checking network admin or user
+exports.checking_connection_admin = function(callback) {
+    models.device.findAll({
+        order: [
+            ['createdAt', 'DESC']
+        ]
+    }).then((result) => {
+        var loopIndex = 0;
+        for (let device of result) {
+            models.device.find({
+                include: {
+                    model: models.device_network,
+                    attributes: ['sn_status'],
+                    where: {
+                        deviceId: device.id
+                    }
+                }
+            }).then((result2) => {
+                if (result2) {
+                    device.device_network = result2.device_network;
+                }
+                loopIndex++;
+                if (loopIndex === result.length) {
+                    callback(null, result);
+                }
+            }).catch((err) => {
+                callback(err, null);
+            });
+        }
+    }).catch((err) => {
+        callback(err, null);
+    });
+
+};
+
+
 //check network
 exports.check_network = function(network_info, callback) {
     models.device.findAll({

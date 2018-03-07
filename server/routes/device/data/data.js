@@ -105,7 +105,7 @@ router.post('/ajaxget', function(req, res, next) {
         } else {
             console.log('device search id ::::', result);
 
-            //data insert info
+            //data list info
             data_controller.list10_value(apikey_info, function(err, rows) {
                 if (err) {
                     console.log('get data error :::::: ', err);

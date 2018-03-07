@@ -2,6 +2,17 @@ var models = require('../../models/index');
 var device = require('../../models/device');
 var device_network = require('../../models/device_network');
 
+//testing count
+exports.num_device = function(callback) {
+    models.device.count({
+
+    }).then((row) => {
+        callback(null, row);
+    }).catch((err) => {
+        callback(err, null);
+    });
+};
+
 
 //group device callback(row, err) models attribute(하나의 속성 값만 가져오는 것), group(속성 값으로 묵어주는 것)로 해결이 가능하다. 더 알아보기 
 exports.group_device = function(callback) {
@@ -134,9 +145,9 @@ exports.check_network = function(network_info, callback) {
             }).then((result2) => {
                 console.log(result2.device_network);
                 if (result2) {
-                    // console.log('testing result2 : ', result2.device_network);
+
                     device.device_networks = result2.device_network;
-                    //console.log("///////////////////////////////////////////");
+
                 }
                 loopIndex++;
                 if (loopIndex === result.length) {
