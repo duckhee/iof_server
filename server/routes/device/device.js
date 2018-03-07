@@ -20,7 +20,7 @@ router.get('/', function(req, res, next) {
 
 //registe page get router 
 router.get('/registe', function(req, res, next) {
-    console.log('middel ware test !! need limit device num');
+    console.log('middel ware test !! need limit device num and check user info');
     next();
 })
 
@@ -75,6 +75,7 @@ router.post('/process/registe', function(req, res, next) {
             var network_info = {
                 device_serial: row.device_serial,
                 device_apikey: row.device_apikey,
+                device_address: row.device_address,
                 id: row.id
             };
             network_controller.insert_network(network_info, function(err, row) {
