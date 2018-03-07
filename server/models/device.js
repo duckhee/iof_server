@@ -1,4 +1,5 @@
 'use strict';
+
 module.exports = function(sequelize, DataTypes) {
     var device = sequelize.define('device', {
         device_name: {
@@ -62,23 +63,23 @@ module.exports = function(sequelize, DataTypes) {
                 foreignKeyConstraint: true
             });
         }
-        //before hook
-    device.hook("beforeCreate", function(models, device) {
-        models.device_network.create({
+        /*
+            //before hook
+            device.hook("afterCreate", function(device) {
+                models.device_network.create({
+                    sn_type: '',
+                    sn_address: '',
+                    sn_serial: device.device_serial,
+                    deviceId: device.id,
+                    sn_apikey: device.device_apikey
+                }).then((result) => {
+                    console.log('created model device network !!');
+                }).catch((err) => {
+                    console.log('before create device failed error :::: ', err);
+                });
 
-            sn_type: '',
-            sn_address: '',
-            sn_serial: device.device_serial,
-            deviceId: device.id,
-            sn_apikey: device.device_apikey
-        }).then((result) => {
-            console.log('created model device network !!');
-        }).catch((err) => {
-            console.log('before create device failed error :::: ', err);
-        });
-
-    });
-
+            });
+        */
 
     return device;
 };

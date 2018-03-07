@@ -22,7 +22,10 @@ exports.group_device = function(callback) {
 //insert device 
 exports.insert_device = function(device_info, callback) {
     models.device.create({
-
+        device_name: device_info.devivce_name,
+        device_apikey: device_info.device_apikey,
+        device_serial: device_info.device_serial,
+        device_address: device_info.device_address
     }).then(function(row) {
         callback(null, row);
     }).catch(function(err) {

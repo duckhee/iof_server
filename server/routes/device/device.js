@@ -56,13 +56,45 @@ router.post('/process/registe', function(req, res, next) {
     var apikey = req.body.device_apikey || req.query.device_apikey || req.params.device_apikey || req.param.device_apikey;
     var serial = req.body.device_serial || req.query.device_serial || req.params.device_serial || req.param.device_serial;
     var address = req.body.device_address || req.query.device_address || req.params.device_address || req.param.device_address;
-
+    var device_info = {
+        devivce_name: name,
+        device_apikey: apikey,
+        device_serial: serial,
+        device_address: address
+    };
     console.log('device name :::: ', name);
     console.log('device apikey :::: ', apikey);
     console.log('device serial :::: ', serial);
     console.log('device address :::: ', address);
+    device_controller.insert_device(device_info, function(err, row) {
+        if (err) {
+            console.log('registe device error ::::: ', err);
+            next(err);
+        } else if (row) {
+            console.log('success ::::::', row.id);
+            var network_info = {
+                device_serial: row.device_serial,
+                device_apikey: row.device_apikey,
+                id: row.id
+            };
+            network_controller.insert_network(network_info, function(err, row) {
+                if (err) {
+                    console.log('network insert error ::::: ', err);
+                    res.status(404);
+                } else if (row) {
+                    console.log('succes');
+                    res.redirect('/device/list');
+                } else {
+                    console.log('null');
+                    res.status(500);
+                }
+            });
+        } else {
+            console.log('null');
+            res.status(500);
+        }
+    });
 
-    res.redirect('/device/list?apikey=' + apikey);
 });
 
 //router device list set middleware
