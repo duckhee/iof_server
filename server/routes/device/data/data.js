@@ -15,18 +15,35 @@ router.get('/', function(req, res, next) {
 //router insert data
 router.get('/insert', function(req, res, next) {
     var query_apikey = req.query.apikey || req.params.apikey || req.body.apikey || req.param.apikey;
-    var apikey_info = { apikey: query_apikey };
+    var query_serial = req.query.serialnumber || req.params.serialnumber || req.body.serialnumber || req.param.serialnumber;
+    var insert_data = req.query.value || req.params.value || req.body.value || req.param.value;
+    var apikey_info = {
+        apikey: query_apikey,
+        serial: query_serial
+    };
 
-    device_controller.check_device(apikey_info, function(err, result) {
+    device_controller.insert_before(apikey_info, function(err, row) {
         if (err) {
-            console.log('check device error :::::', err);
-            next(err);
+            console.log('insert before data error ::: ', err);
+            res.json('failed');
+        } else if (row) {
+            console.log('inset before data success :::::', row.id);
+            var data_info = {
+                data: insert_data,
+                apikey: query_apikey,
+                device_id: row.id,
+                serial: query_serial,
+                sd_address: row.address
+            }
+            data_controller.insert_value(data_info, function(err, row) {
+                if (err) {
+                    res.status(404);
+                } else {
+                    res.json('success');
+                }
+            });
         } else {
-            console.log('device search id ::::', result);
-
-
-
-
+            res.status(500);
         }
     });
 

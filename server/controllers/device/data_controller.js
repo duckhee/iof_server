@@ -25,7 +25,12 @@ exports.checking_insert = function(data_info, callback) {
 //insert value
 exports.insert_value = function(data_info, callback) {
     models.device_value.create({
-
+        sd_serial: data_info.serial,
+        sd_apikey: data_info.apikey,
+        deviceId: data_info.device_id,
+        sd_address: data_info.sd_address,
+        sd_text: data_info.value,
+        sd_data: data_info.value,
     }).then(function(row) {
         callback(null, row);
     }).catch(function(err) {
@@ -110,7 +115,7 @@ exports.delete_value = function(data_info, callback) {
 };
 
 //read data value 
-exports.read_post = function(data_info, callback) {
+exports.read_devicevalue = function(data_info, callback) {
     models.device.findAll({
         where: {
             id: data_info.bno
