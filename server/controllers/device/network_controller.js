@@ -128,3 +128,19 @@ exports.update_actstatus = function(network_info, callback) {
         callback(err, null);
     });
 };
+
+//create network info 
+exports.insert_network = function(network_info, callback) {
+    models.device_network.create({
+        sn_type: '',
+        sn_address: '',
+        sn_serial: network_info.device_serial,
+        deviceId: network_info.id,
+        sn_apikey: network_info.device_apikey
+    }).then((row) => {
+        callback(null, row);
+    }).catch((err) => {
+        console.log('craete network table error ::::: ', err);
+        callback(err, null);
+    });
+};
