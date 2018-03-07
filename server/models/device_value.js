@@ -4,8 +4,8 @@ module.exports = function(sequelize, DataTypes) {
         sd_serial: {
             type: DataTypes.STRING,
             references: {
-                model: '',
-                key: ''
+                model: 'device',
+                key: 'device_serial'
             },
             allowNull: false,
             onDelete: 'CASCADE',
