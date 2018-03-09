@@ -121,7 +121,7 @@ exports.detail_user = function(user_info, callback) {
         where: {
             user_id: user_info.user_id,
             user_password: user_info.user_password
-        },       
+        },
         /*
         include: [{
             model: models.device,
@@ -182,3 +182,19 @@ exports.login = function(user_info, callback) {
         callback(err, null);
     });
 };
+
+//user info get controller
+exports.find_info = function(user_info, callback) {
+    models.user.findOne({
+        where: {
+            user_id: user_info.id
+        },
+        attributes: ['user_id', 'apikey']
+    }).then((row) => {
+
+        callback(null, row);
+    }).catch((err) => {
+        console.log('find user info error ::::: ', err);
+        callback(err, null);
+    })
+}

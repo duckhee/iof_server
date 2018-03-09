@@ -33,7 +33,10 @@ exports.group_device = function(callback) {
 //insert device 
 exports.insert_device = function(device_info, callback) {
     models.device.create({
-
+        device_name: device_info.devivce_name,
+        device_apikey: device_info.device_apikey,
+        device_serial: device_info.device_serial,
+        device_address: device_info.device_address
     }).then(function(row) {
         callback(null, row);
     }).catch(function(err) {
@@ -63,11 +66,26 @@ exports.create_device = function(device_info, callback) {
     });
 };
 
+//insert before data
+exports.insert_before = function(device_info, callback) {
+    models.defualts.find({
+        where: {
+            device_serial: device_info.serial,
+            device_apieky: device_info.apikey
+        }
+    }).then((row) => {
+        callback(null, row);
+    }).catch((err) => {
+        callback(err, null);
+    });
+};
+
 //find detail device
 exports.find_device = function(device_info, callback) {
     models.device.find({
         where: {
-
+            device_serial: device_info.serial,
+            device_apikey: device_info.apikey,
         }
     }).then(function(row) {
         callback(null, row);

@@ -1,4 +1,5 @@
 'use strict';
+
 module.exports = function(sequelize, DataTypes) {
     var device = sequelize.define('device', {
         device_name: {
@@ -20,6 +21,7 @@ module.exports = function(sequelize, DataTypes) {
         device_serial: {
             type: DataTypes.STRING,
             allowNull: false,
+            unique: true,
 
         },
         device_address: {
@@ -54,6 +56,14 @@ module.exports = function(sequelize, DataTypes) {
                 onDelete: 'CASCADE',
             });
 
+            device.hasMany(models.device_value, {
+                foreignKey: 'deviceId', //has사용시는 상대방 ?? 자기자신도 가능 ?
+                onDelete: 'CASCADE',
+                allowNull: false,
+                foreignKeyConstraint: true
+            });
+
+
             device.hasOne(models.device_network, { //hosOne??
                 foreignKey: 'deviceId', //has사용시는 상대방 ?? 자기자신도 가능 ?
                 onDelete: 'CASCADE',
@@ -61,23 +71,23 @@ module.exports = function(sequelize, DataTypes) {
                 foreignKeyConstraint: true
             });
         }
-        //before hook
-    device.hook("beforeCreate", function(models, device) {
-        models.device_network.create({
+        /*
+            //before hook
+            device.hook("afterCreate", function(device) {
+                models.device_network.create({
+                    sn_type: '',
+                    sn_address: '',
+                    sn_serial: device.device_serial,
+                    deviceId: device.id,
+                    sn_apikey: device.device_apikey
+                }).then((result) => {
+                    console.log('created model device network !!');
+                }).catch((err) => {
+                    console.log('before create device failed error :::: ', err);
+                });
 
-            sn_type: '',
-            sn_address: '',
-            sn_serial: device.device_serial,
-            deviceId: device.id,
-            sn_apikey: device.device_apikey
-        }).then((result) => {
-            console.log('created model device network !!');
-        }).catch((err) => {
-            console.log('before create device failed error :::: ', err);
-        });
-
-    });
-
+            });
+        */
 
     return device;
 };

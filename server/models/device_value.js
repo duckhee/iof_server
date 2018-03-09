@@ -4,8 +4,8 @@ module.exports = function(sequelize, DataTypes) {
         sd_serial: {
             type: DataTypes.STRING,
             references: {
-                model: '',
-                key: ''
+                model: 'device',
+                key: 'device_serial'
             },
             allowNull: false,
             onDelete: 'CASCADE',
@@ -14,6 +14,15 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING,
             unique: true,
             allowNull: false,
+        },
+        deviceId: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'device',
+                key: 'id'
+            },
+            onDelete: 'CASCADE',
+            allowNull: false
         },
         sd_address: {
             type: DataTypes.STRING,
@@ -28,10 +37,30 @@ module.exports = function(sequelize, DataTypes) {
         classMethods: {
             associate: function(models) {
                 // associations can be defined here
-
+                models.device_value.belongsTo(models.device, {
+                    foreignKeyConstraint: true,
+                    foreignKey: 'id',
+                    allowNull: false,
+                    onDelete: 'CASCADE',
+                });
             }
         }
     });
+
+    device_value.associate = function(models) {
+        device_value.belongsTo(models.device, {
+            foreignKey: 'deviceId',
+            foreignKeyConstraint: true,
+            allowNull: false
+        });
+        /*
+        device_value.belongsTo(models.user, {
+            foreignKeyConstraint: true,
+            foreignKey: 'rwriter',
+            allowNull: false
+        });
+        */
+    }
     return device_value;
 };
 
