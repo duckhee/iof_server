@@ -159,9 +159,16 @@ router.post('/proccess/list', function(req, res, next) {
     next();
 });
 
+//detail device get middleware router
+router.get('/detail', function(req, res, next) {
+    console.log('middleware router !!! detail ');
+    next();
+});
+
 //detail page get router
 router.get('/detail', function(req, res, next) {
-
+    var query_device_id = req.query.id || req.body.id || req.params.id || req.param.id;
+    console.log('get id ::::: ', query_device_id);
     res.render('device/detailPage');
 });
 
