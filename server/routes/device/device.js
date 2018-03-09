@@ -83,7 +83,7 @@ router.post('/process/registe', function(req, res, next) {
                     console.log('network insert error ::::: ', err);
                     res.status(404);
                 } else if (row) {
-                    console.log('succes');
+                    console.log('success');
                     res.redirect('/device/list');
                 } else {
                     console.log('null');
@@ -101,11 +101,21 @@ router.post('/process/registe', function(req, res, next) {
 //router device list set middleware
 router.get('/list', function(req, res, next) {
     console.log('testing !! middleware');
+    var user_info = { id: 'fain9301' };
+    user_controller.find_info(user_info, function(err, result) {
+        if (err) {
+            console.log('device list middle ware error ::::::: ', err);
+            next(err);
+        } else {
+            console.log('get user info success device list router get :::: ', result.apikey);
+            req.query.apikey = result.apikey;
+            next();
+        }
+    });
+    //req.query.apikey = 'DQ91h8BGCTLizop'; // set and send apikey next router gasan
+    //req.query.apikey = '9UFVHr1HIvMmWOC'; //mac
 
-
-    req.query.apikey = 'DQ91h8BGCTLizop'; // set and send apikey next router 
-
-    next();
+    //next();
 
 
 })
