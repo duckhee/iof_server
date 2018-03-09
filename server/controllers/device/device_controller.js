@@ -47,7 +47,7 @@ exports.create_device = function(device_info, callback) {
         where: {
 
         },
-        defualts: {
+        defaults: {
 
         }
     }).then(function(device, created) {

@@ -7,18 +7,19 @@ var device = require('../../models/device');
 exports.checking_insert = function(data_info, callback) {
     models.device.findOne({
         where: {
-
+            device_serial: data_info.serial
         }
     }).then((row) => {
         models.device_value.create({
-
+            sd_text: '',
+            sd_data: data_info.data_value,
         }).then((row) => {
-
+            callback(null, row);
         }).catch((err) => {
-
+            callback(err, null);
         });
     }).catch((err) => {
-
+        callback(err, null);
     });
 };
 
@@ -100,7 +101,7 @@ exports.list_value = function(data_info, callback) {
 exports.delete_value = function(data_info, callback) {
     models.device_value.destroy({
         where: {
-
+            sd_serial: data_info.serial
         }
     }).then(function(row) {
         callback(null, row);
