@@ -106,19 +106,15 @@ router.get('/list', function(req, res, next) {
         if (err) {
             console.log('device list middle ware error ::::::: ', err);
             next(err);
-        } else {
+        } else if (row) {
             console.log('get user info success device list router get :::: ', result.apikey);
             req.query.apikey = result.apikey;
             next();
+        } else {
+            res.redirect('/device/registe');
         }
     });
-    //req.query.apikey = 'DQ91h8BGCTLizop'; // set and send apikey next router gasan
-    //req.query.apikey = '9UFVHr1HIvMmWOC'; //mac
-
-    //next();
-
-
-})
+});
 
 
 //device list page get router
