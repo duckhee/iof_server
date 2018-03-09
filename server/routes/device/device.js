@@ -106,7 +106,7 @@ router.get('/list', function(req, res, next) {
         if (err) {
             console.log('device list middle ware error ::::::: ', err);
             next(err);
-        } else if (row) {
+        } else if (result) {
             console.log('get user info success device list router get :::: ', result.apikey);
             req.query.apikey = result.apikey;
             next();

@@ -22,13 +22,11 @@
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top">
                 <!-- Sidebar toggle button-->
-                 <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-                        <span class="sr-only">Toggle navigation</span>
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button"> <span class="sr-only">Toggle navigation</span>
                 </a>
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <!-- Tasks: style can be found in dropdown.less -->
-                        <!-- header nav 들어가는 부분 -->
                     </ul>
                 </div>
             </nav>
@@ -55,21 +53,21 @@
         </aside>
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-                <!-- Content Header (Page header) -->
-                 <section class="content-header">
-                    <h1>
-                        Device <small>serial num or name</small>
-                    </h1>
-                    <ol class="breadcrumb">
-                        <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-                        <li><i class="ffa fa-dshboard"></i><a href="/device/list">device</a></li>
-                        <li class="active"><a href="#">detail</a></li>
-                    </ol>
-                </section> 
-                <div class="content">
+            <section class="content-header">
+                <h1> Device
+                    <small>detail</small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+                    <li><i class="ffa fa-dshboard"></i><a href="/device/list">device</a></li>
+                    <li class="active"><a href="#">detail</a></li>
+                </ol>
+            </section>
+            <div class="content">
+                    <div class="row">
                     
-
-                      
+                    
+                    </div>    
                 </div>
             </div>
         <% include ../../partials/footer.ejs %>
@@ -81,7 +79,7 @@
             <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
     </div>
-    <% include ../../partials/footer_javascript_index.ejs %> 
-    
+    <% include ../../partials/footer_graph_javascript.ejs %>
+    <% include ../../partials/footer_javascript.ejs %>
   </body>
 </html>
