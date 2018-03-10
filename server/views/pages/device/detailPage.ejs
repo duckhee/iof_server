@@ -215,6 +215,21 @@ $(function(){
         $.ajax({
             type:"GET",
             url:"",
+            dataType:"json",
+            error:function(){
+                var ajax_data;
+                ajax_data = null;
+            },
+            success:function(data){
+
+            };
+        })
+    };
+
+    var get_textData = function(){
+        $.ajax({
+            type:"GET",
+            url:"",
             dtaType:"json",
             error:function(){
                 var ajax_data;
@@ -225,7 +240,7 @@ $(function(){
                 //ajax_data = JSON.stringify(data);
                 chart_data = data;
                 var get_data = chart_data;
-                
+
             }
         })
     }
