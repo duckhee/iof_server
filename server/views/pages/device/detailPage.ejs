@@ -143,6 +143,113 @@
   <script>
 $(function(){
 
+    function labelFormatter(label, series) {
+            return '<div style="font-size:13px; text-align:center; padding:2px; color: #fff; font-weight: 600;">' +
+            label +
+            "<br>" +
+            Math.round(series.percent) +
+            "%</div>";
+    }
+     //날짜에서 시간과분만 추출
+    function getDateFromJSON(str) {
+        var date = new Date(str);
+        var con_mindate = date.getMinutes();
+        if((0<= con_mindate && con_mindate  <= 15 )){
+            date.setMinutes(00);
+            return (date.getHours()) + ':0' + date.getMinutes();
+        } else if(( 45<= con_mindate && con_mindate<= 60))
+        {
+            var date_time = date.getHours();
+            date.setHours(date_time + 1);
+            date.setMinutes(00);
+            return (date.getHours()) + ':0' + date.getMinutes();
+        }else{
+            date.setMinutes(30);
+            return (date.getHours()) + ':' + date.getMinutes();
+        }  
+    }
+    //날짜에서 하루 빼기
+    function getMinusOneDate(str) {
+        var date = new Date(str);
+        return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + (date.getDate() - 1);
+    }
+    //날짜 형식 변경
+    function getFormatDate(date) {
+        var year = date.getFullYear(); //yyyy
+        var month = (1 + date.getMonth()); //M
+        var day = date.getDate(); //d
+        month = month >= 10 ? month : '0' + month; // month 두자리로 저장
+        day = day >= 10 ? day : '0' + day; //day 두자리로 저장
+        return year + '' + month + '' + day;
+    }
+    //시간말 추출
+    function getFormatDateHour(date) {
+        var hour = date.getHours(); //d
+        hour = hour >= 10 ? hour : '0' + hour; //day 두자리로 저장
+        return hour;
+    }
+
+    var data_chart = {
+        cnt:0,
+        chart:'',
+        init:function(data){
+            this.cnt = 1;
+            this.chart = $.plot("#line-chart", data, {
+                grid:{
+                    hoverable: true,
+                    borderColor: "#f3f3f3",
+                    borderWidth: 1,
+                    tickColor: "#f3f3f3"
+                },
+                series:{
+                    shadowSize:0,
+                    lines:{
+                        show:true,
+                    },
+                    points:{
+                        show:true,
+                    }
+                },
+                lines:{
+                    fill:false,
+                },
+                yaxis:{
+                    show:true,
+                },
+                xaxis:{
+                    //이 설정은 x축의 보여지는 것이 날짜 기준으로 하기 위해서이다.
+                    mode:"categories",
+                    show:true,
+                },
+                legedn:{
+                    show:true,
+                    noColumns:0,
+                    container:$("#line-chart")
+                }
+            });
+             //Initialize tooltip on hover
+            $('<div class="tooltip-inner" id="ec-chart-tooltip"></div>').css({
+                position: "absolute",
+                display: "none",
+                opacity: 0.8
+            }).appendTo("body");
+
+            $("#line-chart").bind("plothover", function(event, pos, item) {
+                                
+                if (item) {
+                    var x = item.datapoint[0].toFixed(2),
+                    y = item.datapoint[1].toFixed(2);
+                    //$("#sensor-chart-tooltip").html(item.series.label + " of " + x + " = " + y)
+                    $("#line-chart-tooltip").html(item.series.label + " legend : " + y).css({
+                        top: item.pageY + 5,
+                        left: item.pageX + 5
+                    }).fadeIn(200);
+                } else {
+                    $("#line-chart-tooltip").hide();
+                }
+            });           
+        }
+    };
     /*
      * LINE CHART
      * ----------
