@@ -100,7 +100,9 @@
                             </div>
                             <!-- box header end -->
                             <div class="box-body">
-                                <div id="show_image"></div>
+                                <div id="show_image">
+                                    <img style="height:300px"></img>
+                                </div>
                             </div>  
                             <!-- box body end -->
                         </div>
@@ -209,7 +211,31 @@ $(function(){
     });
     /* END LINE CHART */
 
-});
+    var get_image = function(){
+        $.ajax({
+            type:"GET",
+            url:"",
+            dataType:"json",
+            error:function(){
+                var ajax_path;
+                ajax_path = "/images/failed/failed.jpg";
+                
+                $("#show_image").find("img").attr("src", ajax_path);
+            },
+            success:function(data){
+                var ajax_data = data;
+                var img_path;
+                var d = new Data(ajax_data.createdAt);
+                var dateStr = d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes();
+                if (ajax_data.createdAt == "") dateStr = "";
+                img_path = '/images/' + ajax_data.si_serial + '/' + ajax_data.si_path + '/' + ajax_data.si_filename;
+                $("#camera-info").find("img").attr("src", img_path);
+            }
+        });
+    }
+    get_image();
+    setInterval("get_image()", 1000 * 60*30);
 
+});
   </script>
 </html>
