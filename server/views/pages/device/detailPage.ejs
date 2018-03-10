@@ -211,6 +211,25 @@ $(function(){
     });
     /* END LINE CHART */
 
+    var get_Data = function(){
+        $.ajax({
+            type:"GET",
+            url:"",
+            dtaType:"json",
+            error:function(){
+                var ajax_data;
+                ajax_data = null;
+            },
+            success:function(data){
+                var chart_data;
+                //ajax_data = JSON.stringify(data);
+                chart_data = data;
+                var get_data = chart_data;
+                
+            }
+        })
+    }
+
     var get_image = function(){
         $.ajax({
             type:"GET",
