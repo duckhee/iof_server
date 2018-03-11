@@ -34,28 +34,31 @@ exports.findinsert_image = function(camera_info, callback) {
         defaults: {
 
         }
-    }).spread(function(image, created) {
-        if(created){
+    }).spread((result, created) => {
+        if (created) {
+            console.log('testing created :::::', created);
             callback(null, null, created);
-        }else if(image){
-            callback(null, image.dataValues, null);
-        }else {
-            callback(null, null, null);
+        } else {
+            console.log(result);
+            callback(null, result.dataValues, null);
         }
-    }).catch(function(err) {
+    }).catch((err) => {
         callback(err, null, null);
     });
-};
+}
 
 //find carmera
-exports.find_image = function(camera_info, callback){
+exports.find_image = function(camera_info, callback) {
     models.camera_image.find({
-        where:{
+        where: {
 
-        }
-    }).then(function(row){
+        },
+        order: [
+            ['createdAt', 'DESC']
+        ]
+    }).then((row) => {
         callback(null, row);
-    }).catch(function(err){
+    }).catch((err) => {
         callback(err, null);
     });
 };
@@ -80,14 +83,14 @@ exports.list_limit_image = function(camera_info, callback) {
 };
 
 //delete carmera image
-exports.delete_image = function(camera_info, callback){
+exports.delete_image = function(camera_info, callback) {
     models.camera_image.destroy({
-        where:{
+        where: {
 
         }
-    }).then(function(row){
+    }).then(function(row) {
         callback(null, row);
-    }).catch(function(err){
+    }).catch(function(err) {
         callback(err, null);
     })
-}
+};
