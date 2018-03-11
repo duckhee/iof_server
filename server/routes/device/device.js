@@ -162,14 +162,29 @@ router.post('/proccess/list', function(req, res, next) {
 //detail device get middleware router
 router.get('/detail', function(req, res, next) {
     console.log('middleware router !!! detail ');
-    next();
+    var device_getid = req.query.id || req.body.id || req.params.id || req.param.id;
+    var get_device_serial = { id: device_getid };;
+    device_controller.device_info(get_device_serial, function(err, result) {
+        if (err) {
+            console.log('device detail error ::::: ', err);
+            next(err);
+        } else {
+            console.log('device detail data :::::: ', result);
+            var device_serial = result.device_serial;
+            req.query.serial = device_serial;
+            next();
+        }
+    });
+
 });
 
 //detail page get router
 router.get('/detail', function(req, res, next) {
     var query_device_id = req.query.id || req.body.id || req.params.id || req.param.id;
+    var device_serial = req.query.serial;
     console.log('get id ::::: ', query_device_id);
-    res.render('device/detailPage');
+    console.log('device serial :::::: ', device_serial);
+    res.render('device/detailPage', { serial: device_serial });
 });
 
 //detail page post router

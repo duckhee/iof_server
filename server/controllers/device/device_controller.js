@@ -196,3 +196,16 @@ exports.check_device = function(device_info, callback) {
         callback(err, null);
     });
 };
+
+//export device info check by id
+exports.device_info = function(device_info, callback) {
+    models.device.find({
+        where: {
+            id: device_info.id
+        }
+    }).then((row) => {
+        callback(null, row);
+    }).catch((err) => {
+        callback(err, null);
+    });
+};
