@@ -130,8 +130,7 @@ router.get('/list', function(req, res, next) {
             if (err) {
                 console.log('device list router error  : ', err);
                 next(err);
-            } else {
-
+            } else if (rows) {
                 for (var i = 0; i < rows.length; i++) {
                     if (rows[i].device_network) {
 
@@ -142,7 +141,15 @@ router.get('/list', function(req, res, next) {
                 res.render('device/listPage', {
                     devices: rows
                 });
+
+            } else {
+                var rows = null;
+                res.render('device/listPage', {
+                    devices: rows
+                })
             }
+
+
 
         });
     } else {

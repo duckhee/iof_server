@@ -8,10 +8,12 @@ var session = require('express-session');
 var passport = require('passport');
 var bcrypt = require('bcrypt-nodejs');
 var flash = require('connect-flash');
+
 var index = require('./server/routes/index');
 var user = require('./server/routes/users/user');
 var device = require('./server/routes/device/device');
 var boarder = require('./server/routes/boarder/boarder');
+var data = require('./server/routes/device/data/data');
 
 //passport testing
 //var custom_passport = require('./server/config/passport');
@@ -113,6 +115,8 @@ app.use('/user', user);
 app.use('/device', device);
 //boarder router
 app.use('/boards', boarder);
+//get data or insert data router
+app.use('/data', data);
 
 
 // catch 404 and forward to error handler

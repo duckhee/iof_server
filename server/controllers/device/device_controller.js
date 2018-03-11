@@ -68,10 +68,10 @@ exports.create_device = function(device_info, callback) {
 
 //insert before data
 exports.insert_before = function(device_info, callback) {
-    models.defualts.find({
+    models.device.find({
         where: {
-            device_serial: device_info.serial,
-            device_apieky: device_info.apikey
+            device_serial: device_info.apikey
+
         }
     }).then((row) => {
         callback(null, row);
@@ -84,8 +84,8 @@ exports.insert_before = function(device_info, callback) {
 exports.find_device = function(device_info, callback) {
     models.device.find({
         where: {
-            device_serial: device_info.serial,
-            device_apikey: device_info.apikey,
+            device_serial: device_info.apikey,
+
         }
     }).then(function(row) {
         callback(null, row);

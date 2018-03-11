@@ -1,7 +1,7 @@
 var models = require('../../models/index');
 var device_network = require('../../models/device_network');
 var device = require('../../models/device');
-
+var util_make = require('../../util/util');
 
 //report checking network admin or user
 exports.checking_connection_admin = function(callback) {
@@ -10,6 +10,7 @@ exports.checking_connection_admin = function(callback) {
             ['createdAt', 'DESC']
         ]
     }).then((result) => {
+
         var loopIndex = 0;
         for (let device of result) {
             models.device.find({
@@ -49,6 +50,11 @@ exports.check_network = function(network_info, callback) {
             ['createdAt', 'DESC']
         ]
     }).then((result) => {
+        console.log('testing ::::: ', result);
+        if (util_make.isEmpty(result) == true) {
+            console.log(util_make.isEmpty(result));
+            callback(null, null);
+        }
         var loopIndex = 0;
         for (let device of result) {
             models.device.find({
@@ -86,14 +92,12 @@ exports.check_network = function(network_info, callback) {
 //export update status
 exports.update_inactstatus = function(network_info, callback) {
     models.device.find({
-        device_apikey: network_info.apikey,
         device_serial: network_info.serial
     }).then((result) => {
         models.device_network.update({
             sn_status: 'inactive'
         }, {
             where: {
-                sn_apikey: network_info.apikey,
                 sn_serial: network_info.serial
             }
         }).then((result2) => {
@@ -109,14 +113,12 @@ exports.update_inactstatus = function(network_info, callback) {
 //export update status
 exports.update_actstatus = function(network_info, callback) {
     models.device.find({
-        device_apikey: network_info.apikey,
         device_serial: network_info.serial
     }).then((result) => {
         models.device_network.update({
             sn_status: 'active'
         }, {
             where: {
-                sn_apikey: network_info.apikey,
                 sn_serial: network_info.serial
             }
         }).then((result2) => {
