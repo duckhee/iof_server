@@ -23,14 +23,14 @@ var db_config = {
 var pool = mysql.createPool(db_config);
 
 
-//var status_change = function(data_info, callback){
+var status_change = function(data_info, callback){
     console.log('testing');
     pool.getConnection((err, conn)=>{
         if(err){
             console.log('connectiong pool error ::::: ', err);
             conn.release();
-            process.exit();
-            //callback(err, null);
+            //process.exit();
+            callback(err, null);
         }else{
             var current_time = new Date();
             var serial = "dxp2I9QRb3OwRevMF0Fx";
@@ -39,18 +39,27 @@ var pool = mysql.createPool(db_config);
                 if(err){
                     console.log('query error :::::::: ', err);
                     conn.release();
-                    process.exit();
-                   // callback(err, null);
+                    //process.exit();
+                    callback(err, null);
                 }else{
                     console.log('update data :::::: ', result);
                     conn.release();
-                    process.exit();
-                    //callback(null, result);
+                    //process.exit();
+                    callback(null, result);
                 }
             })
         }
     })
-//};
+};
+
+var get_status = function(callback){
+    pool.getConnection((err, conn)=>{
+        if(err){
+            console.log('get status connection error :::::::: ', err);
+            
+        }
+    })
+}
 
 /*
 
