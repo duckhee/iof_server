@@ -105,7 +105,10 @@ router.post('/process/login', function(req, res, next) {
     console.log('login post router');
     var userid = req.query.email || req.body.email || req.params.email || req.param.email;
     var userpw = req.query.password || req.body.password || req.params.password || req.param.password;
-
+    
+    //var testing=bcrypt.hashSync(userpw, bcrypt.genSaltSync(10), null);
+    //console.log(testing);
+    
     var user_info = {
         user_id: userid,
         user_password: userpw
@@ -116,8 +119,10 @@ router.post('/process/login', function(req, res, next) {
         if (err) {
             res.redirect('/user/login');
         } else if (row) {
+            req.session.userid = row.user_id;
             res.redirect('/');
         } else {
+            console.log('null');
             res.redirect('/user/login');
         }
     });
@@ -133,5 +138,14 @@ router.get('/profile', function(req, res, next) {
 router.post('/process/profile', function(req, res, next) {
     next();
 });
+
+//router logout
+router.get('/logout', function(req, res, next){
+    console.log('logout router get');
+    req.session.destroy(function(){
+        req.session;
+    });
+     res.redirect('/');
+})
 
 module.exports = router;

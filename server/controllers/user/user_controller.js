@@ -5,6 +5,7 @@ var bcrypt = require('bcrypt-nodejs');
 
 //make user
 exports.create_user = function(user_info, callback) {
+    
     models.user.findOrCreate({
         where: {
             user_id: user_info.user_id,
@@ -110,8 +111,8 @@ exports.find_user = function(user_info, callback) {
             user_id: user_info.user_id,
             user_password: user_info.user_password
         }
-    }).then(function(row) {
-        callback(null, row);
+    }).then(function(user) {
+        callback(null, user);
     }).catch(function(err) {
         callback(err, null);
     });
