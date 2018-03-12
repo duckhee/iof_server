@@ -66,12 +66,17 @@ router.post('/process/registe', function(req, res, next) {
     console.log('device apikey :::: ', apikey);
     console.log('device serial :::: ', serial);
     console.log('device address :::: ', address);
+
     device_controller.insert_device(device_info, function(err, row) {
         if (err) {
+            
             console.log('registe device error ::::: ', err);
+
             next(err);
         } else if (row) {
+            
             console.log('success ::::::', row.id);
+            
             var network_info = {
                 device_serial: row.device_serial,
                 device_apikey: row.device_apikey,
@@ -80,18 +85,26 @@ router.post('/process/registe', function(req, res, next) {
             };
             network_controller.insert_network(network_info, function(err, row) {
                 if (err) {
+                 
                     console.log('network insert error ::::: ', err);
+                 
                     res.status(404);
                 } else if (row) {
+                 
                     console.log('success');
+                 
                     res.redirect('/device/list');
                 } else {
+                 
                     console.log('null');
+                 
                     res.status(500);
                 }
             });
         } else {
+          
             console.log('null');
+          
             res.status(500);
         }
     });
