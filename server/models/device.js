@@ -56,13 +56,13 @@ module.exports = function(sequelize, DataTypes) {
                     foreignKeyConstraint: true
                 });
 
-                models.device.hasMany(models.carmera_image, {
+                models.device.hasMany(models.camera_image, {
                     foreignKey: 'deviceId', //has사용시는 상대방 ?? 자기자신도 가능 ?
                     onDelete: 'CASCADE',
                     allowNull: false,
                     foreignKeyConstraint: true
                 });
-                models.device.hasMany(models.carmera_image, {
+                models.device.hasMany(models.camera_image, {
                     foreignKey: 'si_serial', //has사용시는 상대방 ?? 자기자신도 가능 ?
                     onDelete: 'CASCADE',
                     allowNull: false,
@@ -96,14 +96,14 @@ module.exports = function(sequelize, DataTypes) {
             });
         
             //why error ??/
-            device.hasMany(models.carmera_image, {
+            device.hasMany(models.camera_image, {
                 foreignKey: 'deviceId', //has사용시는 상대방 ?? 자기자신도 가능 ?
                 onDelete: 'CASCADE',
                 allowNull: false,
                 foreignKeyConstraint: true
             });
             
-            device.hasMany(models.carmera_image, {
+            device.hasMany(models.camera_image, {
                 foreignKey: 'si_serial', //has사용시는 상대방 ?? 자기자신도 가능 ?
                 onDelete: 'CASCADE',
                 allowNull: false,
