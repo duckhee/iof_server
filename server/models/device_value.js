@@ -29,7 +29,7 @@ module.exports = function(sequelize, DataTypes) {
         },
         sd_text: {
             type: DataTypes.TEXT,
-            
+            defaultValue:''
         },
         sd_data: {
             type: DataTypes.STRING,
