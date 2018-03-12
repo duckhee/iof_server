@@ -18,7 +18,8 @@ module.exports = {
                 onDelete: 'CASCADE',
             },
             sd_text: {
-                type: Sequelize.TEXT
+                type: Sequelize.TEXT,
+                defaultValue:''
             },
             sd_serial: {
                 type: Sequelize.STRING,

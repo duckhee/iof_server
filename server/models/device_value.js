@@ -28,7 +28,8 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING,
         },
         sd_text: {
-            type: DataTypes.TEXT
+            type: DataTypes.TEXT,
+            
         },
         sd_data: {
             type: DataTypes.STRING,
