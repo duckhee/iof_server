@@ -379,7 +379,7 @@ $(function(){
     var get_Data = function(){
         $.ajax({
             type:"GET",
-            url:"/data/ajaxget?serial=",
+            url:"/data/ajaxget?serial=<%=serial%>",
             dataType:"json",
             error:function(){
                 var ajax_data;
@@ -413,7 +413,7 @@ $(function(){
     var get_image = function(){
         $.ajax({
             type:"GET",
-            url:"",
+            url:"/data/ajaximage?serial=<%=serial%>",
             dataType:"json",
             error:function(){
                 var ajax_path;

@@ -89,6 +89,7 @@ router.post('/process/registe', function(req, res, next) {
                     console.log('network insert error ::::: ', err);
                  
                     res.status(404);
+
                 } else if (row) {
                  
                     console.log('success');
@@ -117,10 +118,14 @@ router.get('/list', function(req, res, next) {
     var user_info = { id: 'fain9301' };
     user_controller.find_info(user_info, function(err, result) {
         if (err) {
+
             console.log('device list middle ware error ::::::: ', err);
+
             next(err);
         } else if (result) {
+
             console.log('get user info success device list router get :::: ', result.apikey);
+
             req.query.apikey = result.apikey;
             next();
         } else {
@@ -132,16 +137,22 @@ router.get('/list', function(req, res, next) {
 
 //device list page get router
 router.get('/list', function(req, res, next) {
+
     console.log('device list get router');
+
     var apikey = req.query.apikey || req.body.apikey || req.params.apikey || req.param.apikey;
     var apikey_info = {
         apikey: apikey
     };
     if (apikey) {
+
         console.log('apikey :::: ', apikey);
+
         network_controller.check_network(apikey_info, function(err, rows) {
             if (err) {
+
                 console.log('device list router error  : ', err);
+
                 next(err);
             } else if (rows) {
                 for (var i = 0; i < rows.length; i++) {
@@ -172,7 +183,9 @@ router.get('/list', function(req, res, next) {
 
 //device list page post router
 router.post('/proccess/list', function(req, res, next) {
+
     console.log('device list post router');
+
     next();
 });
 
@@ -183,7 +196,9 @@ router.get('/detail', function(req, res, next) {
     var get_device_serial = { id: device_getid };
     device_controller.device_info(get_device_serial, function(err, result) {
         if (err) {
+
             console.log('device detail error ::::: ', err);
+            
             next(err);
         } else {
             console.log('device detail data :::::: ', result);

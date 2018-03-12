@@ -156,14 +156,25 @@ router.post('/ajaxget', function(req, res, next) {
 
 //router ajax image get
 router.get('/listajaximage', function(req, res, next){
+    
+    console.log('list image ajax router');
+
     next();
 });
 
 //router ajax image one 
 router.get('/ajaximage', function(req, res, next){
+    var get_serial = req.query.serial || req.body.serial || req.params.serial || req.param.serial;
+
+    console.log('get serial :::::::: ', get_serial);
+    
     next();
 });
 
-//router ajax 
+//router ajax  text data
+router.get('/ajaxtext', function(req, res, next){
+    console.log('text data router');
+    next();
+})
 
 module.exports = router;
