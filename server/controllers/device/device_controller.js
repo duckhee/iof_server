@@ -114,7 +114,7 @@ exports.list_device = function(device_info, callback) {
 exports.delete_device = function(device_info, callback) {
     models.device.destroy({
         where: {
-
+            device_serial:device_info.serial
         }
     }).then(function(row) {
         callback(null, row);
@@ -189,7 +189,7 @@ exports.check_device = function(device_info, callback) {
         where: {
             device_apikey: device_info.apikey
         },
-        attributes: ['id']
+        
     }).then((row) => {
         callback(null, row);
     }).catch((err) => {

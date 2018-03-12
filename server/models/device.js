@@ -5,6 +5,17 @@ module.exports = function(sequelize, DataTypes) {
         device_name: {
             type: DataTypes.STRING
         },
+        /*
+        userId:{
+                type: DataTypes.INTEGER,
+                references: {
+                    model: 'user',
+                    key: 'id'
+                },
+                allowNull: false,
+                onDelete: 'CASCADE'
+        },
+        */
         device_apikey: {
             type: DataTypes.STRING,
             references: {
@@ -31,14 +42,14 @@ module.exports = function(sequelize, DataTypes) {
         classMethods: {
             associate: function(models) {
                 // associations can be defined here
-                device.belongsTo(models.user, {
+                models.device.belongsTo(models.user, {
                     foreignKeyConstraint: true,
                     foreignKey: 'device_apikey',
                     allowNull: false,
                     onDelete: 'CASCADE',
                 });
 
-                device.hasMany(models.device_network, { //hosOne??
+                models.device.hasMany(models.device_network, { //hosOne??
                     foreignKey: 'deviceId', //has사용시는 상대방 ?? 자기자신도 가능 ?
                     onDelete: 'CASCADE',
                     allowNull: false,

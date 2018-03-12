@@ -21,7 +21,8 @@ module.exports = {
                 type: Sequelize.TEXT
             },
             sd_serial: {
-                type: Sequelize.STRING
+                type: Sequelize.STRING,
+                allowNull:false,
             },
             sd_apikey: {
                 type: Sequelize.STRING,

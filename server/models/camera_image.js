@@ -3,7 +3,21 @@ module.exports = function(sequelize, DataTypes) {
     var camera_image = sequelize.define('camera_image', {
         si_serial: {
             type: DataTypes.STRING,
-
+            references: {
+                model: 'device',
+                key: 'device_serial'
+            },
+            allowNull: false,
+            onDelete: 'CASCADE'
+        },
+        deviceId: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'device',
+                key: 'id'
+            },
+            allowNull: false,
+            onDelete: 'CASCADE'
         },
         si_apikey: {
             type: DataTypes.STRING,
@@ -24,6 +38,7 @@ module.exports = function(sequelize, DataTypes) {
         classMethods: {
             associate: function(models) {
                 // associations can be defined here
+                
 
             }
         }

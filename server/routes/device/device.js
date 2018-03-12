@@ -146,17 +146,14 @@ router.get('/list', function(req, res, next) {
                 var rows = null;
                 res.render('device/listPage', {
                     devices: rows
-                })
+                });
             }
-
-
-
         });
     } else {
         var rows = null;
         res.render('device/listPage', {
             devices: rows
-        })
+        });
     }
 });
 
@@ -170,7 +167,7 @@ router.post('/proccess/list', function(req, res, next) {
 router.get('/detail', function(req, res, next) {
     console.log('middleware router !!! detail ');
     var device_getid = req.query.id || req.body.id || req.params.id || req.param.id;
-    var get_device_serial = { id: device_getid };;
+    var get_device_serial = { id: device_getid };
     device_controller.device_info(get_device_serial, function(err, result) {
         if (err) {
             console.log('device detail error ::::: ', err);
@@ -199,9 +196,16 @@ router.post('/process/detail', function(req, res, next) {
     next();
 });
 
+//modfiy page get middleware router
+router.get('/modify', function(req, res, next){
+    console.log('modify middleware router');
+    next();
+});
+
+
 //modfiy page get router
 router.get('/modfiy', function(req, res, next) {
-    res.render('device/modifyPage');
+    next();
 });
 
 //modfiy page post router

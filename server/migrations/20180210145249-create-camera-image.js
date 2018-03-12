@@ -11,10 +11,21 @@ module.exports = {
             si_serial: {
                 type: Sequelize.STRING
             },
+            deviceId:{
+                type:Sequelize.INTEGER,
+                references: {
+                    model: 'devices',
+                    key: 'id'
+                },
+                onDelete: 'CASCADE',
+                allowNull: false,
+            },
+            /*
             si_apikey: {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
+            */
             si_path: {
                 type: Sequelize.STRING
             },

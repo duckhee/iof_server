@@ -87,6 +87,22 @@ exports.list10_value = function(data_info, callback) {
     });
 };
 
+//testing serial limit list
+exports.serial10_list = function(data_info, callback){
+    models.device_value.findAll({
+        where:{
+            device_serial:data_info.serial
+        },
+        order:[
+            ['createdAt', 'DESC']
+        ]
+    }).then((result)=>{
+        callback(null, result);
+    }).catch((err)=>{
+        callback(err, null);
+    })
+}
+
 //find value list not limit
 exports.list_value = function(data_info, callback) {
     models.device_value.findAll({
@@ -96,6 +112,7 @@ exports.list_value = function(data_info, callback) {
         order: [
             ['createdAt', 'DESC']
         ],
+        limit:10,
     }).then(function(rows) {
         callback(null, rows);
     }).catch(function(err) {
