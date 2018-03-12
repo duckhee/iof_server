@@ -40,6 +40,11 @@ module.exports = function(sequelize, DataTypes) {
             }
         }
     });
+
+    device_setting.associate = function(models){
+
+    }
+    
     return device_setting;
 };
 
