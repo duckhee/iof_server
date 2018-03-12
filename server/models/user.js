@@ -7,7 +7,17 @@ module.exports = function(sequelize, DataTypes) {
             user_id: {
                 type: DataTypes.STRING,
                 unique: true,
-                allowNull: false
+                allowNull: false 
+                /*
+                validate: {
+                    notNull: true,
+                    notNull(val) {
+                      if (!val) {
+                        throw new Error('이름이 입력되지 않았습니다.');
+                      }
+                    }
+                }
+                */
             },
             user_password: {
                 type: DataTypes.STRING,
@@ -65,25 +75,42 @@ module.exports = function(sequelize, DataTypes) {
                 }
             },
             */
+           
             classMethods: {
+                /*
+                validPassword: function(password, passwd, callback) {
+                    console.log('validPassword password', password);
+                    console.log('validPassword passwd', passwd);
+                    bcrypt.compare(password, passwd, function(err, isMatch) {
+                      console.log('isMatch', isMatch);
+                      if (isMatch) {
+                        console.log('found match');
+                        return callback(null, true);
+                      } else {
+                        console.log('returning false');
+                        return callback(null, false);
+                      }
+                    });
+                  },
+                  */
                 associate: function(models) {
                     // associations can be defined here
 
-                    user.hasMany(models.device_network, {
+                    models.user.hasMany(models.device_network, {
                         foreignKey: 'apikey',
                         onDelete: 'CASCADE'
                     });
 
-                    user.hasMany(models.tbl_board, {
+                    models.user.hasMany(models.tbl_board, {
                         foreignKey: 'user_id',
                         onDelete: 'CASCADE'
                     });
 
-                    user.hasMany(models.tbl_reply, {
+                    models.user.hasMany(models.tbl_reply, {
                         foreignKey: 'user_id',
                         onDelete: 'CASCADE'
                     });
-                    user.hasMany(models.device, {
+                    models.user.hasMany(models.device, {
                         foreignKey: 'apikey',
                         onDelete: 'CASCADE'
                     });
@@ -111,23 +138,39 @@ module.exports = function(sequelize, DataTypes) {
     );
     /*
     user.beforeCreate(function(model, done){
-        models.user.generatehash(model.user.user_password, function(err, encrypted){
+        model.user.generatehash(model.user.user_password, function(err, encrypted){
             if(err)
             {
                 return done(err);
             }
-            models.user.user_password = encrypted;
+            model.user.user_password = encrypted;
             done();
         });
-    }); 
-    return user;
+    });
+    
+    user.beforeFind(function(model, done){
+        console.log('testing before find hook >>>>>>>>>>>>>', model);
+        done();
+    })
     */
+   // return user;
+    
     //insert before
-
+    /*
     user.hook("beforeCreate", function(user) {
         user.user_password = bcrypt.hashSync(user.user_password, bcrypt.genSaltSync(10), null);
         console.log('before Create hook >>>>>>>>', user.user_password);
     });
+    
+    user.hook("beforeFind", function(user){
+        console.log('insert user password ::::::::::: ',user.user_password);
+        //user.user_password = bcrypt.compareSync(user.user_password,bcrypt.genSaltSync(10));
+        console.log('find before >>>>>>>>>>>>>>>>>>>', user.user_password);
+     
+    });
+
+    */
+
     return user;
 
 };

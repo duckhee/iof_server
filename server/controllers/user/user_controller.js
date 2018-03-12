@@ -1,5 +1,7 @@
 var models = require('../../models/index');
 var user = require('../../models/user');
+var bcrypt = require('bcrypt-nodejs');
+
 
 //make user
 exports.create_user = function(user_info, callback) {
@@ -169,10 +171,11 @@ exports.delete_user = function(user_info, callback) {
 
 //user login controller
 exports.login = function(user_info, callback) {
+    
     models.user.findOne({
         where: {
-            user_email: user_info.user_email,
-            user_password: user_info.user_pw
+            user_email: user_info.user_id,
+            user_password: user_info.user_password
         }
     }).then(row => {
         console.log('login row testing : ', row);

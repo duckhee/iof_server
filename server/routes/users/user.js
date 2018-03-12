@@ -103,13 +103,14 @@ router.get('/login', function(req, res, next) {
 //router login post process
 router.post('/process/login', function(req, res, next) {
     console.log('login post router');
-    var userid = req.query.id || req.body.id || req.params.id || req.param.id;
-    var userpw = req.query.pw || req.body.pw || req.params.pw || req.param.pw;
+    var userid = req.query.email || req.body.email || req.params.email || req.param.email;
+    var userpw = req.query.password || req.body.password || req.params.password || req.param.password;
 
     var user_info = {
-        user_email: userid,
-        user_pw: userpw
+        user_id: userid,
+        user_password: userpw
     };
+    console.log('login user info ::::::::::::: ',user_info);
 
     user_controller.login(user_info, function(err, row) {
         if (err) {
