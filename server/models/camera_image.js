@@ -39,16 +39,39 @@ module.exports = function(sequelize, DataTypes) {
             associate: function(models) {
                 // associations can be defined here
                 
-                //models.camera_image
+                models.camera_image.belongsTo(models.device, {
+                    foreignKeyConstraint: true,
+                    foreignKey: 'id',
+                    allowNull: false,
+                    onDelete: 'CASCADE',
+                });
+                models.camera_image.belongsTo(models.device, {
+                    foreignKeyConstraint: true,
+                    foreignKey: 'device_serial',
+                    allowNull: false,
+                    onDelete: 'CASCADE',
+                });
 
             }
         }   
     });
 
     camera_image.associate = function(models){
-
+        camera_image.belongsTo(models.device, {
+            foreignKeyConstraint: true,
+            foreignKey: 'id',
+            allowNull: false,
+            onDelete: 'CASCADE',
+        });
+        
+        camera_image.belongsTo(models.device, {
+            foreignKeyConstraint: true,
+            foreignKey: 'device_serial',
+            allowNull: false,
+            onDelete: 'CASCADE',
+        });
     }
-    
+
     return camera_image;
 };
 

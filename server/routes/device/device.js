@@ -205,12 +205,25 @@ router.get('/modify', function(req, res, next){
 
 //modfiy page get router
 router.get('/modfiy', function(req, res, next) {
+    console.log('device modfiy get router');
     next();
 });
 
 //modfiy page post router
 router.get('/process/modfiy', function(req, res, next) {
+    console.log('device modfiy post router');
     next();
 });
 
+//setting device get router
+router.get('/setting', function(req, res, next){
+    console.log('device setting get router');
+    next();
+});
+
+//setting device post router
+router.post('/setting', function(req, res, next){
+   console.log('device setting post router');
+    next(); 
+})
 module.exports = router;
