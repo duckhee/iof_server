@@ -3,6 +3,24 @@ var device_network = require('../../models/device_network');
 var device = require('../../models/device');
 var util_make = require('../../util/util');
 
+
+//report checking network
+exports.checking = function(callback){
+    models.device_network.findAll({
+        
+        order:[
+            ['createdAt','DESC']
+        ]
+    }).then((result)=>{
+        console.log('testing ::::: ', result);
+        callback(null, result);
+    }).catch((err)=>{
+        console.log('error ::::: ', err);
+        callback(err, null);
+    });
+};
+
+
 //report checking network admin or user
 exports.checking_connection_admin = function(callback) {
     models.device.findAll({
@@ -10,7 +28,10 @@ exports.checking_connection_admin = function(callback) {
             ['createdAt', 'DESC']
         ]
     }).then((result) => {
-
+        if (util_make.isEmpty(result) == true) {
+            console.log(util_make.isEmpty(result));
+            callback(null, null);
+        }
         var loopIndex = 0;
         for (let device of result) {
             models.device.find({
@@ -77,14 +98,18 @@ exports.check_network = function(network_info, callback) {
                 }
                 loopIndex++;
                 if (loopIndex === result.length) {
+
                     //console.log('get network status and device ::::::::: ', result);
+
                     callback(null, result);
                 }
             }).catch((err) => {
+
                 callback(err, null);
             });
         }
     }).catch((err) => {
+        
         callback(err, null);
     });
 };
@@ -92,7 +117,10 @@ exports.check_network = function(network_info, callback) {
 //export update status
 exports.update_inactstatus = function(network_info, callback) {
     models.device.find({
-        device_serial: network_info.serial
+        //device_serial: network_info.serial
+        where:{
+            device_serial: network_info.serial
+        }
     }).then((result) => {
         models.device_network.update({
             sn_status: 'inactive'
@@ -113,7 +141,10 @@ exports.update_inactstatus = function(network_info, callback) {
 //export update status
 exports.update_actstatus = function(network_info, callback) {
     models.device.find({
-        device_serial: network_info.serial
+        where:{
+            device_serial: network_info.serial
+        }
+        //device_serial: network_info.serial
     }).then((result) => {
         models.device_network.update({
             sn_status: 'active'
