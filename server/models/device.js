@@ -94,14 +94,15 @@ module.exports = function(sequelize, DataTypes) {
                 allowNull: false,
                 foreignKeyConstraint: true
             });
-
+        }
+            /*
             device.hasMany(models.carmera_image, {
                 foreignKey: 'deviceId', //has사용시는 상대방 ?? 자기자신도 가능 ?
                 onDelete: 'CASCADE',
                 allowNull: false,
                 foreignKeyConstraint: true
             });
-
+            
             device.hasMany(models.carmera_image, {
                 foreignKey: 'si_serial', //has사용시는 상대방 ?? 자기자신도 가능 ?
                 onDelete: 'CASCADE',
@@ -109,6 +110,7 @@ module.exports = function(sequelize, DataTypes) {
                 foreignKeyConstraint: true
             });
         }
+        */
         /*
             //before hook
             device.hook("afterCreate", function(device) {
