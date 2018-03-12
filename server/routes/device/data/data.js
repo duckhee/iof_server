@@ -35,12 +35,12 @@ router.get('/insert', function(req, res, next) {
             }
             data_controller.insert_value(data_info, function(err, row) {
                 if (err) {
-                    res.status(404);
+                    res.json('failed');
                 } else {
                     network_controller.update_actstatus(data_info, function(err, result) {
                         if (err) {
                             console.log('updateing active network error ::::: ', err);
-                            res.status(404);
+                            res.json('failed');
                         } else {
                             console.log('success updating network set ::::: ', result);
                             res.json('success');
@@ -50,7 +50,7 @@ router.get('/insert', function(req, res, next) {
                 }
             });
         } else {
-            res.status(500);
+            res.json('failed');
         }
     });
 
