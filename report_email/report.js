@@ -4,6 +4,8 @@ var fs = require('fs');
 var mysql = require('mysql');
 
 
+//따로 설정을 해주어서 돌린다.(single thread를 사용하지 않고, 리눅스 스케줄 관리로 실행 )
+
 var mail_option = {
     from: 'IOF Server report <' + config.mail.auth.user + '>',
     to: 'fain9301@yahoo.com',
