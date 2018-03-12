@@ -3,6 +3,17 @@ var report_email = require('./report/report');
 
 var mysql = require('mysql');
 
+
+var mail_option = {
+    from: 'IOF Server report <' + config.mail.auth.user + '>',
+    to: 'fain9301@yahoo.com',
+    subject: 'server error report'
+};
+
+
+
+
+
 var pool = mysql.createConnection({
     host:'localhost',
     user:'root',
@@ -25,16 +36,4 @@ pool.query('select * from device_networks', function(err, result, filed){
     }
 })
     
-
-
-
-/*
-
-var mail_option = {
-    from: 'IOF Server report <' + config.mail.auth.user + '>',
-    to: 'fain9301@yahoo.com',
-    subject: 'server error report'
-};
-
-*/
 
