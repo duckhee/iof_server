@@ -27,7 +27,7 @@ router.get('/registe', function(req, res, next) {
 //registe page get router
 router.get('/registe', function(req, res, next) {
     console.log('need get apikey and serial');
-    var user_info = { id: 'fain9301' };
+    var user_info = { id: req.session.userid };
     if (user_info) {
         user_controller.find_info(user_info, function(err, row) {
             if (err) {
@@ -45,7 +45,8 @@ router.get('/registe', function(req, res, next) {
             }
         });
     } else {
-        res.json('not user info');
+        res.redirect('/user/login');
+
     }
 
 });
@@ -69,14 +70,14 @@ router.post('/process/registe', function(req, res, next) {
 
     device_controller.insert_device(device_info, function(err, row) {
         if (err) {
-            
+
             console.log('registe device error ::::: ', err);
 
             next(err);
         } else if (row) {
-            
+
             console.log('success ::::::', row.id);
-            
+
             var network_info = {
                 device_serial: row.device_serial,
                 device_apikey: row.device_apikey,
@@ -85,27 +86,27 @@ router.post('/process/registe', function(req, res, next) {
             };
             network_controller.insert_network(network_info, function(err, row) {
                 if (err) {
-                 
+
                     console.log('network insert error ::::: ', err);
-                 
+
                     res.status(404);
 
                 } else if (row) {
-                 
+
                     console.log('success');
-                 
+
                     res.redirect('/device/list');
                 } else {
-                 
+
                     console.log('null');
-                 
+
                     res.status(500);
                 }
             });
         } else {
-          
+
             console.log('null');
-          
+
             res.status(500);
         }
     });
@@ -115,7 +116,7 @@ router.post('/process/registe', function(req, res, next) {
 //router device list set middleware
 router.get('/list', function(req, res, next) {
     console.log('testing !! middleware');
-    var user_info = { id: 'fain9301' };
+    var user_info = { id: req.session.userid };
     user_controller.find_info(user_info, function(err, result) {
         if (err) {
 
@@ -198,7 +199,7 @@ router.get('/detail', function(req, res, next) {
         if (err) {
 
             console.log('device detail error ::::: ', err);
-            
+
             next(err);
         } else {
             console.log('device detail data :::::: ', result);
@@ -225,7 +226,7 @@ router.post('/process/detail', function(req, res, next) {
 });
 
 //modfiy page get middleware router
-router.get('/modify', function(req, res, next){
+router.get('/modify', function(req, res, next) {
     console.log('modify middleware router');
     next();
 });
@@ -244,14 +245,14 @@ router.get('/process/modfiy', function(req, res, next) {
 });
 
 //setting device get router
-router.get('/setting', function(req, res, next){
+router.get('/setting', function(req, res, next) {
     console.log('device setting get router');
     next();
 });
 
 //setting device post router
-router.post('/setting', function(req, res, next){
-   console.log('device setting post router');
-    next(); 
+router.post('/setting', function(req, res, next) {
+    console.log('device setting post router');
+    next();
 })
 module.exports = router;

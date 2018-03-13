@@ -19,11 +19,11 @@ module.exports = {
             },
             sd_text: {
                 type: Sequelize.TEXT,
-                defaultValue:''
+
             },
             sd_serial: {
                 type: Sequelize.STRING,
-                allowNull:false,
+                allowNull: false,
             },
             sd_apikey: {
                 type: Sequelize.STRING,

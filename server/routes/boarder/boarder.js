@@ -80,9 +80,19 @@ router.get('/read', function(req, res, next) {
                 res.redirect('/');
             } else if (result) {
                 console.log(result);
-                res.render('boarder/readPage', {
-                    posts: result
-                });
+                if (req.session.userid) {
+                    res.render('boarder/readPage', {
+                        posts: result,
+                        userid: req.session.userid
+                    });
+                } else {
+                    res.render('boarder/readPage', {
+                        posts: result,
+                        userid: null
+                    })
+                }
+
+
             } else {
                 res.redirect('/boards/read?bno=' + bno);
             }
@@ -101,7 +111,12 @@ router.post('/read', function(req, res, next) {
 //boarder registe page router
 router.get('/registe', function(req, res, next) {
     console.log('boarder registe get router');
-    res.render('boarder/registePage');
+    if (req.session.userid) {
+        res.render('boarder/registePage');
+    } else {
+        res.redirect('/user/login');
+    }
+
 })
 
 //boarder registe page router
@@ -110,7 +125,8 @@ router.post('/process/registe', function(req, res, next) {
 
     var board_title = req.body.title || req.query.title || req.param.title || req.params.title;
     var board_content = req.body.editor1 || req.query.editor1 || req.param.editor1 || req.params.editor1;
-    var board_writer = 'fain9301'; //testing join
+    //var board_writer = 'fain9301'; //testing join
+    var board_writer = req.session.userid;
     var board_info = {
         title: board_title,
         content: board_content,

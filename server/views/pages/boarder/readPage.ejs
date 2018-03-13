@@ -118,7 +118,11 @@
 				            </div>
 				            <div class="box-body">
 					            <label for="exampleInputEmail1">Writer</label> 
-					            <input class="form-control" type="text" placeholder="USER ID"    id="newReplyWriter"> 
+                                <%if(userid){%>
+					            <input class="form-control" type="text" placeholder="USER ID"  id="newReplyWriter" value="<%=userid%>" readonly> 
+                                <%}else {%>
+                                <input class="form-control" type="text" placeholder="USER ID"  id="newReplyWriter" value="" readonly> 
+                                <%}%>
 					            <label for="exampleInputEmail1">Reply Text</label> 
 					            <input class="form-control" type="text" placeholder="REPLY TEXT" id="newReplyText">
 				            </div>
@@ -196,7 +200,7 @@
 	}
 
 	$(document).ready(function() {        
-
+        
 		$("#list").click(function() {
 			location.href="list" ; 
 		});
@@ -209,8 +213,20 @@
 			location.href="modify?bno="+<%= posts[0].dataValues.id %> ; 
 		});
 		
+        var checking_rwriter = function()
+        {
+            var value = $("#newReplyWriter").val();
+            if (value == "" || value == null || value == undefined || (value != null && typeof value == "object" && !Object.keys(value).length)) {
+            location.href = '/user/login';
+            return false;
+            }else{
+                return true;
+            }
+        }
+        
+        
 		$("#replyAddBtn").click(function() {
-            
+            if(checking_rwriter() === true){
 			$.ajax({
 				url  : "process/create/reply" , 
 				type : "post" , 
@@ -233,6 +249,7 @@
 					$("#rlist").append(txt);
 				}
 			});
+            }    
 			/////////
 		});
 	});
