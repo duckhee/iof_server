@@ -28,8 +28,9 @@ var status_change = function(data_info, callback){
     pool.getConnection((err, conn)=>{
         if(err){
             console.log('connectiong pool error ::::: ', err);
-            if()
-            conn.release();
+            if(conn){
+                conn.release();
+            }
             //process.exit();
             callback(err, null);
         }else{
@@ -57,7 +58,25 @@ var get_status = function(callback){
     pool.getConnection((err, conn)=>{
         if(err){
             console.log('get status connection error :::::::: ', err);
-            conn.release();
+            if(conn){
+                conn.release();
+            }
+            //process.exit();
+            callback(err, null);
+        }else{
+            conn.query('select sn_status, sn-serial from device_networks where createdAt=?',[], function(err, result){
+                if(err){
+                    console.log('querry error ::::::::::: ', err);
+                    conn.release();
+                    //process.exit();
+                    callback(err, null);
+                }else{
+                    console.log('select list status and serial :::::::::::: ', result);
+                    conn.release();
+                    //process.exit();
+                    callback(null, result);
+                }
+            });
         }
     })
 }
