@@ -68,7 +68,7 @@ var get_status = function(callback){
             //process.exit();
             callback(err, null);
         }else{
-            conn.query('select sn_status, sn-serial from device_networks where createdAt=?',[], function(err, result){
+            conn.query('select sn_status, sn-serial from device_networks where updatedAt=?',[], function(err, result){
                 if(err){
                     console.log('querry error ::::::::::: ', err);
                     conn.release();
