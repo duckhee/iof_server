@@ -113,7 +113,7 @@ exports.list_device = function(device_info, callback) {
 exports.delete_device = function(device_info, callback) {
     models.device.destroy({
         where: {
-            device_serial:device_info.serial
+            device_serial: device_info.serial
         }
     }).then(function(row) {
         callback(null, row);
@@ -188,7 +188,7 @@ exports.check_device = function(device_info, callback) {
         where: {
             device_apikey: device_info.apikey
         },
-        
+
     }).then((row) => {
         callback(null, row);
     }).catch((err) => {
@@ -205,6 +205,21 @@ exports.device_info = function(device_info, callback) {
     }).then((row) => {
         callback(null, row);
     }).catch((err) => {
+        callback(err, null);
+    });
+};
+
+//count device number
+exports.count_device = function(device_info, callback) {
+    models.device.count({
+        where: {
+            device_serial: device_info.serial
+        }
+    }).then((row) => {
+        console.log('count number :::::: ', row);
+        callback(null, row);
+    }).catch((err) => {
+        console.log('count number error :::::: ', err);
         callback(err, null);
     });
 };
