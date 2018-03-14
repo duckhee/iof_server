@@ -35,17 +35,17 @@ var status_change = function(data_info, callback){
             var current_time = new Date();
             var serial = "dxp2I9QRb3OwRevMF0Fx";
             //console.log('get connection ::::: ', conn);
-            conn.query("update device_networks set sn_status= ?, updatedAt=NOW() where sn_serial = ?", ['inactive', 'dxp2I9QRb3OwRevMF0Fx'], function(err, result){
+            conn.query("update device_networks set sn_status= ?, updatedAt=NOW() where sn_serial = ?", ['inactive', serial], function(err, result){
                 if(err){
                     console.log('query error :::::::: ', err);
                     conn.release();
-                    //process.exit();
-                    callback(err, null);
+                    process.exit();
+                    //callback(err, null);
                 }else{
                     console.log('update data :::::: ', result);
                     conn.release();
-                    //process.exit();
-                    callback(null, result);
+                    process.exit();
+                    //callback(null, result);
                 }
             })
         }
@@ -56,7 +56,7 @@ var get_status = function(callback){
     pool.getConnection((err, conn)=>{
         if(err){
             console.log('get status connection error :::::::: ', err);
-            
+            conn.release();
         }
     })
 }
