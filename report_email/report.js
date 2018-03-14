@@ -13,37 +13,64 @@ var mail_option = {
 };
 
 var db_config = {
-    host:'localhost',
-    user:'root',
-    password:'won1228',
-    port:'3306',
-    database:'database_development'
+    host: 'localhost',
+    user: 'root',
+    password: 'won1228',
+    port: '3306',
+    database: 'database_development'
 }
 
 var pool = mysql.createPool(db_config);
 
 
-var status_change = function(data_info, callback){
+var get_serial = function(callback) {
+    console.log('serial get');
+
+    pool.getConnection((err, conn) => {
+        if (err) {
+            console.log('get device serial num :::::::::: ', err);
+            if (conn) {
+                conn.release();
+            }
+            callback(err, null);
+        } else {
+            conn.query('select device_serial from devices group by device_serial', function(err, result) {
+                if (err) {
+                    console.log('select device query error :::::: ', err);
+                    conn.release();
+                    callback(err, null);
+                } else {
+                    console.log('device serial get :::::: ', result);
+                    callback(null, result);
+                }
+            });
+        }
+    });
+};
+
+//status change check
+var status_change = function(serial, callback) {
     console.log('testing');
-    pool.getConnection((err, conn)=>{
-        if(err){
+    pool.getConnection((err, conn) => {
+        if (err) {
             console.log('connectiong pool error ::::: ', err);
-            if(conn){
+            if (conn) {
                 conn.release();
             }
             //process.exit();
             callback(err, null);
-        }else{
+        } else {
             var current_time = new Date();
-            var serial = "dxp2I9QRb3OwRevMF0Fx";
+            //var serial = "dxp2I9QRb3OwRevMF0Fx";
+            var serial = serial;
             //console.log('get connection ::::: ', conn);
-            conn.query("update device_networks set sn_status= ?, updatedAt=NOW() where sn_serial = ?", ['inactive', serial], function(err, result){
-                if(err){
+            conn.query("update device_networks set sn_status= ?, updatedAt=NOW() where sn_serial = ?", ['inactive', serial], function(err, result) {
+                if (err) {
                     console.log('query error :::::::: ', err);
                     conn.release();
                     //process.exit();
                     callback(err, null);
-                }else{
+                } else {
                     console.log('update data :::::: ', result);
                     conn.release();
                     //process.exit();
@@ -54,27 +81,27 @@ var status_change = function(data_info, callback){
     })
 };
 
-var get_status = function(callback){
+var get_status = function(callback) {
     var time_now;
     var time_data;
     time_now = new Data();
 
-    pool.getConnection((err, conn)=>{
-        if(err){
+    pool.getConnection((err, conn) => {
+        if (err) {
             console.log('get status connection error :::::::: ', err);
-            if(conn){
+            if (conn) {
                 conn.release();
             }
             //process.exit();
             callback(err, null);
-        }else{
-            conn.query('select sn_status, sn-serial from device_networks where updatedAt=?',[], function(err, result){
-                if(err){
+        } else {
+            conn.query('select sn_status, sn-serial from device_networks where updatedAt=?', [], function(err, result) {
+                if (err) {
                     console.log('querry error ::::::::::: ', err);
                     conn.release();
                     //process.exit();
                     callback(err, null);
-                }else{
+                } else {
                     console.log('select list status and serial :::::::::::: ', result);
                     conn.release();
                     //process.exit();
