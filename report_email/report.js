@@ -28,6 +28,7 @@ var status_change = function(data_info, callback){
     pool.getConnection((err, conn)=>{
         if(err){
             console.log('connectiong pool error ::::: ', err);
+            if()
             conn.release();
             //process.exit();
             callback(err, null);
@@ -39,13 +40,13 @@ var status_change = function(data_info, callback){
                 if(err){
                     console.log('query error :::::::: ', err);
                     conn.release();
-                    process.exit();
-                    //callback(err, null);
+                    //process.exit();
+                    callback(err, null);
                 }else{
                     console.log('update data :::::: ', result);
                     conn.release();
-                    process.exit();
-                    //callback(null, result);
+                    //process.exit();
+                    callback(null, result);
                 }
             })
         }
