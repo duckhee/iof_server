@@ -55,6 +55,10 @@ var status_change = function(data_info, callback){
 };
 
 var get_status = function(callback){
+    var time_now;
+    var time_data;
+    time_now = new Data();
+
     pool.getConnection((err, conn)=>{
         if(err){
             console.log('get status connection error :::::::: ', err);
@@ -78,7 +82,7 @@ var get_status = function(callback){
                 }
             });
         }
-    })
+    });
 }
 
 /*
