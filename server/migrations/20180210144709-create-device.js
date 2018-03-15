@@ -43,6 +43,15 @@ module.exports = {
             device_address: {
                 type: Sequelize.STRING
             },
+            device_type: {
+                type: Sequelize.STRING
+            },
+            /* 
+               device_type:{
+                type: Sequelize.ENUM('iof', 'radon'),
+                defaultValue: 'iof'
+            },
+            */
             createdAt: {
                 allowNull: false,
                 type: 'TIMESTAMP',
