@@ -13,6 +13,23 @@ exports.num_device = function(callback) {
     });
 };
 
+//checking device type
+/*
+exports.get_devicetype = function(data_info, callback) {
+    models.device.find({
+        attributes: ['device_type'],
+        where: {
+            device_serial: data_info.type
+        }
+    }).then((result) => {
+        console.log('get device type :::::: ', result);
+        callback(null, result);
+    }).cratch((err) => {
+        console.log('get device type error ::::::: ', err);
+        callback(err, null);
+    });
+}
+*/
 
 //group device callback(row, err) models attribute(하나의 속성 값만 가져오는 것), group(속성 값으로 묵어주는 것)로 해결이 가능하다. 더 알아보기 
 exports.group_device = function(callback) {
@@ -113,7 +130,7 @@ exports.list_device = function(device_info, callback) {
 exports.delete_device = function(device_info, callback) {
     models.device.destroy({
         where: {
-            device_serial:device_info.serial
+            device_serial: device_info.serial
         }
     }).then(function(row) {
         callback(null, row);
@@ -188,7 +205,7 @@ exports.check_device = function(device_info, callback) {
         where: {
             device_apikey: device_info.apikey
         },
-        
+
     }).then((row) => {
         callback(null, row);
     }).catch((err) => {
