@@ -53,7 +53,8 @@ exports.insert_device = function(device_info, callback) {
         device_name: device_info.devivce_name,
         device_apikey: device_info.device_apikey,
         device_serial: device_info.device_serial,
-        device_address: device_info.device_address
+        device_address: device_info.device_address,
+        device_type: device_info.device_type
     }).then(function(row) {
         callback(null, row);
     }).catch(function(err) {
@@ -222,6 +223,21 @@ exports.device_info = function(device_info, callback) {
     }).then((row) => {
         callback(null, row);
     }).catch((err) => {
+        callback(err, null);
+    });
+};
+
+//count device number
+exports.count_device = function(device_info, callback) {
+    models.device.count({
+        where: {
+            device_apikey: device_info.apikey
+        }
+    }).then((row) => {
+        console.log('count number :::::: ', row);
+        callback(null, row);
+    }).catch((err) => {
+        console.log('count number error :::::: ', err);
         callback(err, null);
     });
 };

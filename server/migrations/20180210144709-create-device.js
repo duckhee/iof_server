@@ -17,8 +17,14 @@ module.exports = {
                 },
                 onDelete: 'CASCADE',
                 allowNull: false,
+                
             },
             */
+            device_type: {
+                type: Sequelize.ENUM('radon', 'IoF'),
+                defaultValue: 'IoF'
+            },
+
             device_name: {
                 type: Sequelize.STRING
             },

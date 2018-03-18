@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>welcome Test IOF</title>
+    <title>welcome Test IoF</title>
     <% include ../../partials/stylesheet.ejs %>
     <% include ../../partials/header_javascript.ejs %>
     <% include ../../partials/weather_config.ejs %>
@@ -15,9 +15,9 @@
             <!-- Logo -->
             <a href="/" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><b>I</b>OF</span>
+                <span class="logo-mini"><b>I</b>oF</span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>C &amp; H </b>IOF</span>
+                <span class="logo-lg"><b>C &amp; H </b>IoF</span>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top">
@@ -135,7 +135,7 @@
                                   <tr>
                                     <th>device name</th>
                                     <th>device serial</th>
-                                    <th>device_address</th>
+                                    <th>device_type</th>
                                     <!-- <th>device_apikey</th> -->
                                     <th>device status</th>
                                   </tr>
@@ -146,7 +146,7 @@
                                   <tr>
                                     <td><a href ="/device/detail?id=<%=device.id%>"><%= device.device_name%></a></td>
                                     <td><%= device.device_serial%></td>
-                                    <td><%= device.device_address%></td>
+                                    <td><%= device.device_type%></td>
                                     <% 
                                     if(device.device_network.dataValues.sn_status === 'active'){%>
                                         <th><span class="badge bg-green">active</span></th>

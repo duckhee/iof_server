@@ -16,6 +16,12 @@ module.exports = function(sequelize, DataTypes) {
                 onDelete: 'CASCADE'
         },
         */
+        device_type: {
+            type: DataTypes.ENUM,
+            values: ['radon', 'IoF'],
+            defaultValue: 'IoF'
+        },
+
         device_apikey: {
             type: DataTypes.STRING,
             references: {
@@ -105,6 +111,7 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false,
             foreignKeyConstraint: true
         });
+<<<<<<< HEAD
 
         //why error ??/
         device.hasMany(models.camera_image, {
@@ -114,6 +121,17 @@ module.exports = function(sequelize, DataTypes) {
             foreignKeyConstraint: true
         });
 
+=======
+
+        //why error ??/
+        device.hasMany(models.camera_image, {
+            foreignKey: 'deviceId', //has사용시는 상대방 ?? 자기자신도 가능 ?
+            onDelete: 'CASCADE',
+            allowNull: false,
+            foreignKeyConstraint: true
+        });
+
+>>>>>>> merge_branch
         device.hasMany(models.camera_image, {
             foreignKey: 'si_serial', //has사용시는 상대방 ?? 자기자신도 가능 ?
             onDelete: 'CASCADE',

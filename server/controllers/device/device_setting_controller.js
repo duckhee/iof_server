@@ -16,3 +16,42 @@ exports.group_device = function(callback) {
         callback(err, null);
     });
 }
+
+//group device
+exports.grouping_device = function(device_info, callback) {
+    models.device_setting.findAll({
+        attributes: ['st_serial'],
+        group: ['st_serial'],
+        where: {
+            st_apikey: device_info.apikey
+        }
+    }).then((result) => {
+        callback(null, result);
+    }).catch((err) => {
+        console.log('grouping error ::::::: ', err);
+        callback(err, null);
+    });
+};
+
+//export device setting save
+exports.setting_device = function(device_info, callback) {
+    models.device_setting.findOrCreate({
+        where: {
+
+        },
+        defaults: {
+
+        }
+    }).spread((result, created) => {
+        if (created) {
+            console.log('test created : ', created);
+            callback(null, null, created);
+        } else {
+            console.log(result);
+            callback(null, result.dataValues, null);
+        }
+    }).catch((err) => {
+        console.log('setting device find or created error :::::::::: ', err);
+        callback(err, null, null);
+    })
+};

@@ -66,6 +66,7 @@ router.get('/check_id', function(req, res, next) {
     user_controller.check_id(user_info, function(err, row) {
         if (err) {
             console.log('error : ', err);
+
             res.redirect('/user/check_id?id=' + userid);
         } else if (row) {
             console.log('check id : ', row);
@@ -105,15 +106,15 @@ router.post('/process/login', function(req, res, next) {
     console.log('login post router');
     var userid = req.query.email || req.body.email || req.params.email || req.param.email;
     var userpw = req.query.password || req.body.password || req.params.password || req.param.password;
-    
+
     //var testing=bcrypt.hashSync(userpw, bcrypt.genSaltSync(10), null);
     //console.log(testing);
-    
+
     var user_info = {
         user_id: userid,
         user_password: userpw
     };
-    console.log('login user info ::::::::::::: ',user_info);
+    console.log('login user info ::::::::::::: ', user_info);
 
     user_controller.login(user_info, function(err, row) {
         if (err) {
@@ -140,12 +141,12 @@ router.post('/process/profile', function(req, res, next) {
 });
 
 //router logout
-router.get('/logout', function(req, res, next){
+router.get('/logout', function(req, res, next) {
     console.log('logout router get');
-    req.session.destroy(function(){
+    req.session.destroy(function() {
         req.session;
     });
-     res.redirect('/');
+    res.redirect('/');
 })
 
 module.exports = router;
