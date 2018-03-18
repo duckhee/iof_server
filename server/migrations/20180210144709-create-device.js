@@ -19,11 +19,12 @@ module.exports = {
                 allowNull: false,
                 
             },
-            device_type: {
-                type: Sequelize.ENUM('active', 'inactive'),
-                defaultValue: 'active'
-            },
             */
+            device_type: {
+                type: Sequelize.ENUM('radon', 'IoF'),
+                defaultValue: 'IoF'
+            },
+
             device_name: {
                 type: Sequelize.STRING
             },

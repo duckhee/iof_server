@@ -15,12 +15,13 @@ module.exports = function(sequelize, DataTypes) {
                 allowNull: false,
                 onDelete: 'CASCADE'
         },
-        device_type:{
-                type: DataTypes.ENUM,
-                values: ['radon', 'IoF'],
-                defaultValue: 'IoF'
-        },
         */
+        device_type: {
+            type: DataTypes.ENUM,
+            values: ['radon', 'IoF'],
+            defaultValue: 'IoF'
+        },
+
         device_apikey: {
             type: DataTypes.STRING,
             references: {

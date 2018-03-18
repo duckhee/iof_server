@@ -83,7 +83,7 @@ router.post('/process/registe', function(req, res, next) {
         device_apikey: apikey,
         device_serial: serial,
         device_address: address,
-        //device_type: type
+        device_type: type
     };
     console.log('device name :::: ', name);
     console.log('device apikey :::: ', apikey);
@@ -225,8 +225,10 @@ router.get('/detail', function(req, res, next) {
             next(err);
         } else {
             console.log('device detail data :::::: ', result);
+            console.log('device type :::::: ', result.device_type);
             var device_serial = result.device_serial;
             req.query.serial = device_serial;
+
             next();
         }
     });

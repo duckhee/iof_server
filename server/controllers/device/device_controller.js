@@ -37,7 +37,7 @@ exports.insert_device = function(device_info, callback) {
         device_apikey: device_info.device_apikey,
         device_serial: device_info.device_serial,
         device_address: device_info.device_address,
-        //device_type: device_info.device_type
+        device_type: device_info.device_type
     }).then(function(row) {
         callback(null, row);
     }).catch(function(err) {
