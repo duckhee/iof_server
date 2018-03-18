@@ -34,15 +34,27 @@ router.get('/registe', function(req, res, next) {
                 console.log('error ::: ', err);
                 next(err);
             } else {
-                console.log('user info ::::::', row);
-                console.log('get apikey ::::: ', row.apikey);
-                var serial = row.apikey + util_make.createserial();
-                console.log('serial make :::: ', serial);
-                res.render('device/registePage', {
-                    apikey: row.apikey,
-                    serial: serial
+                var device_info = { apikey: row.apikey };
+                device_controller.count_device(device_info, function(err, result) {
+                    if (err) {
+                        console.log('device counter error ::::::::::::: ', err);
+                        next(err);
+                    } else {
+                        console.log('device count success :::::::::::::::::: ', result);
+                        console.log('user info ::::::', row);
+                        console.log('get apikey ::::: ', row.apikey);
+                        var serial = row.apikey + util_make.createserial();
+                        console.log('serial make :::: ', serial);
+                        res.render('device/registePage', {
+                            apikey: row.apikey,
+                            serial: serial,
+                            count: result
+                        });
+                    }
+
                 });
             }
+
         });
     } else {
         res.redirect('/user/login');
@@ -51,17 +63,27 @@ router.get('/registe', function(req, res, next) {
 
 });
 
+router.post('/process/registe', function(req, res, next) {
+    var type = req.body.device_type || req.query.device_type || req.params.device_type || req.param.device_type;
+    console.log("device type ::: ", type);
+
+    next();
+})
+
 //registe page post router
 router.post('/process/registe', function(req, res, next) {
     var name = req.body.device_name || req.query.device_name || req.params.device_name || req.param.device_name;
     var apikey = req.body.device_apikey || req.query.device_apikey || req.params.device_apikey || req.param.device_apikey;
     var serial = req.body.device_serial || req.query.device_serial || req.params.device_serial || req.param.device_serial;
     var address = req.body.device_address || req.query.device_address || req.params.device_address || req.param.device_address;
+    var type = req.body.device_type || req.query.device_type || req.params.device_type || req.param.device_type;
+    console.log("device type ::: ", type);
     var device_info = {
         devivce_name: name,
         device_apikey: apikey,
         device_serial: serial,
-        device_address: address
+        device_address: address,
+        //device_type: type
     };
     console.log('device name :::: ', name);
     console.log('device apikey :::: ', apikey);
