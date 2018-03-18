@@ -17,6 +17,11 @@ module.exports = {
                 },
                 onDelete: 'CASCADE',
                 allowNull: false,
+                
+            },
+            device_type: {
+                type: Sequelize.ENUM('active', 'inactive'),
+                defaultValue: 'active'
             },
             */
             device_name: {
