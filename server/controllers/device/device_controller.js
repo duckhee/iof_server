@@ -71,7 +71,7 @@ exports.create_device = function(device_info, callback) {
 exports.insert_before = function(device_info, callback) {
     models.device.findOne({
         where: {
-            device_serial: device_info.apikey
+            device_serial: device_info.serial
         }
     }).then((row) => {
         callback(null, row);
@@ -84,7 +84,7 @@ exports.insert_before = function(device_info, callback) {
 exports.find_device = function(device_info, callback) {
     models.device.find({
         where: {
-            device_serial: device_info.apikey,
+            device_serial: device_info.serial,
 
         }
     }).then(function(row) {
