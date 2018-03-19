@@ -241,3 +241,19 @@ exports.count_device = function(device_info, callback) {
         callback(err, null);
     });
 };
+
+//find device type
+exports.device_type = function(serial, callback){
+    models.device.find({
+        where:{
+            device_serial:serial
+        },
+        attributes:['device_type']
+    }).then((result)=>{
+        console.log('device type :::::::::::::: ', result);
+        callback(null, result);
+    }).catch((err)=>{
+        console.log('device get type error ::::::::::::: ', err);
+        callback(err, null);
+    });
+};
