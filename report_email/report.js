@@ -99,7 +99,7 @@ exports.get_status = function(callback) {
             //process.exit();
             callback(err, null);
         } else {
-            conn.query('select sn_status, sn_serial from device_networks where updatedAt >= (CURRENT_TIMESTAMP() - INTERVAL 1 DAY) and sn_status="inactive"', [], function(err, result) {
+            conn.query('select sn_status, sn_serial from device_networks where updatedAt <= (CURRENT_TIMESTAMP() - INTERVAL 1 DAY) and sn_status="inactive"', [], function(err, result) {
                 if (err) {
                     console.log('querry error ::::::::::: ', err);
                     conn.release();
