@@ -43,7 +43,18 @@ module.exports = function(sequelize, DataTypes) {
         },
         device_address: {
             type: DataTypes.STRING
+        },
+        /*
+        device_type: {
+            type: DataTypes.STRING,
+
+        },
+        device_type: {
+            type: DataTypes.ENUM,
+            values: ['iof', 'radon'],
+            defaultValue: 'iof'
         }
+        */
     }, {
         classMethods: {
             associate: function(models) {

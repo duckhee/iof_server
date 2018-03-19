@@ -22,8 +22,8 @@ var db_config = {
 
 var pool = mysql.createPool(db_config);
 
-
-var get_serial = function(callback) {
+//get serial
+exports.get_serial = function(callback) {
     console.log('serial get');
 
     pool.getConnection((err, conn) => {
@@ -49,7 +49,7 @@ var get_serial = function(callback) {
 };
 
 //status change check
-var status_change = function(serial, callback) {
+exports.status_change = function(serial, callback) {
     console.log('testing');
     pool.getConnection((err, conn) => {
         if (err) {
@@ -60,7 +60,7 @@ var status_change = function(serial, callback) {
             //process.exit();
             callback(err, null);
         } else {
-            var current_time = new Date();
+           
             //var serial = "dxp2I9QRb3OwRevMF0Fx";
             var serial = serial;
             //console.log('get connection ::::: ', conn);
@@ -81,10 +81,14 @@ var status_change = function(serial, callback) {
     })
 };
 
-var get_status = function(callback) {
-    var time_now;
-    var time_data;
-    time_now = new Data();
+//seelct from one day connection query
+// select * from devices where updatedAt >= (CURRENT_TIMESTAMP() - INTERVAL 1 DAY);
+
+//get status
+exports.get_status = function(callback) {
+    //var time_now;
+    //var time_data;
+    //time_now = new Data();
 
     pool.getConnection((err, conn) => {
         if (err) {
@@ -95,7 +99,7 @@ var get_status = function(callback) {
             //process.exit();
             callback(err, null);
         } else {
-            conn.query('select sn_status, sn-serial from device_networks where updatedAt=?', [], function(err, result) {
+            conn.query('select sn_status, sn_serial from device_networks where updatedAt <= (CURRENT_TIMESTAMP() - INTERVAL 1 DAY) and sn_status="inactive"', [], function(err, result) {
                 if (err) {
                     console.log('querry error ::::::::::: ', err);
                     conn.release();
@@ -111,6 +115,7 @@ var get_status = function(callback) {
         }
     });
 }
+
 
 /*
 
