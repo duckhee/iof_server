@@ -16,6 +16,7 @@ router.get('/', function(req, res, next) {
 router.get('/insert', function(req, res, next) {
     var query_apikey = req.query.serial || req.params.serial || req.body.serial || req.param.serial;
     var insert_data = req.query.value || req.params.value || req.body.value || req.param.value;
+    console.log('value :::::::: ', insert_data);
     var apikey_info = {
         apikey: query_apikey,
     };
@@ -111,9 +112,9 @@ router.get('/ajaxget', function(req, res, next) {
             next(err);
         } else {
             console.log('device search id ::::', result);
-
+            var devicedata = { id: result.id };
             //data list info
-            data_controller.list10_value(apikey_info, function(err, rows) {
+            data_controller.list10_value(devicedata, function(err, rows) {
                 if (err) {
                     console.log('get data error :::::: ', err);
                     next(err);
@@ -155,24 +156,24 @@ router.post('/ajaxget', function(req, res, next) {
 });
 
 //router ajax image get
-router.get('/listajaximage', function(req, res, next){
-    
+router.get('/listajaximage', function(req, res, next) {
+
     console.log('list image ajax router');
 
     next();
 });
 
 //router ajax image one 
-router.get('/ajaximage', function(req, res, next){
+router.get('/ajaximage', function(req, res, next) {
     var get_serial = req.query.serial || req.body.serial || req.params.serial || req.param.serial;
 
     console.log('get serial :::::::: ', get_serial);
-    
+
     next();
 });
 
 //router ajax  text data
-router.get('/ajaxtext', function(req, res, next){
+router.get('/ajaxtext', function(req, res, next) {
     console.log('text data router');
     next();
 })
