@@ -295,7 +295,7 @@ $(function(){
         hour = hour >= 10 ? hour : '0' + hour; //day 두자리로 저장
         return hour;
     }
-/*
+
     var data_chart = {
         cnt:0,
         chart:'',
@@ -357,12 +357,13 @@ $(function(){
             });           
         }
     };
-    */
+    
     /*
      * LINE CHART
      * ----------
      */
     //LINE randomly generated data
+    /*
     var get_Data = function() {
 
                                     $.ajax({
@@ -394,7 +395,7 @@ $(function(){
                                                 data: show_data,
                                                 color: "#3c8dbc",
                                             };
-                                            $.plot("#sensor-chart", [line_data1], {
+                                            $.plot("#line-chart", [line_data1], {
                                                 grid: {
                                                     hoverable: true,
                                                     borderColor: "#f3f3f3",
@@ -424,25 +425,25 @@ $(function(){
                                                 }
                                             });
                                             //Initialize tooltip on hover
-                                            $('<div class="tooltip-inner" id="sensor-chart-tooltip"></div>').css({
+                                            $('<div class="tooltip-inner" id="line-chart-tooltip"></div>').css({
                                                 position: "absolute",
                                                 display: "none",
                                                 opacity: 0.8
                                             }).appendTo("body");
-                                            $("#sensor-chart").bind("plothover", function(event, pos, item) {
+                                            $("#line-chart").bind("plothover", function(event, pos, item) {
 
                                                 if (item) {
                                                     var x = item.datapoint[0].toFixed(2),
                                                         y = item.datapoint[1].toFixed(2);
 
-                                                    $("#sensor-chart-tooltip").html(item.series.label + " of " + x + " = " + y)
+                                                    $("#line-chart-tooltip").html(item.series.label + " of " + x + " = " + y)
                                                         .css({
                                                             top: item.pageY + 5,
                                                             left: item.pageX + 5
                                                         })
                                                         .fadeIn(200);
                                                 } else {
-                                                    $("#sensor-chart-tooltip").hide();
+                                                    $("#line-chart-tooltip").hide();
                                                 }
 
                                             });
@@ -452,7 +453,8 @@ $(function(){
 
 
                                 };
-/*
+                                */
+
     var get_Data = function(){
         $.ajax({
             type:"GET",
@@ -467,13 +469,16 @@ $(function(){
                 chart_data = data;
                 var get_data;
                 console.log(data);
-                get_data = [getDateFromJSON(data.createdAt), data];
+                for(var i =0; i <data.length; i++){
+                    get_data[i] = [getDateFromJSON(data[i].createdAt), data[i].sd_data];
+                }
+                
 
 
                 var show_data = [];
                 for (var i = 0, max_data = get_data.length; i < max_data; i++) {
                     console.log(get_data[i]);
-                    show_data.push([i, get_data[i].value]);
+                    show_data.push([i, get_data[i].sd_data]);
                     //show_data.push([get_data[i].createAt, get_data[i].value]);
                     console.log(get_data[i].value);
                 }
@@ -482,11 +487,11 @@ $(function(){
             }
         });
     };
-*/
+
     var get_textData = function(){
         $.ajax({
             type:"GET",
-            url:"",
+            url:"/data/ajaxget?serial=<%=serial%>",
             dtaType:"json",
             error:function(){
                 var ajax_data;
@@ -498,11 +503,21 @@ $(function(){
                 //ajax_data = JSON.stringify(data);
                 chart_data = data;
                 var get_data = chart_data;
+                        for(var i =0; i <data.length; i++){
+                    get_data[i] = [getDateFromJSON(data[i].createdAt), data[i].sd_data];
+                }
+                
+                var color1 ="#FF0000";
+                data_line = new Array();
 
+                for(var i = 0; i< get_data.length; i++){
+                    //data_line[i] = {data:get_data[i].reverse(), color:color1, label:(i+1)*10};
+                }
+  
                 if(data_chart.cnt == 0){
-                    data_chart.init();
+                    data_chart.init(get_data);
                 }else{
-                    data_chart.chart.setData();
+                    data_chart.chart.setData(get_data);
                     data_chart.chart.setupGrid();
                     data_chart.chart.draw();
                 }
@@ -533,8 +548,8 @@ $(function(){
         });
     }
     console.log("<%=serial%>")
-    get_Data();
-    setInterval("get_Data()", 1000 * 60*30);
+    get_textData();
+    setInterval("get_textData()", 1000 * 60*30);
     get_image();
     setInterval("get_image()", 1000 * 60*30);
 
