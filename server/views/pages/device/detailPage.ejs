@@ -200,16 +200,7 @@
   </body>
   <script>
 $(function(){
-
-    function labelFormatter(label, series) {
-            return '<div style="font-size:13px; text-align:center; padding:2px; color: #fff; font-weight: 600;">' +
-            label +
-            "<br>" +
-            Math.round(series.percent) +
-            "%</div>";
-    }
-     //날짜에서 시간과분만 추출
-    function getDateFromJSON(str) {
+        function getDateFromJSON(str) {
         var date = new Date(str);
         var con_mindate = date.getMinutes();
         if((0<= con_mindate && con_mindate  <= 15 )){
@@ -252,7 +243,7 @@ $(function(){
         chart:'',
         init:function(data){
             this.cnt = 1;
-            this.chart = $.plot("#line-chart", data, {
+            this.chart = $.plot("#line-chart", [data], {
                 grid:{
                     hoverable: true,
                     borderColor: "#f3f3f3",
@@ -296,7 +287,7 @@ $(function(){
                                 
                 if (item) {
                     var x = item.datapoint[0].toFixed(2),
-                    y = item.datapoint[1].toFixed(2);
+                        y = item.datapoint[1].toFixed(2);
                     //$("#sensor-chart-tooltip").html(item.series.label + " of " + x + " = " + y)
                     $("#line-chart-tooltip").html(item.series.label + " legend : " + y).css({
                         top: item.pageY + 5,
@@ -308,74 +299,7 @@ $(function(){
             });           
         }
     };
-    /*
-     * LINE CHART
-     * ----------
-     */
-    //LINE randomly generated data
-
-    var sin = [], cos = [];
-    for (var i = 0; i < 14; i += 0.5) {
-      sin.push([i, Math.sin(i)]);
-      cos.push([i, Math.cos(i)]);
-    }
-    var line_data1 = {
-      data: sin,
-      color: "#3c8dbc"
-    };
-    var line_data2 = {
-      data: cos,
-      color: "#00c0ef"
-    };
-    $.plot("#line-chart", [line_data1, line_data2], {
-      grid: {
-        hoverable: true,
-        borderColor: "#f3f3f3",
-        borderWidth: 1,
-        tickColor: "#f3f3f3"
-      },
-      series: {
-        shadowSize: 0,
-        lines: {
-          show: true
-        },
-        points: {
-          show: true
-        }
-      },
-      lines: {
-        fill: false,
-        color: ["#3c8dbc", "#f56954"]
-      },
-      yaxis: {
-        show: true,
-      },
-      xaxis: {
-        show: true
-      }
-    });
-    //Initialize tooltip on hover
-    $('<div class="tooltip-inner" id="line-chart-tooltip"></div>').css({
-      position: "absolute",
-      display: "none",
-      opacity: 0.8
-    }).appendTo("body");
-    $("#line-chart").bind("plothover", function (event, pos, item) {
-
-      if (item) {
-        var x = item.datapoint[0].toFixed(2),
-            y = item.datapoint[1].toFixed(2);
-
-        $("#line-chart-tooltip").html(item.series.label + " of " + x + " = " + y)
-            .css({top: item.pageY + 5, left: item.pageX + 5})
-            .fadeIn(200);
-      } else {
-        $("#line-chart-tooltip").hide();
-      }
-
-    });
-    /* END LINE CHART */
-
+    
     var get_Data = function(){
         $.ajax({
             type:"GET",
@@ -386,6 +310,22 @@ $(function(){
                 ajax_data = null;
             },
             success:function(data){
+                var chart_data;
+                chart_data = data;
+                var get_data;
+                console.log(data);
+                for(var i =0; i <data.length; i++){
+                    get_data[i] = [getDateFromJSON(data[i].createdAt), data[i].sd_data];
+                }
+                
+                var show_data = [];
+                for (var i = 0, max_data = get_data.length; i < max_data; i++) {
+                    console.log(get_data[i]);
+                    show_data.push([i, get_data[i].sd_data]);
+                    //show_data.push([get_data[i].createAt, get_data[i].value]);
+                    console.log(get_data[i].value);
+                }
+
 
             }
         });
@@ -394,7 +334,7 @@ $(function(){
     var get_textData = function(){
         $.ajax({
             type:"GET",
-            url:"",
+            url:"/data/ajaxget?serial=<%=serial%>",
             dtaType:"json",
             error:function(){
                 var ajax_data;
@@ -404,12 +344,30 @@ $(function(){
                 var chart_data;
                 //ajax_data = JSON.stringify(data);
                 chart_data = data;
-                var get_data = chart_data;
+                var get_data = [];
+                        for(var i =0; i <data.length; i++){
+                    get_data.push([getDateFromJSON(data[i].createdAt), data[i].sd_data],);
+                }
+                
+                var color1 ="#FF0000";
+                data_line = new Array();
 
+                for(var i = 0; i< get_data.length; i++){
+                    data_line[i] = {data:get_data[i],color:color1};
+                    console.log('data line ::::: ',data_line[i]);
+                }
+                data_line = {data:get_data, color:color1};
+                
+                if(data_chart.cnt == 0){
+                    data_chart.init(data_line);
+                }else{
+                    data_chart.chart.setData(data_line);
+                    data_chart.chart.setupGrid();
+                    data_chart.chart.draw();
+                }
             }
-        })
+        });
     }
-
     var get_image = function(){
         $.ajax({
             type:"GET",
@@ -432,9 +390,22 @@ $(function(){
             }
         });
     }
+    
+    function labelFormatter(label, series) {
+            return '<div style="font-size:13px; text-align:center; padding:2px; color: #fff; font-weight: 600;">' +
+            label +
+            "<br>" +
+            Math.round(series.percent) +
+            "%</div>";
+    }
+    console.log("<%=serial%>")
+    get_textData();
+    setInterval("get_textData()", 1000 * 60*30);
     get_image();
     setInterval("get_image()", 1000 * 60*30);
 
+
 });
+
   </script>
 </html>
