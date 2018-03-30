@@ -77,10 +77,12 @@ exports.list10_value = function(data_info, callback) {
             deviceId: data_info.id
         },
         order: [
-            ['createdAt', 'DESC']
+            //['createdAt', 'DESC'] 오름차순 정렬
+            ['createdAt', 'ASC'] //내림차순 정렬
         ],
         limit: 10,
     }).then(function(rows) {
+        console.log(rows);
         callback(null, rows);
     }).catch(function(err) {
         callback(err, null);
