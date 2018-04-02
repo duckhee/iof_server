@@ -8,6 +8,15 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
+            deviceId:{
+                type:Sequelize.INTEGER,
+                references: {
+                    model: 'devices',
+                    key: 'id'
+                },
+                onDelete: 'CASCADE',
+                allowNull: false,
+            },
             st_serial: {
                 type: Sequelize.STRING
             },

@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>welcome Test IOF</title>
+    <title>welcome Test IoF</title>
     <% include ../../partials/stylesheet.ejs %>
     <% include ../../partials/header_javascript.ejs %>
     <% include ../../partials/weather_config.ejs %>
@@ -15,9 +15,9 @@
             <!-- Logo -->
             <a href="/" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><b>I</b>OF</span>
+                <span class="logo-mini"><b>I</b>oF</span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>C &amp; H </b>IOF</span>
+                <span class="logo-lg"><b>C &amp; H </b>IoF</span>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top">
@@ -28,6 +28,7 @@
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <!-- Tasks: style can be found in dropdown.less -->
+                        
                     </ul>
                 </div>
             </nav>
@@ -57,51 +58,49 @@
                 <!-- Content Header (Page header) -->
                  <section class="content-header">
                     <h1>
-                        Boarder <small>registe</small>
+                        Boarder <small>read</small>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-                        <li><i class="ffa fa-dshboard"></i>boarder</li>
-                        <li class="active"><a href="#">registe</a></li>
+                        <li><i class="ffa fa-dshboard"><a href="/boards"></i>boarder</a></li>
+                        <li class="active"><a href="#">modify</a></li>
                     </ol>
                 </section> 
                   <!-- Main content -->
-    <section class="content">
+  <section class="content">
             <div class="row">
               <div class="col-md-12">
-                    <form action="/boards/process/registe" method="post">
-                <div class="box box-info">
-                  <div class="box-header">
-                        
-                    <h3 class="box-title">                      
-                            <!-- set title input box-->
-                            <div class="form-horizontal">
-                                  <label class="col-sm-2 control-label">title</label>
-                                  <div class="col-sm-10">
-                                      <input id="title" name="title" type="text" placeholder="write title here.">
-                                  </div>
-                          </div>
-                          <!-- end set title input box-->
-                    </h3>
-                    
-                    <!-- tools box -->
-                    <div class="pull-right box-tools">
-                      
+                    <form action="/boards/process/modify" method="post">
+                 <div class="box box-primary">
+                    <div class="box-header">
+                        <h3 class"box-title">MODIFY BOARD</h3>
                     </div>
-                    <!-- /. tools -->
-                  </div>
-                  <!-- /.box-header -->
-                  <div class="box-body pad">
-                          <textarea id="editor1" name="editor1" rows="10" cols="80">
-                                                  
-                          </textarea>
-                  </div>
-                  <!-- submit button box footer -->
-                  <div class="box-footer">
-                      <button type="submit" class="btn btn-primary">submit</button>
+                    <!-- header box end-->
+                    <div class="box-body">
+                      <div class="form-group">
+                            <label for="exampleInputEmail1">Title</label>
+                            <input type="text" name='title' class="form-control" id="title"
+                                value="<%=posts.title %>">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Content</label>
+                            <textarea class="form-control"  name="modify_content" rows="3" id="modify_content" name="content"
+                                ><%= posts.content%></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" >Writer</label>
+                            <input type="text" name="writer" class="form-control" id="writer"
+                                value="<%=posts.writer %>" readonly="readonly">
+                        </div>
+                          </div>
+                    <!-- box body end-->
+                    <div class="box-footer">
+	                    <button type="submit" class="btn btn-primary">submit</button>
                       <button type="button" id="cancelBtn" name="cancelBtn" class="btn btn-danger">cancel</button>
-                  </div>
-                </div>
+                    </div>
+                <!-- box-footer end -->
+                 </div>
             </form>
                 <!-- /.box -->
       
@@ -148,22 +147,61 @@
     </div>
     
     <% include ../../partials/footer_javascript_index.ejs %>
-    <script>
-            
+   
+<script>    
             $(document).ready(function(){
                 $(function () {
                     // Replace the <textarea id="editor1"> with a CKEditor
                     // instance, using default configuration.
-                    CKEDITOR.replace('editor1');
+                    CKEDITOR.replace('modify_content');
                     //bootstrap WYSIHTML5 - text editor
-                    $(".textarea").wysihtml5();
+                    //$(".textarea").wysihtml5();
                 });
-
                 $("#cancelBtn").click(function(){
                     console.log('cancel');
-                    location.replace('/boards/registe');
+                    location.replace('/boards/list');
                 })
             });
-    </script>
+   
+/* 
+$(document).ready(function(){
+	
+	var formObj = $("form[role='form']");
+	
+	console.log(formObj);
+	
+	if(${boardVO.writer==sessionScope.loginUser.uname}
+	  || ${sessionScope.loginUser.uname=='관리자'}){
+		$(".box-footer").html(
+				'<button type="submit" class="btn btn-warning">Modify</button> '
+			   +'<button type="submit" class="btn btn-danger">REMOVE</button> '
+			   +'<button type="submit" class="btn btn-primary">GO LIST </button>');
+	}
+});
+
+$(document).on("click", ".btn-warning", function(){
+	var formObj = $("form[role='form']");
+	formObj.attr("action", "/board/modifyPage.do");
+	formObj.attr("method", "get");		
+	formObj.submit();
+});
+
+$(document).on("click", ".btn-danger", function(){
+	var formObj = $("form[role='form']");
+	if(confirm("게시물을 삭제하시겠습니까?")){	
+		formObj.attr("action", "/board/removePage.do");
+		formObj.submit();
+	}
+});
+
+$(document).on("click", ".btn-primary", function(){
+	var formObj = $("form[role='form']");
+	formObj.attr("method", "get");
+	formObj.attr("action", "/board/listPage.do");
+	formObj.submit();
+});
+*/
+</script>
+
   </body>
 </html>

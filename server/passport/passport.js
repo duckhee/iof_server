@@ -24,5 +24,7 @@ module.exports = function(passport) {
         });
     });
 
+    //strategy set function
+
 
 }

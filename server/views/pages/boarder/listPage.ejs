@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>welcome Test IOF</title>
+    <title>welcome Test IoF</title>
     <% include ../../partials/stylesheet.ejs %>
     <% include ../../partials/header_javascript.ejs %>
     <% include ../../partials/weather_config.ejs %>
@@ -15,9 +15,9 @@
             <!-- Logo -->
             <a href="/" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><b>I</b>OF</span>
+                <span class="logo-mini"><b>I</b>oF</span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>C &amp; H </b>IOF</span>
+                <span class="logo-lg"><b>C &amp; H </b>IoF</span>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top">
@@ -27,6 +27,7 @@
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <!-- Tasks: style can be found in dropdown.less -->
+                        
                     </ul>
                 </div>
             </nav>
@@ -59,8 +60,8 @@
                         </h1>
                         <ol class="breadcrumb">
                             <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-                            <li><i class="ffa fa-dshboard"></i>board</li>
-                            <li class="active">list</li>
+                            <li><i class="ffa fa-dshboard"><a href="/boards"></i>boarder</a></li>
+                            <li class="active"><a href = "#">list</a></li>
                         </ol>
                     </section>
                 <!-- Content Header (Page header) -->
@@ -104,20 +105,24 @@
 						
 						<tbody id="tbody">
                         <% 
-                        //if(locals.post){
-                            for(post of posts){ 
+                        if(post){
+                            for(posts of post){ 
                         %>
 							<tr>
 								<td><%= posts.id%></td>
-								<td><%=posts.title%></td>
+								<td><a href="/boards/read?bno=<%-posts.id%>"><%=posts.title%></a></td>
 								<td><%=posts.writer%></td>
-								<td><%=posts.createdAt%></td>
+								<td><%
+                                var d = new Date();
+                                var str = "";
+                                str = d.getFullYear() + "-" + (d.getMonth() + 1 ) + "-" + d.getDate() ;
+                                %><%=str%></td>
 								<td><span class="badge bg-red"><%=posts.viewcnt%></span></td>
 							</tr>
                         <% 
                             } 
-                            /*
-                        }else{
+                            
+                        }else{ %>
                             <tr>
                                 <td></td>
                                 <td></td>
@@ -125,10 +130,9 @@
                                 <td></td>
                                 <td><span class="badge bg-red"></span></td>
                             </tr>
+                            <%
                         }
-                        */
                         %>
-						
 						</tbody>
 					</table>
 				</div>
@@ -158,10 +162,12 @@
   <script>
   $(document).ready(function(){
     $("#newBtn").click(function(){
-        local.href = '/boards/registe';
+        location.href = '/boards/registe';
     });
     $("#searchBtn").click(function(){
-        alter($("#searchKeyword").val());
+        alert($("#searchType").val()+ " " + $("#searchKeyword").val());
+        //location.href = '/search/board?type=$("#searchType").val()&keyword=$("#searchKeyword").val()
+        
     });
   });
   

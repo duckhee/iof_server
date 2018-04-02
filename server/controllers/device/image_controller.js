@@ -3,8 +3,8 @@ var camera_image = require('../../models/camera_image');
 
 
 
-
-exports.insert = function(camera_info, callback) {
+//inset carmera
+exports.insert_image = function(camera_info, callback) {
     models.camera_image.create({
 
     }).then(function(row) {
@@ -16,7 +16,7 @@ exports.insert = function(camera_info, callback) {
 };
 
 //insert data callback(row, err); array insert
-exports.insert_array_data = function(camera_info, callback) {
+exports.insert_array_image = function(camera_info, callback) {
     models.camera_image.bulkCreate(camera_info).then(function(result) {
         callback(null, result);
     }).catch(function(err) {
@@ -25,7 +25,8 @@ exports.insert_array_data = function(camera_info, callback) {
     });
 };
 
-exports.findinsert = function(camera_info, callback) {
+//find or create carmera
+exports.findinsert_image = function(camera_info, callback) {
     models.camera_image.findOrCreate({
         where: {
 
@@ -33,16 +34,38 @@ exports.findinsert = function(camera_info, callback) {
         defaults: {
 
         }
-    }).spread(function() {
+    }).spread((result, created) => {
+        if (created) {
+            console.log('testing created :::::', created);
+            callback(null, null, created);
+        } else {
+            console.log(result);
+            callback(null, result.dataValues, null);
+        }
+    }).catch((err) => {
+        callback(err, null, null);
+    });
+}
 
-    }).catch(function(err) {
+//find carmera
+exports.find_image = function(camera_info, callback) {
+    models.camera_image.find({
+        where: {
+
+        },
+        order: [
+            ['createdAt', 'DESC']
+        ]
+    }).then((row) => {
+        callback(null, row);
+    }).catch((err) => {
         callback(err, null);
     });
 };
 
 
 //view web limit show data callback(rows, err);
-exports.list_limit = function(camera_info, callback) {
+exports.list_limit_image = function(camera_info, callback) {
     models.camera_image.findAll({
         where: {
             sd_serial: camera_info.sd_serial //'01171030130408'
@@ -57,4 +80,17 @@ exports.list_limit = function(camera_info, callback) {
         console.log('error : ', err.stack);
         callback(err, null);
     });
+};
+
+//delete carmera image
+exports.delete_image = function(camera_info, callback) {
+    models.camera_image.destroy({
+        where: {
+
+        }
+    }).then(function(row) {
+        callback(null, row);
+    }).catch(function(err) {
+        callback(err, null);
+    })
 };

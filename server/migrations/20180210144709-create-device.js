@@ -8,6 +8,23 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
+            /*
+            userId:{
+                type:Sequelize.INTEGER,
+                references: {
+                    model: 'devices',
+                    key: 'id'
+                },
+                onDelete: 'CASCADE',
+                allowNull: false,
+                
+            },
+            */
+            device_type: {
+                type: Sequelize.ENUM('radon', 'IoF'),
+                defaultValue: 'IoF'
+            },
+
             device_name: {
                 type: Sequelize.STRING
             },
@@ -22,14 +39,26 @@ module.exports = {
             },
             device_num: {
                 type: Sequelize.INTEGER,
-                default: 0
+                defaultValue: 0
             },
             device_serial: {
-                type: Sequelize.STRING
+                type: Sequelize.STRING,
+                allowNull: false,
+                unique: true
             },
             device_address: {
                 type: Sequelize.STRING
             },
+            /* 
+            device_type: {
+                type: Sequelize.STRING
+            },
+            
+               device_type:{
+                type: Sequelize.ENUM('iof', 'radon'),
+                defaultValue: 'iof'
+            },
+            */
             createdAt: {
                 allowNull: false,
                 type: 'TIMESTAMP',

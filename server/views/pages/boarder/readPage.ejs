@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>welcome Test IOF</title>
+    <title>welcome Test IoF</title>
     <% include ../../partials/stylesheet.ejs %>
     <% include ../../partials/header_javascript.ejs %>
     <% include ../../partials/weather_config.ejs %>
@@ -15,18 +15,20 @@
             <!-- Logo -->
             <a href="/" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><b>I</b>OF</span>
+                <span class="logo-mini"><b>I</b>oF</span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>C &amp; H </b>IOF</span>
+                <span class="logo-lg"><b>C &amp; H </b>IoF</span>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top">
                 <!-- Sidebar toggle button-->
-                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button"> <span class="sr-only">Toggle navigation</span>
+                 <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                        <span class="sr-only">Toggle navigation</span>
                 </a>
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <!-- Tasks: style can be found in dropdown.less -->
+                        
                     </ul>
                 </div>
             </nav>
@@ -54,121 +56,115 @@
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
-                <section class="content-header">
+                 <section class="content-header">
                     <h1>
-                        Show <small>Serial</small>
+                        Boarder <small>read</small>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-                        <li><i class="ffa fa-dshboard"></i>address</li>
-                        <li class="active"><a href="/">serial</a></li>
+                        <li><i class="ffa fa-dshboard"><a href="/boards"></i>boarder</a></li>
+                        <li class="active"><a href="#">read</a></li>
                     </ol>
-                </section>
-                <div class="content">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="box box-primary">
-                                <div class="box-header with-dorder">
-                                    <i class="fa fa-fw fa-download"></i>
-                                    <h3 class="box-title">Sensor or Picture Down Load</h3>
-                                </div>
-                                <div class="box-body">
-                                <p> click button download.</p>
-                                <form action="/process/download_csv?serial_Num=<%=serial_Num%>" method="post">
-                                    <button type="submit" class="btn btn-block btn-success" name="sensor_download" id="sensor_download"><i class="fa fa-fw fa-download"></i>Sensor Data Download</button>
-                                </form>
-                                <form action="/process/download_zip?serial_Num=<%=serial_Num%>" method="post">
-                                    <button type="submit" class="btn btn-block btn-danger" name="image_download" id="image_download"><i class="fa fa-fw fa-download"></i>Picture Data Download</button>
-                                </form>
-                                </div>
-                            </div>
-                        </div>
+                </section> 
+                  <!-- Main content -->
+    <section class="content">
+            <div class="row">
+              <div class="col-md-12">
+                 <!-- general form elements -->
+                 <div class="box box-primary">
+                    <div class="box-header">
+                        <h3 class"box-title">READ BOARD</h3>
                     </div>
-                        <!-- download button group -->
-                    <div class="row">
-                        <!-- <div class="col-xs-12"> -->
-                        <div class = "col-md-6">
-                            <!-- Line chart -->
-                            <div class="box box-primary">
-                                <div class="box-header with-border">
-                                    <i class="fa fa-bar-chart-o"></i>
-                                    <h3 class="box-title">EC Value (dS/m ECe) 
-                                            </h3><div class="box-tools pull-right"><%= str %></div>     
-                                    <!--<button class="pull-right" id="value_download" name="value_download"><i class="fa fa-fw fa-download"></i>download</button>-->
-                                </div>
-                                <div class="box-body">                                    
-                                    <div id="ec-chartLegend" ></div>
-                                    <div id="ec-chart" style="height: 300px;"></div>    
-                                </div>
-                                <!-- /.box-body-->
-                            </div>
-                            <!-- /.box -->
+                    <!-- header box end-->
+                    <div class="box-body">
+                    <!-- form group start -->
+                    
+                    <!-- 여기서부터 수정 필요 -->
+                    <% for(let post of posts){ %>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Title</label>
+                            <input type="text" name='title' class="form-control" 
+                                value="<%=post.title %>" readonly="readonly">
                         </div>
-                        <!-- chart end -->
-                        <div class = "col-md-6">
-                            <!-- Line chart -->
-                            <div class="box box-primary">
-                                <div class="box-header with-border">
-                                    <i class="fa fa-bar-chart-o"></i>
-                                    <h3 class="box-title">Temperature Value (degC) 
-                                           </h3><div class="box-tools pull-right"><%= str %></div>                                    
-                                    <!-- <button class="pull-right" id="value_download" name="value_download"><i class="fa fa-fw fa-download"></i>download</button> -->
-                                </div>
-
-                                <div class="box-body">
-                                    <div id="temp-chartLegend" ></div>
-                                    <div id="temp-chart" style="height: 300px;"></div>
-                                </div>
-                                <!-- /.box-body-->
-                            </div>
-                            <!-- /.box -->
+                        
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Content</label>
+                            <div id="content1" name="content1"></div>
+                            <textarea class="form-control"  name="content" rows="3" id="content"
+                                readonly="readonly"><%=post.content%></textarea> 
                         </div>
-                        <!-- chart end -->
-                        <div class = "col-md-6">
-
-                            <!-- Line chart -->
-                            <div class="box box-primary">
-                                <div class="box-header with-border">
-                                    <i class="fa fa-bar-chart-o"></i>
-                                    <h3 class="box-title">Moisture Value (%VWC)
-                                            </h3><div class="box-tools pull-right"><%= str %></div>     
-                                    <!--<button class="pull-right" id="value_download" name="value_download"><i class="fa fa-fw fa-download"></i>download</button> -->
-                                </div>
-                                <div class="box-body">
-                                    <div id="moist-chartLegend" ></div>
-                                    <div id="moist-chart" style="height: 300px;"></div>
-
-                                </div>
-                                <!-- /.box-body-->
-                            </div>
-                            <!-- /.box -->
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" >Writer</label>
+                            <input type="text" name="writer" class="form-control" 
+                                value="<%=post.writer %>" readonly="readonly">
                         </div>
-                        <!-- chart end -->
-                    <!--</div>
-
-                    <div class="row"> -->
-                        <div class="col-md-6">
-                            <div class="box box-primary">
-                                <div class="box-header with-border">
-                                    <h3 class="box-title">최근 촬영 사진</h3>
-                                    <div class="box-tools pull-right" id="camera-date"  style="height:300px">
-                                        
-                                    </div>
-                                </div>
-                                <!-- /.box-header -->
-                                <div class="box-body">
-                                    <div id="camera-info">
-                                        <img style="height:300px"></img>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.col -->
+                        <!-- form group end -->
                     </div>
-                    <!-- / camera infomation -->
-                    <!-- infomation -->
-                    <!-- /.weather, camera widget -->
-                </div>
+                    <!-- box body end-->
+                    <div class="box-footer">
+	                    <!-- checking id  function start if -->
+	                        <button id="modify" type="button" class="btn btn-warning">Modify</button> 
+	                        <button id="remove" type="button" class="btn btn-danger">REMOVE</button> 
+                        <!-- login check function end -->
+                        <button id="list" type="button" class="btn btn-primary">GO LIST </button>
+                    </div>
+                <!-- box-footer end -->
+                 </div>
+                <div class="row">
+		            <div class="col-md-12">
+			            <div class="box box-success">
+				            <div class="box-header">
+					            <h3 class="box-title">ADD NEW REPLY</h3>
+				            </div>
+				            <div class="box-body">
+					            <label for="exampleInputEmail1">Writer</label> 
+                                <%if(userid){%>
+					            <input class="form-control" type="text" placeholder="USER ID"  id="newReplyWriter" value="<%=userid%>" readonly> 
+                                <%}else {%>
+                                <input class="form-control" type="text" placeholder="USER ID"  id="newReplyWriter" value="" readonly> 
+                                <%}%>
+					            <label for="exampleInputEmail1">Reply Text</label> 
+					            <input class="form-control" type="text" placeholder="REPLY TEXT" id="newReplyText">
+				            </div>
+				        <!-- /.box-body -->
+				            <div class="box-footer">
+					            <button type="button" class="btn btn-primary" id="replyAddBtn">ADD REPLY</button>
+				            </div>
+			            </div>
+                        <!-- The time line -->
+		                <ul class="timeline">
+		  	            <!-- timeline time label -->
+			                <li class="time-label" id="repliesDiv">
+			                    <span class="bg-green">
+			                        Replies List <small id='replycntSmall'> [ 000 ] </small>
+			                    </span>
+			                </li>
+		                </ul>
+		                <!--  -->
+		                <ul id="rlist">
+				            <% if(post.tbl_replies) { 
+                                for(let reply of post.tbl_replies){ %>
+					            <li class="time-label"><%=reply.dataValues.rcontent%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						           <%=reply.dataValues.rwriter%> 
+                                   <a href="javascript:removeReply(<%=reply.dataValues.id%>,<%=reply.dataValues.tblBoardId%>)">X</a> 
+					            </li>
+                            <%}%>
+                            <%}%>
+		                </ul>
+		            <!--  -->   
+			            <div class='text-center'>
+				            <ul id="pagination" class="pagination pagination-sm no-margin ">
+				            </ul>
+            			</div>
+
+<%}%>
+
+              </div>
+              <!-- /.col-->
+            </div>
+            <!-- ./row -->
+          </section>
+          <!-- /.content -->
             </div>
         <% include ../../partials/footer.ejs %>
             <div class="control-sidebar-bg"></div>
@@ -181,5 +177,124 @@
     </div>
     
     <% include ../../partials/footer_javascript_index.ejs %>
+   
+<script>
+	function removeReply(seq,bno) {
+		$.ajax({
+			url  : "process/delete/reply" , 
+			type : "post" , 
+			data : { rseq : seq , bno : bno} ,
+			dataType : "json" , 
+			success : function(ary) {
+                console.log(ary)
+				$("#rlist").empty(); // remove() 
+				var txt = "";
+				$.each(ary , function(idx, obj) {
+					txt += "<li class='time-label'>"+obj.rcontent;
+					txt += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+obj.rwriter;
+					txt += "<a href='javascript:removeReply("+obj.id+","+obj.tblBoardId+")'>X</a></li>";
+				});
+				$("#rlist").append(txt);
+			}
+		});
+	}
+
+	$(document).ready(function() {        
+        
+		$("#list").click(function() {
+			location.href="list" ; 
+		});
+		$("#remove").click(function() {
+            
+			location.href="remove?bno="+<%= posts[0].dataValues.id %> ; 
+		});
+		$("#modify").click(function() {
+            
+			location.href="modify?bno="+<%= posts[0].dataValues.id %> ; 
+		});
+		
+        var checking_rwriter = function()
+        {
+            var value = $("#newReplyWriter").val();
+            if (value == "" || value == null || value == undefined || (value != null && typeof value == "object" && !Object.keys(value).length)) {
+            location.href = '/user/login';
+            return false;
+            }else{
+                return true;
+            }
+        }
+        
+        
+		$("#replyAddBtn").click(function() {
+            if(checking_rwriter() === true){
+			$.ajax({
+				url  : "process/create/reply" , 
+				type : "post" , 
+				data : {
+                        rwriter : $("#newReplyWriter").val() ,
+					    rcontent : $("#newReplyText").val()  , 
+					    bno: <%=posts[0].dataValues.id%>
+					   } ,
+				dataType : "json" , 
+				success : function(ary) {
+                    console.log(ary);
+					$("#rlist").empty(); // remove() 
+					var txt = "";
+					$.each(ary , function(idx, obj) {
+                        var test = JSON.stringify(obj);
+						txt += "<li class='time-label'>"+obj.rcontent;
+						txt += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+obj.rwriter;
+						txt += "<a href='javascript:removeReply("+obj.id+","+obj.tblBoardId+")'>X</a></li>";
+					});
+					$("#rlist").append(txt);
+				}
+			});
+            }    
+			/////////
+		});
+	});
+
+/* 
+$(document).ready(function(){
+	
+    
+
+	var formObj = $("form[role='form']");
+	
+	console.log(formObj);
+	
+	if(${boardVO.writer==sessionScope.loginUser.uname}
+	  || ${sessionScope.loginUser.uname=='관리자'}){
+		$(".box-footer").html(
+				'<button type="submit" class="btn btn-warning">Modify</button> '
+			   +'<button type="submit" class="btn btn-danger">REMOVE</button> '
+			   +'<button type="submit" class="btn btn-primary">GO LIST </button>');
+	}
+});
+
+$(document).on("click", ".btn-warning", function(){
+	var formObj = $("form[role='form']");
+	formObj.attr("action", "/board/modifyPage.do");
+	formObj.attr("method", "get");		
+	formObj.submit();
+});
+
+$(document).on("click", ".btn-danger", function(){
+	var formObj = $("form[role='form']");
+	if(confirm("게시물을 삭제하시겠습니까?")){	
+		formObj.attr("action", "/board/removePage.do");
+		formObj.submit();
+	}
+});
+
+$(document).on("click", ".btn-primary", function(){
+	var formObj = $("form[role='form']");
+	formObj.attr("method", "get");
+	formObj.attr("action", "/board/listPage.do");
+	formObj.submit();
+});
+*/
+</script>
+
   </body>
 </html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>welcome Test IOF</title>
+    <% include ../../partials/stylesheet.ejs %>
+    <% include ../../partials/header_javascript.ejs %>
+    <% include ../../partials/weather_config.ejs %>
+</head>
+
+
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="/" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>I</b>OF</span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>C &amp; H </b>IOF</span>
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button"> <span class="sr-only">Toggle navigation</span>
+                </a>
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <!-- Tasks: style can be found in dropdown.less -->
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- Sidebar user panel -->
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src="/static/images/logo_iot.png" class="img-circle" alt="User Image">
+                    </div>
+                    <div class="pull-left info">
+                        
+                        <!-- <a href="#"><i class="fa fa-circle text-success"></i> Online</a> -->
+                    </div>
+                </div>
+                <!-- nav item -->
+                <% include ../../partials/nav_item %>
+                <!-- end nav item -->
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+                <section class="content-header">
+                        <h1>
+                                Device
+                          <small>list</small>
+                        </h1>
+                        <ol class="breadcrumb">
+                          <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                          <li><i class="ffa fa-dshboard"></i>device</li>
+                          <li class="active">list</li>
+                        </ol>
+                      </section>
+        
+                <div class="content">
+                   <div class="row">
+                       <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="info-box">
+                                <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+                        
+                                <div class="info-box-content">
+                                    <span class="info-box-text">CPU Traffic</span>
+                                    <span class="info-box-number">90<small>%</small></span>
+                                </div>
+                            <!-- /.info-box-content -->
+                            </div>
+                       </div>
+                        <!-- /.col -->
+                       <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="info-box">
+                                <span class="info-box-icon bg-red"><i class="fa fa-google-plus"></i></span>
+                                <div class="info-box-content">
+                                <span class="info-box-text">Likes</span>
+                                <span class="info-box-number">41,410</span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                        <!-- /.info-box -->
+                    </div>
+
+                    <!-- fix for small devices only -->
+                    <div class="clearfix visible-sm-block"></div>
+
+
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
+      
+                    <div class="info-box-content">
+                        <span class="info-box-text">Sales</span>
+                        <span class="info-box-number">760</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box">
+                      <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
+          
+                      <div class="info-box-content">
+                        <span class="info-box-text">device number</span>
+                        <span class="info-box-number"></span>
+                      </div>
+                      <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                  </div>
+                  <!-- /.col -->
+                   </div> 
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="box">
+                              <div class="box-header">
+                                <h3 class="box-title">Hover Data Table</h3>
+                              </div>
+                              <!-- /.box-header -->
+                              <div class="box-body">
+                                <table id="example2" class="table table-bordered table-hover">
+                                  <thead>
+                                  <tr>
+                                    <th>device name</th>
+                                    <th>device serial</th>
+                                    <th>device_address</th>
+                                    <th>device_apikey</th>
+                                    <th>device status</th>
+                                  </tr>
+                                  </thead>
+                                  <tbody>
+                                <% if(devices){ 
+                                    for(device of devices){%>
+                                  <tr>
+                                    <td><a href ="#"><%= device.device_name%></a></td>
+                                    <td><%= device.device_serial%></td>
+                                    <td><%= device.device_address%></td>
+                                    <td><%= device.device_apikey%></td>
+                                    <% if(device.device_network){
+                                        var test = JSON.parse(device.device_network);
+                                            for(var i = 0;i < test.length; i++){
+                                                status = test[i].dataValues.sn_status;
+                                            }%>
+                                            <script>console.log('<%=status%>');</script>
+                                            <% var test_status = JSON.stringify(status);
+                                             if(test_status === 'active'){%>
+                                        <th><span class="badge bg-green">active</span></th>
+                                    <%}else{%>
+                                        <th><span class="badge bg-red">inactive</span></th>
+                                    <%
+                                    }
+                                        }
+                                    %>
+                                  </tr>
+                                  <%}
+                                  %>
+                                <%}else{%>
+                                  <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <th><span class="badge bg-green"></span></th>
+                                  </tr>
+                                <%}%>
+                                  </tbody>
+                                  <tfoot>
+                                  </tfoot>
+                                </table>
+                              </div>
+                              <!-- /.box-body -->
+                            </div>
+                            <!-- /.box -->
+                  
+                            
+                            <!-- /.box -->
+                          </div>
+                    </div>
+
+                      
+                </div>
+            </div>
+        <% include ../../partials/footer.ejs %>
+            <div class="control-sidebar-bg"></div>
+        </div>
+        <!-- /.content-wrapper -->
+      
+            <!-- /.control-sidebar -->
+            <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+    </div>
+    
+    <% include ../../partials/footer_javascript_index.ejs %>
+  </body>
+  <!-- page script -->
+<script>
+  $(function () {
+    
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false
+    });
+  });
+</script>
+</html>

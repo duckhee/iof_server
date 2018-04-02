@@ -105,3 +105,26 @@
         </li>
 -->
 </ul>
+
+
+
+
+
+
+device set add 
+
+
+            <%if(lcoal.devices){%>
+              <li><a href="/device"><i class="fa fa-circle-o"></i>devices list
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
+                </ul>       
+            </li>
+            <%}else{%>
+            <li><a href="/device"><i class="fa fa-circle-o"></i>devices list</a></li>
+            <%}%>

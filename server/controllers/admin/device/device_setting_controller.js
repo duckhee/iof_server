@@ -1,5 +1,5 @@
-var models = require('../../../models/index');
-var device_setting = require('../../../models/device_setting');
+var models = require('../../models/index');
+var device_setting = require('../../models/device_setting');
 
 
 
@@ -15,4 +15,4 @@ exports.group_device = function(callback) {
         console.log('group error : ', err.stack);
         callback(err, null);
     });
-}
+};

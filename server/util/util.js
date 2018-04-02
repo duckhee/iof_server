@@ -1,5 +1,5 @@
 //craete apikey
-function createApikey() {
+exports.createApikey = function() {
     var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
     var string_length = 15;
     var randomstring = '';
@@ -11,8 +11,22 @@ function createApikey() {
     return randomstring;
 }
 
+//craete serial
+exports.createserial = function() {
+    var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+    var string_length = 5;
+    var randomstring = '';
+    for (var i = 0; i < string_length; i++) {
+        var rnum = Math.floor(Math.random() * chars.length);
+        randomstring += chars.substring(rnum, rnum + 1);
+    }
+    //document.randform.randomfield.value = randomstring;
+    return randomstring;
+}
+
+
 //null checking
-var isEmpty = function(value) {
+exports.isEmpty = function(value) {
     if (value == "" || value == null || value == undefined || (value != null && typeof value == "object" && !Object.keys(value).length)) {
         return true;
     } else {
@@ -21,15 +35,23 @@ var isEmpty = function(value) {
 };
 
 //phone checking
-var phone_number = function(phone_info) {
+exports.phone_number = function(phone_info) {
     var phone = new Array;
-    if (phone_info.indexOf('-') != -1) {
-        phone = phone_info.split('-');
+    if (phone_info) {
+        if (phone_info.indexOf('-') != -1) {
+            phone = phone_info.split('-');
+        } else {
+            phone[0] = phone_info.substr(0, 3);
+            phone[1] = phone_info.substr(3, 4);
+            phone[2] = phone_info.substr(7, 4);
+        }
+
+        return phone;
     } else {
-        phone[0] = phone_info.substr(0, 3);
-        phone[1] = phone_info.substr(3, 4);
-        phone[2] = phone_info.substr(7, 4);
+        phone[0] = 000;
+        phone[1] = 0000;
+        phone[2] = 0000;
+        return phone;
     }
 
-    return phone;
 }

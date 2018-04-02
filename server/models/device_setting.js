@@ -4,6 +4,15 @@ module.exports = function(sequelize, DataTypes) {
         st_serial: {
             type: DataTypes.STRING,
         },
+        deviceId: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'device',
+                key: 'id'
+            },
+            allowNull: false,
+            onDelete: 'CASCADE'
+        },
         st_address: {
             type: DataTypes.STRING,
         },
@@ -28,9 +37,15 @@ module.exports = function(sequelize, DataTypes) {
         classMethods: {
             associate: function(models) {
                 // associations can be defined here
+                
             }
         }
     });
+
+    device_setting.associate = function(models){
+
+    }
+    
     return device_setting;
 };
 
