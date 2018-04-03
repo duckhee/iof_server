@@ -12,13 +12,13 @@ router.all('/*', function(req, res, next) {
 })
 
 //router login check
-router.all('/device/*', function(req, res, next){
-    if(!req.session.userid){
+router.all('/device/*', function(req, res, next) {
+    if (!req.session.userid) {
         console.log('not login user');
         res.send('<script>alert("not login go to login page"); document.location.href ="/user/login"</script>');
-    }else{
-        console.log('login user');
-         next();
+    } else {
+        console.log('login user :::::: ', req.session.id);
+        next();
     }
 });
 

@@ -77,10 +77,12 @@ exports.list10_value = function(data_info, callback) {
             deviceId: data_info.id
         },
         order: [
-            ['createdAt', 'DESC']
+            //['createdAt', 'DESC'] 오름차순 정렬
+            ['createdAt', 'ASC'] //내림차순 정렬
         ],
         limit: 10,
     }).then(function(rows) {
+        console.log(rows);
         callback(null, rows);
     }).catch(function(err) {
         callback(err, null);
@@ -88,17 +90,17 @@ exports.list10_value = function(data_info, callback) {
 };
 
 //testing serial limit list
-exports.serial10_list = function(data_info, callback){
+exports.serial10_list = function(data_info, callback) {
     models.device_value.findAll({
-        where:{
-            device_serial:data_info.serial
+        where: {
+            device_serial: data_info.serial
         },
-        order:[
+        order: [
             ['createdAt', 'DESC']
         ]
-    }).then((result)=>{
+    }).then((result) => {
         callback(null, result);
-    }).catch((err)=>{
+    }).catch((err) => {
         callback(err, null);
     })
 }
@@ -112,7 +114,7 @@ exports.list_value = function(data_info, callback) {
         order: [
             ['createdAt', 'DESC']
         ],
-        limit:10,
+        limit: 10,
     }).then(function(rows) {
         callback(null, rows);
     }).catch(function(err) {

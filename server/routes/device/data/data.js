@@ -16,8 +16,14 @@ router.get('/', function(req, res, next) {
 router.get('/insert', function(req, res, next) {
     var query_apikey = req.query.serial || req.params.serial || req.body.serial || req.param.serial;
     var insert_data = req.query.value || req.params.value || req.body.value || req.param.value;
+<<<<<<< HEAD
     var serial_info = {
         serial: query_apikey,
+=======
+    console.log('value :::::::: ', insert_data);
+    var apikey_info = {
+        apikey: query_apikey,
+>>>>>>> merge_branch
     };
 
     device_controller.insert_before(serial_info, function(err, row) {
@@ -111,9 +117,9 @@ router.get('/ajaxget', function(req, res, next) {
             next(err);
         } else {
             console.log('device search id ::::', result);
-
+            var devicedata = { id: result.id };
             //data list info
-            data_controller.list10_value(apikey_info, function(err, rows) {
+            data_controller.list10_value(devicedata, function(err, rows) {
                 if (err) {
                     console.log('get data error :::::: ', err);
                     next(err);
