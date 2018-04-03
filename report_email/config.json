@@ -5,5 +5,14 @@
             "user": "pain9301@gmail.com",
             "pass": "won1228A!"
         }
+    },
+    "db": {
+        "development": {
+            "host": "localhost",
+            "user": "root",
+            "password": "candhinc3869",
+            "port": "3306",
+            "database": "database_development"
+        }
     }
 }
