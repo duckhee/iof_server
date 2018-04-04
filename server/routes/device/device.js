@@ -236,18 +236,17 @@ router.get('/detail', function(req, res, next) {
 });
 
 //chang view radon or iof
-router.get('/detail', function(req, res, next){
+router.get('/detail', function(req, res, next) {
     var device_serial = req.query.serial;
-    device_controller.device_type(device_serial, function(err, result){
-        if(result.device_type === 'radon')
-        {
-            res.render('device/radonPage',{
-                serial:device_serial
+    device_controller.device_type(device_serial, function(err, result) {
+        if (result.device_type === 'radon') {
+            res.render('device/radonPage', {
+                serial: device_serial
             });
-        }else if(err){
+        } else if (err) {
             console.log('detail route middleware error :::: ', err);
             next(err);
-        }else{
+        } else {
             console.log('show page iof');
             next();
         }
@@ -256,7 +255,7 @@ router.get('/detail', function(req, res, next){
 
 //detail page get router
 router.get('/detail', function(req, res, next) {
-    var query_device_id = req.query.id || req.body.id || req.params.id || req.param.id;
+    //var query_device_id = req.query.id || req.body.id || req.params.id || req.param.id;
     var device_serial = req.query.serial;
     console.log('get id ::::: ', query_device_id);
     console.log('device serial :::::: ', device_serial);

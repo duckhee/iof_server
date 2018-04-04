@@ -16,14 +16,8 @@ router.get('/', function(req, res, next) {
 router.get('/insert', function(req, res, next) {
     var query_apikey = req.query.serial || req.params.serial || req.body.serial || req.param.serial;
     var insert_data = req.query.value || req.params.value || req.body.value || req.param.value;
-<<<<<<< HEAD
     var serial_info = {
         serial: query_apikey,
-=======
-    console.log('value :::::::: ', insert_data);
-    var apikey_info = {
-        apikey: query_apikey,
->>>>>>> merge_branch
     };
 
     device_controller.insert_before(serial_info, function(err, row) {
