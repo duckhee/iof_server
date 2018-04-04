@@ -2,7 +2,7 @@
 module.exports = function(sequelize, DataTypes) {
     var radon_value = sequelize.define('radon_value', {
         rd_value: {
-            type: DataTypes.STRINNG
+            type: DataTypes.STRING
         },
         deviceId: {
             type: DataTypes.INTEGER,
@@ -40,7 +40,7 @@ module.exports = function(sequelize, DataTypes) {
         }
     });
     radon_value.associate = function(models) {
-        radon_value.belongsTo(models.deivce, {
+        radon_value.belongsTo(models.device, {
             foreignKey: 'deviceId',
             foreignKeyConstraint: true,
             allowNull: false

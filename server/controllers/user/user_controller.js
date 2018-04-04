@@ -5,14 +5,17 @@ var bcrypt = require('bcrypt-nodejs');
 
 //make user
 exports.create_user = function(user_info, callback) {
-    
+    console.log('craete user');
+    var member_password = user_info.user_password;
+        var user_password = bcrypt.hashSync(user_info.user_pw);
+        console.log(user_password);
     models.user.findOrCreate({
         where: {
             user_id: user_info.user_id,
         },
         defaults: {
             user_id: user_info.user_id,
-            user_password: user_info.user_pw,
+            user_password: user_password,
             user_name: user_info.user_name,
             user_email: user_info.user_email,
             user_phone1: user_info.user_phone1,
@@ -172,18 +175,32 @@ exports.delete_user = function(user_info, callback) {
 
 //user login controller
 exports.login = function(user_info, callback) {
-    
+
+    var inputpw = user_info.user_password;
+
     models.user.findOne({
         where: {
             user_email: user_info.user_id,
-            user_password: user_info.user_password
+
         }
     }).then(row => {
         console.log('login row testing : ', row);
-        callback(null, row);
+        if (row.length === 0) {
+            console.log('create user first');
+            callback(null, null, 0);
+        } else {
+            if (!bcrypt.compareSync(inputpw, row.user_password)) {
+                console.log('not compare password');
+                callback(null, null, 1);
+            } else {
+                console.log('login suesss', row);
+                callback(null, row, 2);
+            }
+        }
+
     }).catch(err => {
         console.log('login error : ', err);
-        callback(err, null);
+        callback(err, null, null);
     });
 };
 

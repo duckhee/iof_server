@@ -9,7 +9,7 @@ module.exports = {
                 type: Sequelize.INTEGER
             },
             rd_value: {
-                type: Sequelize.STRINNG
+                type: Sequelize.STRING
             },
             deviceId: {
                 type: Sequelize.INTEGER,
