@@ -103,7 +103,7 @@ router.post('/insert', function(req, res, next) {
 //router ajax get data json
 router.get('/ajaxget', function(req, res, next) {
     var query_apikey = req.query.serial || req.params.serial || req.body.serial || req.param.serial;
-    var apikey_info = { apikey: query_apikey };
+    var apikey_info = { serial: query_apikey };
 
     device_controller.find_device(apikey_info, function(err, result) {
         if (err) {
