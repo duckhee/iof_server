@@ -255,7 +255,7 @@ router.get('/detail', function(req, res, next) {
 
 //detail page get router
 router.get('/detail', function(req, res, next) {
-    //var query_device_id = req.query.id || req.body.id || req.params.id || req.param.id;
+    var query_device_id = req.query.id || req.body.id || req.params.id || req.param.id;
     var device_serial = req.query.serial;
     console.log('get id ::::: ', query_device_id);
     console.log('device serial :::::: ', device_serial);
