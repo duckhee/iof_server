@@ -16,12 +16,11 @@ router.get('/', function(req, res, next) {
 router.get('/insert', function(req, res, next) {
     var query_apikey = req.query.serial || req.params.serial || req.body.serial || req.param.serial;
     var insert_data = req.query.value || req.params.value || req.body.value || req.param.value;
-    console.log('value :::::::: ', insert_data);
-    var apikey_info = {
-        apikey: query_apikey,
+    var serial_info = {
+        serial: query_apikey,
     };
 
-    device_controller.insert_before(apikey_info, function(err, row) {
+    device_controller.insert_before(serial_info, function(err, row) {
         if (err) {
             console.log('insert before data error ::: ', err);
             res.json('failed');

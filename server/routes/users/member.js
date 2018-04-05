@@ -116,18 +116,15 @@ router.post('/process/login', function(req, res, next) {
     };
     console.log('login user info ::::::::::::: ', user_info);
 
-    user_controller.login(user_info, function(err, row, check) {
+    user_controller.login(user_info, function(err, row) {
         if (err) {
             res.redirect('/user/login');
         } else if (row) {
             req.session.userid = row.user_id;
             res.redirect('/');
-        } else if(check === 0){
-            console.log('test not id');
-            res.send('<script>alert("not user go to registe page"); document.location.href ="/user/registe"</script>');
-        }else if(check === 1){
-            console.log('test not pw');
-            res.send('<script>alert("not match password"); document.location.href ="/user/login"</script>');
+        } else {
+            console.log('null');
+            res.redirect('/user/login');
         }
     });
 
