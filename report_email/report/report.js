@@ -6,7 +6,7 @@ var connection_info = 'device connection report : ';
 
 var mail_option = {
     from: 'IOF Server report <' + config.mail.auth.user + '>',
-    to: 'fain9301@yahoo.com',
+    to: 'iof@candh.co.kr',
     subject: 'server error report'
 };
 //check network connection module

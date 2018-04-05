@@ -65,7 +65,12 @@ module.exports = function(sequelize, DataTypes) {
                     allowNull: false,
                     onDelete: 'CASCADE',
                 });
-
+                models.device.hasMany(models.device_value, { //hosOne??
+                    foreignKey: 'deviceId', //has사용시는 상대방 ?? 자기자신도 가능 ?
+                    onDelete: 'CASCADE',
+                    allowNull: false,
+                    foreignKeyConstraint: true
+                });
                 models.device.hasMany(models.device_network, { //hosOne??
                     foreignKey: 'deviceId', //has사용시는 상대방 ?? 자기자신도 가능 ?
                     onDelete: 'CASCADE',
@@ -104,6 +109,19 @@ module.exports = function(sequelize, DataTypes) {
             foreignKeyConstraint: true
         });
 
+        device.hasMany(models.iof_value, {
+            foreignKey: 'deviceId', //has사용시는 상대방 ?? 자기자신도 가능 ?
+            onDelete: 'CASCADE',
+            allowNull: false,
+            foreignKeyConstraint: true
+        });
+
+        device.hasMany(models.radon_value, {
+            foreignKey: 'deviceId', //has사용시는 상대방 ?? 자기자신도 가능 ?
+            onDelete: 'CASCADE',
+            allowNull: false,
+            foreignKeyConstraint: true
+        });
 
         device.hasOne(models.device_network, { //hosOne??
             foreignKey: 'deviceId', //has사용시는 상대방 ?? 자기자신도 가능 ?
