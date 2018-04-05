@@ -185,12 +185,12 @@ exports.login = function(user_info, callback) {
         }
     }).then(row => {
         console.log('login row testing : ', row);
-        if (row.length === 0) {
+        if (row === null) {
             console.log('create user first');
             callback(null, null, 0);
         } else {
             if (!bcrypt.compareSync(inputpw, row.user_password)) {
-                console.log('not compare password');
+                console.log('not match password');
                 callback(null, null, 1);
             } else {
                 console.log('login suesss', row);

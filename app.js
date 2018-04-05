@@ -117,9 +117,7 @@ app.use('/device', device);
 app.use('/boards', boarder);
 //get data or insert data router
 app.use('/data', data);
-//test login
-var member = require('./server/routes/users/member');
-app.use('/test', member);
+
 
 
 // catch 404 and forward to error handler
