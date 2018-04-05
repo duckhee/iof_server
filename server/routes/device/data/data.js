@@ -64,7 +64,7 @@ router.post('/insert', function(req, res, next) {
     var apikey_info = {
         apikey: query_apikey,
     };
-
+    console.log('get value :::::::::::::::: ', insert_data);
     device_controller.insert_before(apikey_info, function(err, row) {
         if (err) {
             console.log('insert before data error ::: ', err);
@@ -72,7 +72,7 @@ router.post('/insert', function(req, res, next) {
         } else if (row) {
             console.log('inset before data success :::::', row.id);
             var data_info = {
-                data: insert_data,
+                value: insert_data,
                 apikey: query_apikey,
                 device_id: row.id,
                 serial: query_apikey,
