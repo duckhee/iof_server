@@ -237,6 +237,7 @@ router.get('/detail', function(req, res, next) {
 
 //chang view radon or iof
 router.get('/detail', function(req, res, next) {
+    var query_device_id = req.query.id || req.body.id || req.params.id || req.param.id;
     var device_serial = req.query.serial;
     device_controller.device_type(device_serial, function(err, result) {
         if (result.device_type === 'radon') {
