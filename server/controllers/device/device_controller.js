@@ -80,7 +80,7 @@ exports.insert_before = function(device_info, callback) {
     });
 };
 
-//find detail device
+//find detail device 
 exports.find_device = function(device_info, callback) {
     models.device.find({
         where: {
@@ -226,16 +226,16 @@ exports.count_device = function(device_info, callback) {
 };
 
 //find device type
-exports.device_type = function(serial, callback){
+exports.device_type = function(serial, callback) {
     models.device.find({
-        where:{
-            device_serial:serial
+        where: {
+            device_serial: serial
         },
-        attributes:['device_type']
-    }).then((result)=>{
+        attributes: ['device_type']
+    }).then((result) => {
         console.log('device type :::::::::::::: ', result);
         callback(null, result);
-    }).catch((err)=>{
+    }).catch((err) => {
         console.log('device get type error ::::::::::::: ', err);
         callback(err, null);
     });

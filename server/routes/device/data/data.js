@@ -14,33 +14,34 @@ router.get('/', function(req, res, next) {
 
 //router insert data
 router.get('/insert', function(req, res, next) {
-    var query_apikey = req.query.serial || req.params.serial || req.body.serial || req.param.serial;
+    var query_serial = req.query.serial || req.params.serial || req.body.serial || req.param.serial;
     var insert_data = req.query.value || req.params.value || req.body.value || req.param.value;
-    var serial_info = {
-        serial: query_apikey,
+    var apikey_info = {
+        serial: query_serial,
     };
-
-    device_controller.insert_before(serial_info, function(err, row) {
+    console.log('get value :::::::::::::::: ', insert_data);
+    device_controller.insert_before(apikey_info, function(err, row) {
         if (err) {
-            console.log('insert before data error ::: ', err);
+            // console.log('insert before data error ::: ', err);
             res.json('failed');
         } else if (row) {
             console.log('inset before data success :::::', row.id);
             var data_info = {
-                data: insert_data,
-                apikey: query_apikey,
+                value: insert_data,
+                apikey: query_serial,
                 device_id: row.id,
-                serial: query_apikey,
+                serial: query_serial,
                 sd_address: row.address
             }
+            console.log('data info :::::::::::: ', data_info.value);
             data_controller.insert_value(data_info, function(err, row) {
                 if (err) {
-                    res.json('failed');
+                    res.status(404);
                 } else {
                     network_controller.update_actstatus(data_info, function(err, result) {
                         if (err) {
                             console.log('updateing active network error ::::: ', err);
-                            res.json('failed');
+                            res.status(404);
                         } else {
                             console.log('success updating network set ::::: ', result);
                             res.json('success');
@@ -50,32 +51,30 @@ router.get('/insert', function(req, res, next) {
                 }
             });
         } else {
-            res.json('failed');
+            res.status(500);
         }
     });
-
 });
-
 
 //router insert data
 router.post('/insert', function(req, res, next) {
-    var query_apikey = req.query.serial || req.params.serial || req.body.serial || req.param.serial;
+    var query_serial = req.query.serial || req.params.serial || req.body.serial || req.param.serial;
     var insert_data = req.query.value || req.params.value || req.body.value || req.param.value;
     var apikey_info = {
-        apikey: query_apikey,
+        apikey: query_serial,
     };
     console.log('get value :::::::::::::::: ', insert_data);
     device_controller.insert_before(apikey_info, function(err, row) {
         if (err) {
-            console.log('insert before data error ::: ', err);
+            // console.log('insert before data error ::: ', err);
             res.json('failed');
         } else if (row) {
             console.log('inset before data success :::::', row.id);
             var data_info = {
                 value: insert_data,
-                apikey: query_apikey,
+                apikey: query_serial,
                 device_id: row.id,
-                serial: query_apikey,
+                serial: query_serial,
                 sd_address: row.address
             }
             data_controller.insert_value(data_info, function(err, row) {
