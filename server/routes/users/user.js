@@ -124,10 +124,10 @@ router.post('/process/login', function(req, res, next) {
             res.redirect('/');
         } else if(check === 0){
             console.log('test not id');
-            res.redirect('/user/login');
-        }else if(check === 2){
+            res.send('<script>alert("not user go to registe page"); document.location.href ="/user/registe"</script>');
+        }else if(check === 1){
             console.log('test not pw');
-            res.redirect('/user/login');
+            res.send('<script>alert("not match password"); document.location.href ="/user/login"</script>');
         }
     });
 
