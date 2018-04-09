@@ -13,23 +13,6 @@ exports.num_device = function(callback) {
     });
 };
 
-//checking device type
-/*
-exports.get_devicetype = function(data_info, callback) {
-    models.device.find({
-        attributes: ['device_type'],
-        where: {
-            device_serial: data_info.type
-        }
-    }).then((result) => {
-        console.log('get device type :::::: ', result);
-        callback(null, result);
-    }).cratch((err) => {
-        console.log('get device type error ::::::: ', err);
-        callback(err, null);
-    });
-}
-*/
 
 //group device callback(row, err) models attribute(하나의 속성 값만 가져오는 것), group(속성 값으로 묵어주는 것)로 해결이 가능하다. 더 알아보기 
 exports.group_device = function(callback) {
@@ -88,7 +71,7 @@ exports.create_device = function(device_info, callback) {
 exports.insert_before = function(device_info, callback) {
     models.device.findOne({
         where: {
-            device_serial: device_info.apikey
+            device_serial: device_info.serial
         }
     }).then((row) => {
         callback(null, row);
@@ -97,11 +80,11 @@ exports.insert_before = function(device_info, callback) {
     });
 };
 
-//find detail device
+//find detail device 
 exports.find_device = function(device_info, callback) {
     models.device.find({
         where: {
-            device_serial: device_info.apikey,
+            device_serial: device_info.serial,
 
         }
     }).then(function(row) {
@@ -243,16 +226,16 @@ exports.count_device = function(device_info, callback) {
 };
 
 //find device type
-exports.device_type = function(serial, callback){
+exports.device_type = function(serial, callback) {
     models.device.find({
-        where:{
-            device_serial:serial
+        where: {
+            device_serial: serial
         },
-        attributes:['device_type']
-    }).then((result)=>{
+        attributes: ['device_type']
+    }).then((result) => {
         console.log('device type :::::::::::::: ', result);
         callback(null, result);
-    }).catch((err)=>{
+    }).catch((err) => {
         console.log('device get type error ::::::::::::: ', err);
         callback(err, null);
     });

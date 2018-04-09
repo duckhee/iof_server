@@ -9,7 +9,7 @@ var mysql = require('mysql');
 var mail_option = {
     from: 'IOF Server report <' + config.mail.auth.user + '>',
     to: 'fain9301@yahoo.com',
-    subject: 'server error report'
+    subject: 'device connection report'
 };
 
 var db_config = {
@@ -20,7 +20,7 @@ var db_config = {
     database: 'database_development'
 }
 
-var pool = mysql.createPool(db_config);
+var pool = mysql.createPool(config.db.development);
 
 //get serial
 exports.get_serial = function(callback) {
@@ -60,7 +60,7 @@ exports.status_change = function(serial, callback) {
             //process.exit();
             callback(err, null);
         } else {
-           
+
             //var serial = "dxp2I9QRb3OwRevMF0Fx";
             var serial = serial;
             //console.log('get connection ::::: ', conn);

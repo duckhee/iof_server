@@ -12,19 +12,23 @@ module.exports = function(sequelize, DataTypes) {
                 validate: {
                     notNull: true,
                     notNull(val) {
-                      if (!val) {
-                        throw new Error('이름이 입력되지 않았습니다.');
-                      }
+                        if (!val) {
+                            throw new Error('이름이 입력되지 않았습니다.');
+                        }
                     }
                 }
                 */
             },
+            user_name: {
+                type: DataTypes.STRING,
+            },
+            user_email: {
+                type: DataTypes.STRING,
+                unique: true
+            },
             user_password: {
                 type: DataTypes.STRING,
                 allowNull: false,
-            },
-            user_name: {
-                type: DataTypes.STRING,
             },
             user_phone1: {
                 type: DataTypes.INTEGER,
@@ -43,10 +47,6 @@ module.exports = function(sequelize, DataTypes) {
             },
             user_zipcode: {
                 type: DataTypes.STRING
-            },
-            user_email: {
-                type: DataTypes.STRING,
-                unique: true
             },
             user_status: {
                 type: DataTypes.ENUM,

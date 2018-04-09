@@ -33,10 +33,10 @@ exports.insert_value = function(data_info, callback) {
         sd_text: data_info.value,
         sd_data: data_info.value,
     }).then(function(row) {
-        console.log('success insert data success ::::: ', row);
+        //console.log('success insert data success ::::: ', row);
         callback(null, row);
     }).catch(function(err) {
-        console.log('erorr insert value :::::: ', err);
+        // console.log('erorr insert value :::::: ', err);
         callback(err, null);
     })
 }
