@@ -3,6 +3,7 @@ module.exports = function(sequelize, DataTypes) {
     var device_setting = sequelize.define('device_setting', {
         st_serial: {
             type: DataTypes.STRING,
+            allowNull: false,
         },
         deviceId: {
             type: DataTypes.INTEGER,
