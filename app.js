@@ -1,5 +1,3 @@
-import { setting_device } from './server/controllers/device/device_setting_controller';
-
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -16,6 +14,11 @@ var user = require('./server/routes/users/user');
 var device = require('./server/routes/device/device');
 var boarder = require('./server/routes/boarder/boarder');
 var data = require('./server/routes/device/data/data');
+
+//controller add 
+var dataController = require('./server/controllers/device/data_controller');
+var settingController = require('./server/controllers/device/device_setting_controller');
+var deviceContrller = require('./server/controllers/device/device_controller');
 
 //passport testing
 //var custom_passport = require('./server/config/passport');
@@ -65,7 +68,7 @@ io.sockets.on('connection', function(socket) {
                 });
             }
             //이미지일 경우만 저장
-            fs.writeFile(process.cwd() +"/camera_images/" + params.serial + "/" + date_folder + "/" + params.img_name, file.buffer, function(err) {
+            fs.writeFile(process.cwd() +"/camera_images/" + params.serial + "/" + date_folder + "/" + params.filename, file.buffer, function(err) {
                 if (err) {
                     console.log('File could not be saved: ' + err);
                 } else {
@@ -74,7 +77,7 @@ io.sockets.on('connection', function(socket) {
                     var camera_info = {
                         "si_serial": params.serial,
                         "si_path": date_folder,
-                        "si_filename": params.img_name,
+                        "si_filename": params.filename,
                         "si_filesize": params.filesize,
                         "createdAt": filename_arr[0],
                         "updatedAt": filename_arr[0]
@@ -89,7 +92,7 @@ io.sockets.on('connection', function(socket) {
                             console.log('error');
                         }
                     });
-                    console.log('File ' + params.img_name + " saved");
+                    console.log('File ' + params.filename + " saved");
                 }
             });
         });
@@ -113,14 +116,36 @@ io.sockets.on('connection', function(socket) {
         //save sensor info
         socket.io('sensor_data_request', function(data){
             console.log('socket ::::: ' + data);
-
+            dataController.insert_value(data, function(err, result){
+                if(result){
+                    io.emit('sensor_data_receive_'+data.sd_serial, {msg:1});
+                }else if(err){
+                    console.log('socket data insert error :::::: ', err);
+                }else{
+                    console.log('null insert data');
+                }
+            });
         });
         
         socket.io('sensor_array_data_request', function(data){
             console.log('socket arr :::::::: ', data);
-
-            
-        })
+            dataController.insert_array_data(data, function(err, result){
+                if(result){
+                    io.emit('sensor_data_receive_'+data[0].sd_serial,{msg:1});
+                    dataController.delete_reduplication_data(function(err){
+                        if(err){
+                            console.log('app delete reduplication error ::::::::::::: ', err);
+                        }else{
+                            console.log('null delete data');
+                        }
+                    });
+                }else if(err){
+                    console.log('insert array data requeset inserto error :::::::::::: ',err);
+                }else{
+                    console.log('null data ');
+                }
+            });
+        });
     });
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
