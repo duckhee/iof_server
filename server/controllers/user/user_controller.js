@@ -217,5 +217,5 @@ exports.find_info = function(user_info, callback) {
     }).catch((err) => {
         console.log('find user info error ::::: ', err);
         callback(err, null);
-    })
+    });
 }

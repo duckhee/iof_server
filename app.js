@@ -15,6 +15,11 @@ var device = require('./server/routes/device/device');
 var boarder = require('./server/routes/boarder/boarder');
 var data = require('./server/routes/device/data/data');
 
+//controller add 
+var dataController = require('./server/controllers/device/data_controller');
+var settingController = require('./server/controllers/device/device_setting_controller');
+var deviceContrller = require('./server/controllers/device/device_controller');
+
 //passport testing
 //var custom_passport = require('./server/config/passport');
 
@@ -37,18 +42,19 @@ io.sockets.on('connection', function(socket) {
     var delivery = dl.listen(socket);
 
     delivery.on('receive.success', function(file) {
+        console.log("delivery on");
         //채널별 폴더유무 체크
         var params = file.params;
         var date_folder = moment().format('YYYYMMDD');
 
         //일별 폴더 유무 체크
-        fs.exists('./camera_images/' + params.channel + "/" + date_folder, function(exists) {
+        fs.exists(process.cwd() +'/camera_images/' + params.serial + "/" + date_folder, function(exists) {
             console.log(exists);
             if (!exists) {
                 //채널 폴더 유무 체크
-                fs.exists('./camera_images/' + params.channel, function(exists) {
+                fs.exists(process.cwd() +'/camera_images/' + params.serial, function(exists) {
                     if (!exists) {
-                        fs.mkdir('./camera_images/' + params.channel, '0777', function(err) {
+                        fs.mkdir(process.cwd() +'/camera_images/' + params.serial, '0777', function(err) {
                             if (err) throw err;
                             console.log('dir channel writed');
                         });
@@ -56,18 +62,88 @@ io.sockets.on('connection', function(socket) {
                 });
 
                 //일별 폴더 유무 체크
-                fs.mkdir('./camera_images/' + params.channel + "/" + date_folder, '0777', function(err) {
+                fs.mkdir(process.cwd() +'/camera_images/' + params.serial + "/" + date_folder, '0777', function(err) {
                     if (err) throw err;
                     console.log('dir date writed');
                 });
             }
             //이미지일 경우만 저장
-            fs.writeFile("./camera_images/" + params.channel + "/" + date_folder + "/" + params.img_name, file.buffer, function(err) {
+            fs.writeFile(process.cwd() +"/camera_images/" + params.serial + "/" + date_folder + "/" + params.filename, file.buffer, function(err) {
                 if (err) {
                     console.log('File could not be saved: ' + err);
                 } else {
-                    console.log('File ' + params.img_name + " saved");
-                };
+                    var filename_arr = params.img_name.split(".");
+                    console.log('image time :::::: ', filename_arr[0]);
+                    var camera_info = {
+                        "si_serial": params.serial,
+                        "si_path": date_folder,
+                        "si_filename": params.filename,
+                        "si_filesize": params.filesize,
+                        "createdAt": filename_arr[0],
+                        "updatedAt": filename_arr[0]
+                    };
+                    console.log(camera_info);
+                    cameraControllers.insert_image(camera_info, function(err, row) {
+                        if (err) {
+                            //console.log(err);
+                        } else if (row) {
+                            console.log(row.stack);
+                        } else {
+                            console.log('error');
+                        }
+                    });
+                    console.log('File ' + params.filename + " saved");
+                }
+            });
+        });
+        //socket disconnect
+        socket.on('disconnect', function(){
+            console.log('user disconnected');
+        });
+        //insert device info
+        socket.on('device_setting_request', function(dat){
+            console.log(data);
+            //first time device registe
+            if(data.msg === 0){
+                //device setting
+                //devive settting found
+
+            }
+            if(data.msg === 1){
+                //update device setting
+            }
+        });
+        //save sensor info
+        socket.io('sensor_data_request', function(data){
+            console.log('socket ::::: ' + data);
+            dataController.insert_value(data, function(err, result){
+                if(result){
+                    io.emit('sensor_data_receive_'+data.sd_serial, {msg:1});
+                }else if(err){
+                    console.log('socket data insert error :::::: ', err);
+                }else{
+                    console.log('null insert data');
+                }
+            });
+        });
+        
+        socket.io('sensor_array_data_request', function(data){
+            console.log('socket arr :::::::: ', data);
+            dataController.insert_array_data(data, function(err, result){
+                if(result){
+                    io.emit('sensor_data_receive_'+data[0].sd_serial,{msg:1});
+                    dataController.delete_reduplication_data(function(err){
+                        if(err){
+                            console.log('app delete reduplication error ::::::::::::: ', err);
+                        }else{
+                            console.log('null delete data');
+                        }
+                    });
+                }else if(err){
+                    console.log('insert array data requeset inserto error :::::::::::: ',err);
+                }else{
+                    console.log('null data ');
+                }
             });
         });
     });
