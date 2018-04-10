@@ -114,7 +114,7 @@ io.sockets.on('connection', function(socket) {
             }
         });
         //save sensor info
-        socket.io('sensor_data_request', function(data) {
+        socket.on('sensor_data_request', function(data) {
             console.log('socket ::::: ' + data);
             deviceContrller.insert_before(data, function(err, result) {
                 if (err) {
