@@ -46,7 +46,7 @@ io.sockets.on('connection', function(socket) {
         //채널별 폴더유무 체크
         var params = file.params;
         var date_folder = moment().format('YYYYMMDD');
-        if (!fs.existsSync(process.cwd() + '/images')) {
+        if (!fs.existsSync(process.cwd() + '/camera_images')) {
             fs.mkdirSync(process.cwd() + '/camera_images', '0777');
         }
         var deviceinfo = { serial: params.serial };
