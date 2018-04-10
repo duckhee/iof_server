@@ -85,7 +85,7 @@ io.sockets.on('connection', function(socket) {
                         if (err) {
                             console.log('File could not be saved: ' + err);
                         } else {
-                            var filename_arr = params.img_name.split(".");
+                            var filename_arr = params.filename.split(".");
                             console.log('image time :::::: ', filename_arr[0]);
                             var camera_info = {
                                 "si_serial": params.serial,
