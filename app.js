@@ -50,7 +50,7 @@ io.sockets.on('connection', function(socket) {
             fs.mkdirSync(process.cwd() + '/camera_images', '0777');
         }
         var deviceinfo = { serial: params.serial };
-        var device_serial = deviceContrller.find_device(deviceinfo, function(err, result) {
+        var device_serial = deviceContrller.insert_before(deviceinfo, function(err, result) {
             if (err) {
                 console.log('device checking error ::::::::: ', err);
             } else if (result) {
@@ -100,9 +100,11 @@ io.sockets.on('connection', function(socket) {
                             console.log(camera_info);
                             cameraControllers.insert_image(camera_info, function(err, row) {
                                 if (err) {
-                                    //console.log(err);
+                                    console.log('insert image error ::::::::::: ', err);
+                                    console.log('insert image error stack ::::::::::: ', err.stack);
+                                    console.log('insert image error code ::::::::::: ', err.code);
                                 } else if (row) {
-                                    console.log(row.stack);
+                                    console.log('insert image log :::::::::::: ', row);
                                 } else {
                                     console.log('error');
                                 }
@@ -122,7 +124,7 @@ io.sockets.on('connection', function(socket) {
         });
         //insert device info
         socket.on('device_setting_request', function(dat) {
-            console.log(data);
+            console.log('device setting request ::::::::: ', data);
             //first time device registe
             if (data.msg === 0) {
                 //device setting
