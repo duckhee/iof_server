@@ -50,7 +50,7 @@ io.sockets.on('connection', function(socket) {
             fs.mkdirSync(process.cwd() + '/camera_images', '0777');
         }
         var deviceinfo = { serial: params.serial };
-        var device_serial = deviceContrller.find_device(deviceinfo, function(err, result) {
+        var device_serial = deviceContrller.insert_before(deviceinfo, function(err, result) {
             if (err) {
                 console.log('device checking error ::::::::: ', err);
             } else if (result) {
@@ -100,9 +100,11 @@ io.sockets.on('connection', function(socket) {
                             console.log(camera_info);
                             cameraControllers.insert_image(camera_info, function(err, row) {
                                 if (err) {
-                                    //console.log(err);
+                                    console.log('insert image error ::::::::::: ', err);
+                                    console.log('insert image error stack ::::::::::: ', err.stack);
+                                    console.log('insert image error code ::::::::::: ', err.code);
                                 } else if (row) {
-                                    console.log(row.stack);
+                                    console.log('insert image log :::::::::::: ', row);
                                 } else {
                                     console.log('error');
                                 }
@@ -116,74 +118,79 @@ io.sockets.on('connection', function(socket) {
             }
         })
 
-        //socket disconnect
-        socket.on('disconnect', function() {
-            console.log('user disconnected');
-        });
-        //insert device info
-        socket.on('device_setting_request', function(dat) {
-            console.log(data);
-            //first time device registe
-            if (data.msg === 0) {
-                //device setting
-                //devive settting found
+    });
 
-            }
-            if (data.msg === 1) {
-                //update device setting
-            }
-        });
-        //save sensor info
-        socket.on('sensor_data_request', function(data) {
-            console.log('socket ::::: ' + data);
-            deviceContrller.insert_before(data, function(err, result) {
-                if (err) {
-                    console.log('insert before checking device error ::::::', err);
-                } else if (result) {
-                    console.log('device checking success !');
-                    dataController.insert_value(data, function(err, result) {
-                        if (result) {
-                            io.emit('sensor_data_receive_' + data.sd_serial, { msg: 1 });
-                        } else if (err) {
-                            console.log('socket data insert error :::::: ', err);
-                        } else {
-                            console.log('null insert device');
-                        }
-                    });
-                } else {
-                    console.log('not device ');
-                }
-            });
-        });
 
-        socket.on('sensor_array_data_request', function(data) {
-            console.log('socket arr :::::::: ', data);
-            deviceContrller.insert_before(data, function(err, result) {
-                if (err) {
-                    console.log('insert before checking device error ::::::', err);
-                } else if (result) {
-                    dataController.insert_array_data(data, function(err, result) {
-                        if (result) {
-                            io.emit('sensor_data_receive_' + data[0].sd_serial, { msg: 1 });
-                            dataController.delete_reduplication_data(function(err) {
-                                if (err) {
-                                    console.log('app delete reduplication error ::::::::::::: ', err);
-                                } else {
-                                    console.log('null delete data');
-                                }
-                            });
-                        } else if (err) {
-                            console.log('insert array data requeset inserto error :::::::::::: ', err);
-                        } else {
-                            console.log('null data ');
-                        }
-                    });
-                } else {
-                    console.log('null insert device');
-                }
-            });
+    //socket disconnect
+    socket.on('disconnect', function() {
+        console.log('user disconnected');
+    });
+    //insert device info
+    socket.on('device_setting_request', function(dat) {
+        console.log('device setting request ::::::::: ', data);
+        //first time device registe
+        if (data.msg === 0) {
+            //device setting
+            //devive settting found
+
+        }
+        if (data.msg === 1) {
+            //update device setting
+        }
+    });
+    //save sensor info
+    socket.on('sensor_data_request', function(data) {
+        console.log('socket ::::: ' + data);
+        deviceContrller.insert_before(data, function(err, result) {
+            if (err) {
+                console.log('insert before checking device error ::::::', err);
+            } else if (result) {
+                console.log('device checking success !');
+                dataController.insert_value(data, function(err, result) {
+                    if (result) {
+                        io.emit('sensor_data_receive_' + data.sd_serial, { msg: 1 });
+                    } else if (err) {
+                        console.log('socket data insert error :::::: ', err);
+                    } else {
+                        console.log('null insert device');
+                    }
+                });
+            } else {
+                console.log('not device ');
+            }
         });
     });
+
+    socket.on('sensor_array_data_request', function(data) {
+        console.log('socket arr :::::::: ', data);
+        deviceContrller.insert_before(data, function(err, result) {
+            if (err) {
+                console.log('insert before checking device error ::::::', err);
+            } else if (result) {
+                dataController.insert_array_data(data, function(err, result) {
+                    if (result) {
+                        io.emit('sensor_data_receive_' + data[0].sd_serial, { msg: 1 });
+                        dataController.delete_reduplication_data(function(err) {
+                            if (err) {
+                                console.log('app delete reduplication error ::::::::::::: ', err);
+                            } else {
+                                console.log('null delete data');
+                            }
+                        });
+                    } else if (err) {
+                        console.log('insert array data requeset inserto error :::::::::::: ', err);
+                    } else {
+                        console.log('null data ');
+                    }
+                });
+            } else {
+                console.log('null insert device');
+            }
+        });
+    });
+
+
+
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
