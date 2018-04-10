@@ -53,7 +53,7 @@ io.sockets.on('connection', function(socket) {
         var device_serial = deviceContrller.find_device(deviceinfo, function(err, result) {
             if (err) {
                 console.log('device checking error ::::::::: ', err);
-            } else if (rseult) {
+            } else if (result) {
                 if (!fs.existsSync(process.cwd() + '/camera_images/' + params.serial + '/' + date_folder)) {
                     fs.mkdirSync(process.cwd() + '/camera_images/' + params.serial);
                 }
