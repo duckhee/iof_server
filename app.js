@@ -136,7 +136,7 @@ io.sockets.on('connection', function(socket) {
             });
         });
 
-        socket.io('sensor_array_data_request', function(data) {
+        socket.on('sensor_array_data_request', function(data) {
             console.log('socket arr :::::::: ', data);
             deviceContrller.insert_before(data, function(err, result) {
                 if (err) {
