@@ -19,11 +19,13 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false,
             onDelete: 'CASCADE'
         },
+        /*
         si_apikey: {
             type: DataTypes.STRING,
             unique: true,
             allowNull: false,
         },
+        */
         si_path: {
             type: DataTypes.STRING,
         },
@@ -38,7 +40,7 @@ module.exports = function(sequelize, DataTypes) {
         classMethods: {
             associate: function(models) {
                 // associations can be defined here
-                
+
                 models.camera_image.belongsTo(models.device, {
                     foreignKeyConstraint: true,
                     foreignKey: 'id',
@@ -53,17 +55,17 @@ module.exports = function(sequelize, DataTypes) {
                 });
 
             }
-        }   
+        }
     });
 
-    camera_image.associate = function(models){
+    camera_image.associate = function(models) {
         camera_image.belongsTo(models.device, {
             foreignKeyConstraint: true,
             foreignKey: 'id',
             allowNull: false,
             onDelete: 'CASCADE',
         });
-        
+
         camera_image.belongsTo(models.device, {
             foreignKeyConstraint: true,
             foreignKey: 'device_serial',

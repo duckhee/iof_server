@@ -26,6 +26,9 @@ build/Release
 # https://docs.npmjs.com/cli/shrinkwrap#caveats
 node_modules
 
+#camera images
+camera_images
+
 # Debug log from npm
 npm-debug.log
 npm-debug.log.2104413883
