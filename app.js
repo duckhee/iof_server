@@ -54,8 +54,11 @@ io.sockets.on('connection', function(socket) {
             if (err) {
                 console.log('device checking error ::::::::: ', err);
             } else if (result) {
-                if (!fs.existsSync(process.cwd() + '/camera_images/' + params.serial + '/' + date_folder)) {
+                if (!fs.existsSync(process.cwd() + '/camera_images/' + params.serial)) {
                     fs.mkdirSync(process.cwd() + '/camera_images/' + params.serial);
+                }
+                if (!fs.existsSync(process.cwd() + '/camera_images/' + params.serial + '/' + date_folder)) {
+                    fs.mkdirSync(process.cwd() + '/camera_images/' + params.serial + '/' + date_folder);
                 }
                 //일별 폴더 유무 체크
                 fs.exists(process.cwd() + '/camera_images/' + params.serial + "/" + date_folder, function(exists) {
