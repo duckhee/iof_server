@@ -6,7 +6,11 @@ var camera_image = require('../../models/camera_image');
 //inset carmera
 exports.insert_image = function(camera_info, callback) {
     models.camera_image.create({
-
+        deviceId: camera_info.id,
+        si_serial: camera_info.si_serial,
+        si_path: camera_info.si_path,
+        si_filename: camera_info.si_filename,
+        si_filesize: camera_info.si_filesize
     }).then(function(row) {
         callback(null, row);
     }).catch(function(err) {

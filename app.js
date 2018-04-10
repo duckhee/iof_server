@@ -19,7 +19,7 @@ var data = require('./server/routes/device/data/data');
 var dataController = require('./server/controllers/device/data_controller');
 var settingController = require('./server/controllers/device/device_setting_controller');
 var deviceContrller = require('./server/controllers/device/device_controller');
-
+var cameraControllers = require('./server/controllers/device/image_controller');
 //passport testing
 //var custom_passport = require('./server/config/passport');
 
@@ -87,13 +87,15 @@ io.sockets.on('connection', function(socket) {
                         } else {
                             var filename_arr = params.filename.split(".");
                             console.log('image time :::::: ', filename_arr[0]);
+
                             var camera_info = {
                                 "si_serial": params.serial,
                                 "si_path": date_folder,
                                 "si_filename": params.filename,
                                 "si_filesize": params.filesize,
                                 "createdAt": filename_arr[0],
-                                "updatedAt": filename_arr[0]
+                                "updatedAt": filename_arr[0],
+                                "id": result.id
                             };
                             console.log(camera_info);
                             cameraControllers.insert_image(camera_info, function(err, row) {
