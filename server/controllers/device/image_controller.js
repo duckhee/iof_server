@@ -55,7 +55,7 @@ exports.findinsert_image = function(camera_info, callback) {
 exports.find_image = function(camera_info, callback) {
     models.camera_image.find({
         where: {
-
+            si_serial: camera_info.serial
         },
         order: [
             ['createdAt', 'DESC']

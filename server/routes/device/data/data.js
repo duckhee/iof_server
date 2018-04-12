@@ -4,7 +4,7 @@ var router = express.Router();
 var device_controller = require('../../../controllers/device/device_controller');
 var network_controller = require('../../../controllers/device/network_controller');
 var data_controller = require('../../../controllers/device/data_controller');
-
+var image_controller = require('../../../controllers/device/image_controller');
 //router root data
 router.get('/', function(req, res, next) {
     /// next();
@@ -164,10 +164,17 @@ router.get('/listajaximage', function(req, res, next) {
 //router ajax image one 
 router.get('/ajaximage', function(req, res, next) {
     var get_serial = req.query.serial || req.body.serial || req.params.serial || req.param.serial;
-
     console.log('get serial :::::::: ', get_serial);
-
-    next();
+    var imageInof = { "serial": get_serial };
+    image_controller.find_image(imageInof, function(err, result) {
+        if (err) {
+            console.log('image find error ::::: ', err);
+        } else if (result) {
+            res.json(result);
+        } else {
+            res.json('null');
+        }
+    });
 });
 
 //router ajax  text data
