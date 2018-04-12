@@ -156,8 +156,8 @@ io.sockets.on('connection', function(socket) {
                     "apikey": result.device_apikey,
                     "device_id": result.id,
                     "sd_address": data.info.sd_address,
-                    "sd_text": data.info.value,
-                    "sd_data": data.info.value,
+                    "value": data.info.value,
+
                 };
                 dataController.insert_value(insertValue, function(err, result) {
                     if (result) {
