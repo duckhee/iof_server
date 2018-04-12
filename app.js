@@ -123,7 +123,7 @@ io.sockets.on('connection', function(socket) {
 
     //socket disconnect
     socket.on('disconnect', function() {
-        console.log('user disconnected');
+        console.log('user disconnected socket end device :::::: ');
     });
     //insert device info
     socket.on('device_setting_request', function(data) {
@@ -132,11 +132,13 @@ io.sockets.on('connection', function(socket) {
         if (data.msg === 0) {
             //device setting
             //devive settting found
+            console.log('testing msg == 0');
             io.emit('device_setting_receive_6iOAk0yqx3eRspZXuSsV', "msg 0 testing");
 
         }
         if (data.msg === 1) {
             //update device setting
+            console.log('testing msg == 1');
             io.emit('device_setting_receive_6iOAk0yqx3eRspZXuSsV', "msg 1 testing");
         }
     });
