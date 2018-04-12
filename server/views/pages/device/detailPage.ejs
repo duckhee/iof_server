@@ -384,7 +384,7 @@ $(function(){
                 var ajax_data = data;
                 console.log('get ajax',ajax_data);
                 var img_path;
-                var d = new Data(ajax_data.createdAt);
+                var d = new Date(ajax_data.createdAt);
                 var dateStr = d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes();
                 if (ajax_data.createdAt == "") dateStr = "";
                 img_path = '/images/' + ajax_data.si_serial + '/' + ajax_data.si_path + '/' + ajax_data.si_filename;
