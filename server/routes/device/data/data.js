@@ -169,6 +169,8 @@ router.get('/ajaximage', function(req, res, next) {
     image_controller.find_image(imageInof, function(err, result) {
         if (err) {
             console.log('image find error ::::: ', err);
+            console.log('image find error stack :::::: ', err.stack);
+            console.log('image find error code :::::: ', err.code);
         } else if (result) {
             res.json(result);
         } else {
