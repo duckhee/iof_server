@@ -126,16 +126,18 @@ io.sockets.on('connection', function(socket) {
         console.log('user disconnected');
     });
     //insert device info
-    socket.on('device_setting_request', function(dat) {
+    socket.on('device_setting_request', function(data) {
         console.log('device setting request ::::::::: ', data);
         //first time device registe
         if (data.msg === 0) {
             //device setting
             //devive settting found
+            io.emit('device_setting_receive_6iOAk0yqx3eRspZXuSsV', "msg 0 testing");
 
         }
         if (data.msg === 1) {
             //update device setting
+            io.emit('device_setting_receive_6iOAk0yqx3eRspZXuSsV', "msg 1 testing");
         }
     });
     //save sensor info
