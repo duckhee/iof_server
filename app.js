@@ -145,14 +145,22 @@ io.sockets.on('connection', function(socket) {
     //save sensor info
     socket.on('sensor_data_request', function(data) {
         console.log('socket ::::: ' + data);
-        deviceContrller.insert_before(data, function(err, result) {
+        deviceContrller.insert_before(data.info, function(err, result) {
             if (err) {
                 console.log('insert before checking device error ::::::', err);
             } else if (result) {
                 console.log('device checking success !');
-                dataController.insert_value(data, function(err, result) {
+                var insertValue = {
+                    "serial": data.info.serial,
+                    "sd_apikey": result.apikey,
+                    "deviceId": result.device_id,
+                    "sd_address": data.info.sd_address,
+                    "sd_text": data.info.value,
+                    "sd_data": data.info.value,
+                };
+                dataController.insert_value(insertValue, function(err, result) {
                     if (result) {
-                        io.emit('sensor_data_receive_' + data.sd_serial, { msg: 1 });
+                        io.emit('sensor_data_receive_' + data.serial, { msg: 1 });
                     } else if (err) {
                         console.log('socket data insert error :::::: ', err);
                     } else {
