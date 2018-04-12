@@ -46,7 +46,7 @@ router.get('/insert', function(req, res, next) {
                             console.log('success updating network set ::::: ', result);
                             res.json('success');
                         }
-                    })
+                    });
 
                 }
             });
