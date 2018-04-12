@@ -150,7 +150,7 @@ io.sockets.on('connection', function(socket) {
                 console.log('insert before checking device error ::::::', err);
             } else if (result) {
                 console.log('device checking success !');
-                console.log('socket data insert before :::::::: ', result);
+                console.log('socket data insert before :::::::: ', result.device_apikey);
                 var insertValue = {
                     "serial": data.info.serial,
                     "sd_apikey": result.device_apikey,
