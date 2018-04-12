@@ -204,16 +204,16 @@ $(function(){
         var date = new Date(str);
         var con_mindate = date.getMinutes();
         if((0<= con_mindate && con_mindate  <= 15 )){
-            date.setMinutes(00);
+            //date.setMinutes(00);
             return (date.getHours()) + ':0' + date.getMinutes();
         } else if(( 45<= con_mindate && con_mindate<= 60))
         {
             var date_time = date.getHours();
             date.setHours(date_time + 1);
-            date.setMinutes(00);
+            //date.setMinutes(00);
             return (date.getHours()) + ':0' + date.getMinutes();
         }else{
-            date.setMinutes(30);
+            //date.setMinutes(30);
             return (date.getHours()) + ':' + date.getMinutes();
         }  
     }
