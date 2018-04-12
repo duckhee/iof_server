@@ -388,7 +388,7 @@ $(function(){
                 var dateStr = d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes();
                 if (ajax_data.createdAt == "") dateStr = "";
                 img_path = '/images/' + ajax_data.si_serial + '/' + ajax_data.si_path + '/' + ajax_data.si_filename;
-                $("#camera-info").find("img").attr("src", img_path);
+                $("#show_image").find("img").attr("src", img_path);
             }
         });
     }
