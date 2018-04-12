@@ -3,6 +3,7 @@ module.exports = function(sequelize, DataTypes) {
     var camera_image = sequelize.define('camera_image', {
         si_serial: {
             type: DataTypes.STRING,
+
             references: {
                 model: 'device',
                 key: 'device_serial'
@@ -49,7 +50,7 @@ module.exports = function(sequelize, DataTypes) {
                 });
                 models.camera_image.belongsTo(models.device, {
                     foreignKeyConstraint: true,
-                    foreignKey: 'si_serial',
+                    foreignKey: 'device_serial',
                     allowNull: false,
                     onDelete: 'CASCADE',
                 });
@@ -65,13 +66,14 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false,
             onDelete: 'CASCADE',
         });
-
-        camera_image.belongsTo(models.device, {
-            foreignKeyConstraint: true,
-            foreignKey: 'device_serial',
-            allowNull: false,
-            onDelete: 'CASCADE',
-        });
+        /*
+                camera_image.belongsTo(models.device, {
+                    foreignKeyConstraint: true,
+                    foreignKey: 'device_serial',
+                    allowNull: false,
+                    onDelete: 'CASCADE',
+                });
+        */
     }
 
     return camera_image;
