@@ -154,7 +154,7 @@ io.sockets.on('connection', function(socket) {
                 var insertValue = {
                     "serial": data.info.serial,
                     "apikey": result.device_apikey,
-                    "deviceId": result.id,
+                    "deviceId": result.device_id,
                     "sd_address": data.info.sd_address,
                     "sd_text": data.info.value,
                     "sd_data": data.info.value,
