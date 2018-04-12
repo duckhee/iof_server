@@ -49,7 +49,7 @@ module.exports = function(sequelize, DataTypes) {
                 });
                 models.camera_image.belongsTo(models.device, {
                     foreignKeyConstraint: true,
-                    foreignKey: 'device_serial',
+                    foreignKey: 'si_serial',
                     allowNull: false,
                     onDelete: 'CASCADE',
                 });

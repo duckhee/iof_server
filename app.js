@@ -20,6 +20,7 @@ var dataController = require('./server/controllers/device/data_controller');
 var settingController = require('./server/controllers/device/device_setting_controller');
 var deviceContrller = require('./server/controllers/device/device_controller');
 var cameraControllers = require('./server/controllers/device/image_controller');
+var network_controller = require('./server/controllers/device/network_controller');
 //passport testing
 //var custom_passport = require('./server/config/passport');
 
