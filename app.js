@@ -153,7 +153,7 @@ io.sockets.on('connection', function(socket) {
                 console.log('socket data insert before :::::::: ', result.device_apikey);
                 var insertValue = {
                     "serial": data.info.serial,
-                    "sd_apikey": result.device_apikey,
+                    "apikey": result.device_apikey,
                     "deviceId": result.id,
                     "sd_address": data.info.sd_address,
                     "sd_text": data.info.value,
