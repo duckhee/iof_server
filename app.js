@@ -163,7 +163,7 @@ io.sockets.on('connection', function(socket) {
                 dataController.insert_value(insertValue, function(err, result) {
                     if (result) {
                         io.emit('sensor_data_receive_' + data.serial, { msg: 1 });
-                        network_controller.update_actstatus(data_info, function(err, result) {
+                        network_controller.update_actstatus(data.info, function(err, result) {
                             if (err) {
                                 console.log('updateing active network error ::::: ', err);
                             } else {

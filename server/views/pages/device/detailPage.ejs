@@ -380,7 +380,9 @@ $(function(){
                 $("#show_image").find("img").attr("src", ajax_path);
             },
             success:function(data){
+                console.log(data);
                 var ajax_data = data;
+                console.log(ajax_data);
                 var img_path;
                 var d = new Data(ajax_data.createdAt);
                 var dateStr = d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes();

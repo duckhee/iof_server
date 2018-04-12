@@ -57,6 +57,7 @@ exports.find_image = function(camera_info, callback) {
         where: {
             si_serial: camera_info.serial
         },
+        attributes: ['si_serial', 'si_path', 'si_filename', 'createdAt'],
         order: [
             ['createdAt', 'DESC']
         ]
