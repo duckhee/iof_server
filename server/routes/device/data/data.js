@@ -128,10 +128,10 @@ router.get('/ajaxget', function(req, res, next) {
 
 //router ajax post data json
 router.post('/ajaxget', function(req, res, next) {
-    var query_apikey = req.query.apikey || req.params.apikey || req.body.apikey || req.param.apikey;
-    var apikey_info = { apikey: query_apikey };
+    var query_apikey = req.query.serial || req.params.serial || req.body.serial || req.param.serial;
+    var apikey_info = { serial: query_apikey };
 
-    device_controller.check_device(apikey_info, function(err, result) {
+    device_controller.find_device(apikey_info, function(err, result) {
         if (err) {
             console.log('check device error :::::', err);
             next(err);

@@ -77,8 +77,8 @@ exports.list10_value = function(data_info, callback) {
             deviceId: data_info.id
         },
         order: [
-            //['createdAt', 'DESC'] 오름차순 정렬
-            ['createdAt', 'ASC'] //내림차순 정렬
+            ['createdAt', 'DESC'] //오름차순 정렬
+            // ['createdAt', 'ASC'] //내림차순 정렬
         ],
         limit: 10,
     }).then(function(rows) {
@@ -176,23 +176,23 @@ exports.read_devicevalue = function(data_info, callback) {
 }
 
 //delete data of reduplication
-exports.delete_reduplication_data = function(callback){
-    models.sequelize.query('DELETE FROM iof_values WHERE id not in ( SELECT id from iof_values GROUP BY id_serial, createdAt ) as b)').spread((results, metadata)=>{
+exports.delete_reduplication_data = function(callback) {
+    models.sequelize.query('DELETE FROM iof_values WHERE id not in ( SELECT id from iof_values GROUP BY id_serial, createdAt ) as b)').spread((results, metadata) => {
         //result will be an empty array and metadata will conain the number of affected rows.
-        console.log('reduplication data ::::::::::::::::::: ',results);
-        callback(null,results);
-    }).catch((err)=>{
+        console.log('reduplication data ::::::::::::::::::: ', results);
+        callback(null, results);
+    }).catch((err) => {
         console.log('delete reduplication data error :::::::::::: ', err);
         callback(err, null);
     });
 };
 
 //insert array data callback(err, result) 
-exports.insert_array_data = function(data_info, callback){
-    models.device_value.bulkCreate(data_info).then((result)=>{
-        console.log('insert array data :::::::::::::: ',result);
+exports.insert_array_data = function(data_info, callback) {
+    models.device_value.bulkCreate(data_info).then((result) => {
+        console.log('insert array data :::::::::::::: ', result);
         callback(null, result);
-    }).catch((err)=>{
+    }).catch((err) => {
         console.log('insert array data error ::::::::::::::::: ', err);
         callback(err, null);
     });
