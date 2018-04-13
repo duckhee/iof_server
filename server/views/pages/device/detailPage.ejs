@@ -243,7 +243,7 @@ $(function(){
         chart:'',
         init:function(data){
             this.cnt = 1;
-            this.chart = $.plot("#line-chart", data, {
+            this.chart = $.plot("#line-chart", [data], {
                 grid:{
                     hoverable: true,
                     borderColor: "#f3f3f3",
