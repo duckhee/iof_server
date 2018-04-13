@@ -268,9 +268,13 @@ router.post('/process/detail', function(req, res, next) {
     next();
 });
 
+
 //modfiy page get middleware router
 router.get('/modify', function(req, res, next) {
     console.log('modify middleware router');
+    var query_device_id = req.query.id || req.body.id || req.params.id || req.param.id;
+    var query_device_serial = req.query.serial || req.body.serial || req.params.serial || req.param.serial;
+
     next();
 });
 
