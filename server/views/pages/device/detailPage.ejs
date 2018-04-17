@@ -203,7 +203,7 @@ $(function(){
         function getDateFromJSON(str) {
         var date = new Date(str);
         var con_mindate = date.getMinutes();
-        if((0<= con_mindate && con_mindate  <= 15 )){
+        if((0<= con_mindate && con_mindate  <= 10 )){
             //date.setMinutes(00);
             return (date.getHours()) + ':0' + date.getMinutes();
         } else if(( 45<= con_mindate && con_mindate<= 60))
