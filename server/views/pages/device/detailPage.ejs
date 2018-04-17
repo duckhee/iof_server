@@ -377,7 +377,7 @@ $(function(){
             },
             success:function(data){                
                 var ajax_data = data;
-                var img_path;
+                var img_path = "/images/failed/failed.jpg";
                 var d = new Date(ajax_data.createdAt);
                 var dateStr = d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes();
                 if (ajax_data.createdAt == "") dateStr = "";
