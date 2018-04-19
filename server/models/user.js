@@ -24,6 +24,10 @@ module.exports = function(sequelize, DataTypes) {
                 allowNull: false,
                 defaultValue: 5
             },
+            user_level:{
+                type:DataTypes.INTEGER,
+                allowNull:false
+            },
             user_name: {
                 type: DataTypes.STRING,
             },
