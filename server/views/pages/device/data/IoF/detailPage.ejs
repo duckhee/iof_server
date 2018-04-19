@@ -315,13 +315,13 @@ $(function(){
                 var get_data;
                 console.log(data);
                 for(var i =0; i <data.length; i++){
-                    get_data[i] = [getDateFromJSON(data[i].createdAt), data[i].sd_data];
+                    get_data[i] = [getDateFromJSON(data[i].createdAt), data[i].id_data];
                 }
                 
                 var show_data = [];
                 for (var i = 0, max_data = get_data.length; i < max_data; i++) {
                     console.log(get_data[i]);
-                    show_data.push([i, get_data[i].sd_data]);
+                    show_data.push([i, get_data[i].id_data]);
                     //show_data.push([get_data[i].createAt, get_data[i].value]);
                     console.log(get_data[i].value);
                 }
@@ -346,7 +346,7 @@ $(function(){
                 chart_data = data;
                 var get_data = [];
                         for(var i =0; i <data.length; i++){
-                    get_data.push([getDateFromJSON(data[i].createdAt), data[i].sd_data],);
+                    get_data.push([getDateFromJSON(data[i].createdAt), data[i].id_data],);
                 }               
                 var color1 ="#FF0000";
                 data_line = new Array();
