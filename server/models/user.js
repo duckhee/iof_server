@@ -7,17 +7,22 @@ module.exports = function(sequelize, DataTypes) {
             user_id: {
                 type: DataTypes.STRING,
                 unique: true,
-                allowNull: false 
-                /*
-                validate: {
-                    notNull: true,
-                    notNull(val) {
-                        if (!val) {
-                            throw new Error('이름이 입력되지 않았습니다.');
+                allowNull: false
+                    /*
+                    validate: {
+                        notNull: true,
+                        notNull(val) {
+                            if (!val) {
+                                throw new Error('이름이 입력되지 않았습니다.');
+                            }
                         }
                     }
-                }
-                */
+                    */
+            },
+            user_level: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                defaultValue: 5
             },
             user_name: {
                 type: DataTypes.STRING,
@@ -75,7 +80,7 @@ module.exports = function(sequelize, DataTypes) {
                 }
             },
             */
-           
+
             classMethods: {
                 /*
                 validPassword: function(password, passwd, callback) {
@@ -153,7 +158,7 @@ module.exports = function(sequelize, DataTypes) {
         done();
     })
     */
-   // return user;
+    // return user;
     /*
     //insert before
     user.hook("beforeCreate", function(user) {

@@ -203,7 +203,7 @@ $(function(){
         function getDateFromJSON(str) {
         var date = new Date(str);
         var con_mindate = date.getMinutes();
-        if((0<= con_mindate && con_mindate  <= 15 )){
+        if((0<= con_mindate && con_mindate  <= 10 )){
             //date.setMinutes(00);
             return (date.getHours()) + ':0' + date.getMinutes();
         } else if(( 45<= con_mindate && con_mindate<= 60))
@@ -377,11 +377,16 @@ $(function(){
             },
             success:function(data){                
                 var ajax_data = data;
-                var img_path;
+                var img_path = "/images/failed/failed.jpg";
+                if(data === "null"){
+                    console.log('testing');
+                }else{
+
                 var d = new Date(ajax_data.createdAt);
                 var dateStr = d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes();
                 if (ajax_data.createdAt == "") dateStr = "";
                 img_path = '/images/' + ajax_data.si_serial + '/' + ajax_data.si_path + '/' + ajax_data.si_filename;
+                }
                 $("#show_image").find("img").attr("src", img_path);
             }
         });
@@ -396,7 +401,7 @@ $(function(){
     }
     console.log("<%=serial%>")
     get_textData();
-    setInterval("get_textData()", 1000 * 60*30);
+    setInterval("get_textData()", 1000 * 60*5);
     get_image();
     setInterval("get_image()", 1000 * 60*30);
 
