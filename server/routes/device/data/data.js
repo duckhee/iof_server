@@ -70,6 +70,13 @@ router.post('/insert', function(req, res, next) {
             // console.log('insert before data error ::: ', err);
             res.json('failed');
         } else if (row) {
+            if (row.device_type === 'radon') {
+                console.log('radon data insert ');
+            } else if (row.device_type === 'IoF') {
+                console.log('IoF data insert');
+            } else {
+                console.log('null');
+            }
             console.log('inset before data success :::::', row.id);
             var data_info = {
                 value: insert_data,

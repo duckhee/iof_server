@@ -54,7 +54,7 @@ exports.InsertValue = function(data_info, callback) {
         id_apikey: data_info.apikey,
         deviceId: data_info.device_id,
         id_address: data_info.sd_address,
-        id_value: data_info.value,
+        id_text: data_info.value,
         id_data: data_info.value,
     }).then((result) => {
         callback(null, result);

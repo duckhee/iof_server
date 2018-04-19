@@ -1,9 +1,7 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
     var iof_value = sequelize.define('iof_value', {
-        id_value: {
-            type: DataTypes.STRING
-        },
+
         deviceId: {
             type: DataTypes.INTEGER,
             references: {
