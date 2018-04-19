@@ -241,7 +241,7 @@ router.get('/detail', function(req, res, next) {
     var device_serial = req.query.serial;
     device_controller.device_type(device_serial, function(err, result) {
         if (result.device_type === 'radon') {
-            res.render('device/data/radon/radonPage', {
+            res.render('device/data/radon/detailPage', {
                 serial: device_serial
             });
         } else if (err) {
