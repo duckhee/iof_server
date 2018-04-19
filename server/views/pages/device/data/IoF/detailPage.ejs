@@ -303,7 +303,7 @@ $(function(){
     var get_Data = function(){
         $.ajax({
             type:"GET",
-            url:"/data/ajaxget?serial=<%=serial%>",
+            url:"/data/iofajaxget?serial=<%=serial%>",
             dataType:"json",
             error:function(){
                 var ajax_data;
@@ -334,7 +334,7 @@ $(function(){
     var get_textData = function(){
         $.ajax({
             type:"GET",
-            url:"/data/ajaxget?serial=<%=serial%>",
+            url:"/data/iofajaxget?serial=<%=serial%>",
             dtaType:"json",
             error:function(){
                 var ajax_data;

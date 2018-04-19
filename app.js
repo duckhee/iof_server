@@ -130,22 +130,30 @@ io.sockets.on('connection', function(socket) {
     //insert device info
     socket.on('device_setting_request', function(data) {
         console.log('device setting request ::::::::: ', data);
-        //first time device registe
-        if (data.msg === 0) {
-            //device setting
-            //devive settting found
-            console.log('testing msg == 0');
-            io.emit('device_setting_receive_6iOAk0yqx3eRspZXuSsV', "msg 0 testing");
-
-        }
-        if (data.msg === 1) {
-            //update device setting
-            console.log('testing msg == 1');
-            io.emit('device_setting_receive_6iOAk0yqx3eRspZXuSsV', "msg 1 testing");
-        }
+        var serialInof = { "serial": data.serial }
+        deviceContrller.find_device(serialInof, function(err, result) {
+            if (err) {
+                console.log('not found device');
+                var errSetting = {};
+                io.emit('device_setting_receive_notdevice', errSetting);
+            } else {
+                //first time device registe
+                if (data.msg === 0) {
+                    //device setting
+                    //devive settting found
+                    console.log('testing msg == 0');
+                    io.emit('device_setting_receive_' + result.sd_serial, "msg 0 testing");
+                }
+                if (data.msg === 1) {
+                    //update device setting
+                    console.log('testing msg == 1');
+                    io.emit('device_setting_receive_' + result.sd_serial, "msg 1 testing");
+                }
+            }
+        });
     });
     //save sensor info
-    socket.on('sensor_data_request', function(data) {
+    socket.on('sensor_iofdata_request', function(data) {
         console.log('socket ::::: ' + data);
         deviceContrller.insert_before(data.info, function(err, result) {
             if (err) {
@@ -161,9 +169,9 @@ io.sockets.on('connection', function(socket) {
                     "value": data.info.value,
 
                 };
-                dataController.insert_value(insertValue, function(err, result) {
+                IoFValueController.InsertValue(insertValue, function(err, result) {
                     if (result) {
-                        io.emit('sensor_data_receive_' + data.serial, { msg: 1 });
+                        io.emit('sensor_iofdata_receive_' + data.serial, { msg: 1 });
                         network_controller.update_actstatus(data.info, function(err, result) {
                             if (err) {
                                 console.log('updateing active network error ::::: ', err);
@@ -172,7 +180,7 @@ io.sockets.on('connection', function(socket) {
                             }
                         });
                     } else if (err) {
-                        console.log('socket data insert error :::::: ', err);
+                        console.log('socket iof data insert error :::::: ', err);
                     } else {
                         console.log('null insert device');
                     }
@@ -183,16 +191,16 @@ io.sockets.on('connection', function(socket) {
         });
     });
 
-    socket.on('sensor_array_data_request', function(data) {
+    socket.on('sensor_array_iofdata_request', function(data) {
         console.log('socket arr :::::::: ', data);
         deviceContrller.insert_before(data, function(err, result) {
             if (err) {
                 console.log('insert before checking device error ::::::', err);
             } else if (result) {
-                dataController.insert_array_data(data, function(err, result) {
+                IoFValueController.BulkInsert(data, function(err, result) {
                     if (result) {
                         io.emit('sensor_data_receive_' + data[0].sd_serial, { msg: 1 });
-                        dataController.delete_reduplication_data(function(err) {
+                        IoFValueController.delete_reduplication_data(function(err) {
                             if (err) {
                                 console.log('app delete reduplication error ::::::::::::: ', err);
                             } else {

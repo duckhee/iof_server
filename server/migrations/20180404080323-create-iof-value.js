@@ -32,9 +32,6 @@ module.exports = {
             id_text: {
                 type: Sequelize.TEXT
             },
-            id_apikey: {
-                type: Sequelize.STRING
-            },
             createdAt: {
                 allowNull: false,
                 type: 'TIMESTAMP',

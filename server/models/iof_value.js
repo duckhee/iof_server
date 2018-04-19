@@ -31,9 +31,7 @@ module.exports = function(sequelize, DataTypes) {
         id_text: {
             type: DataTypes.TEXT
         },
-        id_apikey: {
-            type: DataTypes.STRING
-        }
+
     }, {
         classMethods: {
             associate: function(models) {
