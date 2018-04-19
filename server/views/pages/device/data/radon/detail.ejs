@@ -365,32 +365,6 @@ $(function(){
             }
         });
     }
-    var get_image = function(){
-        $.ajax({
-            type:"GET",
-            url:"/data/ajaximage?serial=<%=serial%>",
-            dataType:"json",
-            error:function(){
-                var ajax_path;
-                ajax_path = "/images/failed/failed.jpg";
-                $("#show_image").find("img").attr("src", ajax_path);
-            },
-            success:function(data){                
-                var ajax_data = data;
-                var img_path = "/images/failed/failed.jpg";
-                if(data === "null"){
-                    console.log('testing');
-                }else{
-
-                var d = new Date(ajax_data.createdAt);
-                var dateStr = d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes();
-                if (ajax_data.createdAt == "") dateStr = "";
-                img_path = '/images/' + ajax_data.si_serial + '/' + ajax_data.si_path + '/' + ajax_data.si_filename;
-                }
-                $("#show_image").find("img").attr("src", img_path);
-            }
-        });
-    }
     
     function labelFormatter(label, series) {
             return '<div style="font-size:13px; text-align:center; padding:2px; color: #fff; font-weight: 600;">' +
@@ -402,8 +376,7 @@ $(function(){
     console.log("<%=serial%>")
     get_textData();
     setInterval("get_textData()", 1000 * 60*5);
-    get_image();
-    setInterval("get_image()", 1000 * 60*30);
+    
 
 
 });
