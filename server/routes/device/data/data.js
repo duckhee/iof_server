@@ -5,6 +5,7 @@ var device_controller = require('../../../controllers/device/device_controller')
 var network_controller = require('../../../controllers/device/network_controller');
 var data_controller = require('../../../controllers/device/data_controller');
 var image_controller = require('../../../controllers/device/image_controller');
+var IoFController = require('../../../controllers/device/iof_controller');
 //router root data
 router.get('/', function(req, res, next) {
     /// next();
@@ -152,6 +153,148 @@ router.post('/ajaxget', function(req, res, next) {
         }
     });
 });
+
+
+//get router insert iof data
+router.get('/iofinsert', function(req, res, next) {
+    var query_serial = req.query.serial || req.params.serial || req.body.serial || req.param.serial;
+    var insert_data = req.query.value || req.params.value || req.body.value || req.param.value;
+    var apikey_info = {
+        serial: query_serial,
+    };
+    console.log('get iof value :::::::::::::::: ', insert_data);
+    device_controller.insert_before(apikey_info, function(err, row) {
+        if (err) {
+            // console.log('insert before data error ::: ', err);
+            res.json('failed');
+        } else if (row) {
+            console.log('inset before iof data success :::::', row.id);
+            var data_info = {
+                value: insert_data,
+                apikey: query_serial,
+                device_id: row.id,
+                serial: query_serial,
+                sd_address: row.address
+            }
+            console.log('iof data info :::::::::::: ', data_info.value);
+            IoFController.InsertValue(data_info, function(err, row) {
+                if (err) {
+                    res.status(404);
+                } else {
+                    network_controller.update_actstatus(data_info, function(err, result) {
+                        if (err) {
+                            console.log('updateing active network error ::::: ', err);
+                            res.status(404);
+                        } else {
+                            console.log('success updating network set ::::: ', result);
+                            res.json('success');
+                        }
+                    });
+
+                }
+            });
+        } else {
+            res.status(500);
+        }
+    });
+});
+
+//post router insert data
+router.post('/iofinsert', function(req, res, next) {
+    var query_serial = req.query.serial || req.params.serial || req.body.serial || req.param.serial;
+    var insert_data = req.query.value || req.params.value || req.body.value || req.param.value;
+    var apikey_info = {
+        apikey: query_serial,
+    };
+    console.log('get iof value :::::::::::::::: ', insert_data);
+    device_controller.insert_before(apikey_info, function(err, row) {
+        if (err) {
+            // console.log('insert before data error ::: ', err);
+            res.json('failed');
+        } else if (row) {
+            console.log('inset before iof data success :::::', row.id);
+            var data_info = {
+                value: insert_data,
+                apikey: query_serial,
+                device_id: row.id,
+                serial: query_serial,
+                sd_address: row.address
+            }
+            IoFController.InsertValue(data_info, function(err, row) {
+                if (err) {
+                    res.status(404);
+                } else {
+                    network_controller.update_actstatus(data_info, function(err, result) {
+                        if (err) {
+                            console.log('updateing active network error ::::: ', err);
+                            res.status(404);
+                        } else {
+                            console.log('success updating network set ::::: ', result);
+                            res.json('success');
+                        }
+                    })
+
+                }
+            });
+        } else {
+            res.status(500);
+        }
+    });
+});
+
+//get rout ajax get iof data
+router.get('/iofajaxget', function(req, res, next) {
+    var query_apikey = req.query.serial || req.params.serial || req.body.serial || req.param.serial;
+    var apikey_info = { serial: query_apikey };
+
+    device_controller.find_device(apikey_info, function(err, result) {
+        if (err) {
+            console.log('check device error :::::', err);
+            next(err);
+        } else {
+            console.log('device search id ::::', result);
+            var devicedata = { id: result.id };
+            //data list info
+            IoFController.ListLimit10(devicedata, function(err, rows) {
+                if (err) {
+                    console.log('get data error :::::: ', err);
+                    next(err);
+                } else {
+                    console.log('list limit 10 :::::: ', rows);
+                    res.json(rows);
+                }
+            });
+
+        }
+    });
+});
+
+//post rout ajax get iof data 
+router.post('/iofajaxget', function(req, res, next) {
+    var query_apikey = req.query.serial || req.params.serial || req.body.serial || req.param.serial;
+    var apikey_info = { serial: query_apikey };
+
+    device_controller.find_device(apikey_info, function(err, result) {
+        if (err) {
+            console.log('check device error :::::', err);
+            next(err);
+        } else {
+            console.log('device search id ::::', result);
+            var devicedata = { id: result.id };
+            //data list info
+            IoFController.ListLimit10(devicedata, function(err, rows) {
+                if (err) {
+                    console.log('get data error :::::: ', err);
+                    next(err);
+                } else {
+                    console.log('list limit 10 :::::: ', rows);
+                    res.json(rows);
+                }
+            });
+        }
+    });
+});
+
 
 //router ajax image get
 router.get('/listajaximage', function(req, res, next) {
