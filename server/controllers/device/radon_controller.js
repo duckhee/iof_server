@@ -4,7 +4,10 @@ var radon_value = require('../../models/radon_value');
 //insert data
 exports.InsertData = function(data_info, callback) {
     models.radon_value.create({
-
+        rd_value: data_info.value,
+        deviceId: data_info.deviceId,
+        td_data: data_info.value,
+        rd_serial: data_info.serial,
     }).then((result) => {
         callback(null, result);
     }).catch((err) => {
@@ -17,7 +20,7 @@ exports.InsertData = function(data_info, callback) {
 exports.List10Serial = function(data_info, callback) {
     models.radon_value.findAll({
         where: {
-
+            rd_serial: data_info.serial
         },
         order: [
             ['createdAt', 'DESC']
@@ -74,7 +77,7 @@ exports.deleteData = function(data_info, callback) {
 
 //delete data of reduplication
 exports.delete_reduplication_data = function(callback) {
-    models.sequelize.query('DELETE FROM devices WHERE id not in ( SELECT id from iof_values GROUP BY id_serial, createdAt ) as b)').spread((results, metadata) => {
+    models.sequelize.query('DELETE FROM radon_values WHERE id not in ( SELECT id from radon_values GROUP BY id_serial, createdAt ) as b)').spread((results, metadata) => {
         //result will be an empty array and metadata will conain the number of affected rows.
         console.log('reduplication iof data  ::::::::::::::::::: ', results);
         callback(null, results);

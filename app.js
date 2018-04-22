@@ -22,9 +22,12 @@ var deviceController = require('./server/controllers/device/device_controller');
 var cameraControllers = require('./server/controllers/device/image_controller');
 var network_controller = require('./server/controllers/device/network_controller');
 var IoFValueController = require('./server/controllers/device/iof_controller');
+var RadonValueController = require('./server/controllers/device/radon_controller');
 //passport testing
 //var custom_passport = require('./server/config/passport');
 
+//user utl add here
+var util = require('./server/util/util');
 //test router 테스트용 라우터 모든 테스트 여기
 var test = require('./server/routes/testrouter');
 
@@ -167,7 +170,6 @@ io.sockets.on('connection', function(socket) {
                     "device_id": result.id,
                     "sd_address": data.info.sd_address,
                     "value": data.info.value,
-
                 };
                 IoFValueController.InsertValue(insertValue, function(err, result) {
                     if (result) {
@@ -205,6 +207,13 @@ io.sockets.on('connection', function(socket) {
                                 console.log('app delete reduplication error ::::::::::::: ', err);
                             } else {
                                 console.log('null delete data');
+                                network_controller.update_actstatus(data, function(err, result) {
+                                    if (err) {
+                                        console.log('bulk insert network error :::: ', err);
+                                    } else {
+                                        console.log('bulk network insert ok');
+                                    }
+                                })
                             }
                         });
                     } else if (err) {
@@ -225,7 +234,29 @@ io.sockets.on('connection', function(socket) {
             if (err) {
                 console.log('insert radon data error :::: ', err);
             } else if (result) {
-
+                if (!util.isEmpty(result)) {
+                    var InsertData = {
+                        "serial": data.serial,
+                        "value": data.value,
+                        "deviceId": result.id
+                    };
+                    RadonValueController.InsertData(InsertData, function(err, result) {
+                        if (err) {
+                            console.log('insert radon data error ::::: ', err);
+                        } else {
+                            console.log("insert radon data result ::::: ".result);
+                            network_controller.update_actstatus(InsertData.serial, function(err, result) {
+                                if (err) {
+                                    console.log('update act status error :::: ', err);
+                                } else {
+                                    console.log('update act status result :::: ', err);
+                                }
+                            });
+                        }
+                    });
+                } else {
+                    console.log('radon data device not exit');
+                }
             } else {
                 console.log('not device');
             }
