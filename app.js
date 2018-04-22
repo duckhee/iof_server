@@ -18,7 +18,7 @@ var data = require('./server/routes/device/data/data');
 //controller add 
 var dataController = require('./server/controllers/device/data_controller');
 var settingController = require('./server/controllers/device/device_setting_controller');
-var deviceContrller = require('./server/controllers/device/device_controller');
+var deviceController = require('./server/controllers/device/device_controller');
 var cameraControllers = require('./server/controllers/device/image_controller');
 var network_controller = require('./server/controllers/device/network_controller');
 var IoFValueController = require('./server/controllers/device/iof_controller');
@@ -52,7 +52,7 @@ io.sockets.on('connection', function(socket) {
             fs.mkdirSync(process.cwd() + '/camera_images', '0777');
         }
         var deviceinfo = { serial: params.serial };
-        var device_serial = deviceContrller.insert_before(deviceinfo, function(err, result) {
+        var device_serial = deviceController.insert_before(deviceinfo, function(err, result) {
             if (err) {
                 console.log('device checking error ::::::::: ', err);
             } else if (result) {
@@ -130,8 +130,8 @@ io.sockets.on('connection', function(socket) {
     //insert device info
     socket.on('device_setting_request', function(data) {
         console.log('device setting request ::::::::: ', data);
-        var serialInof = { "serial": data.serial }
-        deviceContrller.find_device(serialInof, function(err, result) {
+        var serialInfo = { "serial": data.serial }
+        deviceController.find_device(serialInof, function(err, result) {
             if (err) {
                 console.log('not found device');
                 var errSetting = {};
@@ -152,10 +152,10 @@ io.sockets.on('connection', function(socket) {
             }
         });
     });
-    //save sensor info
+    //save iof sensor data
     socket.on('sensor_iofdata_request', function(data) {
         console.log('socket ::::: ' + data);
-        deviceContrller.insert_before(data.info, function(err, result) {
+        deviceController.insert_before(data.info, function(err, result) {
             if (err) {
                 console.log('insert before checking device error ::::::', err);
             } else if (result) {
@@ -190,10 +190,10 @@ io.sockets.on('connection', function(socket) {
             }
         });
     });
-
+    //save iof data array request
     socket.on('sensor_array_iofdata_request', function(data) {
         console.log('socket arr :::::::: ', data);
-        deviceContrller.insert_before(data, function(err, result) {
+        deviceController.insert_before(data, function(err, result) {
             if (err) {
                 console.log('insert before checking device error ::::::', err);
             } else if (result) {
@@ -218,9 +218,21 @@ io.sockets.on('connection', function(socket) {
             }
         });
     });
+    //radon data socket data insert
+    socket.on('sensor_radondata_request', function(data) {
+        console.log('radon data socket ::: ', data);
+        deviceController.insert_before(data, function(err, result) {
+            if (err) {
+                console.log('insert radon data error :::: ', err);
+            } else if (result) {
 
+            } else {
+                console.log('not device');
+            }
+        });
+    })
 
-
+    //socket end
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
