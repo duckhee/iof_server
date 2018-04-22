@@ -73,16 +73,21 @@ io.sockets.on('connection', function(socket) {
                         fs.exists(process.cwd() + '/camera_images/' + params.serial, function(exists) {
                             if (!exists) {
                                 fs.mkdir(process.cwd() + '/camera_images/' + params.serial, '0777', function(err) {
-                                    if (err) throw err;
-                                    console.log('dir channel writed');
+                                    if (err) {
+                                        throw err;
+                                        console.log('make folder error :::: ', err);
+                                    }
                                 });
                             }
                         });
 
                         //일별 폴더 유무 체크
                         fs.mkdir(process.cwd() + '/camera_images/' + params.serial + "/" + date_folder, '0777', function(err) {
-                            if (err) throw err;
-                            console.log('dir date writed');
+                            if (err) {
+                                throw err;
+                                console.log('checking folder error ::: ', err);
+                            }
+
                         });
                     }
                     //이미지일 경우만 저장
@@ -111,7 +116,7 @@ io.sockets.on('connection', function(socket) {
                                 } else if (row) {
                                     console.log('insert image log :::::::::::: ', row);
                                 } else {
-                                    console.log('error');
+                                    console.log('null point');
                                 }
                             });
                             console.log('File ' + params.filename + " saved");
@@ -119,7 +124,7 @@ io.sockets.on('connection', function(socket) {
                     });
                 });
             } else {
-                console.log('deivce null');
+                console.log('device null');
             }
         })
 
@@ -265,6 +270,9 @@ io.sockets.on('connection', function(socket) {
 
     //socket end
 });
+
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -339,8 +347,6 @@ db.sequelize.sync().then(() => {
     console.log(err);
     console.log(err.stack);
 });
-
-
 
 
 module.exports = app;
