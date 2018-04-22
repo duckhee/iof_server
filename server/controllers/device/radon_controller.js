@@ -71,3 +71,15 @@ exports.deleteData = function(data_info, callback) {
         callback(err, null);
     });
 };
+
+//delete data of reduplication
+exports.delete_reduplication_data = function(callback) {
+    models.sequelize.query('DELETE FROM devices WHERE id not in ( SELECT id from iof_values GROUP BY id_serial, createdAt ) as b)').spread((results, metadata) => {
+        //result will be an empty array and metadata will conain the number of affected rows.
+        console.log('reduplication iof data  ::::::::::::::::::: ', results);
+        callback(null, results);
+    }).catch((err) => {
+        console.log('delete reduplication iof data  error :::::::::::: ', err);
+        callback(err, null);
+    });
+};
