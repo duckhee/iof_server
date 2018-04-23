@@ -239,6 +239,25 @@ exports.Update_status = function(user_info, callback){
     });
 };
 
+//user status active
+exports.Update_Active = function(user_info, callback){
+    var nowTime = new Date();
+    models.user.update({
+        updatedAt:nowTime,
+        user_status:'active'
+    },
+    {
+        where:{
+            user_id:user_info.userid
+        }
+    }).then((result)=>{
+        callback(null, result);
+    }).catch((err)=>{
+        console.log('update active user status error :::::: ', err);
+        callback(err, null);
+    })
+}
+
 //user status inactive
 exports.Update_Inactive = function(callback){
     var nowTime = new Date();
