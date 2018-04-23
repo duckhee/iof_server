@@ -220,3 +220,40 @@ exports.find_info = function(user_info, callback) {
         callback(err, null);
     });
 }
+
+//user status update
+exports.Update_status = function(user_info, callback){
+    var nowTime = new Date();
+    models.user.update({
+        updatedAt:nowTime,
+        user_status:user_info.status
+    },{
+        where:{
+            user_id:user_info.userid
+        }
+    }).then((result)=>{
+        callback(null, result);
+    }).catch((err)=>{
+        console.log('update user status error :::: ', err);
+        callback(err, null);
+    });
+};
+
+//user status inactive
+exports.Update_Inactive = function(callback){
+    var nowTime = new Date();
+    models.user.update({
+        updatedAt:nowTime,
+        user_status: 'inactive'
+    },
+    {
+        where:{
+            use_id:user_info.userid
+        }
+    }).then((result)=>{
+        callback(null, result);
+    }).catch((err)=>{
+        console.log('update user inactive error :::: ', err);
+        callback(err, null);
+    });
+};
