@@ -255,8 +255,8 @@ exports.Update_Active = function(user_info, callback){
     }).catch((err)=>{
         console.log('update active user status error :::::: ', err);
         callback(err, null);
-    })
-}
+    });
+};
 
 //user status inactive
 exports.Update_Inactive = function(callback){
