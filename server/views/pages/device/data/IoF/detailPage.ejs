@@ -74,11 +74,7 @@
                     </p>
                     </div>
                     <!-- setting device-->
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <button class="btn btn-primary" onclick="/device/setting?device=<%=serial%>">Device Setting</button>
-                        </div>
-                    </div>
+                    
                     <!-- setting device end -->
                     <div class="row">
                     <!-- col md 6 start -->
@@ -159,7 +155,7 @@
                                                 <div id="controller" style="height:300px;">
                                                         <form action="" method="">
                                                             <div class="form-group">
-                                                                <label><h3>water setting</h3></label>
+                                                                <label><h4>water setting</h4></label>
 
                                                                 <select id="waterTime">
                                                                     <option value="30">30초</option>
@@ -173,8 +169,9 @@
                                                                     <button type="button" id="waterPumpOff" class="btn btn-danger"  style="width:15%;" value="off"><i class="fa fa-stop"></i></button>
                                                                 </div>
                                                             </div>
+                                                            <hr>
                                                                 <div class="form-group">
-                                                                <label><h3>shooting time</h3></label>
+                                                                <label><h4>shooting time</h4></label>
                                                                 <select id="cameraTime">
                                                                     <option value="30">30분</option>
                                                                     <option value="60">1시간</option>
@@ -186,6 +183,7 @@
                                                                         <button type="button" id="cameraOn" class="btn btn-primary" style="width:15%;" value="on"><i class="fa fa-play"></i></button>
                                                                         <button type="button" id="cameraOff" class="btn btn-danger" style="width:15%;" value="off"><i class="fa fa-stop"></i></button>
                                                                     </div>
+                                                                    <hr>
                                                                 </div>
                                                         </form>
                                                     </div>
