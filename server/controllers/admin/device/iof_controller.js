@@ -115,7 +115,7 @@ exports.DeleteData = function(data_info, calblack) {
 
 //delete data of reduplication
 exports.delete_reduplication_data = function(callback) {
-    models.sequelize.query('DELETE FROM iof_values WHERE id not in ( SELECT id from iof_values GROUP BY id_serial, createdAt ) as b)').spread((results, metadata) => {
+    models.sequelize.query('DELETE FROM device_values WHERE id not in ( SELECT id from iof_values GROUP BY id_serial, createdAt ) as b)').spread((results, metadata) => {
         //result will be an empty array and metadata will conain the number of affected rows.
         console.log('reduplication iof data  ::::::::::::::::::: ', results);
         callback(null, results);

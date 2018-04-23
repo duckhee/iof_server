@@ -126,22 +126,6 @@ io.sockets.on('connection', function(socket) {
     //insert device info
     socket.on('device_setting_request', function(data) {
         console.log('device setting request ::::::::: ', data);
-<<<<<<< HEAD
-        //setting controller call here. insert before
-
-        //first time device registe
-        if (data.msg === 0) {
-            //device setting
-            //devive settting found
-            console.log('testing msg == 0');
-            io.emit('device_setting_receive_6iOAk0yqx3eRspZXuSsV', "msg 0 testing");
-        }
-        if (data.msg === 1) {
-            //update device setting
-            console.log('testing msg == 1');
-            io.emit('device_setting_receive_6iOAk0yqx3eRspZXuSsV', "msg 1 testing");
-        }
-=======
         var serialInof = { "serial": data.serial }
         deviceContrller.find_device(serialInof, function(err, result) {
             if (err) {
@@ -163,7 +147,6 @@ io.sockets.on('connection', function(socket) {
                 }
             }
         });
->>>>>>> 82ec329c6099b3a42225e2c250185732cfcc9536
     });
     //save sensor info
     socket.on('sensor_iofdata_request', function(data) {
@@ -202,12 +185,8 @@ io.sockets.on('connection', function(socket) {
             }
         });
     });
-<<<<<<< HEAD
-    socket.on('sensor_array_data_request', function(data) {
-=======
 
     socket.on('sensor_array_iofdata_request', function(data) {
->>>>>>> 82ec329c6099b3a42225e2c250185732cfcc9536
         console.log('socket arr :::::::: ', data);
         deviceContrller.insert_before(data, function(err, result) {
             if (err) {
