@@ -38,13 +38,23 @@ module.exports = function(sequelize, DataTypes) {
         classMethods: {
             associate: function(models) {
                 // associations can be defined here
-                
+                models.associate.belongsTo(models.device, {
+                    foreignKeyConstraint: true,
+                    foreignKey: 'id',
+                    allowNull: false,
+                    onDelete: 'CASCADE',
+                });
             }
         }
     });
 
     device_setting.associate = function(models){
-
+        device_setting.belongsTo(models.device, {
+            foreignKeyConstraint: true,
+            foreignKey: 'id',
+            allowNull: false,
+            onDelete: 'CASCADE',
+        });
     }
     
     return device_setting;

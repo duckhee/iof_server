@@ -88,7 +88,6 @@ io.sockets.on('connection', function(socket) {
                         } else {
                             var filename_arr = params.filename.split(".");
                             console.log('image time :::::: ', filename_arr[0]);
-
                             var camera_info = {
                                 "si_serial": params.serial,
                                 "si_path": date_folder,
@@ -117,11 +116,8 @@ io.sockets.on('connection', function(socket) {
             } else {
                 console.log('deivce null');
             }
-        })
-
+        });
     });
-
-
     //socket disconnect
     socket.on('disconnect', function() {
         console.log('user disconnected socket end device :::::: ');
@@ -129,13 +125,14 @@ io.sockets.on('connection', function(socket) {
     //insert device info
     socket.on('device_setting_request', function(data) {
         console.log('device setting request ::::::::: ', data);
+        //setting controller call here. insert before
+
         //first time device registe
         if (data.msg === 0) {
             //device setting
             //devive settting found
             console.log('testing msg == 0');
             io.emit('device_setting_receive_6iOAk0yqx3eRspZXuSsV', "msg 0 testing");
-
         }
         if (data.msg === 1) {
             //update device setting
@@ -158,7 +155,6 @@ io.sockets.on('connection', function(socket) {
                     "device_id": result.id,
                     "sd_address": data.info.sd_address,
                     "value": data.info.value,
-
                 };
                 dataController.insert_value(insertValue, function(err, result) {
                     if (result) {
@@ -181,7 +177,6 @@ io.sockets.on('connection', function(socket) {
             }
         });
     });
-
     socket.on('sensor_array_data_request', function(data) {
         console.log('socket arr :::::::: ', data);
         deviceContrller.insert_before(data, function(err, result) {
@@ -209,7 +204,6 @@ io.sockets.on('connection', function(socket) {
             }
         });
     });
-
 
 
 });
