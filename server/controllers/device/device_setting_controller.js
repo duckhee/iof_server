@@ -29,7 +29,7 @@ exports.setting_device = function(device_info, callback) {
  exports.create_setting = function(setting_info, callback){
     models.device_setting.findOrCreate({
         where: {
-
+            
         },
         defaults: {
 
@@ -51,7 +51,14 @@ exports.setting_device = function(device_info, callback) {
  //insert setting info
  exports.insert_setting = function(setting_info, callback){
      models.device_setting.create({
-
+        st_serial:setting_info.serial,
+        deviceId:setting_info.id,
+        st_address:setting_info.address,
+        st_apikey:setting_info.apikey,
+        st_title:setting_info.title,
+        st_gps:setting_info.gps,
+        st_ping:setting_info.ping,
+        st_group:setting_info.group
      }).then((result)=>{
 
      }).catch((err)=>{

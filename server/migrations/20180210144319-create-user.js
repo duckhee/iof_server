@@ -16,11 +16,6 @@ module.exports = {
                 type: Sequelize.STRING,
                 unique: true
             },
-            user_level: {
-                type: Sequelize.INTEGER,
-                allowNull: false
-            },
-
             user_password: {
                 type: Sequelize.STRING,
                 allowNull: false,

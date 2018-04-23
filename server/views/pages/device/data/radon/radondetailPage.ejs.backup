@@ -73,13 +73,6 @@
                         how to use and show data detail subscript
                     </p>
                     </div>
-                    <!-- setting device-->
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <button class="btn btn-primary" onclick="/device/setting?device=<%=serial%>">Device Setting</button>
-                        </div>
-                    </div>
-                    <!-- setting device end -->
                     <div class="row">
                     <!-- col md 6 start -->
                         <div class="col-xs-12">
@@ -99,26 +92,6 @@
                     </div>
                     <!-- iamge start first -->
                     <div class="row">
-                    <div class="col-md-6">
-                        <div class="box box-primary">
-                            <div class="box-header with-border">
-                                <i class="fa fa-fw fa-file-image-o"></i>
-                                <h3 class="box-title">show image</h3>
-                            </div>
-                            <!-- box header end -->
-                            <div class="box-body">
-                                <div id="show_image">
-                                    <img style="height:300px; width:300px"></img>
-                                </div>
-                            </div>  
-                            <!-- box body end -->
-                        </div>
-                        <!-- box end -->
-                    </div>
-                    <!-- col md 6 end image end  first -->
-
-              
-                    
                     <!-- weather info start -->
                     <div class="col-md-6">
                         <!-- weather info  -->
@@ -160,7 +133,7 @@
                                                         <form action="" method="">
                                                             <div class="form-group">
                                                                 <label>water setting </label>
-                                                                <select id="waterTime">
+                                                                <select>
                                                                     <option value="30">30초</option>
                                                                     <option value="60">1분</option>
                                                                     <option value="90">1분30초</option>
@@ -169,7 +142,7 @@
                                                             </div>
                                                                 <div class="form-group">
                                                                 <label>shooting time </label>
-                                                                <select id="cameraTime">
+                                                                <select>
                                                                         <option value="30">30분</option>
                                                                         <option value="60">1시간</option>
                                                                         <option value="90">1시간30분</option>
@@ -179,10 +152,16 @@
                                                                 </div>
                                                                 <hr>
                                                             <div class="form-group"style="text-align:center;">
-                                                                <button type="button" id="controller_on" name="controller" class="btn btn-primary" style="width:15%;" value="on"><i class="fa fa-play" onclick=""></i></button>
+                                                                <button type="button" id="controller_on" name="controller" class="btn btn-primary" style="width:15%;" value="on"><i class="fa fa-play"></i></button>
                                                                 <button type="button" id="controller_off" name="controller" class="btn btn-danger" style="width:15%;" value="off"><i class="fa fa-stop"></i></button>
                                                             </div>
+                                                            <hr>
+                                                            <div>
+                                                                door value here.
+                                                            </div>
                                                         </form>
+                                                        <hr>
+                                                        door value, door value, door value, door value, door value
                                                     </div>
                                     </div>
                                     <!-- box body end -->
@@ -207,43 +186,91 @@
   </body>
   <script>
 $(function(){
-        function settingValue(){
-            var cameraTime = $("#cameraTime").val();
-            var waterTime = $("#waterTime").val();
 
-            console.log('water time :::: ', waterTime);
-            console.log('camera time :::: ', cameraTime);
-            var Time = {
-                "camera":cameraTime,
-                "water":waterTime
-            }
-            return Time;
+        /*
+     * LINE CHART
+     * ----------
+     */
+    //LINE randomly generated data
+    /*
+    var sin = [], cos = [];
+    for (var i = 0; i < 14; i += 0.5) {
+      sin.push([i, Math.sin(i)]);
+      cos.push([i, Math.cos(i)]);
+    }
+    var line_data1 = {
+      data: sin,
+      color: "#3c8dbc"
+    };
+    var line_data2 = {
+      data: cos,
+      color: "#00c0ef"
+    };
+    $.plot("#line-chart", [line_data1, line_data2], {
+      grid: {
+        hoverable: true,
+        borderColor: "#f3f3f3",
+        borderWidth: 1,
+        tickColor: "#f3f3f3"
+      },
+      series: {
+        shadowSize: 0,
+        lines: {
+          show: true
+        },
+        points: {
+          show: true
         }
+      },
+      lines: {
+        fill: false,
+        color: ["#3c8dbc", "#f56954"]
+      },
+      yaxis: {
+        show: true,
+      },
+      xaxis: {
+        show: true
+      }
+    });
+    //Initialize tooltip on hover
+    $('<div class="tooltip-inner" id="line-chart-tooltip"></div>').css({
+      position: "absolute",
+      display: "none",
+      opacity: 0.8
+    }).appendTo("body");
+    $("#line-chart").bind("plothover", function (event, pos, item) {
 
-        function Start(){
-            var setValue = settingValue();
-            $("#controller_off")
-        }
+      if (item) {
+        var x = item.datapoint[0].toFixed(2),
+            y = item.datapoint[1].toFixed(2);
 
-        function Stop(){
+        $("#line-chart-tooltip").html(item.series.label + " of " + x + " = " + y)
+            .css({top: item.pageY + 5, left: item.pageX + 5})
+            .fadeIn(200);
+      } else {
+        $("#line-chart-tooltip").hide();
+      }
 
+    });
+    */
+    /* END LINE CHART */
 
-        }
-
-        function getDateFromJSON(str) {
+     //날짜에서 시간과분만 추출
+    function getDateFromJSON(str) {
         var date = new Date(str);
         var con_mindate = date.getMinutes();
-        if((0<= con_mindate && con_mindate  <= 10 )){
-            //date.setMinutes(00);
+        if((0<= con_mindate && con_mindate  <= 15 )){
+            date.setMinutes(00);
             return (date.getHours()) + ':0' + date.getMinutes();
         } else if(( 45<= con_mindate && con_mindate<= 60))
         {
             var date_time = date.getHours();
-            //date.setHours(date_time + 1);
-            //date.setMinutes(00);
-            return (date.getHours()) + ':' + date.getMinutes();
+            date.setHours(date_time + 1);
+            date.setMinutes(00);
+            return (date.getHours()) + ':0' + date.getMinutes();
         }else{
-            //date.setMinutes(30);
+            date.setMinutes(30);
             return (date.getHours()) + ':' + date.getMinutes();
         }  
     }
@@ -307,7 +334,7 @@ $(function(){
                 }
             });
              //Initialize tooltip on hover
-            $('<div class="tooltip-inner" id="line-chart-tooltip"></div>').css({
+            $('<div class="tooltip-inner" id="ec-chart-tooltip"></div>').css({
                 position: "absolute",
                 display: "none",
                 opacity: 0.8
@@ -333,7 +360,7 @@ $(function(){
     var get_Data = function(){
         $.ajax({
             type:"GET",
-            url:"/data/iofajaxget?serial=<%=serial%>",
+            url:"/data/ajaxget?serial=<%=serial%>",
             dataType:"json",
             error:function(){
                 var ajax_data;
@@ -345,13 +372,13 @@ $(function(){
                 var get_data;
                 console.log(data);
                 for(var i =0; i <data.length; i++){
-                    get_data[i] = [getDateFromJSON(data[i].createdAt), data[i].id_data];
+                    get_data[i] = [getDateFromJSON(data[i].createdAt), data[i].sd_data];
                 }
                 
                 var show_data = [];
                 for (var i = 0, max_data = get_data.length; i < max_data; i++) {
                     console.log(get_data[i]);
-                    show_data.push([i, get_data[i].id_data]);
+                    show_data.push([i, get_data[i].sd_data]);
                     //show_data.push([get_data[i].createAt, get_data[i].value]);
                     console.log(get_data[i].value);
                 }
@@ -364,7 +391,7 @@ $(function(){
     var get_textData = function(){
         $.ajax({
             type:"GET",
-            url:"/data/iofajaxget?serial=<%=serial%>",
+            url:"/data/ajaxget?serial=<%=serial%>",
             dtaType:"json",
             error:function(){
                 var ajax_data;
@@ -376,15 +403,18 @@ $(function(){
                 chart_data = data;
                 var get_data = [];
                         for(var i =0; i <data.length; i++){
-                    get_data.push([getDateFromJSON(data[i].createdAt), data[i].id_data],);
-                }               
+                    get_data.push([getDateFromJSON(data[i].createdAt), data[i].sd_data],);
+                }
+                
                 var color1 ="#FF0000";
                 data_line = new Array();
+
                 for(var i = 0; i< get_data.length; i++){
                     data_line[i] = {data:get_data[i],color:color1};
                     console.log('data line ::::: ',data_line[i]);
                 }
-                data_line = {data:get_data.reverse(), color:color1};               
+                data_line = {data:get_data, color:color1};
+                
                 if(data_chart.cnt == 0){
                     data_chart.init(data_line);
                 }else{
@@ -392,32 +422,6 @@ $(function(){
                     data_chart.chart.setupGrid();
                     data_chart.chart.draw();
                 }
-            }
-        });
-    }
-    var get_image = function(){
-        $.ajax({
-            type:"GET",
-            url:"/data/ajaximage?serial=<%=serial%>",
-            dataType:"json",
-            error:function(){
-                var ajax_path;
-                ajax_path = "/images/failed/failed.jpg";
-                $("#show_image").find("img").attr("src", ajax_path);
-            },
-            success:function(data){                
-                var ajax_data = data;
-                var img_path = "/images/failed/failed.jpg";
-                if(data === "null"){
-                    console.log('testing');
-                }else{
-
-                var d = new Date(ajax_data.createdAt);
-                var dateStr = d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes();
-                if (ajax_data.createdAt == "") dateStr = "";
-                img_path = '/images/' + ajax_data.si_serial + '/' + ajax_data.si_path + '/' + ajax_data.si_filename;
-                }
-                $("#show_image").find("img").attr("src", img_path);
             }
         });
     }
@@ -432,11 +436,12 @@ $(function(){
     console.log("<%=serial%>")
     get_textData();
     setInterval("get_textData()", 1000 * 60*5);
-    get_image();
-    setInterval("get_image()", 1000 * 60*30);
+    
 
 
 });
-
+  </script>
+  <script>
+ 
   </script>
 </html>

@@ -93,12 +93,9 @@
 
                     <!-- fix for small devices only -->
                     <div class="clearfix visible-sm-block"></div>
-
-
                     <div class="col-md-3 col-sm-6 col-xs-12">
                         <div class="info-box">
                             <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
-      
                     <div class="info-box-content">
                         <span class="info-box-text">Sales</span>
                         <span class="info-box-number">760</span>
@@ -130,7 +127,7 @@
                               </div>
                               <!-- /.box-header -->
                               <div class="box-body">
-                                <table id="example2" class="table table-bordered table-hover">
+                                <table id="devicelist" class="table table-bordered table-hover">
                                   <thead>
                                   <tr>
                                     <th>device name</th>
@@ -170,14 +167,10 @@
                               </div>
                               <!-- /.box-body -->
                             </div>
-                            <!-- /.box -->
-                  
-                            
+                            <!-- /.box -->               
                             <!-- /.box -->
                           </div>
                     </div>
-
-                      
                 </div>
             </div>
         <% include ../../partials/footer.ejs %>
@@ -196,13 +189,13 @@
 <script>
   $(function () {
     
-    $('#example2').DataTable({
+    $('#devicelist').DataTable({
       "paging": true,
       "lengthChange": false,
-      "searching": false,
+      "searching": true,
       "ordering": true,
       "info": true,
-      "autoWidth": false
+      "autoWidth": true
     });
   });
 </script>
