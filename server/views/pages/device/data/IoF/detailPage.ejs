@@ -159,29 +159,31 @@
                                                 <div id="controller" style="height:300px;">
                                                         <form action="" method="">
                                                             <div class="form-group">
-                                                                <label>water setting </label>
+                                                                <label><h3>water setting</h3></label>
                                                                 <select id="waterTime">
                                                                     <option value="30">30초</option>
                                                                     <option value="60">1분</option>
                                                                     <option value="90">1분30초</option>
                                                                     <option value="120">2분</option>
                                                                 </select>
+                                                                <div class="form-group">
+                                                                    <button type="button" id="waterPumpOn" class="btn btn-primary" style="width:15%;" value="on"><i class="fa fa-play"></i></button>
+                                                                    <button type="button" id="waterPumpOff" class="btn btn-danger"  style="width:15%;" value="off"><i class="fa fa-stop"></i></button>
+                                                                </div>
                                                             </div>
                                                                 <div class="form-group">
-                                                                <label>shooting time </label>
+                                                                <label><h3>shooting time</h3></label>
                                                                 <select id="cameraTime">
-                                                                        <option value="30">30분</option>
-                                                                        <option value="60">1시간</option>
-                                                                        <option value="90">1시간30분</option>
-                                                                        <option value="120">2시간</option>
-                                                                    </select>
-                                                                    <br>
+                                                                    <option value="30">30분</option>
+                                                                    <option value="60">1시간</option>
+                                                                    <option value="90">1시간30분</option>
+                                                                    <option value="120">2시간</option>
+                                                                </select>
+                                                                    <div class="form-group">
+                                                                        <button type="button" id="cameraOn" class="btn btn-primary" style="width:15%;" value="on"><i class="fa fa-play"></i></button>
+                                                                        <button type="button" id="cameraOff" class="btn btn-danger" style="width:15%;" value="off"><i class="fa fa-stop"></i></button>
+                                                                    </div>
                                                                 </div>
-                                                                <hr>
-                                                            <div class="form-group"style="text-align:center;">
-                                                                <button type="button" id="controller_on" name="controller" class="btn btn-primary" style="width:15%;" value="on"><i class="fa fa-play" onclick=""></i></button>
-                                                                <button type="button" id="controller_off" name="controller" class="btn btn-danger" style="width:15%;" value="off"><i class="fa fa-stop"></i></button>
-                                                            </div>
                                                         </form>
                                                     </div>
                                     </div>
@@ -207,6 +209,86 @@
   </body>
   <script>
 $(function(){
+
+        //pump on/off
+        function PumpOn(cmd){
+            $.ajax({
+                type:"GET",
+                url:"",
+                data:{
+                    serial:"<%=serial%>",
+                    command:cmd
+                },
+                dataType:"json",
+                error:function(){
+
+                },
+                success:function(data){
+                    console.log('insert data : ', data);
+                }
+            });
+        }
+        //device get value of water setup
+        function getWaterSet(waterValue){
+            event.preventDefault();
+            $.ajax({
+                type:"GET",
+                url:"",
+                data:{
+                    serial:"<%=serial%>",
+                    waterTime:$("#").val()
+                },
+                dataType:"json",
+                error:function(error){
+                    console.log('get water setting error : ', error);
+                },
+                success:function(data){
+                    console.log('get water setting : ', data);
+                }
+            });
+        };
+
+        //device get value of camera setup
+        function getCameraSet(cameraValue){
+            event.preventDefault();
+            $.ajax({
+                type:"GET",
+                url:"",
+                data:{
+                    serial:"<%=serial%>",
+                    caeraTime:$("#").val()
+                },
+                dataType:"json",
+                error:function(error){
+                    console.log('get water setting error : ', error);
+                },
+                success:function(data){
+                    console.log('get camera setting : ', data);
+                }
+            });
+        };
+        
+        //device get value of setup
+        function getDeviceSet(waterValue, cameraValue){
+            $.ajax({
+                type:"GET",
+                url:"",
+                data:{
+                    serial:"<%=serial%>",
+                    waterData:$("#waterTime").val(),
+                    cameraData:$("#cameraTime").val()
+                },
+                dataType:'json',
+                error:function(){
+
+                },
+                success:function(data){
+
+                }
+            });
+        }
+
+        //setting value function
         function settingValue(){
             var cameraTime = $("#cameraTime").val();
             var waterTime = $("#waterTime").val();
@@ -221,8 +303,8 @@ $(function(){
         }
 
         function Start(){
-            var setValue = settingValue();
-            $("#controller_off")
+            
+            
         }
 
         function Stop(){

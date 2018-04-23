@@ -60,9 +60,10 @@ exports.setting_device = function(device_info, callback) {
         st_ping:setting_info.ping,
         st_group:setting_info.group
      }).then((result)=>{
-
+        callback(null, result);
      }).catch((err)=>{
-
+        console.log('device setting insert error ::: ', err);
+        callback(err, null);
      });
  };
 

@@ -130,6 +130,34 @@ module.exports = function(sequelize, DataTypes) {
             foreignKeyConstraint: true
         });
 
+        device.hasMany(models.iof_setting, {
+            foreignKey: 'deviceId', //has사용시는 상대방 ?? 자기자신도 가능 ?
+            onDelete: 'CASCADE',
+            allowNull: false,
+            foreignKeyConstraint: true
+        });
+
+        device.hasMany(models.iof_setting, {
+            foreignKey: 'sd_serial', //has사용시는 상대방 ?? 자기자신도 가능 ?
+            onDelete: 'CASCADE',
+            allowNull: false,
+            foreignKeyConstraint: true
+        });
+
+        device.hasMany(models.radon_setting, {
+            foreignKey:'deviceId',
+            onDelete:'CASCADE',
+            allowNull:false,
+            foreignKeyConstraint:true
+        });
+        
+        device.hasMany(models.radon_setting, {
+            foreignKey:'sr_serial',
+            onDelete:'CASCADE',
+            allowNull:false,
+            foreignKeyConstraint:true
+        });
+
         //why error ??/
         device.hasMany(models.camera_image, {
             foreignKey: 'deviceId', //has사용시는 상대방 ?? 자기자신도 가능 ?

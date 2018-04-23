@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>welcome Test IOF</title>
+<% include ../partials/stylesheet.ejs %>
+<% include ../partials/header_javascript.ejs %>
+<% include ../partials/weather_config.ejs %>
+
+</head>
+
+
+<body class="hold-transition skin-blue sidebar-mini">
+	<div class="wrapper">
+		<header class="main-header">
+			<!-- Logo -->
+			<a href="/" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
+				<span class="logo-mini"><b>I</b>OF</span> <!-- logo for regular state and mobile devices -->
+				<span class="logo-lg"><b>C &amp; H </b>IOF</span>
+			</a>
+			<!-- Header Navbar: style can be found in header.less -->
+			<nav class="navbar navbar-static-top">
+				<!-- Sidebar toggle button-->
+				<a href="#" class="sidebar-toggle" data-toggle="offcanvas"
+					role="button"> <span class="sr-only">Toggle navigation</span>
+				</a>
+				<div class="navbar-custom-menu">
+					<ul class="nav navbar-nav">
+
+						<!-- Notifications: style can be found in dropdown.less -->
+						<li class="dropdown notifications-menu"><a href="#"
+							class="dropdown-toggle" data-toggle="dropdown"> <i
+								class="fa fa-bell-o"></i> <span class="label label-warning"></span>
+						</a>
+							<ul class="dropdown-menu">
+								<li class="header">You have notifications</li>
+								<li>
+									<!-- inner menu: contains the actual data -->
+									<ul class="menu">
+										<li><a href="#"> <i class="fa fa-users text-aqua"></i>
+												5 new members joined today
+										</a></li>
+										<li><a href="#"> <i class="fa fa-warning text-yellow"></i>
+												Very long description here that may not fit into the page
+												and may cause design problems
+										</a></li>
+										<li><a href="#"> <i class="fa fa-users text-red"></i>
+												5 new members joined
+										</a></li>
+										<li><a href="#"> <i
+												class="fa fa-shopping-cart text-green"></i> 25 sales made
+										</a></li>
+										<li><a href="#"> <i class="fa fa-user text-red"></i>
+												You changed your username
+										</a></li>
+									</ul>
+								</li>
+								<li class="footer"><a href="#">View all</a></li>
+							</ul></li>
+						<!-- Tasks: style can be found in dropdown.less -->
+						<li class="dropdown tasks-menu"><a href="#"
+							class="dropdown-toggle" data-toggle="dropdown"> <i
+								class="fa fa-flag-o"></i> <span class="label label-danger"></span>
+						</a>
+							<ul class="dropdown-menu">
+								<li class="header">You have tasks</li>
+								<li>
+									<!-- inner menu: contains the actual data -->
+									<ul class="menu">
+										<li>
+											<!-- Task item --> <a href="#">
+												<h3>
+													Design some buttons <small class="pull-right">20%</small>
+												</h3>
+												<div class="progress xs">
+													<div class="progress-bar progress-bar-aqua"
+														style="width: 20%" role="progressbar" aria-valuenow="20"
+														aria-valuemin="0" aria-valuemax="100">
+														<span class="sr-only">20% Complete</span>
+													</div>
+												</div>
+										</a>
+										</li>
+										<!-- end task item -->
+										<li>
+											<!-- Task item --> <a href="#">
+												<h3>
+													Create a nice theme <small class="pull-right">40%</small>
+												</h3>
+												<div class="progress xs">
+													<div class="progress-bar progress-bar-green"
+														style="width: 40%" role="progressbar" aria-valuenow="20"
+														aria-valuemin="0" aria-valuemax="100">
+														<span class="sr-only">40% Complete</span>
+													</div>
+												</div>
+										</a>
+										</li>
+										<!-- end task item -->
+										<li>
+											<!-- Task item --> <a href="#">
+												<h3>
+													Some task I need to do <small class="pull-right">60%</small>
+												</h3>
+												<div class="progress xs">
+													<div class="progress-bar progress-bar-red"
+														style="width: 60%" role="progressbar" aria-valuenow="20"
+														aria-valuemin="0" aria-valuemax="100">
+														<span class="sr-only">60% Complete</span>
+													</div>
+												</div>
+										</a>
+										</li>
+										<!-- end task item -->
+										<li>
+											<!-- Task item --> <a href="#">
+												<h3>
+													Make beautiful transitions <small class="pull-right">80%</small>
+												</h3>
+												<div class="progress xs">
+													<div class="progress-bar progress-bar-yellow"
+														style="width: 80%" role="progressbar" aria-valuenow="20"
+														aria-valuemin="0" aria-valuemax="100">
+														<span class="sr-only">80% Complete</span>
+													</div>
+												</div>
+										</a>
+										</li>
+										<!-- end task item -->
+									</ul>
+								</li>
+								<li class="footer"><a href="#">View all tasks</a></li>
+							</ul></li>
+						<!-- User Account: style can be found in dropdown.less -->
+						<li class="dropdown user user-menu"><a href="#"
+							class="dropdown-toggle" data-toggle="dropdown"> <img src="#"
+								class="user-image" alt="User Image"> <span
+								class="hidden-xs">user name</span>
+						</a>
+							<ul class="dropdown-menu">
+								<!-- User image -->
+								<li class="user-header"><img src="#" class="img-circle"
+									alt="User Image">
+									<p>
+										user name - channel number <small>reg date</small>
+									</p></li>
+								<!-- Menu Body -->
+								<li class="user-body">
+									<div class="row">
+										<div class="col-xs-4 text-center">
+											<a href="#">Followers</a>
+										</div>
+										<div class="col-xs-4 text-center">
+											<a href="#">Sales</a>
+										</div>
+										<div class="col-xs-4 text-center">
+											<a href="#">Friends</a>
+										</div>
+									</div> <!-- /.row -->
+								</li>
+								<!-- Menu Footer-->
+								<li class="user-footer">
+									<div class="pull-left">
+										<a href="#" class="btn btn-default btn-flat">Profile</a>
+									</div>
+									<div class="pull-right">
+										<a href="#" class="btn btn-default btn-flat">Sign out</a>
+									</div>
+								</li>
+							</ul></li>
+						<!-- Control Sidebar Toggle Button -->
+						<li><a href="#" data-toggle="control-sidebar"><i
+								class="fa fa-gears"></i></a></li>
+					</ul>
+				</div>
+			</nav>
+		</header>
+		<!-- Left side column. contains the logo and sidebar -->
+		<aside class="main-sidebar">
+			<!-- sidebar: style can be found in sidebar.less -->
+			<section class="sidebar">
+				<!-- Sidebar user panel -->
+				<div class="user-panel">
+					<div class="pull-left image">
+						<img src="/static/images/logo_iot.png" class="img-circle"
+							alt="User Image">
+					</div>
+					<div class="pull-left info">
+						<p>User ID</p>
+						<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+					</div>
+				</div>
+				<% include ../partials/nav_item %>
+			</section>
+			<!-- /.sidebar -->
+		</aside>
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<h1>
+					Show <small>Channel</small>
+				</h1>
+				<ol class="breadcrumb">
+					<li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+					<li><i class="ffa fa-dshboard"></i>Channel</li>
+					<li class="active"><a href="/channel/detail">show</a></li>
+				</ol>
+			</section>
+			<div class="content">
+				<div class="row">
+					<div class="col-xs-12">
+						<!-- Line chart -->
+						<div class="box box-primary">
+							<div class="box-header with-border">
+								<i class="fa fa-bar-chart-o"></i>
+								<h3 class="box-title">Senser Value &amp; On/Off controller</h3>
+							</div>
+							<div class="box-body">
+								<div id="sensor-chart" style="height: 300px;"></div>
+
+							</div>
+							<!-- /.box-body-->
+						</div>
+						<!-- /.box -->
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-6">
+						<div class="box box-primary">
+							<div class="box-header with-border">
+								<h3 class="box-title">최근 촬영 사진</h3>
+								<div class="box-tools pull-right" id="camera-date">
+									<%
+										var d = new Date(createdAt); 
+										var str = "";
+										if(createdAt){
+											str = d.getFullYear() + "-" + (d.getMonth() + 1 ) + "-" + d.getDate() + "-" + d.getHours() + "-" + d.getMinutes();
+										}                                           
+                                    %>
+									<%= str %>
+								</div>
+							</div>
+							<!-- /.box-header -->
+							<div class="box-body">
+								<div id="camera-info">
+                                    <img src="<%=img_path%>" style="width: 100%; " />
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /.col -->
+					<div class="col-md-6">
+						<div class="box box-primary">
+							<div class="box-header with-border">
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+									</div>
+									<input type="text" class="form-control pull-right"
+										id="reservation">
+								</div>
+								<!-- /.input group -->
+							</div>
+							<!-- /.box-header -->
+							<div class="box-body">
+
+								<div id="carousel-example-generic" class="carousel slide"
+									data-ride="carousel">
+									<ol class="carousel-indicators">
+										
+									</ol>
+									<div class="carousel-inner">
+										
+											
+									</div>
+									<a class="left carousel-control"
+										href="#carousel-example-generic" data-slide="prev"> <span
+										class="fa fa-angle-left"></span>
+									</a> <a class="right carousel-control"
+										href="#carousel-example-generic" data-slide="next"> <span
+										class="fa fa-angle-right"></span>
+									</a>
+								</div>
+							</div>
+							<!-- /.box-body -->
+						</div>
+						<!-- /.box -->
+					</div>
+					<!-- /.col -->
+				</div>
+				<!-- / camera infomation -->
+				<!-- infomation -->
+				<div class="row">
+					<div class="col-md-6">
+						<!-- weather info  -->
+						<div class="box box-primary">
+							<div class="box-header with-border">
+								<i class="fa fa-cloud"></i>
+								<h3 class="box-title">Weather info</h3>
+								<div class="box-tools pull-right">
+									<!-- <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button> -->
+								</div>
+							</div>
+							<div class="box-body">
+								<div id="weater-info" style="height: 300px">
+									<iframe id="forecast_embed" type="text/html" frameborder="0"
+										height="245" width="100%"
+										src="http://forecast.io/embed/#lat=36.962648&lon=127.464767&name=IoF&units=uk">
+									</iframe>
+									<div class="weather"></div>
+								</div>
+								<!-- /.box-body-->
+							</div>
+							<!--/.box  -->
+						</div>
+					</div>
+					<div class="col-md-6">
+						<!-- setup info -->
+						<div class="box box-primary">
+							<div class="box-header with-border">
+								<h3 class="box-title">Device Setup</h3>
+							</div>
+							<!-- /.box-header -->
+							<div class="box-body ">
+								<div class="row">
+									<div class="col-md-6 ">
+										<div class="box-header with-border">
+											<h3 class="box-title">Water Setup</h3>
+										</div>
+
+										<div class="box-body">
+											<form role="form">
+												<!-- select -->
+												<div class="form-group">
+													<label>관수 시간설정</label>
+													<div class="input-group">
+														<select class="form-control" name="waterTimeValue" id="waterTimeValue" >
+															<option value="30">30초</option>
+															<option value="45">45초</option>
+															<option value="60">60초</option>
+															<option value="75">75초</option>
+                                                        </select> 
+                                                        <span class="input-group-btn">
+															<button type="button" id="waterSetupBtn" class="btn btn-info btn-flat">설정</button>
+														</span>
+													</div>
+												</div>
+												<div class="form-group">
+													<label>관수 On/Off</label> <span class="input-group-btn">
+														<div class="col-lg-6">
+															<button type="button" id="controller_on" name="controller" class="btn btn-primary btn-block" value="on">
+																<i class="fa fa-play"></i>
+															</button>
+														</div>
+														<div class="col-lg-6">
+															<button type="button" id="controller_off" name="controller" class="btn btn-danger btn-block" value="off">
+																<i class="fa fa-stop"></i>
+															</button>
+														</div>
+													</span>
+												</div>
+											</form>
+										</div>
+									</div>
+									<!-- controller box start -->
+									<div class="col-md-6">
+										<div class="box-header with-border">
+											<h3 class="box-title">Camera Setup</h3>
+										</div>
+										<div class="box-body">
+											<form role="form">
+												<!-- select -->
+												<div class="form-group">
+													<label>카메라 시간설정</label>
+													<div class="input-group">
+														<select class="form-control" name="cameraTimeValue" id="cameraTimeValue">
+															<option value="15">15분 간격</option>
+															<option value="30">30분 간격</option>
+															<option value="45">45분 간격</option>
+															<option value="60">60분 간격</option>
+														</select> <span class="input-group-btn">
+															<button type="button" id="cameraSetupBtn"
+																class="btn btn-info btn-flat">설정</button>
+														</span>
+													</div>
+												</div>
+												<div class="form-group">
+													<label>카메라 촬영</label> <span class="input-group-btn ">
+														<button type="button" id="shootBtn"
+															class="btn btn-primary btn-block">
+															<i class="fa fa-play"></i>
+														</button>
+													</span>
+												</div>
+											</form>
+										</div>
+										<!-- /.box-body -->
+									</div>
+									<!--end controller box -->
+								</div>
+							</div>
+
+						</div>
+						<!--/.box  -->
+					</div>
+				</div>
+
+				<!-- /.weather, camera widget -->
+			</div>
+		</div>
+	</div>
+	<!-- /.content-wrapper -->
+	<% include ../partials/footer.ejs %>
+	<!-- Control Sidebar -->
+	<aside class="control-sidebar control-sidebar-dark">
+		<!-- Create the tabs -->
+		<ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+			<li><a href="#control-sidebar-home-tab" data-toggle="tab"><i
+					class="fa fa-home"></i></a></li>
+			<li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i
+					class="fa fa-gears"></i></a></li>
+		</ul>
+		<!-- Tab panes -->
+		<div class="tab-content">
+			<!-- Home tab content -->
+			<div class="tab-pane" id="control-sidebar-home-tab">
+				<h3 class="control-sidebar-heading">Recent Activity</h3>
+				<ul class="control-sidebar-menu">
+					<li><a href="javascript:void(0)"> <i
+							class="menu-icon fa fa-birthday-cake bg-red"></i>
+
+							<div class="menu-info">
+								<h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
+
+								<p>Will be 23 on April 24th</p>
+							</div>
+					</a></li>
+					<li><a href="javascript:void(0)"> <i
+							class="menu-icon fa fa-user bg-yellow"></i>
+
+							<div class="menu-info">
+								<h4 class="control-sidebar-subheading">Frodo Updated His
+									Profile</h4>
+
+								<p>New phone +1(800)555-1234</p>
+							</div>
+					</a></li>
+					<li><a href="javascript:void(0)"> <i
+							class="menu-icon fa fa-envelope-o bg-light-blue"></i>
+
+							<div class="menu-info">
+								<h4 class="control-sidebar-subheading">Nora Joined Mailing
+									List</h4>
+
+								<p>nora@example.com</p>
+							</div>
+					</a></li>
+					<li><a href="javascript:void(0)"> <i
+							class="menu-icon fa fa-file-code-o bg-green"></i>
+
+							<div class="menu-info">
+								<h4 class="control-sidebar-subheading">Cron Job 254
+									Executed</h4>
+
+								<p>Execution time 5 seconds</p>
+							</div>
+					</a></li>
+				</ul>
+				<!-- /.control-sidebar-menu -->
+				<h3 class="control-sidebar-heading">Tasks Progress</h3>
+				<ul class="control-sidebar-menu">
+					<li><a href="javascript:void(0)">
+							<h4 class="control-sidebar-subheading">
+								Custom Template Design <span
+									class="label label-danger pull-right">70%</span>
+							</h4>
+
+							<div class="progress progress-xxs">
+								<div class="progress-bar progress-bar-danger" style="width: 70%"></div>
+							</div>
+					</a></li>
+					<li><a href="javascript:void(0)">
+							<h4 class="control-sidebar-subheading">
+								Update Resume <span class="label label-success pull-right">95%</span>
+							</h4>
+							<div class="progress progress-xxs">
+								<div class="progress-bar progress-bar-success"
+									style="width: 95%"></div>
+							</div>
+					</a></li>
+					<li><a href="javascript:void(0)">
+							<h4 class="control-sidebar-subheading">
+								Laravel Integration <span class="label label-warning pull-right">50%</span>
+							</h4>
+
+							<div class="progress progress-xxs">
+								<div class="progress-bar progress-bar-warning"
+									style="width: 50%"></div>
+							</div>
+					</a></li>
+					<li><a href="javascript:void(0)">
+							<h4 class="control-sidebar-subheading">
+								Back End Framework <span class="label label-primary pull-right">68%</span>
+							</h4>
+							<div class="progress progress-xxs">
+								<div class="progress-bar progress-bar-primary"
+									style="width: 68%"></div>
+							</div>
+					</a></li>
+				</ul>
+				<!-- /.control-sidebar-menu -->
+			</div>
+			<!-- /.tab-pane -->
+			<!-- Stats tab content -->
+			<div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab
+				Content</div>
+			<!-- /.tab-pane -->
+			<!-- Settings tab content -->
+			<div class="tab-pane" id="control-sidebar-settings-tab">
+				<form method="post">
+					<h3 class="control-sidebar-heading">General Settings</h3>
+					<div class="form-group">
+						<label class="control-sidebar-subheading"> Report panel
+							usage <input type="checkbox" class="pull-right" checked>
+						</label>
+						<p>Some information about this general settings option</p>
+					</div>
+					<!-- /.form-group -->
+					<div class="form-group">
+						<label class="control-sidebar-subheading"> Allow mail
+							redirect <input type="checkbox" class="pull-right" checked>
+						</label>
+						<p>Other sets of options are available</p>
+					</div>
+					<!-- /.form-group -->
+					<div class="form-group">
+						<label class="control-sidebar-subheading"> Expose author
+							name in posts <input type="checkbox" class="pull-right" checked>
+						</label>
+						<p>Allow the user to show his name in blog posts</p>
+					</div>
+					<!-- /.form-group -->
+					<h3 class="control-sidebar-heading">Chat Settings</h3>
+					<div class="form-group">
+						<label class="control-sidebar-subheading"> Show me as
+							online <input type="checkbox" class="pull-right" checked>
+						</label>
+					</div>
+					<!-- /.form-group -->
+					<div class="form-group">
+						<label class="control-sidebar-subheading"> Turn off
+							notifications <input type="checkbox" class="pull-right">
+						</label>
+					</div>
+					<!-- /.form-group -->
+					<div class="form-group">
+						<label class="control-sidebar-subheading"> Delete chat
+							history <a href="javascript:void(0)" class="text-red pull-right"><i
+								class="fa fa-trash-o"></i></a>
+						</label>
+					</div>
+					<!-- /.form-group -->
+				</form>
+			</div>
+			<!-- /.tab-pane -->
+		</div>
+	</aside>
+	<!-- /.control-sidebar -->
+	<!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+	<div class="control-sidebar-bg"></div>
+	</div>
+
+	<% include ../partials/footer_graph_javascript.ejs %>
+	<!--<script src="/socket.io/socket.io.js"></script>
+	<script src="/test/socket.io/socket.io.js/"></script>-->
+	<script>    
+		//var socket = io("http://http://192.168.0.34:5001/");
+            /*
+			* Custom Label formatter
+			* ----------------------
+			*/
+		    function labelFormatter(label, series) {
+				return '<div style="font-size:13px; text-align:center; padding:2px; color: #fff; font-weight: 600;">'
+						+ label
+						+ "<br>"
+						+ Math.round(series.percent)
+						+ "%</div>";
+            }
+
+            //관수 온오프 작동
+            function onoff_send(cmd) {
+                $.ajax({
+                    type: "GET",
+                    url: "./test/onoff",
+                    data: {
+                        channel: "<%=channel%>",
+                        command: cmd
+                    },
+                    dataType: "json",
+                    error: function () {
+
+                    },
+                    success: function (data) {
+                        console.log(data);
+                    }
+                });
+            }
+            
+            //날짜에서 시간과분만 추출
+            function getDateFromJSON(str) {
+                var date = new Date(str);
+                return (date.getHours() + 9) + ':' + date.getMinutes();
+			}
+
+			//날짜에서 하루 빼기
+			function getMinusOneDate(str) {
+				var date = new Date(str);
+                return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + (date.getDate() - 1) ;
+            }
+
+            //날짜 형식 변경
+            function getFormatDate(date) {
+                var year = date.getFullYear();      //yyyy
+                var month = (1 + date.getMonth());  //M
+                var day = date.getDate();           //d
+
+                month = month >= 10 ? month : '0' + month;  // month 두자리로 저장
+                day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
+                return year + '' + month + '' + day;
+            }
+
+            //시간말 추출
+            function getFormatDateHour(date) {
+                var hour = date.getHours();                                        //d
+                hour = hour >= 10 ? hour : '0' + hour;                            //day 두자리로 저장
+                return hour;
+            }
+
+            var get_Data = function () {
+
+                $.ajax({
+
+                    type: "GET",
+                    url: "/test/ajax?channel=<%=channel%>",
+                    dataType: "json",
+                     error: function () {
+                        var ajax_data;
+                        ajax_data = null;
+                    },
+                    success: function (data) {
+
+                        var chart_data;
+                        //ajax_data = JSON.stringify(data);
+                        chart_data = data;
+
+                        var get_data = chart_data;
+
+                        var show_data = [];
+                        
+                        for (var i = 0, max_data = get_data.length; i < max_data; i++) {
+                            show_data.push([getDateFromJSON(get_data[i].createdAt), get_data[i].value]);
+                        }
+
+                        var line_data1 = {
+                            data: show_data.reverse(),
+                            color: "#3c8dbc",
+                        };
+
+                        //flot.html 에서 가져옴
+                        $.plot("#sensor-chart", [line_data1], {
+                            grid: {
+                                hoverable: true,
+                                borderColor: "#f3f3f3",
+                                borderWidth: 1,
+                                tickColor: "#f3f3f3"
+                            },
+                            series: {
+                                shadowSize: 0,
+                                lines: {
+                                    show: true
+                                },
+                                points: {
+                                    show: true
+                                }
+                            },
+                            lines: {
+                                fill: false,
+                                color: ["#3c8dbc", "#f56954"],
+                            },
+                            yaxis: {
+                                min: 0,
+                                max: 1200,
+                                show: true,
+                            },
+                            xaxis: {
+                                // 이 설정은 x축의 보여지는 것이 날짜 기준으로 하기 위해서 있는 것이다.
+                                /*
+                                    mode: "time",
+                                    min: (new Date("2017/08/08")).getTime(),
+                                    max: (new Date("2017/08/18")).getTime(),
+                                    // min: (new Date("2010/11/01")).getTime(),
+                                    // max: (new Date("2011/02/01")).getTime(),
+                                */          
+                                mode: "categories",
+                                show: true,
+                            }
+                        });
+                        //Initialize tooltip on hover
+                        $('<div class="tooltip-inner" id="sensor-chart-tooltip"></div>').css({
+                            position: "absolute",
+                            display: "none",
+                            opacity: 0.8
+                        }).appendTo("body");
+                        
+                        $("#sensor-chart").bind("plothover", function (event, pos, item) {
+
+                            if (item) {
+                                var x = item.datapoint[0].toFixed(2),
+                                    y = item.datapoint[1].toFixed(2);
+
+                                //$("#sensor-chart-tooltip").html(item.series.label + " of " + x + " = " + y)
+                                $("#sensor-chart-tooltip").html(y).css({
+                                    top: item.pageY + 5,
+                                    left: item.pageX + 5
+                                }).fadeIn(200);
+                            } else {
+                                $("#sensor-chart-tooltip").hide();
+                            }
+                        });
+                    }
+                });
+            }
+
+            var get_image = function () {
+
+                $.ajax({
+
+                    type: "GET",
+                    url: "/test/ajaxpath?channel=<%=channel%>",
+				    dataType : "json",
+				    error : function() {
+					    var ajax_path;
+					    ajax_path = '/upload/failed/failed/failed.jpg';
+					        //console.log(ajax_path);
+					    $("#camera-info").find("img").attr("src", ajax_path);
+
+                    },
+                    success : function(data) {
+
+                        var ajax_data = data;
+						var img_path;						
+						var d = new Date(ajax_data.createdAt);			
+                        var dateStr = d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes();
+						
+						if(ajax_data.createdAt == "") dateStr = "";
+
+                        img_path = '/upload/' + ajax_data.field_id + '/' + ajax_data.folder_name + '/' + ajax_data.img_name;
+
+                        $("#camera-info").find("img").attr("src", img_path);
+                        $("#camera-date").text(dateStr);
+
+                    }
+                });
+			}
+			
+			//관수 설정 변경
+			$("#waterSetupBtn").on("click", function (event) {
+				event.preventDefault();			
+				$.ajax({
+                    type: "GET",
+                    url: "/test/ajaxWaterSetSetup",
+                    data: {
+						channel: "<%=channel%>",
+						settin_value: $("#waterTimeValue").val()
+                    },
+				    dataType : "json",
+				    error : function() {
+						getDeviceSetup();
+                    },
+                    success : function(data) {
+						getDeviceSetup();
+                    }
+                });
+			});
+			
+			//카메라 설정 변경
+			$("#cameraSetupBtn").on("click", function (event) {
+				event.preventDefault();			
+				$.ajax({
+                    type: "GET",
+                    url: "/test/ajaxCameraSetSetup",
+                    data: {
+						channel: "<%=channel%>",
+						settin_value: $("#cameraTimeValue").val()
+                    },
+				    dataType : "json",
+				    error : function() {
+						getDeviceSetup();
+                    },
+                    success : function(data) {
+						getDeviceSetup();
+                    }
+                });
+            });
+
+            $("#shootBtn").on("click", function (event) {
+				event.preventDefault();			
+                $.ajax({
+                    type: "GET",
+                    url: "/test/ajaxCameraShoot",
+                    data: {
+						channel: "<%=channel%>"
+                    },
+				    dataType : "json",
+				    error : function() {
+						
+                    },
+                    success : function(data) {
+						//socket.emit('chat', data);
+						setTimeout(function() {
+						//your code to be executed after 1 second
+							get_image();
+						}, 5000);
+
+                    }
+                });
+			});
+			
+			// device get value of setup
+			function getDeviceSetup(){
+				$.ajax({
+                    type: "GET",
+                    url: "/test/ajaxGetSetup",
+                    data: {
+                        channel: "<%=channel%>"
+                    },
+				    dataType : "json",
+				    error : function() {
+
+                    },
+                    success : function(data) {
+						$("#waterTimeValue").val(data.water_stop_time);
+						$("#cameraTimeValue").val(data.shooting_time);
+                    }
+                });
+
+			}
+
+            // get slide image
+            function slide_getImage( startDate , endDate ){
+                $.ajax({
+                    type: "GET",
+                    url: "/test/ajaxGetImage",
+                    data: {
+                        channel: "<%=channel%>",
+                        startDate: startDate,
+                        endDate: endDate
+                    },
+				    dataType : "json",
+				    error : function() {
+					    var ajax_path;
+					    ajax_path = '/upload/failed/failed/failed.jpg';
+					    $("#camera-info").find("img").attr("src", ajax_path);
+
+                    },
+                    success : function(data) {
+						/**/
+						
+                        $("#carousel-example-generic").carousel("pause").removeData();
+						var content_indi = "";
+						var content_inner = "";
+
+						$.each(data, function (i, obj) {
+							if(obj.isImg){
+								content_indi += '<li data-target="#carousel-example-generic" data-slide-to="' + i + '"></li>';								
+								content_inner += '<div class="item"><img src="/upload/' + obj.field_id + '/' + obj.folder_name + '/' + obj.img_name + '" /><div class="carousel-caption"></div></div>';
+																
+							}
+						});
+						
+                        $('.carousel-indicators').html(content_indi);
+                        $('.carousel-inner').html(content_inner);
+						if($('.carousel-indicators > li').size() == 0){
+							$('.carousel-indicators').html('<li data-target="#carousel-example-generic" data-slide-to="0"></li>');
+                        	$('.carousel-inner').html('<div class="item"><img src="/upload/failed/failed/failed.jpg" /></div>');
+						}						
+                        $('.carousel-inner .item').first().addClass('active');
+						$('.carousel-indicators > li').first().addClass('active');
+						$('.carousel-indicators').hide();
+						$('#carousel-example-generic').carousel();
+						
+                    }
+                });
+            }
+            //Date range picker
+			$('#reservation').daterangepicker();
+			$('#reservation').on('apply.daterangepicker', function(ev, picker) {
+				
+                slide_getImage(getMinusOneDate(picker.startDate.format('YYYY-MM-DD')) + " 22:00:00" , picker.endDate.format('YYYY-MM-DD') + " 09:00:00");
+                
+                /*
+                $(".carousel-indicators").append('<li data-target="#carousel-example-generic" data-slide-to="3" ></li>');
+                $(".carousel-inner").append('<div class="item"><img src="http://placehold.it/900x500/f39c12/ffffff&amp;text=I+Love+Bootstrap" alt="Third slide"><div class="carousel-caption">Third Slide</div></div>');
+                $('#carousel-example-generic').carousel('next');
+               
+                $("#carousel-example-generic").carousel("pause").removeData();
+                var content_indi = "";
+                var content_inner = "";
+                $.each(data, function (i, obj) {
+                    content_indi += '<li data-target="#carousel-example-generic" data-slide-to="' + i + '"></li>';
+                    content_inner += '<div class="item" style="background:url(&#39/images/' + obj.img_filename + '&#39) no-repeat center center;background-size: cover"></div>';
+                });
+                $('#car_id').html(content_indi);
+                $('#car_inner').html(content_inner);
+                $('#car_inner .item').first().addClass('active');
+                $('#car_indi > li').first().addClass('active');
+                $('#carousel-example-generic').carousel();
+                */  
+            });
+            
+			//alert($('#reservation').data("daterangepicker").startDate.format('YYYY-MM-DD'));
+            slide_getImage( getMinusOneDate($('#reservation').data("daterangepicker").startDate.format('YYYY-MM-DD')) + " 22:00:00" , $('#reservation').data("daterangepicker").endDate.format('YYYY-MM-DD') + " 09:00:00" );
+            //관수 온 버튼 이벤트
+            $("#controller_on").click(function () {
+
+                $(this).attr("disabled", true);
+
+                onoff_send(1);
+
+                setTimeout(function () {
+                    $("#controller_on").attr("disabled", false);
+                }, 1000 * 30);
+
+            });
+
+            //관수 오프 버튼 이벤트
+            $("#controller_off").click(function () {
+
+                $("#controller_on").attr("disabled", false);
+
+                onoff_send(0);
+
+            });
+
+            
+            getDeviceSetup();
+            get_Data();
+			setInterval("get_Data()", 1000 * 30);
+			setInterval("get_image()", 1000 * 30);
+    </script>
+
+</body>
+
+</html>

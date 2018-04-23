@@ -33,8 +33,31 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
+        models.iof_setting.belongsTo(models.device,{
+          foreignKeyConstraint: true,
+          foreignKey: 'id',
+          allowNull: false,
+          onDelete: 'CASCADE',  
+        });
+        
       }
     }
   });
+  iof_setting.associate = function(models){
+    iof_setting.belongsTo(models.device,
+      {
+        foreignKeyConstraint: true,
+        foreignKey: 'id',
+        allowNull: false,
+        onDelete: 'CASCADE',
+    });
+    
+    iof_setting.belongsTo(models.device, {
+      foreignKeyConstraint: true,
+      foreignKey: 'device_serial',
+      allowNull: false,
+      onDelete: 'CASCADE',
+    })
+  }
   return iof_setting;
 };

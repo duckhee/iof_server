@@ -9,7 +9,7 @@
     },
     "test": {
         "username": "root",
-        "password": null,
+        "password": "won1228",
         "database": "database_test",
         "host": "127.0.0.1",
         "dialect": "mysql",
@@ -19,7 +19,7 @@
         "username": "root",
         "password": null,
         "database": "database_production",
-        "host": "127.0.0.1",
+        "host": "13.209.19.28",
         "dialect": "mysql",
         "timezone": "+09:00"
     }

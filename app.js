@@ -148,6 +148,24 @@ io.sockets.on('connection', function(socket) {
             }
         });
     });
+    //insert iof device setting
+    socket.on('iof_device_setting_request', function(data){
+        console.log('iof device setting request ::::::::::: ', data);
+        var serialInfo = {"serial":data.serial};
+        deviceContrller.find_device(serialInfo, function(err, result){
+            if(err){
+                console.log('device setting error :::: ', err);
+                var errorSetting = {};
+                io.emit('iof_device_setting_error', errorSetting);
+            }else{
+                if(data.msg === 0){
+
+                }else if(data.msg === 1){
+                    
+                }
+            }
+        })
+    });
     //save sensor info
     socket.on('sensor_iofdata_request', function(data) {
         console.log('socket ::::: ' + data);
