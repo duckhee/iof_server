@@ -7,8 +7,8 @@ var bcrypt = require('bcrypt-nodejs');
 exports.create_user = function(user_info, callback) {
     console.log('craete user');
     var member_password = user_info.user_password;
-        var user_password = bcrypt.hashSync(user_info.user_pw);
-        console.log(user_password);
+    var user_password = bcrypt.hashSync(user_info.user_pw);
+    console.log(user_password);
     models.user.findOrCreate({
         where: {
             user_id: user_info.user_id,
@@ -24,6 +24,7 @@ exports.create_user = function(user_info, callback) {
             user_address1: user_info.user_address1,
             user_address2: user_info.user_address2,
             user_zipcode: user_info.user_zipcode,
+
             apikey: user_info.user_apikey,
         }
     }).spread((user, created) => {

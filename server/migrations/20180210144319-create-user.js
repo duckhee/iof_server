@@ -16,6 +16,11 @@ module.exports = {
                 type: Sequelize.STRING,
                 unique: true
             },
+            user_level: {
+                type: Sequelize.INTEGER,
+                allowNull: false
+            },
+
             user_password: {
                 type: Sequelize.STRING,
                 allowNull: false,
@@ -38,12 +43,12 @@ module.exports = {
             user_address2: {
                 type: Sequelize.STRING
             },
-            user_zipcode:{
-                type:Sequelize.STRING
+            user_zipcode: {
+                type: Sequelize.STRING
             },
-            user_email:{
-                type:Sequelize.STRING,
-                unique:true
+            user_email: {
+                type: Sequelize.STRING,
+                unique: true
             },
             apikey: {
                 type: Sequelize.STRING,

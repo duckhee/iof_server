@@ -8,9 +8,6 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-            id_value: {
-                type: Sequelize.STRING
-            },
             deviceId: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
@@ -31,9 +28,6 @@ module.exports = {
             },
             id_text: {
                 type: Sequelize.TEXT
-            },
-            id_apikey: {
-                type: Sequelize.STRING
             },
             createdAt: {
                 allowNull: false,
