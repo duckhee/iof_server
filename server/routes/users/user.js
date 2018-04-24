@@ -121,11 +121,19 @@ router.post('/process/login', function(req, res, next) {
             res.redirect('/user/login');
         } else if (row) {
             req.session.userid = row.user_id;
-            res.redirect('/');
-        } else if(check === 0){
+            var UpdateAct = { "userid": row.user_id };
+            user_controller.Update_Active(UpdateAct, function(err, result) {
+                if (err) {
+                    console.log('update Active error ::: ', err);
+                    res.redirect('/login');
+                } else {
+                    res.redirect('/');
+                }
+            })
+        } else if (check === 0) {
             console.log('test not id');
             res.send('<script>alert("not user go to registe page"); document.location.href ="/user/registe"</script>');
-        }else if(check === 1){
+        } else if (check === 1) {
             console.log('test not pw');
             res.send('<script>alert("not match password"); document.location.href ="/user/login"</script>');
         }
