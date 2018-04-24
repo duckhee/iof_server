@@ -44,7 +44,6 @@ router.post('/process/registe', function(req, res, next) {
     user_controller.create_user(user_info, function(err, newuser, olduser) {
         if (err) {
             console.log('create user error : ', err);
-
         } else if (olduser === true) {
             res.redirect('/');
         } else if (newuser) {
@@ -66,7 +65,6 @@ router.get('/check_id', function(req, res, next) {
     user_controller.check_id(user_info, function(err, row) {
         if (err) {
             console.log('error : ', err);
-
             res.redirect('/user/check_id?id=' + userid);
         } else if (row) {
             console.log('check id : ', row);
@@ -121,11 +119,19 @@ router.post('/process/login', function(req, res, next) {
             res.redirect('/user/login');
         } else if (row) {
             req.session.userid = row.user_id;
-            res.redirect('/');
-        } else if(check === 0){
+            var UpdateAct = { "userid": row.user_id };
+            user_controller.Update_Active(UpdateAct, function(err, result) {
+                if (err) {
+                    console.log('update Active error ::: ', err);
+                    res.redirect('/login');
+                } else {
+                    res.redirect('/');
+                }
+            })
+        } else if (check === 0) {
             console.log('test not id');
             res.send('<script>alert("not user go to registe page"); document.location.href ="/user/registe"</script>');
-        }else if(check === 1){
+        } else if (check === 1) {
             console.log('test not pw');
             res.send('<script>alert("not match password"); document.location.href ="/user/login"</script>');
         }
