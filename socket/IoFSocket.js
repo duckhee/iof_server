@@ -1,6 +1,6 @@
 var deviceController = require('../server/controllers/device/device_controller');
-var IoFValueController = require('./server/controllers/device/iof_controller');
-var network_controller = require('./server/controllers/device/network_controller');
+var IoFValueController = require('../server/controllers/device/iof_controller');
+var network_controller = require('../server/controllers/device/network_controller');
 
 
 module.exports = function(socket) {
