@@ -1,6 +1,6 @@
 var SettingController = require('../server/controllers/device/device_setting_controller');
-var IoFController = require('../server/controllers/device/IoF_Setting_controller');
-var RadonController = require('../server/controllers/device/radon_Setting_controller');
+var IoFSettingController = require('../server/controllers/device/IoF_Setting_controller');
+var RadonSettingController = require('../server/controllers/device/radon_Setting_controller');
 var DeviceController = require('../server/controllers/device/device_controller');
 var DeviceSettingController = require('../server/controllers/device/device_setting_controller');
 //util
@@ -16,7 +16,11 @@ module.exports = function(io, socket) {
                 console.log('checking device error before setting ::::: ', err);
             } else if (result) {
                 if (!Util.isEmpty(result)) {
-                    if (result.)
+                    if (result.device_type === 'IoF') {
+
+                    } else if (result.device_type === 'radon') {
+
+                    }
                 } else {
 
                 }
