@@ -1,6 +1,6 @@
 var dl = require('delivery');
 var moment = require('moment');
-
+var fs = require('fs');
 //controller
 var deviceController = require('../server/controllers/device/device_controller');
 var cameraController = require('../server/controllers/device/image_controller');
