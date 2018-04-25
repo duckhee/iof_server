@@ -1,5 +1,3 @@
-
-
 var models = require('../../models/index');
 var device_network = require('../../models/device_network');
 var device = require('../../models/device');
@@ -7,16 +5,16 @@ var util_make = require('../../util/util');
 
 
 //report checking network
-exports.checking = function(callback){
+exports.checking = function(callback) {
     models.device_network.findAll({
-        
-        order:[
-            ['createdAt','DESC']
+
+        order: [
+            ['createdAt', 'DESC']
         ]
-    }).then((result)=>{
+    }).then((result) => {
         console.log('testing ::::: ', result);
         callback(null, result);
-    }).catch((err)=>{
+    }).catch((err) => {
         console.log('error ::::: ', err);
         callback(err, null);
     });
@@ -116,12 +114,12 @@ exports.update_inactstatus = function(network_info, callback) {
     var nowTime = new Date();
     models.device.find({
         //device_serial: network_info.serial
-        where:{
+        where: {
             device_serial: network_info.serial
         }
     }).then((result) => {
         models.device_network.update({
-            updatedAt:nowTime,
+            updatedAt: nowTime,
             sn_status: 'inactive'
         }, {
             where: {
@@ -139,15 +137,15 @@ exports.update_inactstatus = function(network_info, callback) {
 
 //export update status
 exports.update_actstatus = function(network_info, callback) {
-    var nowTime = new isDate();
+    var nowTime = new Date();
     models.device.find({
-        where:{
+        where: {
             device_serial: network_info.serial
         }
         //device_serial: network_info.serial
     }).then((result) => {
         models.device_network.update({
-            updatedAt:nowTime,
+            updatedAt: nowTime,
             sn_status: 'active'
         }, {
             where: {
