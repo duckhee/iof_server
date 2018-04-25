@@ -15,9 +15,9 @@ module.exports = function(io, socket) {
                 io.emit('iof_device_setting_error', errorSetting);
             } else {
                 if (data.msg === 0) {
-
+                    //checking value not
                 } else if (data.msg === 1) {
-
+                    //checking value 
                 }
             }
         })
