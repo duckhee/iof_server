@@ -1,7 +1,9 @@
-module.exports = function(socket) {
+module.exports = function(io, socket) {
 
     socket.on('', function(data) {
 
-    })
+    });
+
+    io.emit('');
 
 }

@@ -79,7 +79,7 @@ module.exports = function(io, socket) {
                         });
                         console.log('file : ' + params.filename + ' saved');
                     }
-                })
+                });
             } else {
                 console.log('not device null');
             }
