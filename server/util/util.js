@@ -55,3 +55,11 @@ exports.phone_number = function(phone_info) {
     }
 
 }
+
+//checking device IoF
+exports.GetDeviceIoF = function(deviceInfo) {
+    if (deviceInfo.device_type === 'IoF') {
+        return true;
+    }
+    return false;
+}

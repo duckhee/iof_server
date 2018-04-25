@@ -16,7 +16,7 @@ module.exports = function(io, socket) {
                 console.log('checking device error before setting ::::: ', err);
             } else if (result) {
                 if (!Util.isEmpty(result)) {
-
+                    if (result.)
                 } else {
 
                 }
