@@ -125,7 +125,7 @@ router.post('/process/login', function(req, res, next) {
                     console.log('update Active error ::: ', err);
                     res.redirect('/login');
                 } else {
-                    res.send('<script>history.back();</script>')
+                    res.redirect('/');
                 }
             })
         } else if (check === 0) {
