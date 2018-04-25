@@ -7,6 +7,7 @@ router.all('/*', function(req, res, next) {
     console.log('root path all router');
     console.log('request ip : ', req.ip);
     console.log('request url : ', req.originalUrl);
+    console.log('now url :: ', req.url);
     console.log('session user id :::::::::::: ', req.session.userid);
     next();
 })
