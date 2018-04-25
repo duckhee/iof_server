@@ -59,7 +59,8 @@ exports.InsertValue = function(data_info, callback) {
     }).then((result) => {
         callback(null, result);
     }).catch((err) => {
-        console.log('insert iof data error : ')
+        console.log('insert iof data error : ', err);
+        callback(err, null);
     });
 };
 
