@@ -3,7 +3,7 @@ var IoFValueController = require('../server/controllers/device/iof_controller');
 var network_controller = require('../server/controllers/device/network_controller');
 
 
-module.exports = function(socket) {
+module.exports = function(io, socket) {
     //insert iof device setting
     socket.on('iof_device_setting_request', function(data) {
         console.log('iof device setting request ::::::::::: ', data);

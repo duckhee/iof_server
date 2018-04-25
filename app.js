@@ -44,8 +44,8 @@ var io = require('socket.io').listen(5001), // 이미지 저장관련 소켓
 var moment = require('moment'); //시간 모듈
 
 io.sockets.on('connection', function(socket) {
-    ImageSocket(socket);
-    IoFSocket(socket);
+    ImageSocket(io, socket);
+    IoFSocket(io, socket);
     //socket disconnect
     socket.on('disconnect', function() {
         console.log('user disconnected socket end device :::::: ');

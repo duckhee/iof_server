@@ -5,7 +5,7 @@ var fs = require('fs');
 var deviceController = require('../server/controllers/device/device_controller');
 var cameraController = require('../server/controllers/device/image_controller');
 
-module.exports = function(socket) {
+module.exports = function(io, socket) {
     var delivery = dl.listen(socket);
 
     //delivery receive image
