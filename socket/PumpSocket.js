@@ -4,6 +4,7 @@ module.exports = function(io, socket) {
 
     });
 
-    io.emit('');
+    var ControlInfo = {};
+    io.emit('', ControlInfo);
 
 }
