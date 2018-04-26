@@ -6,7 +6,7 @@ exports.InsertData = function(data_info, callback) {
     models.radon_value.create({
         rd_value: data_info.value,
         deviceId: data_info.deviceId,
-        td_data: data_info.value,
+        td_data: data_info.textvalue,
         rd_serial: data_info.serial,
     }).then((result) => {
         callback(null, result);
