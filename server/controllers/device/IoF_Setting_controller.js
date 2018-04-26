@@ -66,3 +66,10 @@ exports.UpdateSetting = function(setting_info, callback) {
         callback(err, null);
     });
 };
+
+//export setting camera value
+exports.CameraSetting = function(setting_info, callback) {
+    models.iof_setting.create({
+
+    })
+}
