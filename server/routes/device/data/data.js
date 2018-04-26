@@ -351,7 +351,7 @@ router.get('/radoninsert', function(req, res, next) {
     device_controller.insert_before(CheckingDevice, function(err, result) {
         if (err) {
             console.log('radon device checking error ::: ', err);
-            res.status(500);
+            next(err);
         } else if (result) {
             //checking null please
             var textvalue = radonValue + ',' + doorValue1 + ',' + doorValue2 + ',' + doorValue3 + ',' + doorValue4 + ',' + doorValue5;
@@ -391,7 +391,7 @@ router.post('/radoninsert', function(req, res, next) {
     device_controller.insert_before(CheckingDevice, function(err, result) {
         if (err) {
             console.log('radon device checking error ::: ', err);
-            res.status(500);
+            next(err);
         } else if (result) {
             //checking null please
             var textvalue = radonValue + ',' + doorValue1 + ',' + doorValue2 + ',' + doorValue3 + ',' + doorValue4 + ',' + doorValue5;
