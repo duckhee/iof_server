@@ -21,7 +21,13 @@ module.exports = {
                 type: Sequelize.TEXT
             },
             id_serial: {
-                type: Sequelize.STRING
+                type: Sequelize.STRING,
+                onDelete: 'CASCADE',
+                allowNull: false,
+                references: {
+                    model: 'devices',
+                    key: "device_serial"
+                }
             },
             id_address: {
                 type: Sequelize.STRING
