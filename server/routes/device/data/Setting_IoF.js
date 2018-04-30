@@ -73,5 +73,5 @@ router.post('/IoFgetSetting', function(req, res, next){
 
 
 
-return router;
+module.exports = router;
 

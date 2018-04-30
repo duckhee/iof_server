@@ -15,7 +15,7 @@ var device = require('./server/routes/device/device');
 var boarder = require('./server/routes/boarder/boarder');
 var data = require('./server/routes/device/data/data');
 //device control (capture, motor on)
-
+var control = require('./server/routes/device/control');
 
 //controller add 
 var dataController = require('./server/controllers/device/data_controller');
@@ -30,11 +30,34 @@ var IoFValueController = require('./server/controllers/device/iof_controller');
 //socket server
 var ImageSocket = require('./socket/ImageSocket');
 var IoFSocket = require('./socket/IoFSocket');
-
+var Control = require('./socket/ControlSocket');
 //test router 테스트용 라우터 모든 테스트 여기
 var test = require('./server/routes/testrouter');
 
 let db = require('./server/models');
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+//카메라 사진 저장
+var io = require('socket.io').listen(5001), // 이미지 저장관련 소켓
+    dl = require('delivery'), //이미지 전달 모듈
+    fs = require('fs'); // 파일 저장
+var moment = require('moment'); //시간 모듈
+
+io.sockets.on('connection', function(socket) {
+    ImageSocket(io, socket);
+    IoFSocket(io, socket);
+    //setting and control IoF device
+    Control(io, socket);
+    //socket disconnect
+    socket.on('disconnect', function() {
+        console.log('user disconnected socket end device :::::: ');
+    });
+});
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 
 
@@ -81,29 +104,7 @@ app.use('/boards', boarder);
 //get data or insert data router
 app.use('/data', data);
 //seting IoFDevice
-
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-//카메라 사진 저장
-var io = require('socket.io').listen(5001), // 이미지 저장관련 소켓
-    dl = require('delivery'), //이미지 전달 모듈
-    fs = require('fs'); // 파일 저장
-var moment = require('moment'); //시간 모듈
-
-io.sockets.on('connection', function(socket) {
-    ImageSocket(io, socket);
-    IoFSocket(io, socket);
-    //setting and control IoF device
-    
-    //socket disconnect
-    socket.on('disconnect', function() {
-        console.log('user disconnected socket end device :::::: ');
-    });
-});
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+app.use('/control', control);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

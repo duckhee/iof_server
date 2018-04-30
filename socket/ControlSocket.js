@@ -2,6 +2,14 @@ var DeviceController = require('../server/controllers/device/device_controller')
 
 
 module.exports = function(io, socket) {
+ 
+    /*
+    socket.on('finshpumpon_tesitng', function(data){
+        console.log('get data :::::: ', data.serial);
+        io.emit('testingsocket', 125334);
+    });
+    */
+
     //socket water start
     socket.on('waterstart', function(data) {
         console.log('water start ::::::::::: ', data);

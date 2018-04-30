@@ -5,17 +5,23 @@ var DeviceController = require('../../controllers/device/device_controller');
 var SettingDevice = require('../../controllers/device/device_setting_controller');
 var SettingIoF = require('../../controllers/device/IoF_Setting_controller');
 
-module.exports = function(io, socket){
+var io2 = require('socket.io-client');
+var socket2 = io2.connect('http://localhost:5001');
 
+
+/*
     router.get('/test', function(req, res, next) {
-        console.log('tesitng socket');
+        //console.log('tesitng socket');
         var TestingData = {
-            "serial":testing
+            "serial":'tsetasdfdka'
         }
-        io.emit('finshpumpon_tesitng', TestingData);
+        socket2.emit('finshpumpon_tesitng', TestingData);
          res.json('test');
-    })
-    
+        socket2.on('testingsocket', function(data){
+            console.log('testing get dtata' , data);
+        })
+    });
+*/  
 //checking device get router
 router.get('/ajaxpumpon', function(req, res, next){
     console.log('checking device ');
@@ -35,9 +41,9 @@ router.get('/ajaxpumpon', function(req, res, next){
                 "serial":result.device_serial,
                 "command":getcommand
             }
-            io.emit('waterstart',Info);
+            socket2.emit('waterstart',Info);
             console.log('event water start');
-            socket.on('finshpumpon_'+result.device_serial, function(data){
+            socket2.on('finshpumpon_'+result.device_serial, function(data){
                 if(data.flag === 1){
                     console.log('pump on success');
                      res.json('pump start success');
@@ -105,9 +111,9 @@ router.get('/ajaxpumpoff', function(req, res, next){
                 "serial":result.device_serial,
                 "cmd":data.command
             }
-            io.emit('waterstop', Info);
+            socket2.emit('waterstop', Info);
             console.log('event water stop');
-            socket.on('finshpumpstop_'+result.device_serial, function(data){
+            socket2.on('finshpumpstop_'+result.device_serial, function(data){
                 if(data.flag === 1){
                     console.log('pump off success');
                      res.json('pump off success');
@@ -125,7 +131,20 @@ router.get('/ajaxpumpoff', function(req, res, next){
 router.get('/ajaxpumpoff', function(req, res, next){
     var getserial = req.query.serial || req.body.serial || req.param.serial || req.params.serial;
     var getcommand = req.query.command || req.body.command || req.param.command || req.params.command;
-    next();
+    var DeviceInfo = {
+        "serial":getserial,
+        "command":getcommand
+    };
+    DeviceController.insert_before(DeviceInfo, function(err, result){
+        if(err){
+            console.log('device find error ::::: ', err);
+
+        }else{
+            console.log('device find result ::::: ', result);
+            
+            
+        }
+    })
 });
 
 //get pump off
@@ -164,9 +183,9 @@ router.get('ajaxshooting', function(req, res, next){
                 "serial":result.device_serial,
                 "cmd":getcommand
             };
-            io.emit('camerashoot', Info);
+            socket2.emit('camerashoot', Info);
             console.log('camera shooting ');
-            socket.on('finshshooting_'+result.device_serial, function(data){
+            socket2.on('finshshooting_'+result.device_serial, function(data){
                 if(data.flag === 1){
                     console.log('shooting picture sucess');
                      res.json('shooting picture success');
@@ -204,6 +223,5 @@ router.post('ajaxshooting', function(req, res, next){
     next();
 });
 
-return router;
+module.exports = router;
 
-}
