@@ -208,12 +208,11 @@
     
     <% include ../../../../partials/footer_graph_javascript.ejs %>
   </body>
-  <script src="/socket.io/socket.io.js"></script> <!-- 1 -->
   <script>
 $(function(){
 
         //pump on/off
-        function PumpOn(cmd){
+        function PumpSend(cmd){
             $.ajax({
                 type:"GET",
                 url:"",
@@ -222,14 +221,15 @@ $(function(){
                     command:cmd
                 },
                 dataType:"json",
-                error:function(){
-
+                error:function(error){
+                    console.log('pump send error ::: ', error);
                 },
                 success:function(data){
                     console.log('insert data : ', data);
                 }
             });
         }
+        
         //device get value of water setup
         function getWaterSet(waterValue){
             event.preventDefault();
