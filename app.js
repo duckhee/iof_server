@@ -14,6 +14,8 @@ var user = require('./server/routes/users/user');
 var device = require('./server/routes/device/device');
 var boarder = require('./server/routes/boarder/boarder');
 var data = require('./server/routes/device/data/data');
+//device control (capture, motor on)
+
 
 //controller add 
 var dataController = require('./server/controllers/device/data_controller');
@@ -34,25 +36,6 @@ var test = require('./server/routes/testrouter');
 
 let db = require('./server/models');
 
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-//카메라 사진 저장
-var io = require('socket.io').listen(5001), // 이미지 저장관련 소켓
-    dl = require('delivery'), //이미지 전달 모듈
-    fs = require('fs'); // 파일 저장
-var moment = require('moment'); //시간 모듈
-
-io.sockets.on('connection', function(socket) {
-    ImageSocket(io, socket);
-    IoFSocket(io, socket);
-    //socket disconnect
-    socket.on('disconnect', function() {
-        console.log('user disconnected socket end device :::::: ');
-    });
-});
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 var app = express();
@@ -97,7 +80,29 @@ app.use('/device', device);
 app.use('/boards', boarder);
 //get data or insert data router
 app.use('/data', data);
+//seting IoFDevice
 
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+//카메라 사진 저장
+var io = require('socket.io').listen(5001), // 이미지 저장관련 소켓
+    dl = require('delivery'), //이미지 전달 모듈
+    fs = require('fs'); // 파일 저장
+var moment = require('moment'); //시간 모듈
+
+io.sockets.on('connection', function(socket) {
+    ImageSocket(io, socket);
+    IoFSocket(io, socket);
+    //setting and control IoF device
+    
+    //socket disconnect
+    socket.on('disconnect', function() {
+        console.log('user disconnected socket end device :::::: ');
+    });
+});
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 // catch 404 and forward to error handler
