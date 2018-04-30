@@ -168,7 +168,7 @@ router.post('/ajaxpumpoff', function(req, res, next){
 });
 
 //capture picture router
-router.get('ajaxshooting', function(req, res, next){
+router.get('/ajaxshooting', function(req, res, next){
     var getserial = req.body.serial || req.query.serial || req.param.serial || req.params.serial;
     var getcommand = req.body.command || req.query.command || req.param.command || req.params.command;
     var DeviceInfo = {
@@ -199,27 +199,27 @@ router.get('ajaxshooting', function(req, res, next){
 });
 
 //capture picture router
-router.get('ajaxshooting', function(req, res, next){
+router.get('/ajaxshooting', function(req, res, next){
     next();
 });
 
 //capture picture router
-router.get('ajaxshooting', function(req, res, next){
+router.get('/ajaxshooting', function(req, res, next){
     next();
 });
 
 //capture picture router
-router.post('ajaxshooting', function(req, res, next){
+router.post('/ajaxshooting', function(req, res, next){
     next();
 });
 
 //capture picture router
-router.post('ajaxshooting', function(req, res, next){
+router.post('/ajaxshooting', function(req, res, next){
     next();
 });
 
 //capture picture router
-router.post('ajaxshooting', function(req, res, next){
+router.post('/ajaxshooting', function(req, res, next){
     next();
 });
 
