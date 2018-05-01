@@ -6,16 +6,46 @@ var SettingDevice = require('../../../controllers/device/device_setting_controll
 var SettingIoF = require('../../../controllers/device/IoF_Setting_controller');
 
 
-router.get('/IoFsetSetting', function(req, res, next){
+router.get('/IoFSettingWater', function(req, res, next) {
+    console.log('water time setting checking device');
+    var getSerial = req.body.serial || req.query.serial || req.param.serial || req.params.serial;
+    next();
+});
+
+
+//get setting water set router
+router.get('/IoFSettingWater', function(req, res, next) {
+    console.log('water setting ');
+    var getSerial = req.body.serial || req.query.serial || req.param.serial || req.params.serial;
+    var getWaterTime = req.body.waterTime || req.query.waterTime || req.param.waterTime || req.params.waterTime;
+    var deviceInfo = {
+        "serial": getSerial
+    }
+    DeviceController.insert_before(deviceInfo, function(err, result) {
+        if (err) {
+            console.log('water setting insert before checking device error :::; ', err);
+            next(err);
+        } else {
+            var SettingInfo = {
+                "id": result.id,
+                "serial": getSerial,
+                "waterTime": water_time
+            }
+        }
+    });
+});
+
+//setting device id
+router.get('/IoFSetSetting', function(req, res, next) {
     var device_id = req.body.id || req.query.id || req.param.id || req.params.id;
     var DeviceInfo = {
-        "id":device_id
+        "id": device_id
     };
-    DeviceController.device_info(DeviceInfo, function(err, result){
-        if(err){
+    DeviceController.device_info(DeviceInfo, function(err, result) {
+        if (err) {
             console.log('insert device error :::: ', err);
             next(err);
-        }else{
+        } else {
             console.log('checking device :::: ', result);
             req.query.serial = result.device_serial;
             next();
@@ -24,49 +54,49 @@ router.get('/IoFsetSetting', function(req, res, next){
 });
 
 //setting iof device 
-router.get('/IoFsetSetting', function(req, res, next){
+router.get('/IoFSetSetting', function(req, res, next) {
     var serial = req.body.serial || req.query.serial || req.param.serial || req.params.serial;
-    next();    
+    next();
 });
 
 //seting iof device
-router.get('/IoFsetSetting', function(req, res, next){
+router.get('/IoFSetSetting', function(req, res, next) {
     var serial = req.body.serial || req.query.serial || req.param.serial || req.params.serial;
     next();
 });
 
 //post setting iof device
-router.post('/IoFsetSetting', function(req, res, next){
+router.post('/IoFSetSetting', function(req, res, next) {
     var serial = req.body.serial || req.query.serial || req.param.serial || req.params.serial;
     next();
 });
 
 //post setting iof device
-router.post('/IoFsetSetting', function(req, res, next){
+router.post('/IoFSetSetting', function(req, res, next) {
     var serial = req.body.serial || req.query.serial || req.param.serial || req.params.serial;
     next();
 });
 
 //get setting iof device
-router.get('/IoFgetSetting', function(req, res, next){
+router.get('/IoFSetSetting', function(req, res, next) {
     var serial = req.body.serial || req.query.serial || req.param.serial || req.params.serial;
     next();
 });
 
 //get setting iof device
-router.get('/IoFgetSetting', function(req, res, next){
+router.get('/IoFSetSetting', function(req, res, next) {
     var serial = req.body.serial || req.query.serial || req.param.serial || req.params.serial;
     next();
 });
 
 //post get setting iof device
-router.post('/IoFgetSetting', function(req, res, next){
+router.post('/IoFSetSetting', function(req, res, next) {
     var serial = req.body.serial || req.query.serial || req.param.serial || req.params.serial;
     next();
 });
 
 //post get setting iof device
-router.post('/IoFgetSetting', function(req, res, next){
+router.post('/IoFSetSetting', function(req, res, next) {
     var serial = req.body.serial || req.query.serial || req.param.serial || req.params.serial;
     next();
 });
@@ -74,4 +104,3 @@ router.post('/IoFgetSetting', function(req, res, next){
 
 
 module.exports = router;
-

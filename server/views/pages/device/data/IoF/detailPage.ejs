@@ -228,7 +228,7 @@ function emptyCheck(value) {
 */
         //pump on/off
         function PumpSend(cmd){
-            $.ajax({
+            var xhr = $.ajax({
                 type:"GET",
                 url:"",
                 data:{
@@ -238,9 +238,11 @@ function emptyCheck(value) {
                 dataType:"json",
                 error:function(error){
                     console.log('pump send error ::: ', error);
+                    xhr.abort();
                 },
                 success:function(data){
                     console.log('insert data : ', data);
+                    return data;
                 }
             });
         }
@@ -248,19 +250,21 @@ function emptyCheck(value) {
         //device get value of water setup
         function getWaterSet(waterValue){
             event.preventDefault();
-            $.ajax({
+            var xhr = $.ajax({
                 type:"GET",
                 url:"",
                 data:{
                     serial:"<%=serial%>",
-                    waterTime:$("#").val()
+                    waterTime:$("#waterTime").val()
                 },
                 dataType:"json",
                 error:function(error){
                     console.log('get water setting error : ', error);
+                    xhr.abort();
                 },
                 success:function(data){
                     console.log('get water setting : ', data);
+                    return data;
                 }
             });
         };
@@ -273,14 +277,16 @@ function emptyCheck(value) {
                 url:"",
                 data:{
                     serial:"<%=serial%>",
-                    caeraTime:$("#").val()
+                    caeraTime:$("#cameraTime").val()
                 },
                 dataType:"json",
                 error:function(error){
                     console.log('get water setting error : ', error);
+                    xhr.abort();
                 },
                 success:function(data){
                     console.log('get camera setting : ', data);
+                    return data;
                 }
             });
         };
@@ -304,7 +310,6 @@ function emptyCheck(value) {
                 }
             });
         }
-
         //setting value function
         function settingValue(){
             var cameraTime = $("#cameraTime").val();
@@ -317,16 +322,6 @@ function emptyCheck(value) {
                 "water":waterTime
             }
             return Time;
-        }
-
-        function Start(){
-            
-
-        }
-
-        function Stop(){
-
-
         }
         /*
         function cameraShoot(){
@@ -353,6 +348,7 @@ function emptyCheck(value) {
             return xhr;
         }
         */
+
         //camera shooting
         $("#cameraOn").click(function(event){
             event.preventDefault();			
@@ -375,7 +371,6 @@ function emptyCheck(value) {
                     console.log('get data', data);
 
                 },
-                
             });
 
             setTimeout(()=>{
