@@ -8,9 +8,11 @@ var io = require('socket.io').listen(5001), // 이미지 저장관련 소켓
 var moment = require('moment'); //시간 모듈
 
 io.sockets.on('connection', function(socket) {
-
+    
     var delivery = dl.listen(socket);
-
+    socket.on('finshpumpon_tesitng', function(data){
+        console.log('testing socket data :', data.serial);
+    })
     delivery.on('receive.success', function(file) {
         console.log("delivery on");
         //채널별 폴더유무 체크

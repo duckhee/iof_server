@@ -11,6 +11,9 @@ var camera_controller = require('../../controllers/device/image_controller');
 var network_controller = require('../../controllers/device/network_controller');
 var device_controller = require('../../controllers/device/device_controller');
 var user_controller = require('../../controllers/user/user_controller');
+//setting IoF setting controller
+var IoFSettingController = require('../../controllers/device/IoF_Setting_controller');
+
 
 //show device index page
 router.get('/', function(req, res, next) {
@@ -101,8 +104,26 @@ router.post('/process/registe', function(req, res, next) {
                     console.log('network insert error ::::: ', err);
                     res.status(404);
                 } else if (row) {
-                    console.log('success');
-                    res.redirect('/device/list');
+                    console.log('inset network success');
+                    if (type === 'IoF') {
+                        var SettingInfo = {
+                            "id": row.id,
+                            "serial": row.device_serial,
+                            "address": row.device_address,
+                        }
+                        IoFSettingController.DefaultSetting(SettingInfo, function(err, result) {
+                            if (err) {
+                                console.log('default setting iof error :::: ', err);
+                                next(err);
+                            } else {
+                                console.log('setting success');
+                                res.redirect('/device/list');
+                            }
+                        });
+                    } else {
+                        res.redirect('/device/list');
+                    }
+
                 } else {
                     console.log('null');
                     res.status(500);

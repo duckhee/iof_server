@@ -59,7 +59,9 @@ module.exports = function(io, socket) {
         //checking device setting
     socket.on('device_setting_request', function(data) {
         console.log('device setting before check device :::', data);
-        var deviceInfo = {};
+        var deviceInfo = {
+            "serial": data.serial
+        };
         DeviceController.insert_before(deviceInfo, function(err, result) {
             if (err) {
                 console.log('checking device error before setting ::::: ', err);
@@ -67,7 +69,17 @@ module.exports = function(io, socket) {
                 if (!Util.isEmpty(result)) {
                     if (result.device_type === 'IoF') {
                         //iof setting how to ??
-
+                        var settingInfo = {
+                            "serial": result.device_serial
+                        }
+                        IoFSettingController.FindSetting(settingInfo, function(err, settingResult) {
+                            if (err) {
+                                console.log('find setting error ::::::::::: ', err);
+                            } else {
+                                console.log('setting find ::::: ', settingResult);
+                                io.emit('send_setting_iof', settingResult);
+                            }
+                        });
 
                     } else if (result.device_type === 'radon') {
                         //radon setting how to ??

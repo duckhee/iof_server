@@ -163,6 +163,9 @@
                                                                     <option value="90">1분30초</option>
                                                                     <option value="120">2분</option>
                                                                 </select>
+                                                                <div class="btn pull-right">
+                                                                    <button type="button" id="pumpSetting" class="btn btn-primary"  value="setting">Setting</button>
+                                                                </div>
                                                                 <hr>
                                                                 <div class="form-group">
                                                                     <button type="button" id="waterPumpOn" class="btn btn-primary" style="width:15%;" value="on"><i class="fa fa-play"></i></button>
@@ -178,6 +181,9 @@
                                                                     <option value="90">1시간30분</option>
                                                                     <option value="120">2시간</option>
                                                                 </select>
+                                                                <div class="btn pull-right">
+                                                                    <button type="button" id="cameraSetting" class="btn btn-primary" value="setting">Setting</button>
+                                                                </div>
                                                                 <hr>
                                                                     <div class="form-group">
                                                                         <button type="button" id="cameraOn" class="btn btn-primary" style="width:15%;" value="on"><i class="fa fa-play"></i></button>
@@ -208,13 +214,21 @@
     
     <% include ../../../../partials/footer_graph_javascript.ejs %>
   </body>
-  <script src="/socket.io/socket.io.js"></script> <!-- 1 -->
   <script>
 $(function(){
-
+/*
+//null checking
+function emptyCheck(value) {
+    if (value == "" || value == null || value == undefined || (value != null && typeof value == "object" && !Object.keys(value).length)) {
+        return true;
+    } else {
+        return false;
+    }
+};
+*/
         //pump on/off
-        function PumpOn(cmd){
-            $.ajax({
+        function PumpSend(cmd){
+            var xhr = $.ajax({
                 type:"GET",
                 url:"",
                 data:{
@@ -222,30 +236,35 @@ $(function(){
                     command:cmd
                 },
                 dataType:"json",
-                error:function(){
-
+                error:function(error){
+                    console.log('pump send error ::: ', error);
+                    xhr.abort();
                 },
                 success:function(data){
                     console.log('insert data : ', data);
+                    return data;
                 }
             });
         }
+        
         //device get value of water setup
         function getWaterSet(waterValue){
             event.preventDefault();
-            $.ajax({
+            var xhr = $.ajax({
                 type:"GET",
                 url:"",
                 data:{
                     serial:"<%=serial%>",
-                    waterTime:$("#").val()
+                    waterTime:$("#waterTime").val()
                 },
                 dataType:"json",
                 error:function(error){
                     console.log('get water setting error : ', error);
+                    xhr.abort();
                 },
                 success:function(data){
                     console.log('get water setting : ', data);
+                    return data;
                 }
             });
         };
@@ -253,19 +272,21 @@ $(function(){
         //device get value of camera setup
         function getCameraSet(cameraValue){
             event.preventDefault();
-            $.ajax({
+            var xhr = $.ajax({
                 type:"GET",
                 url:"",
                 data:{
                     serial:"<%=serial%>",
-                    caeraTime:$("#").val()
+                    caeraTime:$("#cameraTime").val()
                 },
                 dataType:"json",
                 error:function(error){
                     console.log('get water setting error : ', error);
+                    xhr.abort();
                 },
                 success:function(data){
                     console.log('get camera setting : ', data);
+                    return data;
                 }
             });
         };
@@ -289,7 +310,6 @@ $(function(){
                 }
             });
         }
-
         //setting value function
         function settingValue(){
             var cameraTime = $("#cameraTime").val();
@@ -303,17 +323,114 @@ $(function(){
             }
             return Time;
         }
-
-        function Start(){
+        /*
+        function cameraShoot(){
             
+          var xhr = $.ajax({
+                type:"GET",
+                url:"/control/ajaxshooting",
+                data:{
+                    serial:"<%=serial%>",
+                    command:$("#cameraTime").val()
+                },
+                dataType:"json",
+                error:function(err){
+                    console.log('shooting camera error :::: ',err);
+                },
+                success:function(data){
+                    console.log('get data', data);
+                },
+                fail:function(){
+                    console.log('faield');
+                }
+            });
 
+            return xhr;
         }
+        */
 
-        function Stop(){
+        //camera shooting
+        $("#cameraOn").click(function(event){
+            event.preventDefault();			
+            $(this).attr("disabled", true);
+            console.log('click shooting');
+            var xhr = $.ajax({
+                type:"GET",
+                url:"/control/ajaxshooting",
+                data:{
+                    serial:"<%=serial%>",
+                    command:$("#cameraTime").val()
+                },
+                dataType:"json",
+                error:function(err){
+                    console.log('shooting camera error :::: ',err);
+                    xhr.abort();
+                },
+                success:function(data){
+                    get_image();
+                    console.log('get data', data);
 
+                },
+            });
 
-        }
+            setTimeout(()=>{
+                $("#cameraOn").attr('disabled', false);
+                xhr.abort();
+            }, 1000 * 3);
 
+        });
+
+        //pump on off
+        $("#waterPumpOn").click(function(event){
+            event.preventDefault();
+            $(this).attr('disabled', true);
+            console.log('pump on');
+            var xhr = $.ajax({
+                type:"GET",
+                url:'/control/ajaxpumpon',
+                data:{
+                    serial:"<%=serial%>",
+                    command:$("#waterTime").val()
+                },
+                dataType:"json",
+                error:function(err){
+                    console.log('water pump error ::: ', err);
+                    xhr.abort();
+                },
+                success:function(data){
+                    console.log('get pump data : ', data);
+                }
+            });
+            setTimeout(()=>{
+                $("#waterPumpOn").attr('disabled', false);
+                xhr.abort();
+            }, 1000*5);
+        });
+        $("#waterPumpOff").click(function(event){
+            event.preventDefault();
+            $(this).attr('disabled', true);
+            console.log('pump off');
+            var xhr = $.ajax({
+                type:"GET",
+                url:'/control/ajaxpumpoff',
+                data:{
+                    serial:"<%=serial%>",
+                    command:$("#waterTime").val()
+                },
+                dataType:"json",
+                error:function(err){
+                    console.log('water pump off error :::: ', err);
+                    xhr.abort();
+                },
+                success:function(data){
+                    console.log('get pump data : ', data);
+                }
+            });
+            setTimeout(()=>{
+                $("#waterPumpOff").attr('disabled', false);
+                xhr.abort();
+            }, 1000*5);
+        })
         function getDateFromJSON(str) {
         var date = new Date(str);
         var con_mindate = date.getMinutes();

@@ -24,7 +24,6 @@ exports.create_user = function(user_info, callback) {
             user_address1: user_info.user_address1,
             user_address2: user_info.user_address2,
             user_zipcode: user_info.user_zipcode,
-
             apikey: user_info.user_apikey,
         }
     }).spread((user, created) => {
@@ -222,56 +221,54 @@ exports.find_info = function(user_info, callback) {
 }
 
 //user status update
-exports.Update_status = function(user_info, callback){
+exports.Update_status = function(user_info, callback) {
     var nowTime = new Date();
     models.user.update({
-        updatedAt:nowTime,
-        user_status:user_info.status
-    },{
-        where:{
-            user_id:user_info.userid
+        updatedAt: nowTime,
+        user_status: user_info.status
+    }, {
+        where: {
+            user_id: user_info.userid
         }
-    }).then((result)=>{
+    }).then((result) => {
         callback(null, result);
-    }).catch((err)=>{
+    }).catch((err) => {
         console.log('update user status error :::: ', err);
         callback(err, null);
     });
 };
 
 //user status active
-exports.Update_Active = function(user_info, callback){
+exports.Update_Active = function(user_info, callback) {
     var nowTime = new Date();
     models.user.update({
-        updatedAt:nowTime,
-        user_status:'active'
-    },
-    {
-        where:{
-            user_id:user_info.userid
+        updatedAt: nowTime,
+        user_status: 'active'
+    }, {
+        where: {
+            user_id: user_info.userid
         }
-    }).then((result)=>{
+    }).then((result) => {
         callback(null, result);
-    }).catch((err)=>{
+    }).catch((err) => {
         console.log('update active user status error :::::: ', err);
         callback(err, null);
     });
 };
 
 //user status inactive
-exports.Update_Inactive = function(callback){
+exports.Update_Inactive = function(callback) {
     var nowTime = new Date();
     models.user.update({
-        updatedAt:nowTime,
+        updatedAt: nowTime,
         user_status: 'inactive'
-    },
-    {
-        where:{
-            use_id:user_info.userid
+    }, {
+        where: {
+            use_id: user_info.userid
         }
-    }).then((result)=>{
+    }).then((result) => {
         callback(null, result);
-    }).catch((err)=>{
+    }).catch((err) => {
         console.log('update user inactive error :::: ', err);
         callback(err, null);
     });
