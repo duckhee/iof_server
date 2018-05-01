@@ -9,8 +9,22 @@ var bcrypt = require('bcrypt-nodejs');
 // }
 
 //checking url 
-exports.Checking = function(url) {
-    console.log('url info :::: ', url);
-    var pwUrl = bcrypt.hashSync(url);
+
+const flag = 'right';
+const flag2 = 'false';
+
+
+exports.BcryptUrl = function() {
+    console.log('bcrypt url info :::: ', flag);
+    var pwUrl = bcrypt.hashSync(flag);
     return pwUrl;
+}
+
+exports.CompareUrl = function(flagStatus) {
+    console.log('compare url info ::: ', flag);
+    if (bcrypt.compareSync(flagStatus, flag)) {
+        return true;
+    } else {
+        return false;
+    }
 }
