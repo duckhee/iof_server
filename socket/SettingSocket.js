@@ -93,4 +93,8 @@ module.exports = function(io, socket) {
         });
         //insert before function end
     });
+
+
+    //start socket setting
+
 }
