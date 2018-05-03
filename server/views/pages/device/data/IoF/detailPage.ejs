@@ -371,7 +371,7 @@ function emptyCheck(value) {
                     xhr.abort();
                     setTimeout(()=>{
                         get_image()
-                    }, 1000*3);
+                    }, 1000*10);
                     get_image();
                     console.log('get data', data);
 
@@ -381,7 +381,7 @@ function emptyCheck(value) {
             setTimeout(()=>{
                 $("#cameraOn").attr('disabled', false);
                 xhr.abort();
-            }, 1000 * 3);
+            }, 1000 * 10);
 
         });
 
