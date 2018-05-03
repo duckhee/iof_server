@@ -195,6 +195,7 @@ router.get('/ajaxshooting', function(req, res, next) {
                     res.json('shooting picture failed');
                 }
             });
+            res.json('data');
         }
     });
 });
