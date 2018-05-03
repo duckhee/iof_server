@@ -186,7 +186,7 @@ router.get('/ajaxshooting', function(req, res, next) {
             socket2.emit('camerashoot', Info);
             console.log('camera shooting ');
             socket2.on('finshshooting_' + result.device_serial, function(data) {
-                console.log('get device data ::: ', data);
+                console.log('get shooting success data ::: ', data);
                 if (data.flag === '1') {
                     console.log('shooting picture sucess');
                     res.json('shooting picture success');
