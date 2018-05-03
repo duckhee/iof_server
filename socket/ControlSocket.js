@@ -72,11 +72,12 @@ module.exports = function(io, socket) {
                     "cmd": data.cmd
                 };
                 io.emit('shooting_' + result.device_serial, ShootingInfo);
-                socket.on('shooting_success_' + result.device_serial, function(data) {
-                    res.json('success');
-                })
+
             }
         });
 
+    });
+    socket.on('shooting_success_' + result.device_serial, function(data) {
+        res.json('success');
     });
 };
