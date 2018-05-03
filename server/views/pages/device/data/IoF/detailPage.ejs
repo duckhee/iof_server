@@ -367,6 +367,7 @@ function emptyCheck(value) {
                     xhr.abort();
                 },
                 success:function(data){
+                    xhr.abort();
                     get_image();
                     console.log('get data', data);
 
