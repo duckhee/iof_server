@@ -369,7 +369,7 @@ function emptyCheck(value) {
                 },
                 success:function(data){
                     xhr.abort();
-                    setTimeOut(()=>{
+                    setTimeout(()=>{
                         get_image()
                     }, 1000*3);
                     get_image();
