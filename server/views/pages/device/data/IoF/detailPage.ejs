@@ -369,6 +369,9 @@ function emptyCheck(value) {
                 },
                 success:function(data){
                     xhr.abort();
+                    setTimeOut(()=>{
+                        get_image()
+                    }, 1000*3);
                     get_image();
                     console.log('get data', data);
 
