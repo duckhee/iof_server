@@ -15,7 +15,7 @@ module.exports = function(io, socket) {
         console.log('water start ::::::::::: ', data);
         var Info = {
             "serial": data.serial,
-            "cmd": data.command
+            "cmd": data.cmd
         };
         DeviceController.insert_before(Info, function(err, result) {
             if (err) {
@@ -24,7 +24,7 @@ module.exports = function(io, socket) {
                 console.log('find device result ::: ', result);
                 var ControlInfo = {
                     "serial": result.device_serial,
-                    "cmd": data.command
+                    "cmd": data.cmd
                 };
                 io.emit('pumpstart_' + result.device_serial, ControlInfo);
             }
@@ -36,7 +36,7 @@ module.exports = function(io, socket) {
         console.log('water end :::: ', data);
         var Info = {
             "serial": data.serial,
-            "cmd": data.command
+            "cmd": data.cmd
         };
         DeviceController.insert_before(Info, function(err, result) {
             if (err) {
@@ -45,7 +45,7 @@ module.exports = function(io, socket) {
                 console.log('find devcie result ::: ', result);
                 var ControlInfo = {
                     "serial": result.device_serial,
-                    "cmd": data.command
+                    "cmd": data.cmd
                 };
                 io.emit('pumpstop_' + result.device_serial, ControlInfo);
             }
@@ -55,7 +55,7 @@ module.exports = function(io, socket) {
     //socket camera shoot
     socket.on('camerashoot', function(data) {
         console.log('camera shooting data :: ', data);
-        console.log('camera command ::: ', data.command);
+        console.log('camera command ::: ', data.cmd);
         var Info = {
             "serial": data.serial,
             "cmd": data.cmd
@@ -67,7 +67,7 @@ module.exports = function(io, socket) {
                 console.log('find device result ::: ', result);
                 var ShootingInfo = {
                     "serial": result.device_serial,
-                    "cmd": data.command
+                    "cmd": data.cmd
                 };
                 io.emit('shooting_' + result.device_serial, ShootingInfo);
             }
