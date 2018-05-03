@@ -55,7 +55,8 @@ module.exports = function(io, socket) {
     //socket camera shoot
     socket.on('camerashoot', function(data) {
         console.log('camera shooting data :: ', data);
-        console.log('camera command ::: ', data.cmd);
+        var textData = JSON.stringify(data);
+        console.log('camera command ::: ', textData.cmd);
         var Info = {
             "serial": data.serial,
             "cmd": data.cmd
