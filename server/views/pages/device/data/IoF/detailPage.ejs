@@ -365,6 +365,7 @@ function emptyCheck(value) {
                 error:function(err){
                     console.log('shooting camera error :::: ',err);
                     xhr.abort();
+                    get_image();
                 },
                 success:function(data){
                     xhr.abort();
