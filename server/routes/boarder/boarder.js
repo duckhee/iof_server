@@ -167,7 +167,7 @@ router.get('/remove', function(req, res, next) {
 //boarder remove page router
 router.post('/process/remove', function(req, res, next) {
     console.log('remove post router');
-    res.redirect('/boards/remove?bno=' + req.params.bno);
+    res.redirect('/boards/remove?bno=' + req.params.bno+'?writer='+req.params.writer);
 
 });
 
