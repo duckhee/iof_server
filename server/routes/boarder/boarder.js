@@ -176,7 +176,8 @@ router.get('/modify', function(req, res, next) {
     console.log('boarder modify get router');
     var post_id = req.query.bno || req.body.bno || req.param.bno || req.params.bno;
     var post_info = {
-        bno: post_id
+        bno: post_id,
+        writer:req.session.id
     }
     boarder_controller.modify_start(post_info, function(err, row) {
         if (err) {

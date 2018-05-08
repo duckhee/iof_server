@@ -144,7 +144,8 @@ exports.upcount = function(data_info, callback) {
 exports.modify_start = function(boarder_info, callback) {
     models.tbl_board.find({
         where: {
-            id: boarder_info.bno
+            id: boarder_info.bno,
+            writer:boarder_info.writer
         }
     }).then((row) => {
         callback(null, row);
