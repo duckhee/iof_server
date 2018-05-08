@@ -96,7 +96,7 @@ exports.delete_reply = function(reply_info, callback) {
         where: {
             tblBoardId: reply_info.bno,
             id: reply_info.id,
-            rwriter: 'fain9301'
+            rwriter: reply_info.rwriter
         }
     }).then((row) => {
         callback(null, row);

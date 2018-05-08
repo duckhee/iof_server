@@ -261,7 +261,8 @@ router.post('/process/delete/reply', function(req, res, next) {
     console.log('bno : ', req.body.bno);
     var reply_info = {
         bno: req.body.bno,
-        id: req.body.rseq
+        id: req.body.rseq,
+        rwriter:req.body.rwriter
     };
     reply_controller.delete_reply(reply_info, function(err, row) {
         if (err) {
