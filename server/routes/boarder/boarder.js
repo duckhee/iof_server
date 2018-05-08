@@ -152,7 +152,7 @@ router.get('/remove', function(req, res, next) {
     console.log('remove get router');
     var bno = req.query.bno || req.param.bno || req.body.bno || req.params.bno;
     var writer = req.query.writer || req.param.writer || req.body.writer || req.params.writer;
-    var boarder_info = { bno: bno,writer: writer};
+    var boarder_info = { "bno": bno,"writer": writer};
     boarder_controller.delete_boarder(boarder_info, function(err, row) {
         if (err) {
             console.log('remove boarder error :', err);
