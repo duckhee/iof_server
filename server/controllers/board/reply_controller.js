@@ -36,7 +36,7 @@ exports.insert_reply = function(reply_info, callback) {
 //create reply
 exports.create_reply = function(reply_info, callback) {
     models.tbl_reply.create({
-        rwriter: 'fain9301', //tesitng value
+        rwriter: reply_info.rwriter, //tesitng value
         tblBoardId: reply_info.bno,
         rcontent: reply_info.rcontent
     }).then(function(row) {
