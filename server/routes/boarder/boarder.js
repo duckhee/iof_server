@@ -228,6 +228,7 @@ router.post('/process/create/reply', function(req, res, next) {
                 if (err) {
                     next();
                 } else if (rows) {
+                    console.log('reply rows ::::: ', rows);
                     res.json(rows);
                 } else {
                     next();
