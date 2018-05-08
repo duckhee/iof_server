@@ -182,7 +182,7 @@ router.get('/modify', function(req, res, next) {
     boarder_controller.modify_start(post_info, function(err, row) {
         if (err) {
             console.log('modify read boarder error : ', err);
-            res.redirect('/boards/modify');
+            res.redirect('/boards/list');
         } else {
             res.render('boarder/modifyPage', {
                 posts: row
