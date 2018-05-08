@@ -183,7 +183,7 @@ exports.delete_boarder = function(boarder_info, callback) {
     models.tbl_board.destroy({
         where: {
             id: boarder_info.bno,
-            writer: 'fain9301' //test user
+            writer: boarder_info.writer //test user
         }
     }).then((row) => {
         callback(null, row);
