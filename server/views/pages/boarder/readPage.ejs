@@ -183,7 +183,7 @@
 		$.ajax({
 			url  : "process/delete/reply" , 
 			type : "post" , 
-			data : { rseq : seq , bno : bno} ,
+			data : { rseq : seq , bno : bno, rwriter:$("#newReplyWriter").val()} ,
 			dataType : "json" , 
 			success : function(ary) {
                 console.log(ary)
