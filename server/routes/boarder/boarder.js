@@ -151,23 +151,29 @@ router.post('/process/registe', function(req, res, next) {
 router.get('/remove', function(req, res, next) {
     console.log('remove get router');
     var bno = req.query.bno || req.param.bno || req.body.bno || req.params.bno;
-    var writer = req.query.writer || req.param.writer || req.body.writer || req.params.writer;
-    var boarder_info = { "bno": bno,"writer": writer};
-    boarder_controller.delete_boarder(boarder_info, function(err, row) {
-        if (err) {
-            console.log('remove boarder error :', err);
-            res.redirect('/boards/process/remove?bno=' + bno);
-        } else {
-            console.log('boarder delete success ');
-            res.redirect('/boards/list');
-        }
-    });
+    var writer = req.session.userid;
+    var boarder_info = { "bno": bno, "writer": writer };
+    console.log('remove router get info ::: ', boarder_info);
+    if (util_make.isEmpty(writer)) {
+        console.log('null writer');
+        res.send('<script>alert("not login go to login page"); document.location.href ="/user/login";</script>');
+    } else {
+        boarder_controller.delete_boarder(boarder_info, function(err, row) {
+            if (err) {
+                console.log('remove boarder error :', err);
+                res.redirect('/boards/process/remove?bno=' + bno);
+            } else {
+                console.log('boarder delete success ');
+                res.redirect('/boards/list');
+            }
+        });
+    }
 });
 
 //boarder remove page router
 router.post('/process/remove', function(req, res, next) {
     console.log('remove post router');
-    res.redirect('/boards/remove?bno=' + req.params.bno+'?writer='+req.params.writer);
+    res.redirect('/boards/remove?bno=' + req.params.bno + '?writer=' + req.params.writer);
 
 });
 
@@ -177,7 +183,7 @@ router.get('/modify', function(req, res, next) {
     var post_id = req.query.bno || req.body.bno || req.param.bno || req.params.bno;
     var post_info = {
         bno: post_id,
-        writer:req.session.id
+        writer: req.session.userid
     }
     boarder_controller.modify_start(post_info, function(err, row) {
         if (err) {
@@ -264,7 +270,7 @@ router.post('/process/delete/reply', function(req, res, next) {
     var reply_info = {
         bno: req.body.bno,
         id: req.body.rseq,
-        rwriter:req.body.rwriter
+        rwriter: req.body.rwriter
     };
     reply_controller.delete_reply(reply_info, function(err, row) {
         if (err) {
@@ -286,4 +292,4 @@ router.post('/process/delete/reply', function(req, res, next) {
     });
 });
 
-module.exports = router;
+module.exports = router;;
