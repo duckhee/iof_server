@@ -99,11 +99,11 @@ router.post('/process/registe', function(req, res, next) {
                 "device_address": row.device_address,
                 "id": row.id
             };
-            network_controller.insert_network(network_info, function(err, row) {
+            network_controller.insert_network(network_info, function(err, rows) {
                 if (err) {
                     console.log('network insert error ::::: ', err);
                     res.status(404);
-                } else if (row) {
+                } else if (rows) {
                     console.log('inset network success');
                     if (type === 'IoF') {
                         var SettingInfo = {
