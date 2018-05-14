@@ -77,11 +77,11 @@ router.post('/process/registe', function(req, res, next) {
     var type = req.body.device_type || req.query.device_type || req.params.device_type || req.param.device_type;
     console.log("device type ::: ", type);
     var device_info = {
-        devivce_name: name,
-        device_apikey: apikey,
-        device_serial: serial,
-        device_address: address,
-        device_type: type
+        "devivce_name": name,
+        "device_apikey": apikey,
+        "device_serial": serial,
+        "device_address": address,
+        "device_type": type
     };
     console.log('device name :::: ', name);
     console.log('device apikey :::: ', apikey);
@@ -94,10 +94,10 @@ router.post('/process/registe', function(req, res, next) {
         } else if (row) {
             console.log('success ::::::', row.id);
             var network_info = {
-                device_serial: row.device_serial,
-                device_apikey: row.device_apikey,
-                device_address: row.device_address,
-                id: row.id
+                "device_serial": row.device_serial,
+                "device_apikey": row.device_apikey,
+                "device_address": row.device_address,
+                "id": row.id
             };
             network_controller.insert_network(network_info, function(err, row) {
                 if (err) {
