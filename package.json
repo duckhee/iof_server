@@ -38,5 +38,10 @@
         "util": "^0.10.3",
         "validator": "^9.4.1",
         "zip-folder": "^1.0.0"
+    },
+    "devDependencies": {
+        "mocha": "^5.1.1",
+        "should": "^13.2.1",
+        "supertest": "^3.1.0"
     }
 }
