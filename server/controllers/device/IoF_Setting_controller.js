@@ -10,7 +10,12 @@ exports.DefaultSetting = function(settingInfo, callback) {
         water_time: 5,
         camera_time: 30,
         sensing_time: 1
-    })
+    }).then((result)=>{
+        callback(null, result);
+    }).catch((err)=>{
+        console.log('default setting error ::::: ', err);
+        callback(err, null);
+    });
 }
 
 exports.InsertSetting = function(setting_info, callback) {
