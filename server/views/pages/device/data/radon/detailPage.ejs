@@ -395,7 +395,7 @@ $(function(){
                 chart_data = data;
                 var get_data = [];
                         for(var i =0; i <data.length; i++){
-                    get_data.push([getDateFromJSON(data[i].createdAt), data[i].sd_data],);
+                    get_data.push([getDateFromJSON(data[i].createdAt), data[i].sd_data]);
                 }
                 
                 var color1 ="#FF0000";
@@ -405,7 +405,7 @@ $(function(){
                     data_line[i] = {data:get_data[i],color:color1};
                     console.log('data line ::::: ',data_line[i]);
                 }
-                data_line = {data:get_data, color:color1};
+                data_line = {data:get_data.reverse(), color:color1};
                 
                 if(data_chart.cnt == 0){
                     data_chart.init(data_line);
